@@ -9,13 +9,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>
 	<%!
-		List<WebDevObby> res = DatabaseManager.getDatabaseManager().getResultsFromWebDev();
+		DatabaseManager db = new DatabaseManager();
+		List<WebDevObby> res = db.getResultsFromWebDev();
 	%>
 	
-	<%	for(WebDevObby item : res){
-			item.getId();
-			item.getMy_name();
-		}
+	<%	
+	//for(WebDevObby item : res){
+		//	item.getId();
+			//item.getMy_name();
+		//}
 	%>
 </title>
 </head>
