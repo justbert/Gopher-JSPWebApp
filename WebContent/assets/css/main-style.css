@@ -1,0 +1,58 @@
+#sidebar-navigator{
+	background-color: rgb(153,153,153);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 250px;
+}
+
+.sidebar-nav{
+	padding:10px;
+}
+
+.sidebar-nav li{
+	list-style:none;
+	margin:20px;
+	color:white;
+}
+.sidebar-nav a:link {
+    color:white;
+    text-decoration:none;
+	font-size:x-large;
+}
+a:visited {
+    color:white;
+    text-decoration:none;
+	font-size:x-large;
+}
+a:hover {
+    color:white;
+    text-decoration:none;
+	font-size:x-large;
+}
+a:active {
+	color:white;
+    text-decoration:none;
+	font-size:x-large;
+}
+
+.sidebar-brand:before{
+	content:'';
+	background-image: url("/Gopher/assets/img/logo.gif");
+	background-size: 100% 100%;
+    width: inherit;
+    height: inherit;
+    display: inline-block;
+}
+.content{
+    width: 100%;
+    position: absolute;
+    margin-left: 250px;
+}
+#wrapper{
+	position:absolute;
+	background:#c7eaee;
+	height:100%;
+	width:100%;
+}
