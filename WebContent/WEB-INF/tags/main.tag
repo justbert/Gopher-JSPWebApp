@@ -7,9 +7,7 @@
 		<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" >
 		<link href="${pageContext.request.contextPath}/assets/css/main-style.css" rel="stylesheet" type="text/css" >
 		<script href="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
-		
 	</head>
-
 	<body>
 		<div id="wrapper">
 			<div id="sidebar-navigator">

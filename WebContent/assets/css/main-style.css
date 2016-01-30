@@ -46,13 +46,9 @@ a:active {
     display: inline-block;
 }
 .content{
-    width: 100%;
-    position: absolute;
     margin-left: 250px;
 }
 #wrapper{
-	position:absolute;
 	background:#c7eaee;
 	height:100%;
-	width:100%;
 }

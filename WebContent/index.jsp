@@ -3,6 +3,8 @@
 
 <t:main>
 	<jsp:body>
-        <!-- YOUR SHIT HERE -->
+        <form>
+        	<input type="text" width="100%"></input>
+        </form>
     </jsp:body>
 </t:main>
