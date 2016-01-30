@@ -1,17 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Skye Turriff - Gopher</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet" type="text/css" >
-	<script src="${pageContext.request.contextPath}/css/bootstrap.js"></script>
-</head>
-<body>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-	<div class="container-fluid profile-header text-center">
+<t:main>
+	<jsp:body>
+	
+        <div class="container-fluid profile-header text-center">
 		<img class="img-circle" src="img/profile_img.jpg" >
 		<h2>Skye Turriff</h2>
 	</div>
@@ -22,6 +15,6 @@
 			<li><a href="#">Errands</a>
 		</ul>
 	</div>
-
-</body>
-</html>
+	
+    </jsp:body>
+</t:main>
