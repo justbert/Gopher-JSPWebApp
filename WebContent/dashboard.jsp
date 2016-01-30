@@ -4,7 +4,19 @@
 <t:main>
 	<jsp:body>
 	
-        <div class="container-fluid profile-header text-center">
+	<style>
+		.profile-header {
+			padding-top: 50px;
+			padding-bottom: 50px;
+			background-color: #c7eaee;
+		}
+	
+		.img-circle {
+			border-radius: 50%;
+		}
+	</style>
+	
+    <div class="container-fluid profile-header text-center">
 		<img class="img-circle" src="img/profile_img.jpg" >
 		<h2>Skye Turriff</h2>
 	</div>
