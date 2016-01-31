@@ -1,3 +1,7 @@
+body{
+	background:#c7eaee;
+}
+
 #sidebar-navigator{
 	background-color: rgb(153,153,153);
 	position: absolute;
@@ -36,7 +40,6 @@ a:active {
     text-decoration:none;
 	font-size:x-large;
 }
-
 .sidebar-brand:before{
 	content:'';
 	background-image: url("/Gopher/assets/img/logo.gif");
@@ -46,13 +49,9 @@ a:active {
     display: inline-block;
 }
 .content{
-    width: 100%;
-    position: absolute;
     margin-left: 250px;
+    padding:20px;
 }
 #wrapper{
-	position:absolute;
-	background:#c7eaee;
 	height:100%;
-	width:100%;
 }
