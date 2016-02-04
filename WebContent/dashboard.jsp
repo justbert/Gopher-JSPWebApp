@@ -15,12 +15,7 @@
 			border-radius: 50%;
 		}
 		
-		.dashboard-nav a {
-			padding: 10px 15px;
-			font-size: 16px;
-		}
-		
-		.dashboard-nav a:hover {
+		.dashboard-nav a, a:hover {
 			padding: 10px 15px;
 			font-size: 16px;
 		}
@@ -28,9 +23,10 @@
 		.dashboard-content {
 			border-color: white;
 			border-width: 10px;
-			border-radius: 10px;
+			border-radius: 0px 0px 10px 10px;
 			background-color: white;
 			margin: 0px;
+			padding: 20px;
 		}
 		
 		table {
