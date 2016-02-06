@@ -59,7 +59,7 @@
 	<div class="tab-content dashboard-content">
 		
 		<!-- Profile info, displayed by default -->
-		<div id="profile" class="tab-pane fade in active">
+		<div id="profile" class="tab-pane fade in active table-responsive">
 			<h1>My profile info goes here</h1>
 			<table class="table">
 				<tr>
