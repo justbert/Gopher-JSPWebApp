@@ -43,7 +43,7 @@
 	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
-		<img class="img-circle" src="img/profile_img.jpg" >
+		<img class="img-circle" src="assets/img/profile_img.jpg" >
 		<h2>Skye Turriff</h2>
 	</div>
 	
