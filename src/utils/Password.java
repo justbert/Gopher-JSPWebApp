@@ -1,12 +1,25 @@
 package utils;
 
 import java.security.MessageDigest;
-
-import com.sun.xml.internal.ws.client.dispatch.MessageDispatch;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 public class Password {
 	
-	public static string encrypt(String pw) {
-		MessageDigest digest = new Mess
+	//Used for user registration
+	public static String encrypt(String pw) throws NoSuchAlgorithmException {
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+	}
+	
+	//Used for verification of a password
+	public static String encrypt(String pw, String salt) {
+		
+	}
+	
+	private static String generateSalt() throws NoSuchAlgorithmException {
+		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+		byte[] salt = new byte[16];
+		sr.nextBytes(salt);
+		return salt.toString();
 	}
 }

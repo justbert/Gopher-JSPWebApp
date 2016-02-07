@@ -67,6 +67,7 @@ public class Login {
 		try {
 			userSet = db.query(sb.toString());
 			if(userSet.first()) {
+				user = new User();
 				user.setId(userSet.getInt(1));
 				
 			}
