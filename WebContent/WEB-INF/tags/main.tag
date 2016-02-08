@@ -6,14 +6,14 @@
 		<title>Login</title>
 		<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" >
 		<link href="${pageContext.request.contextPath}/assets/css/main-style.css" rel="stylesheet" type="text/css" >
-		<script href="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<div id="sidebar-navigator">
 				<ul class="sidebar-nav">
 		            <li class="sidebar-brand"><a href="#">Gopher</a></li>
-		            <li><a href="#">Browse</a></li>
+		            <li><a href="browse.jsp">Browse</a></li>
 		            <li><a href="#">Request</a></li>
 		            <li><a href="#">Profile</a></li>
         		</ul>
