@@ -10,7 +10,7 @@
 		<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 	
 		<style>
-			.profile-img{
+			.profile-img {
 				max-width: 100%;
 				height: auto;
 				margin-left: auto;

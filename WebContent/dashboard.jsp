@@ -163,7 +163,7 @@
 				<tr>
 					<th>Errand</th>
 					<th>Reward</th>
-					<th>Date Completed</th>
+					<th>Date Requested</th>
 				</tr>
 				<tr>
 					<td>Pick up my kids from daycare</td>
