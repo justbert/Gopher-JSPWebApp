@@ -6,10 +6,10 @@
 		<title>Login</title>
 		<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" >
 		<link href="${pageContext.request.contextPath}/assets/css/main-style.css" rel="stylesheet" type="text/css" >
-<<<<<<< HEAD
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
-	
+		<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+		
 		<style>
 			.profile-img {
 				max-width: 100%;
@@ -23,8 +23,6 @@
 			}
 		</style>
 		
-		<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
-
 	</head>
 	<body>
 		<div id="wrapper">
