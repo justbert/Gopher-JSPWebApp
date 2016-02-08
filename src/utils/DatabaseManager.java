@@ -30,6 +30,11 @@ public class DatabaseManager {
      }
      
 	 public ResultSet query(String queryString, String... parameters) throws SQLException{
+		 /*
+		  * should a pst be passed as a parameter so that it can be reused multiple times if the
+		  * class performing the search can use it multiple times, or is it stashed on the DB
+		  * somehow?
+		  */
 		 PreparedStatement pst = null;
          pst = conn.prepareStatement(queryString);
          for(int i = 1; i <= parameters.length; i++)

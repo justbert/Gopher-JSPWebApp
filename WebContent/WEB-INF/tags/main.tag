@@ -6,6 +6,7 @@
 		<title>Login</title>
 		<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" >
 		<link href="${pageContext.request.contextPath}/assets/css/main-style.css" rel="stylesheet" type="text/css" >
+<<<<<<< HEAD
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 	
@@ -21,7 +22,9 @@
 			    display: block;
 			}
 		</style>
-	
+		
+		<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+
 	</head>
 	<body>
 		<div id="wrapper">
@@ -39,7 +42,7 @@
 				</div>
 				<ul class="sidebar-nav">
 		            <li class="sidebar-brand"><a href="#">Gopher</a></li>
-		            <li><a href="#">Browse</a></li>
+		            <li><a href="browse.jsp">Browse</a></li>
 		            <li><a href="#">Request</a></li>
 		            <li><a href="dashboard.jsp">Profile</a></li>
         		</ul>
