@@ -3,21 +3,26 @@
 
 <t:main>
 	<jsp:body>
-        <form action="table" method="post">  
-            <legend> Login to App </legend>  
-            <table>  
-                <tr>  
-                    <td>User ID</td>  
-                    <td><input type="text" name="username" required="required" /></td>  
-                </tr>
-                <tr> 
-                    <td>Password</td>  
-                    <td><input type="password" name="userpass" required="required" /></td>  
-                </tr>  
-                <tr>  
-                    <td><input type="submit" value="Login" /></td>  
-                </tr>  
-            </table>  
-    	</form>
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="form-signin col-sm-4">
+	        
+		</div>
+		<div class="col-md-4"></div>
+    </div>
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="form-signin col-sm-4">
+			<img class="img-responsive" style="margin:auto;" src="assets/img/cute_gopher.png"></img>
+	        <form class="form-signin">
+				<h2 class="form-signin-heading">Please sign in</h2>
+				<input type="text" class="form-control" placeholder="Username" required autofocus>
+				<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+				<br/>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			</form>
+		</div>
+		<div class="col-sm-4"></div>
+    </div>
     </jsp:body>
 </t:main>
