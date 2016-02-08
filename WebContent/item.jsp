@@ -3,6 +3,9 @@
 
 <t:main>
 <jsp:body>
+<jsp:useBean id="taskBean" class="models.Task"/>
+<jsp:useBean id="userBean" class="models.User"/>
+<jsp:setProperty name="userBean" property="username" value="Josh" />
 <!-- Page Content -->
 <div class="row">
     <div class="col-md-9">
@@ -10,9 +13,9 @@
             <img src="http://lorempixel.com/1500/400/abstract/1" alt="Slide 1" />
             <div class="caption-full">
                 <h4 class="pull-right">$24.99</h4>
-                <h4><a href="#"style="color: black;">Product Name</a>
+                <h4><a href="#"style="color: black;"><jsp:getProperty name="taskBean" property="taskName"/></a> <!--  apparently property name is case sensitive, and needs to be 1st char lowercase-->
                 </h4>
-                <p>Blah</p>
+                <p><jsp:getProperty name="userBean" property="username"/></p>
                 <p>Blah Blah</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
