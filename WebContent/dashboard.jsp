@@ -10,6 +10,10 @@
 			padding-bottom: 50px;
 			background-color: #c7eaee;
 		}
+		
+		.profile-img {
+			border: 3px solid white;
+		}
 	
 		.img-circle {
 			border-radius: 50%;
@@ -18,6 +22,7 @@
 		.dashboard-nav a, a:hover {
 			padding: 10px 15px;
 			font-size: 16px;
+			color: #555;
 		}
 		
 		.dashboard-content {
@@ -30,12 +35,26 @@
 		}
 		
 		table {
-			width: 100%;
-			cell-padding: 20px;
+			table-layout: fixed;
+			/*width: 100%;*/
+			/*cell-padding: 20px;*/
+		}
+		
+		.table-title {
+			display: inline-flex;
+			padding: 0px 10px 10px 0px;
 		}
 		
 		tr {
-			margin: 5px;
+			/*margin: 5px;*/
+		}
+		
+		.edit-btns {
+			float: right;
+		}
+		
+		.tab-icon {
+			padding-right: 10px;
 		}
 	</style>
 	
@@ -43,14 +62,15 @@
 	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
-		<img class="img-circle" src="assets/img/profile_img.jpg" >
-		<h2>Skye Turriff</h2>
+		<img class="img-circle profile-img" src="assets/img/profile_img.jpg" >
+		<h1>Skye Turriff</h1>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
 	<div class="dashboard-nav">
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
+			<li><a data-toggle="tab" href="#alerts">Notifications</a></li>
 			<li><a data-toggle="tab" href="#active-errands">Active Errands</a></li>
 			<li><a data-toggle="tab" href="#past-errands">Past Errands</a></li>
 		</ul>
@@ -61,35 +81,69 @@
 		
 		<!-- Profile info, displayed by default -->
 		<div id="profile" class="tab-pane fade in active table-responsive">
-			<h1>My profile info goes here</h1>
+			<h3 class="table-title"><span class="glyphicon glyphicon-user tab-icon"></span>
+				My Account
+			</h3>
+			<div class="btn-group edit-btns" role="group">
+				<button type="button" class="btn btn-default btn-sm" aria-label="Edit Profile">
+					<span class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit Profile"></span>
+				</button>
+				<button type="button" class="btn btn-default btn-sm" aria-label="Change Photo">
+					<span class="glyphicon glyphicon-camera" data-toggle="tooltip" title="Change Photo"></span>
+				</button>
+				<button type="button" class="btn btn-default btn-sm" aria-label="Setting">
+					<span class="glyphicon glyphicon-cog" data-toggle="tooltip" title="Settings"></span>
+				</button>
+			</div>
 			<table class="table">
 				<tr>
-					<td>Username:</td>
+					<th>Username:</th>
 					<td>Skye Turriff</td>
 				</tr>
 				<tr>
-					<td>Email:</td>
+					<th>Email:</th>
 					<td>turriff.skye@gmail.com</td>
 				</tr>
 				<tr>
-					<td>Gopher Rating:</td>
-					<td><img class="img-circle" src="assets/img/rating.png" ><img class="img-circle" src="assets/img/rating.png" ><img class="img-circle" src="assets/img/rating.png" ></td>
+					<th>Gopher Rating:</th>
+					<td>
+						<img class="img-circle" src="assets/img/rating.png" >
+						<img class="img-circle" src="assets/img/rating.png" >
+						<img class="img-circle" src="assets/img/rating.png" >
+					</td>
 				</tr>
 				<tr>
-					<td>Customer Rating:</td>
-					<td><img class="img-circle" src="assets/img/rating.png" ><img class="img-circle" src="assets/img/rating.png" ></td>
+					<th>Customer Rating:</th>
+					<td>
+						<img class="img-circle" src="assets/img/rating.png" >
+						<img class="img-circle" src="assets/img/rating.png" >
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<!--  Notifications tab -->
+		<div id="alerts" class="tab-pane fade table-responsive">
+			<h3 class="table-title"><span class="glyphicon glyphicon-bell tab-icon"></span>
+				My Notifications
+			</h3>
+			<table class="table">
+				<tr>
+					<td>No notifications to show</td>
 				</tr>
 			</table>
 		</div>
 		
 		<!--  Current errands - requesting or to-do -->
-		<div id="active-errands" class="tab-pane fade tale-responsive">
-			<h1>Accepted Errands To Be Completed</h1>
+		<div id="active-errands" class="tab-pane fade table-responsive">
+			<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
+				Incomplete Errands
+			</h3>
 			<table class="table">
 				<tr>
-					<td>Errand</td>
-					<td>Reward Offered</td>
-					<td>Date Accepted</td>
+					<th>Errand</th>
+					<th>Reward</th>
+					<th>Date Accepted</th>
 				</tr>
 				<tr>
 					<td>Walk my dog</td>
@@ -102,12 +156,14 @@
 					<td>02/01/2016</td>
 				</tr>
 			</table>
-			<h1>Errand Requests</h1>
+			<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
+				Errand Requests
+			</h3>
 			<table class="table">
 				<tr>
-					<td>Errand</td>
-					<td>Reward</td>
-					<td>Date Completed</td>
+					<th>Errand</th>
+					<th>Reward</th>
+					<th>Date Completed</th>
 				</tr>
 				<tr>
 					<td>Pick up my kids from daycare</td>
@@ -119,12 +175,14 @@
 		
 		<!-- Past errands completed or requested by user -->
 		<div id="past-errands" class="tab-pane fade table-responsive">
-			<h1>Gophered Errands</h1>
+			<h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
+				Gophered Errands
+				</h3>
 			<table class="table">
 				<tr>
-					<td>Errand</td>
-					<td>Reward</td>
-					<td>Date Completed</td>
+					<th>Errand</th>
+					<th>Reward</th>
+					<th>Date Completed</th>
 				</tr>
 				<tr>
 					<td>Get me a popsicle</td>
@@ -137,12 +195,14 @@
 					<td>01/17/2016</td>
 				</tr>
 			</table>
-			<h1>Requested Errands</h1>
+			<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
+				Requested Errands
+			</h3>
 			<table class="table">
 				<tr>
-					<td>Errand</td>
-					<td>Reward</td>
-					<td>Date Completed</td>
+					<th>Errand</th>
+					<th>Reward</th>
+					<th>Date Completed</th>
 				</tr>
 				<tr>
 					<td>Deliver my medicine</td>
