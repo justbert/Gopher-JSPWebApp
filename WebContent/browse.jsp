@@ -14,16 +14,7 @@
 </script>
 
 <!-- Page Content -->
-
 	<div class="row">
-        <div class="col-md-3">
-            <p class="lead">Available Gopher Opportunities</p>
-            <div class="list-group">
-	             <a href="#" class="list-group-item" style="color: black;">Sexy Times</a>
-	             <a href="#" class="list-group-item" style="color: black;">Groceries</a>
-	             <a href="#" class="list-group-item" style="color: black;">One-way Errands</a>
-    		</div>
-		</div>
 		<div class="col-md-9">
 			<div id="carousel" class="carousel slide" data-ride="carousel">
     			<!-- Menu -->
@@ -35,13 +26,13 @@
 			    <!-- Items -->
 			    <div class="carousel-inner">			        
 			        <div class="item active">
-			            <img src="http://lorempixel.com/1500/600/abstract/1" alt="Slide 1" />
+			            <img src="http://lorempixel.com/1500/400/abstract/1" alt="Slide 1" />
 			        </div>
 			        <div class="item">
-			            <img src="http://lorempixel.com/1500/600/abstract/2" alt="Slide 2" />
+			            <img src="http://lorempixel.com/1500/400/abstract/2" alt="Slide 2" />
 			        </div>
 			        <div class="item">
-			            <img src="http://lorempixel.com/1500/600/abstract/3" alt="Slide 3" />
+			            <img src="http://lorempixel.com/1500/400/abstract/3" alt="Slide 3" />
 			        </div>
 			    </div> 
 			    <a href="#carousel" class="left carousel-control" data-slide="prev">
@@ -58,7 +49,7 @@
 	                     <div class="caption">
 	                         <h4 class="pull-right">$24.99</h4>
 	                         <h4>
-							 <a href="#" style="color: black;">Pick up my Groceries</a>
+							 <a href="item.jsp" style="color: black;">Pick up my Groceries</a>
 	                         </h4>
 	                         <p>This is a sample Gopher Task that can be selected and an item info page loads</p>
 	                     </div>
@@ -180,77 +171,3 @@
 </div>
 </jsp:body>
 </t:main>
-
-<!-- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            Brand and toggle get grouped for better mobile display
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle"
-						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
-            </div>
-            Collect the nav links, forms, and other content for toggling
-            <div class="collapse navbar-collapse"
-					id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            /.navbar-collapse
-        </div>
-        /.container
-    </nav> -->
-
-
-
-
-
-<!--                 <div class="row carousel-holder">
-                    <div class="col-md-12">
-                        <div id="carousel-example-generic"
-								class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li	data-target="#carousel" data-slide-to="0" class="active"></li>
-                                <li	data-target="#carousel" data-slide-to="1"></li>
-                                <li	data-target="#carousel" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img
-											src="assets/img/gopher_placeholder.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                    <img 
-											src="assets/img/profile_img.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                    <img 
-											src="assets/img/GOPHER_banner.jpg" alt="">
-                                </div>
-                            </div>
-                            <a class="left carousel-control"
-									href="#carousel" data-slide="prev">
-                                <span
-									class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control"
-									href="#carousel" data-slide="next">
-                                <span
-									class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div> -->
