@@ -25,17 +25,17 @@ body{
     text-decoration:none;
 	font-size:x-large;
 }
-a:visited {
+.sidebar-nav a:visited {
     color:white;
     text-decoration:none;
 	font-size:x-large;
 }
-a:hover {
+.sidebar-nav a:hover {
     color:white;
     text-decoration:none;
 	font-size:x-large;
 }
-a:active {
+.sidebar-nav a:active {
 	color:white;
     text-decoration:none;
 	font-size:x-large;
