@@ -3,16 +3,6 @@
 
 <t:main>
 <jsp:body>
-<script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
-<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.carousel').carousel({
-			interval : 3000
-		})
-	});
-</script>
-
 <!-- Page Content -->
 	<div class="row">
 		<div class="col-md-9">
@@ -169,5 +159,14 @@
         </div>
     </footer>
 </div>
+<script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.carousel').carousel({
+			interval : 3000
+		})
+	});
+</script>
 </jsp:body>
 </t:main>

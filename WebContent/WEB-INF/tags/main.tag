@@ -8,7 +8,6 @@
 		<link href="${pageContext.request.contextPath}/assets/css/main-style.css" rel="stylesheet" type="text/css" >
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
-		<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 		
 		<style>
 			.profile-img {
