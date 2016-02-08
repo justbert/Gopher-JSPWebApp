@@ -13,7 +13,7 @@
 			<div id="sidebar-navigator">
 				<ul class="sidebar-nav">
 		            <li class="sidebar-brand"><a href="#">Gopher</a></li>
-		            <li><a href="#">Browse</a></li>
+		            <li><a href="browse.jsp">Browse</a></li>
 		            <li><a href="#">Request</a></li>
 		            <li><a href="#">Profile</a></li>
         		</ul>
