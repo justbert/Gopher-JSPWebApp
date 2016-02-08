@@ -10,7 +10,7 @@
             <img src="http://lorempixel.com/1500/400/abstract/1" alt="Slide 1" />
             <div class="caption-full">
                 <h4 class="pull-right">$24.99</h4>
-                <h4><a href="#">Product Name</a>
+                <h4><a href="#"style="color: black;">Product Name</a>
                 </h4>
                 <p>Blah</p>
                 <p>Blah Blah</p>
