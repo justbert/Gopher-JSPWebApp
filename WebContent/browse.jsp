@@ -40,7 +40,7 @@
 			    </a>
 			</div>
 		</div>
-		<div class="bg-grey fill">
+		<div class="bg-white fill">
 				<div class="w_960" id="product-wrapper">
 		            <div class="col-sm-4 col-lg-4 col-md-4">
 		                 <div class="thumbnail">

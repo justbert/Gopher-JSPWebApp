@@ -11,12 +11,13 @@
 			background-color: #c7eaee;
 		}
 		
-		.profile-img {
-			border: 3px solid white;
+		.profile-header-img {
+			margin-top: 20px;
 		}
 	
 		.img-circle {
 			border-radius: 50%;
+			border: 3px solid white;
 		}
 		
 		.dashboard-nav a, a:hover {
@@ -29,12 +30,14 @@
 		}
 		
 		.dashboard-content {
-			border-color: white;
-			border-width: 10px;
+			border-style: solid;
+			border-color: #ddd;
+			border-width: 0px 1px 1px 1px;
 			border-radius: 0px 0px 10px 10px;
 			background-color: white;
 			margin: 0px;
 			padding: 20px;
+			min-height: 500px;
 		}
 		
 		table {
@@ -65,13 +68,15 @@
 	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
-		<img class="img-circle profile-img" src="assets/img/profile_img.jpg" >
+    	<div class="profile-header-img">
+			<img class="img-circle" src="assets/img/profile_img.jpg" >
+		</div>
 		<h1>Skye Turriff</h1>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
 	
-	<div class="bg-grey fill"><div class="w_960">
+	<div><div class="w_960">
 		<div class="dashboard-nav">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>

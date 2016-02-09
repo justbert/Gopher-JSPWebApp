@@ -7,8 +7,8 @@
 	}
 	.btn{
 		border: 2px solid #FFFFFF;
-		color: #FFFFFF;
-		background-color:rgba(255,255,255,0); 		
+		color: #989898;
+		background-color:rgba(255,255,255,0.6); 		
 	}
 </style>	
 <t:main>
