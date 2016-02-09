@@ -14,7 +14,6 @@
 <t:main>
 	<jsp:body>
 	<div class="jumbotron text-center">
-		
 		<div class="gopher homespacer">	
 			<img src="assets/img/cute_gopher.png">		
 		
@@ -24,9 +23,9 @@
 				<form class="form-inline">
    					<a href="#login"><button type="button" class="btn btn-outline btn-lg spacer">log in</button></a>
    					<a href="#signup"><button type="button" class="btn btn-outline btn-lg">sign up</button></a>
- 					</form> 
- 				</div> 
- 			</div>  		
+ 				</form> 
+ 			</div> 
+ 		</div>  		
    	</div> 
    	   		  
    	

@@ -20,6 +20,10 @@ html,body{
   		margin-right: 20px;
 }
 
+.bg-grey{
+  		background-color: #989898;
+}
+
 .bg-white{
   		background-color: white;
 }
