@@ -7,8 +7,8 @@ public class Task implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -218272690039621900L;
-	private String taskName = "Phantasmagorical Photon Shifter";
-	private String taskDescription = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+	private String taskName = "Pick up my groceries";
+	private String taskDescription = "I need someone to pick up my sweet groceries and meats puhhhlueeeezzzee";
 	
 	public void setTaskDescription(String TaskDescription){
 		this.taskDescription = TaskDescription;

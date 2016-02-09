@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-md-9">
         <div class="thumbnail">
-            <img src="http://lorempixel.com/1500/400/abstract/1" alt="Slide 1" />
+            <img src="http://lorempixel.com/1500/400/food/5" alt="Slide 1"/>
             <div class="caption-full">
                 <h4 class="pull-right">$24.99</h4>
                 <h4><a href="#"style="color: black;"><jsp:getProperty name="taskBean" property="taskName"/></a> <!--  apparently property name is case sensitive, and needs to be 1st char lowercase-->
