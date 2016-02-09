@@ -38,10 +38,11 @@
 					</div>
 				</div>
 				<ul class="sidebar-nav">
-		            <li class="sidebar-brand"><a href="/Gopher/index.jsp">Gopher</a></li>
+		            <li class="sidebar-brand"><a href="/Gopher/index.html">Gopher</a></li>
 		            <li><a href="/Gopher/browse.jsp">Browse</a></li>
 		            <li><a href="/Gopher/request.jsp">Request</a></li>
 		            <li><a href="/Gopher/dashboard.jsp">Profile</a></li>
+		            <li><a href="/Gopher/contact.jsp">Contact</a></li>
         		</ul>
 			</div>
 			<div class="content">
