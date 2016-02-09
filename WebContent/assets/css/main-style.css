@@ -19,8 +19,8 @@ html,body{
   	margin-right: 20px;
 }
 
-.bg-grey{
- 	background-color: #989898;
+.bg-white{
+  		background-color: white;
 }
 .bg-teal{
     background-color: #c7eaee;
@@ -94,7 +94,7 @@ html,body{
 	margin:0 auto;	
 }
 .w_960{
-	width:960px;
+	max-width:960px;
 	margin:0 auto;
 }
 #myNavbar li:hover{
