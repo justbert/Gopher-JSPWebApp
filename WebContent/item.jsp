@@ -7,7 +7,7 @@
 <jsp:useBean id="userBean" class="models.User"/>
 <jsp:setProperty name="userBean" property="username" value="Josh" />
 <!-- Page Content -->
-<div class="bg-white pad-nav-bar">
+<div class="pad-nav-bar"></div>
 <div class="row bg-teal">
     <div class="col-md-8 col-md-offset-2">
         <div class="thumbnail ">
@@ -79,9 +79,9 @@
         </div>
     </div>
 </div>
-<div class="container bg-white">
+<!-- /.container -->
+<div class="container">
 <hr>
-Footer
  <footer>
      <div class="row">
          <div class="col-lg-12">
@@ -90,10 +90,7 @@ Footer
      </div>
  </footer>
 </div>
-<!-- /.container -->
-</div>
-<!-- /.container -->
-
+<!-- /.container footer -->
 
 
 <!-- jQuery -->
