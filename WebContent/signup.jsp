@@ -3,15 +3,22 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <style>
 	#login-form{
+		padding: 20px 0px;
 		margin: 0 auto;
 		text-align: center;
 	}
+	
+	#login-form h2 {
+		margin: 20px;	
+	}
+	
 	#login-form input{
 		margin:20px auto;
 		margin-top:0px;
 		height:40px;
 		width:350px;
 	}
+	
 </style>
 <t:main>	
 	<jsp:body>
@@ -30,8 +37,8 @@
 			</form>
 		</div>
 	</div>
-	<div class="bg-grey fill">
-		<div style="width:200px;text-align:center;margin:0 auto;">
+	<div class="bg-white fill">
+		<div style="width:200px;text-align:center;margin:0 auto;padding-top:20px">
 			<img width="200px" src="/Gopher/assets/img/logo.gif" />
 		</div>
 	</div>
