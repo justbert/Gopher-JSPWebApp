@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS users (
 	phone_home VARCHAR(20),
 	phone_mobile VARCHAR(20),
 	phone_work VARCHAR(20),
-	password CHAR(64),
+	password CHAR(128),
 	salt CHAR(32),
 	date_joined TIMESTAMP,
     PRIMARY KEY (id),

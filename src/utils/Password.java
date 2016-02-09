@@ -9,7 +9,7 @@ public class Password {
 	//Used for user registration
 	//Returns a String array with the password, and the salt
 	public static String[] encrypt(String pw) throws NoSuchAlgorithmException {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		MessageDigest md = MessageDigest.getInstance("SHA-512");
 		String[] values = new String[2];
 		values[1] = generateSalt();
 		
@@ -35,7 +35,7 @@ public class Password {
 	
 	//Used for verification of a password
 	public static String encrypt(String pw, String salt) throws NoSuchAlgorithmException {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		MessageDigest md = MessageDigest.getInstance("SHA-512");
 		
 		md.update(salt.getBytes());
 		
