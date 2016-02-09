@@ -3,6 +3,8 @@ package utils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.mysql.jdbc.PreparedStatement;
+
 import models.User;
 
 public class Login {

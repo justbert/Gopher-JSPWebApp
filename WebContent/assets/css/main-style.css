@@ -11,7 +11,6 @@ html,body{
   		margin: 0px;
   		height: 450px;
 }
-
 .homespacer{
 	margin-top:80px;
 	margin-left: -50px;
@@ -26,6 +25,7 @@ html,body{
 .bg-teal{
 	    background-color: #c7eaee;
 }
+<<<<<<< HEAD
 .block-size{
 	height: 300px;
 }
@@ -45,6 +45,7 @@ html,body{
 .img-align{
 	margin-top:-7px;
 }
+<<<<<<< HEAD
 
 .navbar{
 	background-color: rgba(255,255,255,0.6);
@@ -57,8 +58,12 @@ html,body{
 	flex-direction: row;
 	justify-content: center;
 }
+.block-display{
+	display:block;	
+}
 
 @font-face {
+	
   		font-family: 'Monty';
   		src: url(../fonts/Montez-Regular.ttf);
 }

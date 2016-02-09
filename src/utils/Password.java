@@ -7,45 +7,13 @@ import java.security.SecureRandom;
 public class Password {
 	
 	//Used for user registration
-	//Returns a String array with the password, and the salt
-	public static String[] encrypt(String pw) throws NoSuchAlgorithmException {
+	public static String encrypt(String pw) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
-		String[] values = new String[2];
-		values[1] = generateSalt();
-		
-		md.update(values[1].getBytes());
-		
-		byte[] bytes = md.digest(pw.getBytes());
-        //This bytes[] has bytes in decimal format;
-        //Convert it to hexadecimal format
-        StringBuilder sb = new StringBuilder();
-        for(int i=0; i< bytes.length ;i++)
-        {
-            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        //Get complete hashed password in hex format
-        values[0] = sb.toString();
-		
-		return values;
 	}
 	
 	//Used for verification of a password
-	public static String encrypt(String pw, String salt) throws NoSuchAlgorithmException {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
+	public static String encrypt(String pw, String salt) {
 		
-		md.update(salt.getBytes());
-		
-		byte[] bytes = md.digest(pw.getBytes());
-        //This bytes[] has bytes in decimal format;
-        //Convert it to hexadecimal format
-        StringBuilder sb = new StringBuilder();
-        for(int i=0; i< bytes.length ;i++)
-        {
-            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        //Get complete hashed password in hex format
-        
-        return sb.toString();
 	}
 	
 	private static String generateSalt() throws NoSuchAlgorithmException {

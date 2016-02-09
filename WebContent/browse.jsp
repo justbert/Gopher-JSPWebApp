@@ -23,13 +23,13 @@
 			    <!-- Items -->
 			    <div class="carousel-inner">			        
 			        <div class="item active">
-			            <img src="http://lorempixel.com/1500/400/abstract/1" alt="Slide 1" />
+			            <img src="http://lorempixel.com/1500/400/food/5" alt="Slide 1"/>
 			        </div>
 			        <div class="item">
-			            <img src="http://lorempixel.com/1500/400/abstract/2" alt="Slide 2" />
+			            <img src="http://lorempixel.com/1500/400/cats/5" alt="Slide 2"/>
 			        </div>
 			        <div class="item">
-			            <img src="http://lorempixel.com/1500/400/abstract/3" alt="Slide 3" />
+			            <img src="http://lorempixel.com/1500/400/people/5" alt="Slide 3"/>
 			        </div>
 			    </div> 
 			    <a href="#carousel" class="left carousel-control" data-slide="prev">
