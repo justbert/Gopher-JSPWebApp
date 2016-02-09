@@ -27,7 +27,7 @@
 			<div class="bg-white">
 				<div class="w_960">
 			       <form class="block-display" id="login-form">
-					 <h2>Sign in</h2>
+					 <h2 class="monty-font">Sign in</h2>
 <!-- 					 <label>Email address</label> -->
 					 <input class="block-display" type="text" placeholder="Email"/>
 <!-- 					 <label>Password</label> -->
