@@ -29,9 +29,9 @@
 				 <label>Email address</label>
 				 <input class="block-display" type="text" />
 				 <label>Password</label>
-				 <input class="block-display" type="text" />
+				 <input class="block-display" type="password" />
 				 <label>Confirm Password</label>
-				 <input class="block-display" type="text" />
+				 <input class="block-display" type="password" />
 				 
 				 <button class="btn btn-default">Sign me up!</button>
 			</form>

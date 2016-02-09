@@ -4,8 +4,22 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+/**
+ * Class for encrypting passwords.
+ * @author Justin
+ *
+ */
 public class Password {
 	
+	private static final int ITERATION_COUNT = 1234;
+	
+	
+	/**
+	 * Method used during registration to encrypt user Password.
+	 * @param pw The password to encrypt.
+	 * @return	An array of Strings, first String is the hashed Password, second is the Salt associated to the user.
+	 * @throws NoSuchAlgorithmException
+	 */
 	//Used for user registration
 	//Returns a String array with the password, and the salt
 	public static String[] encrypt(String pw) throws NoSuchAlgorithmException {
@@ -17,7 +31,7 @@ public class Password {
 		
 		byte[] bytes = md.digest(pw.getBytes());
 		
-		for(int hashes = 0; hashes < 1234; ++hashes) {
+		for(int hashes = 0; hashes < ITERATION_COUNT; ++hashes) {
 			bytes = md.digest(bytes);
 		}
         //This bytes[] has bytes in decimal format;
@@ -33,6 +47,13 @@ public class Password {
 		return values;
 	}
 	
+	/**
+	 * Encrypts a password using a provided salt, and password.
+	 * @param pw
+	 * @param salt
+	 * @return The hashed password.
+	 * @throws NoSuchAlgorithmException
+	 */
 	//Used for verification of a password
 	public static String encrypt(String pw, String salt) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -41,7 +62,7 @@ public class Password {
 		
 		byte[] bytes = md.digest(pw.getBytes());
 		
-		for(int hashes = 0; hashes < 1234; ++hashes) {
+		for(int hashes = 0; hashes < ITERATION_COUNT; ++hashes) {
 			bytes = md.digest(bytes);
 		}
 		
