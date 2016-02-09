@@ -16,6 +16,10 @@ public class Password {
 		md.update(values[1].getBytes());
 		
 		byte[] bytes = md.digest(pw.getBytes());
+		
+		for(int hashes = 0; hashes < 1234; ++hashes) {
+			bytes = md.digest(bytes);
+		}
         //This bytes[] has bytes in decimal format;
         //Convert it to hexadecimal format
         StringBuilder sb = new StringBuilder();
@@ -36,6 +40,11 @@ public class Password {
 		md.update(salt.getBytes());
 		
 		byte[] bytes = md.digest(pw.getBytes());
+		
+		for(int hashes = 0; hashes < 1234; ++hashes) {
+			bytes = md.digest(bytes);
+		}
+		
         //This bytes[] has bytes in decimal format;
         //Convert it to hexadecimal format
         StringBuilder sb = new StringBuilder();
@@ -52,6 +61,15 @@ public class Password {
 		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 		byte[] salt = new byte[16];
 		sr.nextBytes(salt);
-		return salt.toString();
+		
+		 //This bytes[] has bytes in decimal format;
+        //Convert it to hexadecimal format
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i< salt.length ;i++)
+        {
+            sb.append(Integer.toString((salt[i] & 0xff) + 0x100, 16).substring(1));
+        }
+		
+		return sb.toString();
 	}
 }
