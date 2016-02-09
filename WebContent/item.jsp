@@ -7,10 +7,11 @@
 <jsp:useBean id="userBean" class="models.User"/>
 <jsp:setProperty name="userBean" property="username" value="Josh" />
 <!-- Page Content -->
-<div class="row">
-    <div class="col-md-9">
-        <div class="thumbnail">
-            <img src="http://lorempixel.com/1500/400/food/5" alt="Slide 1"/>
+<div class="pad-nav-bar"></div>
+<div class="row bg-teal" style="height:95%">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="thumbnail ">
+            <img src="http://lorempixel.com/1500/200/food/5" alt="Slide 1"/>
             <div class="caption-full">
                 <h4 class="pull-right">$24.99</h4>
                 <h4><a href="#"style="color: black;"><jsp:getProperty name="taskBean" property="taskName"/></a> <!--  apparently property name is case sensitive, and needs to be 1st char lowercase-->
@@ -32,7 +33,7 @@
             </div>
         </div>
 
-        <div class="well">
+        <div class="well bg-white">
             <div class="text-right">
                 <a class="btn btn-success">Leave a Review</a>
             </div>
@@ -80,18 +81,6 @@
 </div>
 <!-- /.container -->
 
-<div class="container">
-<hr>
-<!-- Footer -->
- <footer>
-     <div class="row">
-         <div class="col-lg-12">
-             <p>Copyright &copy; Gopher 2016</p>
-         </div>
-     </div>
- </footer>
-</div>
-<!-- /.container -->
 
 <!-- jQuery -->
 <script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>

@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS users (
 	phone_home VARCHAR(20),
 	phone_mobile VARCHAR(20),
 	phone_work VARCHAR(20),
-	password VARCHAR(50),
+	password CHAR(64),
+	salt CHAR(32),
 	date_joined TIMESTAMP,
     PRIMARY KEY (id),
 	FOREIGN KEY (address_id_home)
