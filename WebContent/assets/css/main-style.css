@@ -1,57 +1,100 @@
-body{
-	background:#c7eaee;
+html,body{
+	height:100%;
 }
 
-#sidebar-navigator{
-	background-color: rgb(153,153,153);
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	height: 100%;
-	width: 200px;;
+#test{
+	height:100%;
+}
+.jumbotron{ 
+  		background-color: #C7EAEE;
+  		color: #ffffff;
+  		margin: 0px;
+  		height: 450px;
 }
 
-.sidebar-nav{
-	padding:10px;
+.homespacer{
+	margin-top:80px;
+	margin-left: -50px;
+}
+.spacer{
+  		margin-right: 20px;
 }
 
-.sidebar-nav li{
-	list-style:none;
-	margin:20px;
-	color:white;
+.bg-grey{
+  		background-color: #989898;
 }
-.sidebar-nav a:link {
-    color:white;
-    text-decoration:none;
-	font-size:x-large;
+.bg-teal{
+	    background-color: #c7eaee;
 }
-.sidebar-nav a:visited {
-    color:white;
-    text-decoration:none;
-	font-size:x-large;
+.block-size{
+	height: 300px;
 }
-.sidebar-nav a:hover {
-    color:white;
-    text-decoration:none;
-	font-size:x-large;
+
+.block-text{
+	color: #FFFFFF;
+	font-size: 16px;
 }
-.sidebar-nav a:active {
-	color:white;
-    text-decoration:none;
-	font-size:x-large;
+
+.vert-align{
+	display: -webkit-flex;
+ 			display: flex;
+ 			align-items: center;
+ 			flex-direction: column;
 }
-.sidebar-brand:before{
-	content:'';
-	background-image: url("/Gopher/assets/img/logo.gif");
-	background-size: 100% 100%;
-    width: inherit;
-    height: inherit;
-    display: inline-block;
+
+.img-align{
+	margin-top:-7px;
 }
-.content{
-    margin-left: 200px;
-    padding:20px;
+
+.navbar{
+	background-color: rgba(255,255,255,0.6);
+}
+
+.gopher{
+ 	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+}
+
+@font-face {
+  		font-family: 'Monty';
+  		src: url(../fonts/Montez-Regular.ttf);
+}
+
+.monty-font{
+	font-family: 'Monty';
+	font-size: 100px;
+}
+.logo {
+  		font-size: 70px;
+}
+.fill{	
+	height:75%;	
+}
+#title-text{
+	margin-left:120px;	
+}
+#profile-widget{
+	margin-top:5px;
+	margin-right:5px;
+	position:fixed;
+	top:0;
+	right:0;
+	z-index:9999;
+}
+#profile-wdiget-button-container{
+	display:block;
 }
 #wrapper{
 	height:100%;
+	margin:0 auto;	
+}
+.w_960{
+	width:960px;
+	margin:0 auto;
+}
+.pad-nav-bar{
+	padding-top:50px;
 }
