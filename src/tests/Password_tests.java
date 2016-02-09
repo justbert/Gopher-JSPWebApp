@@ -36,6 +36,8 @@ public class Password_tests {
 		}
 		
 		System.out.println("ReEncrypted password: " + encrypted);
+		System.out.println("Hash length: " + encrypted.length());
+		System.out.println("Salt length: " + returns[1].length());
 		
 		if(returns[0].equals(encrypted)) {
 			System.out.println("Encryption of passwords match.");
