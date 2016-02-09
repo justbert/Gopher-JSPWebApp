@@ -40,7 +40,7 @@
 	        </div>
         </div>
 	</div>
-	<div class="bg-grey fill">
+	<div class="bg-white fill">
 		<div class="w_960">
 			<div id="tasks-container">
 		        <div class="row" id="subtasks">

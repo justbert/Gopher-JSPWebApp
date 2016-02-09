@@ -2,16 +2,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <style>
-#login-form{
-	margin: 0 auto;
-	text-align: center;
-}
-#login-form input{
-	margin:20px auto;
-	margin-top:0px;
-	height:40px;
-	width:350px;
-}
+	#login-form{
+		margin: 0 auto;
+		text-align: center;
+	}
+	#login-form input{
+		margin:20px auto;
+		margin-top:0px;
+		height:40px;
+		width:350px;
+	}
 </style>
 <t:main>	
 	<jsp:body>
