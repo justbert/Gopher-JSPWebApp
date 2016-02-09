@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
 <style>
 	.what-is-gopher{
 		border-top:1px solid gray;
@@ -21,11 +22,19 @@
    				<div class="monty-font" ><strong>gopher</strong></div> 
 				<p>Need something done? Get someone to <i>gopher</i> it!</p> 
 				<form class="form-inline">
+<<<<<<< HEAD
    					<a href="#login"><button type="button" class="btn btn-outline btn-lg spacer">log in</button></a>
    					<a href="#signup"><button type="button" class="btn btn-outline btn-lg">sign up</button></a>
  				</form> 
  			</div> 
  		</div>  		
+=======
+   					<a href="/Gopher/login.jsp"><button type="button" class="btn btn-outline btn-lg spacer" style="background: #989898;">log in</button></a>
+   					<a href="/Gopher/signup.jsp"><button type="button" class="btn btn-outline btn-lg" style="background: #989898;">sign up</button></a>
+ 					</form> 
+ 				</div> 
+ 			</div>  		
+>>>>>>> dev
    	</div> 
    	   		  
    	

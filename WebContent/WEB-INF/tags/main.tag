@@ -49,6 +49,4 @@
 			<jsp:doBody/>
 		</div>
 	</body>
-  
-  
 </html>
