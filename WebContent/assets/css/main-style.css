@@ -6,26 +6,25 @@ html,body{
 	height:100%;
 }
 .jumbotron{ 
-  		background-color: #C7EAEE;
-  		color: #ffffff;
-  		margin: 0px;
-  		height: 450px;
+	background-color: #C7EAEE;
+	color: #ffffff;
+	margin: 0px;
+	height: 450px;
 }
 .homespacer{
 	margin-top:80px;
 	margin-left: -50px;
 }
 .spacer{
-  		margin-right: 20px;
+  	margin-right: 20px;
 }
 
 .bg-grey{
-  		background-color: #989898;
+ 	background-color: #989898;
 }
 .bg-teal{
-	    background-color: #c7eaee;
+    background-color: #c7eaee;
 }
-<<<<<<< HEAD
 .block-size{
 	height: 300px;
 }
@@ -37,15 +36,14 @@ html,body{
 
 .vert-align{
 	display: -webkit-flex;
- 			display: flex;
- 			align-items: center;
- 			flex-direction: column;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
 .img-align{
 	margin-top:-7px;
 }
-<<<<<<< HEAD
 
 .navbar{
 	background-color: rgba(255,255,255,0.6);
@@ -63,9 +61,8 @@ html,body{
 }
 
 @font-face {
-	
-  		font-family: 'Monty';
-  		src: url(../fonts/Montez-Regular.ttf);
+  	font-family: 'Monty';
+  	src: url(../fonts/Montez-Regular.ttf);
 }
 
 .monty-font{
@@ -73,7 +70,7 @@ html,body{
 	font-size: 100px;
 }
 .logo {
-  		font-size: 70px;
+  	font-size: 70px;
 }
 .fill{	
 	height:75%;	

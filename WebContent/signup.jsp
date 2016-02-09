@@ -31,6 +31,9 @@
 		</div>
 	</div>
 	<div class="bg-grey fill">
+		<div style="width:200px;text-align:center;margin:0 auto;">
+			<img width="200px" src="/Gopher/assets/img/logo.gif" />
+		</div>
 	</div>
 	</jsp:body>
 </t:main>
