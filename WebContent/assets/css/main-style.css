@@ -97,6 +97,9 @@ html,body{
 	width:960px;
 	margin:0 auto;
 }
+#myNavbar li:hover{
+	text-decoration:underline;
+}
 .pad-nav-bar{
 	padding-top:50px;
 }
