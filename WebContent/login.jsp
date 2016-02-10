@@ -1,21 +1,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<style>
-	.form-signin-heading{
-		margin:0px 0px 0px 0px;
-		padding: 50px 0px 10px 0px;
+<style>	
+	#login-form{
+		padding: 20px 0px;
+		margin: 0 auto;
+		text-align: center;
 	}
 	
-	.form-signin {
-		width: 50%;
-		margin-right: auto;
-		margin-left: auto;
+	#login-form h2 {
+		margin: 20px;	
 	}
 	
-	.form-signin input {
-		padding: 3px;
-		margin-top: 10px;
+	#login-form input{
+		margin:20px auto;
+		margin-top:0px;
+		height:40px;
+		width:350px;
 	}
+	
 </style>
 <t:main>
 	<jsp:body>
@@ -24,13 +26,14 @@
 		</div>
 			<div class="bg-white">
 				<div class="w_960">
-			        <form class="form-signin">
-						<h2 class="form-signin-heading">Please sign in</h2>
-						<input type="text" class="form-control" placeholder="Username" required autofocus>
-						<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-						<br/>
-						<button class="btn btn-lg btn-primary" type="submit">Sign in</button>
-					</form>
+			       <form class="block-display" id="login-form">
+					 <h2 class="monty-font">Sign in</h2>
+<!-- 					 <label>Email address</label> -->
+					 <input class="block-display" type="text" placeholder="Email"/>
+<!-- 					 <label>Password</label> -->
+					 <input class="block-display" type="password" placeholder="Password" />
+					 <button class="btn btn-default bg-grey" type="submit">Sign in</button>
+				</form>
 				</div>
 			</div>
     </jsp:body>
