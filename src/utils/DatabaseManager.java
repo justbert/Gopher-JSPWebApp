@@ -6,20 +6,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 
+ * @author Ian
+ *
+ */
 public class DatabaseManager {
-	private static final DatabaseManager db = new DatabaseManager();
+	private static final DatabaseManager db = new DatabaseManager(); /* thread-safe singletop instatiation of connection */
 	private Connection conn = null;
      
      private DatabaseManager(){
     	 String url = "jdbc:mysql://localhost:3306/";  
          String dbName = "form";  
          String driver = "com.mysql.jdbc.Driver";  
-         String userName = "root";  
-         String password = "Redeyes0!";
+         String userName = "root";  	/* Temporary Login */
+         String password = "password "; /* Temporary Password*/ 
          
          try {
-             Class.forName(driver).newInstance();  
-             conn = DriverManager.getConnection(url + dbName, userName, password);
+             Class.forName(driver).newInstance();  /* Reflect database driver */
+             conn = DriverManager.getConnection(url + dbName, userName, password); 
          } catch (Exception e) {
              System.out.println(e);
          }
@@ -29,6 +34,14 @@ public class DatabaseManager {
     	 return db;
      }
      
+     /**
+      * Wrapper method for any raw SQL query, wraps the SQL in prepared statements
+      * to protect against injection.
+      * @param queryString
+      * @param parameters Variable length parameters as strings
+      * @return ResultSet of the query
+      * @throws SQLException
+      */
 	 public ResultSet query(String queryString, String... parameters) throws SQLException{
 		 /*
 		  * should a pst be passed as a parameter so that it can be reused multiple times if the
@@ -43,10 +56,20 @@ public class DatabaseManager {
          return pst.executeQuery();
 	 }
 	 
+	 /**
+	  * Query overload for no parameters
+	  * @param queryString
+	  * @return
+	  * @throws SQLException
+	  */
 	 public ResultSet query(String queryString) throws SQLException{
 		 return query(queryString, new String[0]);
 	 }
 	 
+	 /**
+	  * close the connection
+	  * @throws SQLException
+	  */
 	 public void close() throws SQLException{
 		 if(conn != null)
 			 conn.close();
