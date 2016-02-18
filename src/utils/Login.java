@@ -56,18 +56,18 @@ public class Login {
 	/*
 	 * Returns null if user isn't found or password isn't correct
 	 */
-	public static User getUser(String username, String password) {
+	public static User getUser(String email) {
 		
 		DatabaseManager db = DatabaseManager.getDatabaseManager();
 		StringBuilder sb = new StringBuilder();
 		ResultSet userSet;
 		User user = null;
 		
-		sb.append("SELECT id, password, name_first, name_last,"
-				+ " email, address_id_home, address_id_work, phone_home,"
-				+ " phone_mobile, phone_work, date_joined"
-				+ " FROM Gopher.users WHERE username = '");
-		sb.append(username);
+		sb.append("SELECT id, nameFirst, nameLast,"
+				+ " email, addressIDHome, addressIDWork, phoneHome,"
+				+ " phoneMobile, phoneWork, dateJoined"
+				+ " FROM Gopher.users WHERE email = '");
+		sb.append(email);
 		sb.append("'");
 		
 		try {

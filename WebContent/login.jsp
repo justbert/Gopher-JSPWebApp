@@ -1,4 +1,5 @@
 <%@page import="utils.Login"%>
+<%@page import="models.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <style>	
@@ -26,6 +27,10 @@ String email = request.getParameter("email");
 if(email != null) {
 	if(Login.verifyEmail(email)) {
 		if(Login.verifyPassword(email, request.getParameter("password"))) {
+			User current = Login.getUser(email);
+			if(current != null) {
+				session.setAttribute("userObject", current);
+			}
 			response.sendRedirect("dashboard.jsp");
 		} else {
 			%>
