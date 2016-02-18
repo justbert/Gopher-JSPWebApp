@@ -23,10 +23,9 @@ CREATE TABLE IF NOT EXISTS addresses (
 
 CREATE TABLE IF NOT EXISTS users (
     id INT unsigned NOT NULL AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL,
 	nameFirst VARCHAR(50),
 	nameLast VARCHAR(50),
-	email VARCHAR(50),
+	email VARCHAR(50) NOT NULL,
 	addressIDHome INT unsigned,
 	addressIDWork INT unsigned,
 	phoneHome VARCHAR(20),
