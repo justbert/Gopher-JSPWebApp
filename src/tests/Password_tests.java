@@ -9,7 +9,7 @@ import utils.Password;
 public class Password_tests {
 
 	@Test
-	public void test() {
+	public void testEncryption() {
 		
 		String password = "PasswordTesting1";
 		String[] returns = new String[2];
@@ -42,6 +42,35 @@ public class Password_tests {
 		} else {
 			System.out.println("Encryption of passwords does not match.");
 		}
+	}
+	
+	@Test
+	public void massTestEncryption() {
+		
+		String[] encryptedPasswords = new String[1000];
+		int count = 0;
+		for(int index = 0; index < encryptedPasswords.length; ++index) {
+			try {
+				encryptedPasswords[index] = Password.encrypt("Test1234Testing")[0];
+			} catch (NoSuchAlgorithmException e) {
+				
+			}
+		}
+		
+		System.out.println("Hashed created.");
+		
+		for(int i = 0; i < encryptedPasswords.length; ++i) {
+			for(int j = 0; j < encryptedPasswords.length; ++j) {
+				if(j == i) {
+					continue;
+				} else if(encryptedPasswords[i].equals(encryptedPasswords[j])) {
+					System.out.println("Hash conflict");
+				}
+				++count;
+			}
+			System.out.println(i + " processed.");
+		}
+		System.out.println("End of MassTest. Count = " + count);
 	}
 
 }

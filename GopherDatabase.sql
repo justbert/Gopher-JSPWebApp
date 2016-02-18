@@ -10,79 +10,79 @@ CREATE TABLE IF NOT EXISTS countries (
 
 CREATE TABLE IF NOT EXISTS addresses (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-	country_id INT unsigned,
+	countryID INT unsigned,
 	city VARCHAR(50),
-	street_address_1 VARCHAR(50),
-	street_address_2 VARCHAR(50),
-	postal_code VARCHAR(6),
+	streetAddress1 VARCHAR(50),
+	streetAddress2 VARCHAR(50),
+	postalCode VARCHAR(6),
 	territory VARCHAR(20),
 	PRIMARY KEY (id),
-	FOREIGN KEY (country_id)
+	FOREIGN KEY (countryID)
 		REFERENCES countries (id)
 );
 
 CREATE TABLE IF NOT EXISTS users (
     id INT unsigned NOT NULL AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
-	name_first VARCHAR(50),
-	name_last VARCHAR(50),
+	nameFirst VARCHAR(50),
+	nameLast VARCHAR(50),
 	email VARCHAR(50),
-	address_id_home INT unsigned,
-	address_id_work INT unsigned,
-	phone_home VARCHAR(20),
-	phone_mobile VARCHAR(20),
-	phone_work VARCHAR(20),
+	addressIDHome INT unsigned,
+	addressIDWork INT unsigned,
+	phoneHome VARCHAR(20),
+	phoneMobile VARCHAR(20),
+	phoneWork VARCHAR(20),
 	password CHAR(128),
 	salt CHAR(32),
-	date_joined TIMESTAMP,
+	dateJoined TIMESTAMP,
     PRIMARY KEY (id),
-	FOREIGN KEY (address_id_home)
+	FOREIGN KEY (addressIDHome)
 		REFERENCES addresses (id),
-	FOREIGN KEY (address_id_work)
+	FOREIGN KEY (addressIDWork)
 		REFERENCES addresses (id)
 );
 
 CREATE TABLE IF NOT EXISTS transactions (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-	user_id_customer INT unsigned,
-	user_id_gopher INT unsigned,
-	date_created TIMESTAMP,
-	date_completed TIMESTAMP,
+	userIDCustomer INT unsigned,
+	userIDGopher INT unsigned,
+	dateCreated TIMESTAMP,
+	dateCompleted TIMESTAMP,
 	PRIMARY KEY (id),
-	FOREIGN KEY (user_id_customer)
+	FOREIGN KEY (userIDCustomer)
 		REFERENCES users (id),
-	FOREIGN KEY (user_id_gopher)
+	FOREIGN KEY (userIDGopher)
 		REFERENCES users (id)
 );
 
 CREATE TABLE IF NOT EXISTS tasks (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-	transaction_id INT unsigned,
-	date_initiated TIMESTAMP,
-	date_completed TIMESTAMP,
+	transactionID INT unsigned,
+	dateInitiated TIMESTAMP,
+	dateCompleted TIMESTAMP,
 	deadline TIMESTAMP,
 	reward VARCHAR(50),
 	category VARCHAR(50),
-	address_id_location INT unsigned,
+	addressIDLocation INT unsigned,
 	status VARCHAR(50),
 	importance VARCHAR(50),
 	PRIMARY KEY (id),
-	FOREIGN KEY (address_id_location)
+	FOREIGN KEY (addressIDLocation)
 		REFERENCES addresses (id),
-	FOREIGN KEY (transaction_id)
+	FOREIGN KEY (transactionID)
 		REFERENCES transactions (id)
 );
 
 CREATE TABLE IF NOT EXISTS ratings (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-	user_rated INT unsigned,
-	user_rating INT unsigned,
+	userRated INT unsigned,
+	userRating INT unsigned,
 	rating INT,
 	comments VARCHAR(200),
-	date_created TIMESTAMP,
+	dateCreated TIMESTAMP,
 	PRIMARY KEY (id),
-	FOREIGN KEY (user_rated)
+	FOREIGN KEY (userRated)
 		REFERENCES users (id),
-	FOREIGN KEY (user_rating)
+	FOREIGN KEY (userRating)
 		REFERENCES users (id)
 );
