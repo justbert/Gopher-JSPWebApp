@@ -2,13 +2,14 @@ package models;
 
 import java.io.Serializable;
 
+/**
+ * Task bean for modelling database tables
+ * @author Josh
+ */
 public class Task implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -218272690039621900L;
-	private String taskName = "Pick up my groceries";
-	private String taskDescription = "I need someone to pick up my sweet groceries and meats puhhhlueeeezzzee";
+	private String taskName;
+	private String taskDescription;
 	
 	public void setTaskDescription(String TaskDescription){
 		this.taskDescription = TaskDescription;

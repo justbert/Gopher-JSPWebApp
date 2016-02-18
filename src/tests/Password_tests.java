@@ -6,6 +6,11 @@ import org.junit.Test;
 
 import utils.Password;
 
+/**
+ * Test class for the passwod encryption functionality
+ * @author Justing
+ *
+ */
 public class Password_tests {
 
 	@Test
