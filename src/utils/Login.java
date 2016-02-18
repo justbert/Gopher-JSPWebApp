@@ -5,6 +5,11 @@ import java.sql.SQLException;
 
 import models.User;
 
+/**
+ * Class which
+ * @author Justin
+ *
+ */
 public class Login {
 	
 	/*
