@@ -16,11 +16,11 @@ public class DatabaseManager {
 	private Connection conn = null;
      
      private DatabaseManager(){
-    	 String url = "jdbc:mysql://localhost:3306/";  
-         String dbName = "form";  
+    	 String url = "jdbc:mysql://localhost:8888/";  
+         String dbName = "gopher";  
          String driver = "com.mysql.jdbc.Driver";  
-         String userName = "root";  	/* Temporary Login */
-         String password = "password "; /* Temporary Password*/ 
+         String userName = "GopherAdmin";  	/* Temporary Login */
+         String password = "Gophers"; /* Temporary Password*/ 
          
          try {
              Class.forName(driver).newInstance();  /* Reflect database driver */

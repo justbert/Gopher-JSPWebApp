@@ -1,5 +1,6 @@
 package utils;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,14 +16,14 @@ public class Login {
 	/*
 	 * Verifies if the username supplied has been registered.
 	 */
-	public static boolean verifyUsername(String username) {
+	public static boolean verifyEmail(String email) {
 		
 		DatabaseManager db = DatabaseManager.getDatabaseManager();
 		ResultSet set;
 		boolean found = false;
 		
 		try {
-			set = db.query("SELECT id from Gopher.users WHERE username = '" + username + "'");
+			set = db.query("SELECT id from Gopher.users WHERE email = '" + email + "'");
 			found = set.first();
 		} catch (SQLException e) {
 			
@@ -31,23 +32,25 @@ public class Login {
 		return found;
 	}
 	
-	public static boolean verifyPassword(String username, String password) {
+	public static boolean verifyPassword(String email, String password) {
 		
 		DatabaseManager db = DatabaseManager.getDatabaseManager();
 		ResultSet set;
-		boolean found = false;
+		boolean match = false;
 		
 		try {
-			set = db.query("SELECT password from Gopher.users WHERE username = '" + username + "'");
+			set = db.query("SELECT password, salt from Gopher.users WHERE email = '" + email + "'");
 			
 			if(set.first()) {
-				found = set.getString(1).equals(password);
+				String dbPW = set.getString(1);
+				String salt = set.getString(2);
+				match = Password.encrypt(password, salt).equals(dbPW);
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | NoSuchAlgorithmException e) {
 			
 		}
 		
-		return found;
+		return match;
 	}
 	
 	/*
