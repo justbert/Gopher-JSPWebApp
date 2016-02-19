@@ -6,8 +6,6 @@
 	<script src="assets/bootstrap/js/bootstrap.js"></script>
 	<link href="assets/css/main-style.css" rel="stylesheet" type="text/css">
 
-
-
 	<body>
 		<% if(session.getAttribute("userObject") != null) {%>
 		<jsp:include page="/assets/jsp/widget.jsp"/>
