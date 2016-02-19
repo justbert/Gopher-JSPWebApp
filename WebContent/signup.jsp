@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@page import="utils.RegisterUser"%>
+<%@page import="models.User"%>
+<%@page import="utils.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <style>
@@ -52,6 +54,10 @@ if(email != null) {
 	if(!RegisterUser.verifyEmail(email)) {
 		if(request.getParameter("password").equals(request.getParameter("passwordConfirm"))) {
 			if(RegisterUser.registerUser(email, request.getParameter("password"))) {
+				User current = Login.getUser(email);
+				if(current != null) {
+					session.setAttribute("userObject", current);
+				}
 				response.sendRedirect("dashboard.jsp");
 			} else {
 				%>
