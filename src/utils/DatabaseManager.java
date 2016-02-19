@@ -48,9 +48,7 @@ public class DatabaseManager {
     	String url, dbName, driver, userName, password;
     	 
 		try(Scanner input = new Scanner(new FileReader(new File("C:/Users/Justin/Dropbox/College/Level 5/Web Application Dev/Project/serverConfig.txt")))) {
-			url = input.nextLine();  
-			
-			System.out.println("URL: " + url);
+			url = input.nextLine(); 
 	        dbName = input.nextLine();  
 	        driver = input.nextLine();  
 	        userName = input.nextLine();
