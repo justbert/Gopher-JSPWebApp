@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="utils.RegisterUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <style>
@@ -24,14 +25,14 @@
 	<jsp:body>
 	<div class="bg-teal pad-nav-bar">
 		<div class="w_960" >
-			<form class="block-display" id="login-form">
+			<form class="block-display" id="login-form" method="post">
 				 <h2>Join <span class="monty-font">Gopher</span> today.</h2>
 				 <label>Email address</label>
-				 <input class="block-display" type="text" />
+				 <input class="block-display" type="email" name="email" />
 				 <label>Password</label>
-				 <input class="block-display" type="password" />
+				 <input class="block-display" type="password" name="password"/>
 				 <label>Confirm Password</label>
-				 <input class="block-display" type="password" />
+				 <input class="block-display" type="password" name="passwordConfirm"/>
 				 
 				 <button class="btn btn-default">Sign me up!</button>
 			</form>
@@ -44,4 +45,40 @@
 	</div>
 	</jsp:body>
 </t:main>
-	
+
+<%
+String email = request.getParameter("email");
+if(email != null) {
+	if(!RegisterUser.verifyEmail(email)) {
+		if(request.getParameter("password").equals(request.getParameter("passwordConfirm"))) {
+			if(RegisterUser.registerUser(email, request.getParameter("password"))) {
+				response.sendRedirect("dashboard.jsp");
+			} else {
+				%>
+				<script type="text/javascript">
+					alert("Registration failed, please try again.");
+				</script>
+				<%	
+			}
+		} else {
+			%>
+			<script type="text/javascript">
+				alert("Passwords do not match.");
+			</script>
+			<%
+		}
+	} else if(email.equals("")) {
+		%>
+		<script type="text/javascript">
+			alert("Please enter an email.");
+		</script>
+		<%
+	} else {
+		%>
+		<script type="text/javascript">
+			alert("This email has already been registered.");
+		</script>
+		<%	
+	}
+}
+%>

@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS users (
     id INT unsigned NOT NULL AUTO_INCREMENT,
 	nameFirst VARCHAR(50),
 	nameLast VARCHAR(50),
-	email VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL UNIQUE,
 	addressIDHome INT unsigned,
 	addressIDWork INT unsigned,
 	phoneHome VARCHAR(20),

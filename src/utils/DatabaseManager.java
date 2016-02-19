@@ -113,4 +113,11 @@ public class DatabaseManager {
 		 if(conn != null)
 			 conn.close();
 	 }
+	 
+	 public int update(String updateString) throws SQLException {
+		 PreparedStatement pst = null;
+         pst = conn.prepareStatement(updateString);
+         
+         return pst.executeUpdate();
+	 }
 }
