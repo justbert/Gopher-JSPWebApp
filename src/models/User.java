@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * This class represents a model of User data
+ * It acts as the domain-specific class that the application
+ * will use to represent the "users" table of the database
  * @author skyet
  *
  */
@@ -13,8 +15,8 @@ public class User implements Serializable {
 	private static final long serialVersionUID = -6205863538753164722L;
 	
 	// Fields
-	private int id;
-	private String nameFirst;
+	private int id;					
+	private String nameFirst;		
 	private String nameLast;
 	private String email;
 	private Address addressHome;
@@ -22,9 +24,9 @@ public class User implements Serializable {
 	private String phoneHome;
 	private String phoneMobile;
 	private String phoneWork;
-	private String password;	// yes this is here for now shhh
-	private Date dateJoined;
-	private List<Task> tasks;
+	private String password;		
+	private Date dateJoined;		
+	private List<Errand> errands;	// Errands associated with this user	
 	
 	// Getters
 	public int getId() { 
@@ -60,8 +62,8 @@ public class User implements Serializable {
 	public Date getDateJoined() { 
 		return dateJoined; 
 	}
-	public List<Task> getTasks() {
-		return tasks;
+	public List<Errand> getErrands() {
+		return errands;
 	}
 	
 	// Setters
@@ -98,8 +100,8 @@ public class User implements Serializable {
 	public void setDateJoined(Date dateJoined) { 
 		this.dateJoined = dateJoined; 
 	}
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
+	public void setErrands(List<Errand> errands) {
+		this.errands = errands;
 	}
 	
 	public String toString() {
