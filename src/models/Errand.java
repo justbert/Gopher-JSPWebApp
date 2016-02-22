@@ -20,6 +20,8 @@ public class Errand implements Serializable {
 	private Date dateCreated;		// Date the errand was created
 	private Date dateCompleted;		// Date the errand was completed
 	private List<Task> tasks;		// List of tasks involved in the errand
+	private String reward;			// Reward for completing this errand	*NOT IN DB TABLE*
+	private String category;		// Type of errand						*NOT IN DB TABLE*
 	
 	// Getters
 	public int getId() {
@@ -40,6 +42,12 @@ public class Errand implements Serializable {
 	public List<Task> getTasks() {
 		return tasks;
 	}
+	public String getReward() {
+		return reward;
+	}
+	public String getCategory() {
+		return category;
+	}
 	
 	// Setters
 	public void setId(int id) {
@@ -59,6 +67,12 @@ public class Errand implements Serializable {
 	}
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+	public void setReward(String reward) {
+		this.reward = reward;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 }
