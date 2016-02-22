@@ -43,7 +43,7 @@ public class DatabaseManager {
 	private static final DatabaseManager db = new DatabaseManager(); /* thread-safe singletop instatiation of connection */
 	private Connection conn = null;
      
-     private DatabaseManager(){
+     protected DatabaseManager(){
     	 
     	String url, dbName, driver, userName, password;
     	 
@@ -67,7 +67,7 @@ public class DatabaseManager {
         
      }
      
-     public static DatabaseManager getDatabaseManager(){
+     protected static DatabaseManager getDatabaseManager(){
     	 return db;
      }
      
@@ -79,7 +79,7 @@ public class DatabaseManager {
       * @return ResultSet of the query
       * @throws SQLException
       */
-	 public ResultSet query(String queryString, String... parameters) throws SQLException{
+	 protected ResultSet query(String queryString, String... parameters) throws SQLException{
 		 /*
 		  * should a pst be passed as a parameter so that it can be reused multiple times if the
 		  * class performing the search can use it multiple times, or is it stashed on the DB
@@ -99,7 +99,7 @@ public class DatabaseManager {
 	  * @return
 	  * @throws SQLException
 	  */
-	 public ResultSet query(String queryString) throws SQLException{
+	 protected ResultSet query(String queryString) throws SQLException{
 		 return query(queryString, new String[0]);
 	 }
 	 
@@ -107,15 +107,8 @@ public class DatabaseManager {
 	  * close the connection
 	  * @throws SQLException
 	  */
-	 public void close() throws SQLException{
+	 protected void close() throws SQLException{
 		 if(conn != null)
 			 conn.close();
-	 }
-	 
-	 public int update(String updateString) throws SQLException {
-		 PreparedStatement pst = null;
-         pst = conn.prepareStatement(updateString);
-         
-         return pst.executeUpdate();
 	 }
 }
