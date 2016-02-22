@@ -13,13 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Test Servlet to test our the Database Manager class. Does not actually represent any data.
- * THIS CLASS IS USELESS SHIT
- * THIS CLASS IS USELESS SHIT
- * THIS CLASS IS USELESS SHIT
- * THIS CLASS IS USELESS SHIT
- * THIS CLASS IS USELESS SHIT
- * THIS CLASS IS USELESS SHIT
- * THIS CLASS IS USELESS SHIT
  * @author Ian
  *
  */
