@@ -47,6 +47,8 @@ CREATE TABLE IF NOT EXISTS transactions (
 	userIDGopher INT unsigned,
 	dateCreated TIMESTAMP,
 	dateCompleted TIMESTAMP,
+	reward VARCHAR(50),
+	category VARCHAR(50),
 	PRIMARY KEY (id),
 	FOREIGN KEY (userIDCustomer)
 		REFERENCES users (id),
@@ -57,11 +59,10 @@ CREATE TABLE IF NOT EXISTS transactions (
 CREATE TABLE IF NOT EXISTS tasks (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
 	transactionID INT unsigned,
+	dateCreated TIMESTAMP,
 	dateInitiated TIMESTAMP,
 	dateCompleted TIMESTAMP,
 	deadline TIMESTAMP,
-	reward VARCHAR(50),
-	category VARCHAR(50),
 	addressIDLocation INT unsigned,
 	status VARCHAR(50),
 	importance VARCHAR(50),

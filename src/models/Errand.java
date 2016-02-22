@@ -15,8 +15,8 @@ public class Errand implements Serializable {
 	private static final long serialVersionUID = -2691284966379819188L;
 
 	private int id;					// Unique id of the errand
-	private int userIDCustomer;		// Customer associated with the errand
-	private int userIDGopher;		// Gopher associated with the errand
+	private User customer;			// Customer associated with the errand
+	private User gopher;			// Gopher associated with the errand
 	private Date dateCreated;		// Date the errand was created
 	private Date dateCompleted;		// Date the errand was completed
 	private List<Task> tasks;		// List of tasks involved in the errand
@@ -27,11 +27,11 @@ public class Errand implements Serializable {
 	public int getId() {
 		return id;
 	}
-	public int getUserIDCustomer() {
-		return userIDCustomer;
+	public User getCustomer() {
+		return customer;
 	}
-	public int getUserIDGopher() {
-		return userIDGopher;
+	public User getGopher() {
+		return gopher;
 	}
 	public Date getDateCreated() {
 		return dateCreated;
@@ -53,11 +53,11 @@ public class Errand implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public void setUserIDCustomer(int userIDCustomer) {
-		this.userIDCustomer = userIDCustomer;
+	public void setCustomer(User customer) {
+		this.customer = customer;
 	}
-	public void setUserIDGopher(int userIDGopher) {
-		this.userIDGopher = userIDGopher;
+	public void setGopher(User gopher) {
+		this.gopher = gopher;
 	}
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
