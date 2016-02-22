@@ -27,6 +27,7 @@ public class User implements Serializable {
 	private String password;		
 	private Date dateJoined;		
 	private List<Errand> errands;	// Errands associated with this user	
+	private List<Rating> ratings;	// Ratings received by the user
 	
 	// Getters
 	public int getId() { 
@@ -65,6 +66,9 @@ public class User implements Serializable {
 	public List<Errand> getErrands() {
 		return errands;
 	}
+	public List<Rating> getRatings() {
+		return ratings;
+	}
 	
 	// Setters
 	public void setId(int id) { 
@@ -102,6 +106,9 @@ public class User implements Serializable {
 	}
 	public void setErrands(List<Errand> errands) {
 		this.errands = errands;
+	}
+	public void setRatings(List<Rating> ratings) {
+		this.ratings = ratings;
 	}
 	
 	public String toString() {

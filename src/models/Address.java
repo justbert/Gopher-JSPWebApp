@@ -4,30 +4,30 @@ import java.io.Serializable;
 
 /**
  * This class represents a model for addresses
+ * It acts as the domain-specific class that the application
+ * will use to represent the "addresses" table of the database
  * @author skyet
  *
  */
 public class Address implements Serializable {
-
 	private static final long serialVersionUID = -3615245129407389786L;
 	
-	// Fields
 	private int id;
-	private String street_address1;
-	private String street_address2;
+	private String streetAddress1;
+	private String streetAddress2;
 	private String city;
 	private String province;
-	private String postal_code;
+	private String postalCode;
 	
 	// Getters
 	public int getId() { 
 		return id; 
 	}
-	public String getStreet_address1() { 
-		return street_address1; 
+	public String getStreetAddress1() { 
+		return streetAddress1; 
 	}
-	public String getStreet_address2() { 
-		return street_address2; 
+	public String getStreetAddress2() { 
+		return streetAddress2; 
 	}
 	public String getCity() { 
 		return city; 
@@ -35,19 +35,19 @@ public class Address implements Serializable {
 	public String getProvince() { 
 		return province; 
 	}
-	public String getPostal_code() { 
-		return postal_code; 
+	public String getPostalCode() { 
+		return postalCode; 
 	}
 	
 	// Setters
 	public void setId(int id) { 
 		this.id = id; 
 	}
-	public void setStreet_address1(String street_address1) { 
-		this.street_address1 = street_address1; 
+	public void setStreetAddress1(String streetAddress1) { 
+		this.streetAddress1 = streetAddress1; 
 	}
-	public void setStreet_address2(String street_address2) { 
-		this.street_address2 = street_address2;
+	public void setStreetAddress2(String streetAddress2) { 
+		this.streetAddress2 = streetAddress2;
 	}
 	public void setCity(String city) { 
 		this.city = city; 
@@ -55,8 +55,8 @@ public class Address implements Serializable {
 	public void setProvince(String province) { 
 		this.province = province; 
 	}
-	public void setPostal_code(String postal_code) { 
-		this.postal_code = postal_code; 
+	public void setPostalCode(String postalCode) { 
+		this.postalCode = postalCode; 
 	}
 
 }
