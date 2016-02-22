@@ -2,6 +2,7 @@ package models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * This class represents a model of User data
@@ -13,87 +14,96 @@ public class User implements Serializable {
 	
 	// Fields
 	private int id;
-	private String username;
-	private String name_first;
-	private String name_last;
+	private String nameFirst;
+	private String nameLast;
 	private String email;
-	private Address address_home;
-	private Address address_work;
-	private String phone_home;
-	private String phone_work;
+	private Address addressHome;
+	private Address addressWork;
+	private String phoneHome;
+	private String phoneMobile;
+	private String phoneWork;
 	private String password;	// yes this is here for now shhh
-	private Date date_joined;
+	private Date dateJoined;
+	private List<Task> tasks;
 	
 	// Getters
 	public int getId() { 
 		return id; 
 	}
-	public String getUsername() { 
-		return username; 
+	public String getNameFirst() { 
+		return nameFirst; 
 	}
-	public String getName_first() { 
-		return name_first; 
-	}
-	public String getName_last() { 
-		return name_last; 
+	public String getNameLast() { 
+		return nameLast; 
 	}
 	public String getEmail() { 
 		return email; 
 	}
-	public Address getAddress_home() { 
-		return address_home; 
+	public Address getAddressHome() { 
+		return addressHome; 
 	}
-	public Address getAddress_work() { 
-		return address_work; 
+	public Address getAddressWork() { 
+		return addressWork; 
 	}
-	public String getPhone_home() { 
-		return phone_home; 
+	public String getPhoneHome() { 
+		return phoneHome; 
 	}
-	public String getPhone_work() { 
-		return phone_work; 
+	public String getPhoneMobile() { 
+		return phoneMobile;
+	}
+	public String getPhoneWork() { 
+		return phoneWork; 
 	}
 	public String getPassword() { 
 		return password; 
 	}
-	public Date getDate_joined() { 
-		return date_joined; 
+	public Date getDateJoined() { 
+		return dateJoined; 
+	}
+	public List<Task> getTasks() {
+		return tasks;
 	}
 	
 	// Setters
 	public void setId(int id) { 
 		this.id = id; 
 	}
-	public void setUsername(String username) { 
-		this.username = username; 
+	public void setNameFirst(String nameFirst) { 
+		this.nameFirst = nameFirst; 
 	}
-	public void setName_first(String name_first) { 
-		this.name_first = name_first; 
-	}
-	public void setName_last(String name_last) { 
-		this.name_last = name_last; 
+	public void setNameLast(String nameLast) { 
+		this.nameLast = nameLast; 
 	}
 	public void setEmail(String email) { 
 		this.email = email; 
 	}
-	public void setAddress_home(Address address_home) { 
-		this.address_home = address_home; 
+	public void setAddressHome(Address addressHome) { 
+		this.addressHome = addressHome; 
 	}
-	public void setAddress_work(Address address_work) { 
-		this.address_work = address_work; 
+	public void setAddressWork(Address addressWork) { 
+		this.addressWork = addressWork; 
 	}
-	public void setPhone_home(String phone_home) { 
-		this.phone_home = phone_home; 
+	public void setPhoneHome(String phoneHome) { 
+		this.phoneHome = phoneHome; 
 	}
-	public void setPhone_work(String phone_work) { 
-		this.phone_work = phone_work; 
+	public void setPhoneMobile(String phoneMobile) { 
+		this.phoneHome = phoneMobile; 
+	}
+	public void setPhoneWork(String phoneWork) { 
+		this.phoneWork = phoneWork; 
 	}
 	public void setPassword(String password) { 
 		this.password = password; 
 	}
-	public void setDate_joined(Date date_joined) { 
-		this.date_joined = date_joined; 
+	public void setDateJoined(Date dateJoined) { 
+		this.dateJoined = dateJoined; 
+	}
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 	
-	
+	public String toString() {
+		return nameFirst + " " + nameLast;
+	}
 	
 }
