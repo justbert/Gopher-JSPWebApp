@@ -110,7 +110,7 @@ public class DatabaseManager {
 	  * @return
 	  * @throws SQLException
 	  */
-	 protected int update(String queryString, String... parameters) throws SQLException{
+	 protected int update(String queryString, Object... parameters) throws SQLException{
 		 /*
 		  * Since delete, insert, and update don't return result sets, they return an int for number of rows effected.
 		  * Thus, executeUpdate is needed instead of executeQuery for these operations.
