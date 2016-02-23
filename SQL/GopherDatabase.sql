@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS countries (
 
 CREATE TABLE IF NOT EXISTS addresses (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-	countryID INT unsigned,
+	country_id INT unsigned,
 	city VARCHAR(50),
 	streetAddress1 VARCHAR(50),
 	streetAddress2 VARCHAR(50),
@@ -43,17 +43,43 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS transactions (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-	userIDCustomer INT unsigned,
-	userIDGopher INT unsigned,
-	dateCreated TIMESTAMP,
-	dateCompleted TIMESTAMP,
-	reward VARCHAR(50),
+	user_id_customer INT unsigned,
+	user_id_gopher INT unsigned,
+	date_created TIMESTAMP,
+	date_completed TIMESTAMP,
+    reward_id INT unsigned,
+    deadline TIMESTAMP,
+    status VARCHAR(200),
+	importance VARCHAR(50),
 	category VARCHAR(50),
 	PRIMARY KEY (id),
 	FOREIGN KEY (userIDCustomer)
+		REFERENCES users (id),s
+	FOREIGN KEY (user_id_gopher)
 		REFERENCES users (id),
-	FOREIGN KEY (userIDGopher)
-		REFERENCES users (id)
+	FOREIGN KEY (rating_id)
+		REFERENCES ratings (id)
+);
+
+CREATE TABLE IF NOT EXISTS rewards(
+	id INT unsigned NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100),
+    reward_value numeric(15,2) default NULL,
+    address_id INT unsigned,
+    description VARCHAR(2000),
+    PRIMARY KEY (id),
+    FOREIGN KEY (address_id)
+		REFERENCES addresses (id)
+);
+
+CREATE TABLE IF NOT EXISTS notifications (
+	id INT unsigned NOT NULL AUTO_INCREMENT,
+    title VARCHAR(50),
+    receiving_user_id INT unsigned,
+    type INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (receiving_user_id) 
+    	REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS tasks (
@@ -69,20 +95,23 @@ CREATE TABLE IF NOT EXISTS tasks (
 	PRIMARY KEY (id),
 	FOREIGN KEY (addressIDLocation)
 		REFERENCES addresses (id),
-	FOREIGN KEY (transactionID)
-		REFERENCES transactions (id)
+	FOREIGN KEY (errand_id)
+		REFERENCES errands (id)
 );
 
 CREATE TABLE IF NOT EXISTS ratings (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-	userRated INT unsigned,
-	userRating INT unsigned,
+	user_rated_id INT unsigned,
+	user_rater_id INT unsigned,
+    errand_id INT unsigned,
 	rating INT,
 	comments VARCHAR(200),
 	dateCreated TIMESTAMP,
 	PRIMARY KEY (id),
-	FOREIGN KEY (userRated)
+	FOREIGN KEY (user_rated_id)
 		REFERENCES users (id),
-	FOREIGN KEY (userRating)
-		REFERENCES users (id)
+	FOREIGN KEY (user_rater_id)
+		REFERENCES users (id),
+	FOREIGN KEY (errand_id) 
+		REFERENCES errands(id)
 );

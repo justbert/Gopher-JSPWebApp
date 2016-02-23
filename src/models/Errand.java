@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import entities.Task;
+import entities.User;
+
 /**
  * This class represents a model of Errand data
  * It acts as the domain-specific class that the application

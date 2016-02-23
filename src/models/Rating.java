@@ -3,6 +3,8 @@ package models;
 import java.io.Serializable;
 import java.util.Date;
 
+import entities.User;
+
 /**
  * This class represents a model for user ratings
  * It acts as the domain-specific class that the application
@@ -16,6 +18,7 @@ public class Rating implements Serializable {
 	private int id;				// Unique id for the rating
 	private User userRated;		// The user receiving the rating
 	private User rater;			// The user giving the rating
+	private Errand errand;		// the errand the user is being rated for
 	private int rating;			// The numeric value of the rating
 	private String comments;	// Comments left by the rater
 	private Date dateCreated;	// Date rating was created
@@ -29,6 +32,9 @@ public class Rating implements Serializable {
 	}
 	public User getRater() {
 		return rater;
+	}
+	public Errand getErrand() {
+		return errand;
 	}
 	public int getRating() {
 		return rating;
@@ -49,6 +55,9 @@ public class Rating implements Serializable {
 	}
 	public void setRater(User rater) {
 		this.rater = rater;
+	}
+	public void setErrand(Errand errand) {
+		this.errand = errand;
 	}
 	public void setRating(int rating) {
 		this.rating = rating;

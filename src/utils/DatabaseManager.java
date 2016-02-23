@@ -110,12 +110,5 @@ public class DatabaseManager {
 	 public void close() throws SQLException{
 		 if(conn != null)
 			 conn.close();
-	 }
-	 
-	 public int update(String updateString) throws SQLException {
-		 PreparedStatement pst = null;
-         pst = conn.prepareStatement(updateString);
-         
-         return pst.executeUpdate();
-	 }
+	}
 }
