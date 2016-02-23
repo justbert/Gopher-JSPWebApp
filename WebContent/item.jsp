@@ -3,8 +3,8 @@
 
 <t:main>
 <jsp:body>
-<jsp:useBean id="taskBean" class="models.Task"/>
-<jsp:useBean id="userBean" class="models.User"/>
+<jsp:useBean id="taskBean" class="entities.Task"/>
+<jsp:useBean id="userBean" class="entities.User"/>
 <jsp:setProperty name="userBean" property="username" value="Josh" />
 <!-- Page Content -->
 <div class="pad-nav-bar"></div>
