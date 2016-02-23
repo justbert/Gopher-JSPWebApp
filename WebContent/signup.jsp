@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page import="utils.RegisterUser"%>
-<%@page import="models.User"%>
+<%@page import="entities.User"%>
 <%@page import="utils.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
