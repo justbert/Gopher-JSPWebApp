@@ -12,36 +12,37 @@ CREATE TABLE IF NOT EXISTS addresses (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
 	country_id INT unsigned,
 	city VARCHAR(50),
-	streetAddress1 VARCHAR(50),
-	streetAddress2 VARCHAR(50),
-	postalCode VARCHAR(6),
+	street_address_1 VARCHAR(50),
+	street_address_2 VARCHAR(50),
+	postal_code VARCHAR(6),
 	territory VARCHAR(20),
 	PRIMARY KEY (id),
-	FOREIGN KEY (countryID)
+	FOREIGN KEY (country_id)
 		REFERENCES countries (id)
 );
 
 CREATE TABLE IF NOT EXISTS users (
     id INT unsigned NOT NULL AUTO_INCREMENT,
-	nameFirst VARCHAR(50),
-	nameLast VARCHAR(50),
-	email VARCHAR(50) NOT NULL UNIQUE,
-	addressIDHome INT unsigned,
-	addressIDWork INT unsigned,
-	phoneHome VARCHAR(20),
-	phoneMobile VARCHAR(20),
-	phoneWork VARCHAR(20),
-	password CHAR(128),
-	salt CHAR(32),
-	dateJoined TIMESTAMP,
+    username VARCHAR(50) NOT NULL,
+	name_first VARCHAR(50),
+	name_last VARCHAR(50),
+	email VARCHAR(50),
+	address_id_home INT unsigned,
+	address_id_work INT unsigned,
+	phone_home VARCHAR(20),
+	phone_mobile VARCHAR(20),
+	phone_work VARCHAR(20),
+	password VARCHAR(50),
+	date_joined TIMESTAMP,
+    is_admin BOOLEAN default false,
     PRIMARY KEY (id),
-	FOREIGN KEY (addressIDHome)
+	FOREIGN KEY (address_id_home)
 		REFERENCES addresses (id),
-	FOREIGN KEY (addressIDWork)
+	FOREIGN KEY (address_id_work)
 		REFERENCES addresses (id)
 );
 
-CREATE TABLE IF NOT EXISTS transactions (
+CREATE TABLE IF NOT EXISTS errands (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
 	user_id_customer INT unsigned,
 	user_id_gopher INT unsigned,
@@ -53,8 +54,8 @@ CREATE TABLE IF NOT EXISTS transactions (
 	importance VARCHAR(50),
 	category VARCHAR(50),
 	PRIMARY KEY (id),
-	FOREIGN KEY (userIDCustomer)
-		REFERENCES users (id),s
+	FOREIGN KEY (user_id_customer)
+		REFERENCES users (id),
 	FOREIGN KEY (user_id_gopher)
 		REFERENCES users (id),
 	FOREIGN KEY (rating_id)
@@ -84,16 +85,16 @@ CREATE TABLE IF NOT EXISTS notifications (
 
 CREATE TABLE IF NOT EXISTS tasks (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-	transactionID INT unsigned,
-	dateCreated TIMESTAMP,
-	dateInitiated TIMESTAMP,
-	dateCompleted TIMESTAMP,
-	deadline TIMESTAMP,
-	addressIDLocation INT unsigned,
-	status VARCHAR(50),
-	importance VARCHAR(50),
+    name VARCHAR(50),
+	errand_id INT unsigned,
+    date_created TIMESTAMP,
+	date_initiated TIMESTAMP,
+	date_completed TIMESTAMP,
+	address_id INT unsigned,
+	is_active boolean,
+    description VARCHAR(2000),
 	PRIMARY KEY (id),
-	FOREIGN KEY (addressIDLocation)
+	FOREIGN KEY (address_id)
 		REFERENCES addresses (id),
 	FOREIGN KEY (errand_id)
 		REFERENCES errands (id)
@@ -106,7 +107,7 @@ CREATE TABLE IF NOT EXISTS ratings (
     errand_id INT unsigned,
 	rating INT,
 	comments VARCHAR(200),
-	dateCreated TIMESTAMP,
+	date_created TIMESTAMP,
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_rated_id)
 		REFERENCES users (id),
