@@ -8,7 +8,7 @@
 
 	<body>
 		<% if(session.getAttribute("userObject") != null) {%>
-		<jsp:include page="/assets/jsp/widget.jsp"/>
+		<jsp:include page="/widget.jsp"/>
 		<%} %>
 		<nav class="navbar navbar-default navbar-fixed-top nav-margin">
 			<div class="container">

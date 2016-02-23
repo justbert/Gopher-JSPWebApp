@@ -72,13 +72,16 @@ public class UserDao extends DatabaseManager {
 		sb.append("','");
 		sb.append(passwordAndSalt[1]);
 		sb.append("');");
-
-		try {
-			if(update(sb.toString()) > 0)
-				registered = true;
-		} catch (SQLException e) {
-
-		}
+		
+		
+		
+//PROBLEMATIC CODE, UPDATE IS NOT A THING
+//		try {
+//			if(update(sb.toString()) > 0)
+//				registered = true;
+//		} catch (SQLException e) {
+//
+//		}
 
 		return registered;
 	}
@@ -101,7 +104,7 @@ public class UserDao extends DatabaseManager {
 		sb.append("'");
 
 		try {
-			userSet = db.query(sb.toString());
+			userSet = query(sb.toString());
 			if(userSet.first()) {
 				user = new User();
 				user.setId(userSet.getInt(1));
