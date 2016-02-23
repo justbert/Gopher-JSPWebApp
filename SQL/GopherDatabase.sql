@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS countries (
 );
 
 CREATE TABLE IF NOT EXISTS addresses (
-	address_id INT unsigned NOT NULL AUTO_INCREMENT,
+	id INT unsigned NOT NULL AUTO_INCREMENT,
 	country_id INT unsigned,
 	city VARCHAR(50),
 	street_address_1 VARCHAR(50),
@@ -48,46 +48,39 @@ CREATE TABLE IF NOT EXISTS errands (
 	user_id_gopher INT unsigned,
 	date_created TIMESTAMP,
 	date_completed TIMESTAMP,
-    reward_id INT,
+    reward_id INT unsigned,
     deadline TIMESTAMP,
-    task_status varchar(200),
+    status VARCHAR(200),
 	importance VARCHAR(50),
-    reward VARCHAR(50),
 	category VARCHAR(50),
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_id_customer)
 		REFERENCES users (id),
 	FOREIGN KEY (user_id_gopher)
-		REFERENCES users (id)
+		REFERENCES users (id),
+	FOREIGN KEY (rating_id)
+		REFERENCES ratings (id)
 );
 
 CREATE TABLE IF NOT EXISTS rewards(
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-    reward_name varchar(100),
+    name VARCHAR(100),
     reward_value numeric(15,2) default NULL,
-    reward_address INT,
-    reward_description varchar(2000),
-    foreign key (reward_address)
+    address_id INT unsigned,
+    description VARCHAR(2000),
+    PRIMARY KEY (id),
+    FOREIGN KEY (address_id)
 		REFERENCES addresses (id)
-);
-
-CREATE TABLE IF NOT EXISTS errands_tasks(
-	task_id INT,
-    errand_id INT,
-    errands_tasks_id INT unsigned NOT NULL AUTO_INCREMENT,
-    primary key (errands_tasks_id),
-    FOREIGN KEY (task_id)
-		REFERENCES tasks (id),
-	FOREIGN KEY (errand_id)
-		REFERENCES errand(id)
 );
 
 CREATE TABLE IF NOT EXISTS notifications (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
     title VARCHAR(50),
-    receiving_user_id INT,
+    receiving_user_id INT unsigned,
     type INT,
-    foreign key (receiving_user_id) REFERENCES users(id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (receiving_user_id) 
+    	REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS tasks (
@@ -103,22 +96,23 @@ CREATE TABLE IF NOT EXISTS tasks (
 	PRIMARY KEY (id),
 	FOREIGN KEY (address_id)
 		REFERENCES addresses (id),
-	FOREIGN KEY (transaction_id)
-		REFERENCES transactions (id)
+	FOREIGN KEY (errand_id)
+		REFERENCES errands (id)
 );
 
 CREATE TABLE IF NOT EXISTS ratings (
 	id INT unsigned NOT NULL AUTO_INCREMENT,
-	user_rated INT unsigned,
-	user_rating INT unsigned,
-    task_id INT unsigned,
+	user_rated_id INT unsigned,
+	user_rater_id INT unsigned,
+    errand_id INT unsigned,
 	rating INT,
 	comments VARCHAR(200),
 	date_created TIMESTAMP,
 	PRIMARY KEY (id),
-	FOREIGN KEY (user_rated)
+	FOREIGN KEY (user_rated_id)
 		REFERENCES users (id),
-	FOREIGN KEY (user_rating)
+	FOREIGN KEY (user_rater_id)
 		REFERENCES users (id),
-	FOREIGN KEY (task_id) references tasks(id)
+	FOREIGN KEY (errand_id) 
+		REFERENCES errands(id)
 );
