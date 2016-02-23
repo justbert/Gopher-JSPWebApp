@@ -76,6 +76,7 @@ public class UserDao extends DatabaseManager {
 		
 		
 //PROBLEMATIC CODE, UPDATE IS NOT A THING
+//Josh disagrees. update is a thing, to run executeUpdate instead of executeQuery.
 //		try {
 //			if(update(sb.toString()) > 0)
 //				registered = true;
@@ -91,7 +92,7 @@ public class UserDao extends DatabaseManager {
 	 */
 	public User getUser(String email) {
 
-		DatabaseManager db = DatabaseManager.getDatabaseManager();
+		//DatabaseManager db = DatabaseManager.getDatabaseManager();
 		StringBuilder sb = new StringBuilder();
 		ResultSet userSet;
 		User user = null;

@@ -35,19 +35,19 @@ import java.util.Scanner;
 	GopherAdmin
 	Gophers
 	
-	File locations (for when stuff gets repulled):
+	File locations (for when stuff gets re-pulled):
 	Justin's file location:
 	C:/Users/Justin/Dropbox/College/Level 5/Web Application Dev/Project/serverConfig.txt
  */
 public class DatabaseManager {
-	private static final DatabaseManager db = new DatabaseManager(); /* thread-safe singletop instatiation of connection */
+	private static final DatabaseManager db = new DatabaseManager(); /* thread-safe singleton instantiation of connection */
 	private Connection conn = null;
      
      protected DatabaseManager(){
     	 
     	String url, dbName, driver, userName, password;
     	 
-		try(Scanner input = new Scanner(new FileReader(new File("C:/Users/Justin/Dropbox/College/Level 5/Web Application Dev/Project/serverConfig.txt")))) {
+		try(Scanner input = new Scanner(new FileReader("serverConfig.txt"))) {
 			url = input.nextLine(); 
 	        dbName = input.nextLine();  
 	        driver = input.nextLine();  
@@ -92,7 +92,7 @@ public class DatabaseManager {
          
          return pst.executeQuery();
 	 }
-	 
+
 	 /**
 	  * Query overload for no parameters
 	  * @param queryString
@@ -101,6 +101,26 @@ public class DatabaseManager {
 	  */
 	 protected ResultSet query(String queryString) throws SQLException{
 		 return query(queryString, new String[0]);
+	 }
+	 
+	 /**
+	  * Update for DELETE, INSERT, UPDATE functionality that returns int # of rows effected.
+	  * @param queryString
+	  * @param parameters
+	  * @return
+	  * @throws SQLException
+	  */
+	 protected int update(String queryString, String... parameters) throws SQLException{
+		 /*
+		  * Since delete, insert, and update don't return result sets, they return an int for number of rows effected.
+		  * Thus, executeUpdate is needed instead of executeQuery for these operations.
+		  */
+		 PreparedStatement pst = null;
+         pst = conn.prepareStatement(queryString);
+         for(int i = 1; i <= parameters.length; i++)
+        	 pst.setObject(i, parameters[i]);
+         
+         return pst.executeUpdate();
 	 }
 	 
 	 /**
