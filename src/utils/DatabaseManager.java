@@ -104,6 +104,43 @@ public class DatabaseManager {
 	 }
 	 
 	 /**
+	  * Update for DELETE, INSERT, UPDATE functionality that returns int # of rows effected.
+	  * @param queryString
+	  * @param parameters
+	  * @return
+	  * @throws SQLException
+	  */
+	 protected int update(String queryString, String... parameters) throws SQLException{
+		 /*
+		  * Since delete, insert, and update don't return result sets, they return an int for number of rows effected.
+		  * Thus, executeUpdate is needed instead of executeQuery for these operations.
+		  */
+		 PreparedStatement pst = null;
+         pst = conn.prepareStatement(queryString);
+         for(int i = 1; i <= parameters.length; i++)
+        	 pst.setObject(i, parameters[i]);
+         
+         return pst.executeUpdate();
+	 }
+	 
+	 /**
+	  * Update for INSERT functionality that returns int # of rows effected.
+	  * Accepts an Object[] composed of the data to map to the new database entry
+	  * @param queryString Defines the query with placeholder for Object data
+	  * @param parameters The Object containing the values to insert into the database
+	  * @return the number of rows effected
+	  * @throws SQLException
+	  */
+	 protected int update(String queryString, Object... parameters) throws SQLException{
+		 PreparedStatement pst = null;
+         pst = conn.prepareStatement(queryString);
+         for(int i = 1; i <= parameters.length; i++)
+        	 pst.setObject(i, parameters[i]);
+         
+         return pst.executeUpdate();
+	 }
+	 
+	 /**
 	  * close the connection
 	  * @throws SQLException
 	  */

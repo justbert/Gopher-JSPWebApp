@@ -34,6 +34,9 @@ public class Rating implements Serializable {
 	public int getRating() {
 		return rating;
 	}
+	public Errand getErrand() {
+		return errand;
+	}
 	public String getComments() {
 		return comments;
 	}
@@ -53,6 +56,9 @@ public class Rating implements Serializable {
 	}
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+	public void setErrand(Errand errand) {
+		this.errand = errand;
 	}
 	public void setComments(String comments) {
 		this.comments = comments;

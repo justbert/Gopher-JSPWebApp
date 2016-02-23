@@ -3,7 +3,6 @@ package daos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import entities.Rating;
@@ -23,17 +22,21 @@ public class RatingDAO extends DatabaseManager {
 			"SELECT * FROM ratings ORDER BY date_created desc";
 	
 	/** Defines a query that selects all ratings for a single user by user id */
-	private static final String selectUserRatingsById = 
+	private static final String selectUserRatingsByUserId = 
 			"SELECT * FROM ratings WHERE user_rated_id = ? ORDER BY date_created desc";
 	
 	/** Defines a query that selects all ratings made by a single user by user id */
-	private static final String selectContributedRatingsById = 
+	private static final String selectContributedRatingsByUserId = 
 			"SELECT * FROM ratings WHERE user_rater_id = ? ORDER BY date_created desc";
 	
 	/** Defines a query that adds a rating entry into the database */
 	private static final String insertRating = 
 			"INSERT INTO ratings ( user_rated_id, user_rater_id, errand_id, rating, comments )"
 			+ "VALUES ( ?, ?, ?, ?, ? )";
+	
+	/** Defines a query that updates the rating value and comments of an entry by id */
+	private static final String updateRatingById = 
+			"UPDATE ratings SET rating = ?, comments = ? WHERE id = ?";
 	
 	
 	/**
@@ -64,7 +67,7 @@ public class RatingDAO extends DatabaseManager {
 	public List<Rating> getUserRatingsById(int userId) {
 		List<Rating> ratings = new ArrayList<>();
 		
-		try (ResultSet rs = query(selectUserRatingsById, Integer.toString(userId))) {
+		try (ResultSet rs = query(selectUserRatingsByUserId, Integer.toString(userId))) {
 			while (rs.next()) {
 				ratings.add(mapData(rs));
 			}
@@ -84,7 +87,7 @@ public class RatingDAO extends DatabaseManager {
 	public List<Rating> getRatingsMadeById(int userId) {
 		List<Rating> ratings = new ArrayList<>();
 		
-		try (ResultSet rs = query(selectContributedRatingsById, Integer.toString(userId))) {
+		try (ResultSet rs = query(selectContributedRatingsByUserId, Integer.toString(userId))) {
 			while (rs.next()) {
 				ratings.add(mapData(rs));
 			}
@@ -95,26 +98,50 @@ public class RatingDAO extends DatabaseManager {
 		return ratings;
 	}
 	
+	
 	/**
-	 * 
-	 * @param ratedId
-	 * @param raterId
-	 * @param errandId
-	 * @param rating
-	 * @param comments
-	 * @return
+	 * Inserts a new entry into the database
+	 * @param rating The model data to map to the database entry
+	 * @return The number of rows updated
 	 */
-	public int addRating(int ratedId, int raterId, int errandId, int rating, String comments) {	
+	public int addRating(Rating rating) {	
+		int result = -1;
+		
+		Object[] ratingData = {
+			rating.getUserRated(),
+			rating.getRater(),
+			rating.getErrand(),
+			rating.getRating(),
+			rating.getComments()
+		};
+		
+		try {
+			result = update(insertRating, ratingData);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	/**
+	 * Updates an entry with a new rating value and new comment string.
+	 * @param newRatingValue The new value to insert as the User rating
+	 * @param newComments The new comments entered by the User making the rating
+	 * @param ratingId The id of the rating entry to be updated
+	 * @return The number of rows effected
+	 */
+	public int editRating(int newRatingValue, String newComments, int ratingId) {
 		int result = -1;
 		
 		try {
-			result = update(insertRating, 
-					Integer.toString(ratedId), 
-					Integer.toString(raterId),
-					Integer.toString(errandId), 
-					Integer.toString(rating), 
-					comments);
-			
+			result = update(updateRatingById, 
+					Integer.toString(newRatingValue),
+					newComments,
+					Integer.toString(ratingId)
+					);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
