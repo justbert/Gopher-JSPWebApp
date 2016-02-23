@@ -7,7 +7,7 @@ import entities.Address;
 import entities.Task;
 import utils.DatabaseManager;
 
-public class TasksDAO extends DatabaseManager{
+public class TasksDao extends DatabaseManager{
 	
 	private static final String select_latestTask = "SELECT * from tasks order by date_completed desc join on addresses using(address_id)"; 
 	
