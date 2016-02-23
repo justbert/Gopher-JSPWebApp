@@ -1,4 +1,4 @@
-package models;
+package junkyard;
 
 import java.io.Serializable;
 

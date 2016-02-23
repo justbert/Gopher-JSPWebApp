@@ -1,4 +1,4 @@
-package models;
+package entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,8 +12,9 @@ import java.util.List;
  *
  */
 public class User implements Serializable {
+
 	private static final long serialVersionUID = -6205863538753164722L;
-	
+
 	// Fields
 	private int id;					
 	private String nameFirst;		
@@ -28,7 +29,6 @@ public class User implements Serializable {
 	private Date dateJoined;		
 	private List<Errand> errands;	// Errands associated with this user	
 	private List<Rating> ratings;	// Ratings received by the user
-	
 	// Getters
 	public int getId() { 
 		return id; 
@@ -69,7 +69,7 @@ public class User implements Serializable {
 	public List<Rating> getRatings() {
 		return ratings;
 	}
-	
+
 	// Setters
 	public void setId(int id) { 
 		this.id = id; 
@@ -114,5 +114,4 @@ public class User implements Serializable {
 	public String toString() {
 		return nameFirst + " " + nameLast;
 	}
-	
 }

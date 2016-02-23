@@ -110,5 +110,5 @@ public class DatabaseManager {
 	 protected void close() throws SQLException{
 		 if(conn != null)
 			 conn.close();
-	 }
+	}
 }
