@@ -15,18 +15,4 @@ public class NotificationDAO extends DatabaseManager{
 	public NotificationDAO(){
 		
 	}
-	
-//	public List<Notification> getAllNotifications(){
-//		List<Notification> results = new ArrayList<>();
-//		try(ResultSet rs = query(select_AllNotification)){
-//			while(rs.next())
-//				results.add(new Notification(
-//						rs.getInt("id"),
-//						rs.getString("title"),
-//						
-//						
-//						
-//						));
-//		}
-//	}
 }
