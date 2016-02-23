@@ -1,4 +1,4 @@
-package models;
+package entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,8 +9,9 @@ import java.util.Date;
  *
  */
 public class User implements Serializable {
+
 	private static final long serialVersionUID = -6205863538753164722L;
-	
+
 	// Fields
 	private int id;
 	private String username;
@@ -23,7 +24,7 @@ public class User implements Serializable {
 	private String phone_work;
 	private String password;	// yes this is here for now shhh
 	private Date date_joined;
-	
+
 	// Getters
 	public int getId() { 
 		return id; 
@@ -58,7 +59,7 @@ public class User implements Serializable {
 	public Date getDate_joined() { 
 		return date_joined; 
 	}
-	
+
 	// Setters
 	public void setId(int id) { 
 		this.id = id; 
@@ -93,7 +94,7 @@ public class User implements Serializable {
 	public void setDate_joined(Date date_joined) { 
 		this.date_joined = date_joined; 
 	}
-	
-	
-	
+
+
+
 }

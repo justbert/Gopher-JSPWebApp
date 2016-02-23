@@ -43,7 +43,7 @@ public class DatabaseManager {
 	private static final DatabaseManager db = new DatabaseManager(); /* thread-safe singletop instatiation of connection */
 	private Connection conn = null;
      
-     private DatabaseManager(){
+     protected DatabaseManager(){
     	 
     	String url, dbName, driver, userName, password;
     	 

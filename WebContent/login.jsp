@@ -1,5 +1,6 @@
-<%@page import="utils.Login"%>
-<%@page import="models.User"%>
+<%-- <%@page import="utils.Login"%>
+<%@page import="models.User"%> --%>
+<%@page import="servlets.LoginServlet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <style>	
@@ -28,7 +29,7 @@
 		</div>
 		<div class="bg-white">
 			<div class="w_960">
-		    	<form class="block-display" id="login-form" action="login.jsp" method="post">
+		    	<form class="block-display" id="login-form" action="loginServlet" method="post">
 					<h2 class="monty-font">Sign in</h2>
 				 	<input class="block-display" type="text" placeholder="Email" name="email"/>
 				 	<input class="block-display" type="password" placeholder="Password" name="password" />
@@ -38,36 +39,3 @@
 		</div>
     </jsp:body>
 </t:main>
-
-<%
-String email = request.getParameter("email");
-if(email != null) {
-	if(Login.verifyEmail(email)) {
-		if(Login.verifyPassword(email, request.getParameter("password"))) {
-			User current = Login.getUser(email);
-			if(current != null) {
-				session.setAttribute("userObject", current);
-			}
-			response.sendRedirect("dashboard.jsp");
-		} else {
-			%>
-			<script type="text/javascript">
-				alert("Password is incorrect. Please try again.");
-			</script>
-			<%
-		}
-	} else if(email.equals("")) {
-		%>
-		<script type="text/javascript">
-			alert("Please enter an email.");
-		</script>
-		<%
-	} else {
-		%>
-		<script type="text/javascript">
-			alert("This email has not been registered.");
-		</script>
-		<%	
-	}
-}
-%>

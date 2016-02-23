@@ -1,4 +1,4 @@
-package controller;
+package junkyard;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 
+import daos.UserDao;
 import utils.DatabaseManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +18,10 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 public class MyTableServlet extends HttpServlet{
-	String query = "SELECT * FROM gopher.mytable;"; /* Sample query to get sample data from sample table */
-	DatabaseManager db = DatabaseManager.getDatabaseManager(); /* Get DB connection */
+	String query = "SELECT * FROM gopher.users;"; /* Sample query to get sample data from sample table */
+	//DatabaseManager db = DatabaseManager.getDatabaseManager(); /* Get DB connection */
 	
+	private UserDao user = new UserDao();
 	
 	@Override
 	/**
@@ -28,16 +30,16 @@ public class MyTableServlet extends HttpServlet{
 	 * @param resp
 	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-		 String n = req.getParameter("username");
-	     String p = req.getParameter("userpass");
-	     
-	     try(ResultSet rs = db.query(query)){
-			while(rs.next()){
-				System.out.println(rs.getString(1));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		 String n = req.getParameter("username");
+//	     String p = req.getParameter("userpass");
+//	     
+//	     try(ResultSet rs = query(query)){
+//			while(rs.next()){
+//				System.out.println(rs.getString(1));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 }
