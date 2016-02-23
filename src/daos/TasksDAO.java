@@ -1,10 +1,10 @@
-package src.dao;
+package daos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import models.Address;
-import models.Task;
+import entities.Address;
+import entities.Task;
 import utils.DatabaseManager;
 
 public class TasksDAO extends DatabaseManager{

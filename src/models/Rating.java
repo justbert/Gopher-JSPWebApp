@@ -3,6 +3,8 @@ package models;
 import java.io.Serializable;
 import java.util.Date;
 
+import entities.User;
+
 /**
  * This class represents a model for user ratings
  * It acts as the domain-specific class that the application
