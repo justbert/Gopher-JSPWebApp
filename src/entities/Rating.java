@@ -17,6 +17,7 @@ public class Rating implements Serializable {
 	private User userRated;		// The user receiving the rating
 	private User rater;			// The user giving the rating
 	private int rating;			// The numeric value of the rating
+	private Errand errand;		// The errand this rating pertains to
 	private String comments;	// Comments left by the rater
 	private Date dateCreated;	// Date rating was created
 	
