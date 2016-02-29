@@ -21,7 +21,7 @@ if (sessionEmail == null){
 <jsp:body>
 <!-- Page Content -->
 		<div class="bg-teal pad-nav-bar">
-			<div id="carousel" class="carousel slide w_960 pad-me-please" data-ride="carousel">
+			<div id="carousel" class="carousel slide pad-me-please" data-ride="carousel">
     			<!-- Menu -->
 			    <ol class="carousel-indicators">
 			        <li data-target="#carousel" data-slide-to="0" class="active"></li>

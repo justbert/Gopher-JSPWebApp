@@ -26,19 +26,17 @@
 <t:main>	
 	<jsp:body>
 	<div class="bg-teal pad-nav-bar">
-		<div class="w_960" >
-			<form class="block-display" id="login-form" method="post">
-				 <h2>Join <span class="monty-font">Gopher</span> today.</h2>
-				 <label>Email address</label>
-				 <input class="block-display" type="email" name="email" />
-				 <label>Password</label>
-				 <input class="block-display" type="password" name="password"/>
-				 <label>Confirm Password</label>
-				 <input class="block-display" type="password" name="passwordConfirm"/>
-				 
-				 <button class="btn btn-default">Sign me up!</button>
-			</form>
-		</div>
+		<form class="block-display" id="login-form" method="post">
+			 <h2>Join <span class="monty-font">Gopher</span> today.</h2>
+			 <label>Email address</label>
+			 <input class="block-display" type="email" name="email" />
+			 <label>Password</label>
+			 <input class="block-display" type="password" name="password"/>
+			 <label>Confirm Password</label>
+			 <input class="block-display" type="password" name="passwordConfirm"/>
+			 
+			 <button class="btn btn-default">Sign me up!</button>
+		</form>
 	</div>
 	<div class="bg-white fill">
 		<div style="width:200px;text-align:center;margin:0 auto;padding-top:20px">
