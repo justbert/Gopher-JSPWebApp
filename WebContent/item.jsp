@@ -8,7 +8,7 @@
 <jsp:setProperty name="userBean" property="username" value="Josh" />
 <!-- Page Content -->
 <div class="pad-nav-bar"></div>
-<div class="row bg-teal" style="height:95%">
+<div class="row bg-teal">
     <div class="col-md-8 col-md-offset-2">
         <div class="thumbnail ">
             <img src="http://lorempixel.com/1500/200/food/5" alt="Slide 1"/>

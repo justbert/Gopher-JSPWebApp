@@ -28,14 +28,12 @@
 			<img class="img-responsive" style="margin:auto;padding:20px 0px;" src="assets/img/cute_gopher.png"></img>
 		</div>
 		<div class="bg-white">
-			<div class="w_960">
-		    	<form class="block-display" id="login-form" action="loginServlet" method="post">
-					<h2 class="monty-font">Sign in</h2>
-				 	<input class="block-display" type="text" placeholder="Email" name="email"/>
-				 	<input class="block-display" type="password" placeholder="Password" name="password" />
-				 	<button class="btn btn-default bg-grey" type="submit">Sign in</button>
-				</form>
-			</div>
+	    	<form class="block-display" id="login-form" action="loginServlet" method="post">
+				<h2 class="monty-font">Sign in</h2>
+			 	<input class="block-display" type="text" placeholder="Email" name="email"/>
+			 	<input class="block-display" type="password" placeholder="Password" name="password" />
+			 	<button class="btn btn-default bg-grey" type="submit">Sign in</button>
+			</form>
 		</div>
     </jsp:body>
 </t:main>

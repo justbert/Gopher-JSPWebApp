@@ -76,7 +76,7 @@
 	
 	<!-- Tab navigation for dashboard content -->
 	
-	<div><div class="w_960">
+	<div>
 		<div class="dashboard-nav">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
@@ -228,7 +228,7 @@
 			</div>
 					
 		</div>
-	</div></div>
+	</div>
 	
     </jsp:body>
 </t:main>

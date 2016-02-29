@@ -31,7 +31,7 @@
     			</div>
   			</div>
 		</nav>
-		<div id="wrapper">
+		<div class="container">
 			<jsp:doBody/>
 		</div>
 	</body>
