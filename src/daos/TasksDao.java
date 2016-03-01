@@ -16,15 +16,7 @@ public class TasksDao extends DatabaseManager{
 		try(ResultSet rs = query(select_latestTask)){
 			if(rs.next())
 				return new Task(
-							rs.getInt("id"),
-							rs.getString("name"),
-							rs.getInt("errand_id"),
-							rs.getDate("date_created"),
-							rs.getDate("date_initiated"),
-							rs.getDate("date_completed"),
-							new Address(),
-							rs.getBoolean("is_active"),
-							rs.getString("description")						
+							
 						);
 		}catch(SQLException e){
 			e.printStackTrace();

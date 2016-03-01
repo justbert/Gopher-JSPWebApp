@@ -108,10 +108,10 @@ public class RatingDAO extends DatabaseManager {
 		int result = -1;
 		
 		Object[] ratingData = {
-			rating.getUserRated(),
-			rating.getRater(),
-			rating.getErrand(),
-			rating.getRating(),
+			rating.getUserIdRated(),
+			rating.getUserIdRater(),
+			rating.getErrandId(),
+			rating.getRatingValue(),
 			rating.getComments()
 		};
 		
@@ -160,11 +160,11 @@ public class RatingDAO extends DatabaseManager {
 		Rating rating = new Rating();
 		
 		rating.setId(rs.getInt("id"));
-		rating.setUserRated(new User());		// will have to decide how to do this later
-		rating.setRater(new User());			// Can User class use its DAO to do this with an id?
-		rating.setRating(rs.getInt("rating"));
+		rating.setUserIdRated(new User());		// will have to decide how to do this later
+		rating.setUserIdRater(new User());			// Can User class use its DAO to do this with an id?
+		rating.setRatingValue(rs.getInt("rating"));
 		rating.setComments(rs.getString("comments"));
-		rating.setDateCreated(rs.getDate("date_created"));
+		rating.setCreationDate(rs.getDate("date_created"));
 		
 		return rating;
 	}

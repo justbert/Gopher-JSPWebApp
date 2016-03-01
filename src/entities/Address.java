@@ -2,6 +2,8 @@ package entities;
 
 import java.io.Serializable;
 
+import entities.Errand.ImportanceType;
+
 /**
  * This class represents a model for addresses
  * It acts as the domain-specific class that the application
@@ -13,50 +15,150 @@ public class Address implements Serializable {
 	private static final long serialVersionUID = -3615245129407389786L;
 	
 	private int id;
-	private String streetAddress1;
-	private String streetAddress2;
+	private String addressLine1;
+	private String addressLine2;
 	private String city;
 	private String province;
-	private String postalCode;
+	private String country;
+	private String zip;
+	private User userId;
+	private AddressType addressType;
 	
-	// Getters
-	public int getId() { 
-		return id; 
-	}
-	public String getStreetAddress1() { 
-		return streetAddress1; 
-	}
-	public String getStreetAddress2() { 
-		return streetAddress2; 
-	}
-	public String getCity() { 
-		return city; 
-	}
-	public String getProvince() { 
-		return province; 
-	}
-	public String getPostalCode() { 
-		return postalCode; 
-	}
 	
-	// Setters
-	public void setId(int id) { 
-		this.id = id; 
+	public enum AddressType{
+		HOME("Home", 1),
+		WORK("Work", 2),
+		PICKUP_LOCATION("Pickup Location", 3),
+		MEETING_LOCATION("Meeting Location", 4),
+		DROPOFF_LOCATION("Dropoff Location", 5),
+		CUSTOM_TYPE("Custom Type", 6);
+		
+		private String name;
+		private int index;
+		
+		private AddressType(String name, int index){
+			this.name = name;
+			this.index = index;
+		}
+		
+		public AddressType getAddressType(int index){
+			for(AddressType type : AddressType.values())
+				if(type.index == index) return type;
+			return null;
+		}
+		
+		public String getTitle(){
+			return name;
+		}
+		
+		public int getIndex(){
+			return this.index;
+		}
 	}
-	public void setStreetAddress1(String streetAddress1) { 
-		this.streetAddress1 = streetAddress1; 
+
+	public Address(int id, String addressLine1, String addressLine2, String city, String province, String country, String zip, User userId, AddressType addressType) {
+		super();
+		this.id = id;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.province = province;
+		this.country = country;
+		this.zip = zip;
+		this.userId = userId;
+		this.addressType = addressType;
 	}
-	public void setStreetAddress2(String streetAddress2) { 
-		this.streetAddress2 = streetAddress2;
+
+	public int getId() {
+		return id;
 	}
-	public void setCity(String city) { 
-		this.city = city; 
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public void setProvince(String province) { 
-		this.province = province; 
+
+
+	public String getAddressLine1() {
+		return addressLine1;
 	}
-	public void setPostalCode(String postalCode) { 
-		this.postalCode = postalCode; 
+
+
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+
+
+	public String getAddressLine2() {
+		return addressLine2;
+	}
+
+
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+
+
+	public String getCity() {
+		return city;
+	}
+
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+	public String getProvince() {
+		return province;
+	}
+
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+
+	public String getCountry() {
+		return country;
+	}
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+	public String getZip() {
+		return zip;
+	}
+
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+
+	public User getUserId() {
+		return userId;
+	}
+
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
+
+	public AddressType getAddressType() {
+		return addressType;
+	}
+
+
+	public void setAddressType(AddressType addressType) {
+		this.addressType = addressType;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

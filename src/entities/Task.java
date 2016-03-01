@@ -15,103 +15,85 @@ import java.util.Date;
 public class Task implements Serializable{
 	private static final long serialVersionUID = -218272690039621900L;
 
-	private int id;						// Unique task id
-	private String name;				// Task name
-	private int errandID;				// Errand this task belongs to
-	private Date dateCreated;			// Date task was created by a Customer
-	private Date dateInitiated;			// Date the task was started by a Gopher
-	private Date dateCompleted;			// Date the task was completed
-	private Date deadline;				// Date this task must be completed by
-	private Address location;			// Task may involve going to a specific place
-	private boolean isActive;
-	private String description;	
+	private int id;
+	private String name;
+	private String description;
+	private Date startDate;
+	private Date completionDate;
+	private Errand errandId;
+	private Address address_id;
 	
-	public Task(int id, String name, int errandID, Date dateCreated, Date dateInitiated, Date dateCompleted,
-			Address location, boolean isActive, String description) {
+	public Task(){}
+	
+	public Task(int id, String name, String description, Date startDate, Date completionDate, Errand errandId,
+			Address address_id) {
+		super();
 		this.id = id;
 		this.name = name;
-		this.errandID = errandID;
-		this.dateCreated = dateCreated;
-		this.dateInitiated = dateInitiated;
-		this.dateCompleted = dateCompleted;
-		this.location = location;
-		this.isActive = isActive;
 		this.description = description;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+		this.startDate = startDate;
+		this.completionDate = completionDate;
+		this.errandId = errandId;
+		this.address_id = address_id;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public int getErrandID() {
-		return errandID;
-	}
-
-	public Date getDateCreated() {
-		return dateCreated;
-	}
-
-	public Date getDateInitiated() {
-		return dateInitiated;
-	}
-
-	public Date getDateCompleted() {
-		return dateCompleted;
-	}
-
-	public Address getLocation() {
-		return location;
-	}
-
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public String description() {
-		return description;
-	}
-
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setErrandID(int errandID) {
-		this.errandID = errandID;
-	}
-
-	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
-	}
-
-	public void setDateInitiated(Date dateInitiated) {
-		this.dateInitiated = dateInitiated;
-	}
-
-	public void setDateCompleted(Date dateCompleted) {
-		this.dateCompleted = dateCompleted;
-	}
-
-	public void setLocation(Address location) {
-		this.location = location;
-	}
-
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public String getDescription() {
+		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getCompletionDate() {
+		return completionDate;
+	}
+
+	public void setCompletionDate(Date completionDate) {
+		this.completionDate = completionDate;
+	}
+
+	public Errand getErrandId() {
+		return errandId;
+	}
+
+	public void setErrandId(Errand errandId) {
+		this.errandId = errandId;
+	}
+
+	public Address getAddress_id() {
+		return address_id;
+	}
+
+	public void setAddress_id(Address address_id) {
+		this.address_id = address_id;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }

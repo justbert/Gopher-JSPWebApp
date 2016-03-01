@@ -1,13 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<%
- String sessionEmail = request.getParameter("emailLogin");
-
-if (sessionEmail == null){
-	sessionEmail = request.getSession().getAttribute("emailLogin").toString();
-}
-
-%>
 <style>
 	.pad-me-please{
 		margin-top:50px;

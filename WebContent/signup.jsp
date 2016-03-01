@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<%@page import="utils.RegisterUser"%>
-<%@page import="entities.User"%>
-<%@page import="utils.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <style>
@@ -45,44 +42,3 @@
 	</div>
 	</jsp:body>
 </t:main>
-
-<%
-String email = request.getParameter("email");
-if(email != null) {
-	if(!RegisterUser.verifyEmail(email)) {
-		if(request.getParameter("password").equals(request.getParameter("passwordConfirm"))) {
-			if(RegisterUser.registerUser(email, request.getParameter("password"))) {
-				User current = Login.getUser(email);
-				if(current != null) {
-					session.setAttribute("userObject", current);
-				}
-				response.sendRedirect("dashboard.jsp");
-			} else {
-				%>
-				<script type="text/javascript">
-					alert("Registration failed, please try again.");
-				</script>
-				<%	
-			}
-		} else {
-			%>
-			<script type="text/javascript">
-				alert("Passwords do not match.");
-			</script>
-			<%
-		}
-	} else if(email.equals("")) {
-		%>
-		<script type="text/javascript">
-			alert("Please enter an email.");
-		</script>
-		<%
-	} else {
-		%>
-		<script type="text/javascript">
-			alert("This email has already been registered.");
-		</script>
-		<%	
-	}
-}
-%>

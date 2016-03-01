@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import entities.Address.AddressType;
+
 /**
  * This class represents a model of User data
  * It acts as the domain-specific class that the application
@@ -20,98 +22,139 @@ public class User implements Serializable {
 	private String nameFirst;		
 	private String nameLast;
 	private String email;
-	private Address addressHome;
-	private Address addressWork;
 	private String phoneHome;
 	private String phoneMobile;
 	private String phoneWork;
-	private String password;		
-	private Date dateJoined;		
-	private List<Errand> errands;	// Errands associated with this user	
-	private List<Rating> ratings;	// Ratings received by the user
-	// Getters
-	public int getId() { 
-		return id; 
+	private String password;
+	private Date dateJoined;
+	private UserType userTypeId;
+	
+	public enum UserType{
+		GOHPER("Gopher", 1),
+		ADMIN("Admin", 2),
+		CUSTOMER("Customer", 3);
+		
+		private String name;
+		private int index;
+		
+		private UserType(String name, int index){
+			this.name = name;
+			this.index = index;
+		}
+		
+		public static UserType getUserType(int index){
+			for(UserType type : UserType.values())
+				if(type.index == index) return type;
+			return null;
+		}
+		
+		public String getTitle(){
+			return name;
+		}
+		
+		public int getIndex(){
+			return this.index;
+		}
 	}
-	public String getNameFirst() { 
-		return nameFirst; 
-	}
-	public String getNameLast() { 
-		return nameLast; 
-	}
-	public String getEmail() { 
-		return email; 
-	}
-	public Address getAddressHome() { 
-		return addressHome; 
-	}
-	public Address getAddressWork() { 
-		return addressWork; 
-	}
-	public String getPhoneHome() { 
-		return phoneHome; 
-	}
-	public String getPhoneMobile() { 
-		return phoneMobile;
-	}
-	public String getPhoneWork() { 
-		return phoneWork; 
-	}
-	public String getPassword() { 
-		return password; 
-	}
-	public Date getDateJoined() { 
-		return dateJoined; 
-	}
-	public List<Errand> getErrands() {
-		return errands;
-	}
-	public List<Rating> getRatings() {
-		return ratings;
+	public User(){}
+
+	public User(int id, String nameFirst, String nameLast, String email, String phoneHome, String phoneMobile,
+			String phoneWork, String password, Date dateJoined, UserType userTypeId) {
+		super();
+		this.id = id;
+		this.nameFirst = nameFirst;
+		this.nameLast = nameLast;
+		this.email = email;
+		this.phoneHome = phoneHome;
+		this.phoneMobile = phoneMobile;
+		this.phoneWork = phoneWork;
+		this.password = password;
+		this.dateJoined = dateJoined;
+		this.userTypeId = userTypeId;
 	}
 
-	// Setters
-	public void setId(int id) { 
-		this.id = id; 
+	public int getId() {
+		return id;
 	}
-	public void setNameFirst(String nameFirst) { 
-		this.nameFirst = nameFirst; 
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public void setNameLast(String nameLast) { 
-		this.nameLast = nameLast; 
+
+	public String getNameFirst() {
+		return nameFirst;
 	}
-	public void setEmail(String email) { 
-		this.email = email; 
+
+	public void setNameFirst(String nameFirst) {
+		this.nameFirst = nameFirst;
 	}
-	public void setAddressHome(Address addressHome) { 
-		this.addressHome = addressHome; 
+
+	public String getNameLast() {
+		return nameLast;
 	}
-	public void setAddressWork(Address addressWork) { 
-		this.addressWork = addressWork; 
+
+	public void setNameLast(String nameLast) {
+		this.nameLast = nameLast;
 	}
-	public void setPhoneHome(String phoneHome) { 
-		this.phoneHome = phoneHome; 
+
+	public String getEmail() {
+		return email;
 	}
-	public void setPhoneMobile(String phoneMobile) { 
-		this.phoneHome = phoneMobile; 
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public void setPhoneWork(String phoneWork) { 
-		this.phoneWork = phoneWork; 
+
+	public String getPhoneHome() {
+		return phoneHome;
 	}
-	public void setPassword(String password) { 
-		this.password = password; 
+
+	public void setPhoneHome(String phoneHome) {
+		this.phoneHome = phoneHome;
 	}
-	public void setDateJoined(Date dateJoined) { 
-		this.dateJoined = dateJoined; 
+
+	public String getPhoneMobile() {
+		return phoneMobile;
 	}
-	public void setErrands(List<Errand> errands) {
-		this.errands = errands;
+
+	public void setPhoneMobile(String phoneMobile) {
+		this.phoneMobile = phoneMobile;
 	}
-	public void setRatings(List<Rating> ratings) {
-		this.ratings = ratings;
+
+	public String getPhoneWork() {
+		return phoneWork;
+	}
+
+	public void setPhoneWork(String phoneWork) {
+		this.phoneWork = phoneWork;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Date getDateJoined() {
+		return dateJoined;
+	}
+
+	public void setDateJoined(Date dateJoined) {
+		this.dateJoined = dateJoined;
+	}
+
+	public UserType getUserTypeId() {
+		return userTypeId;
+	}
+
+	public void setUserTypeId(UserType userTypeId) {
+		this.userTypeId = userTypeId;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
-	public String toString() {
-		return nameFirst + " " + nameLast;
-	}
 }
