@@ -7,10 +7,10 @@ public class Notification {
 	private NotificationType notificationTypeID;
 	
 	public enum NotificationType{
-		SystemMessage("System Message", 0),
-		PrivateMessage("Private Message", 1),
-		ErrandCompleted("Errand Completed", 2),
-		ErrandAccepted("Errand Accepted", 3);
+		SystemMessage("System Message", 1),
+		PrivateMessage("Private Message", 2),
+		ErrandCompleted("Errand Completed",3),
+		ErrandAccepted("Errand Accepted", 4);
 		
 		private String title;
 		private int index;
