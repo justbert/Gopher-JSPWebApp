@@ -47,7 +47,8 @@ public class DatabaseManager {
     	 
     	String url, dbName, driver, userName, password;
     	 
-		try(Scanner input = new Scanner(new FileReader("serverConfig.txt"))) {
+		try(Scanner input = new Scanner(new FileReader("C:\\serverConfig.txt"))) {
+
 			url = input.nextLine(); 
 	        dbName = input.nextLine();  
 	        driver = input.nextLine();  
@@ -79,7 +80,7 @@ public class DatabaseManager {
       * @return ResultSet of the query
       * @throws SQLException
       */
-     protected ResultSet query(String queryString, String... parameters) throws SQLException{
+     protected ResultSet query(String queryString, Object... parameters) throws SQLException{
 		 /*
 		  * should a pst be passed as a parameter so that it can be reused multiple times if the
 		  * class performing the search can use it multiple times, or is it stashed on the DB
@@ -88,7 +89,7 @@ public class DatabaseManager {
 		 PreparedStatement pst = null;
          pst = conn.prepareStatement(queryString);
          for(int i = 1; i <= parameters.length; i++)
-        	 pst.setObject(i, parameters[i]);
+        	 pst.setObject(i, parameters[i - 1]);
          
          return pst.executeQuery();
 	 }

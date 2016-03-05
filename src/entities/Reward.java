@@ -15,41 +15,41 @@ public class Reward implements Serializable {
 	private int id;
 	private String name;
 	private int rewardValue;
-	private Address address;
 	private String description;
 	
-	// Getters
+	
+	public Reward(int id, String name, int rewardValue, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.rewardValue = rewardValue;
+		this.description = description;
+	}
 	public int getId() {
 		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
 	}
-	public int getRewardValue() {
-		return rewardValue;
-	}
-	public Address getAddress() {
-		return address;
-	}
-	public String getDescription() {
-		return description;
-	}
-	
-	// Setters
-	public void setId(int id) {
-		this.id = id;
-	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getRewardValue() {
+		return rewardValue;
 	}
 	public void setRewardValue(int rewardValue) {
 		this.rewardValue = rewardValue;
 	}
-	public void setAddress(Address address) {
-		this.address = address;
+	public String getDescription() {
+		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}	
 }
