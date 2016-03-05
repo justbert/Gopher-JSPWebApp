@@ -2,7 +2,7 @@
 <%@page import="models.User"%> --%>
 <%@page import="servlets.LoginServlet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
 <style>	
 	#login-form{
 		padding: 20px 0px;
