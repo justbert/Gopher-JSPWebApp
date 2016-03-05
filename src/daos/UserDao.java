@@ -9,31 +9,52 @@ import utils.DatabaseManager;
 import utils.Password;
 
 public class UserDao extends DatabaseManager {
-	private static final String select_VerifyEmail = "SELECT id from Gopher.users WHERE email = ?";
-	private static final String select_VerifyPassword = "SELECT password, salt from Gopher.users WHERE email = ?";
+	private static final String select_VerifyEmail = "SELECT id from gopher.users WHERE email = ?";
+	private static final String select_VerifyUsername = "SELECT id from gopher.users WHERE username = ?";
+	private static final String select_VerifyPassword = "SELECT password, salt from gopher.users WHERE id = ?";
 	private static final String insert_RegisterUser = "INSERT INTO users (email, password, salt) VALUES (?, ?, ?)";
-	private static final String select_getUser = "SELECT id, nameFirst, nameLast, email, addressIDHome, addressIDWork, phoneHome, phoneMobile, phoneWork, dateJoined FROM Gopher.users WHERE email = ?";
+	private static final String select_getUser = "SELECT nameFirst, nameLast, username, email, phoneHome, phoneWork, phoneMobile, joinDate FROM gopher.users WHERE id = ?";
 	
 	/*
-	 * Verifies if the username supplied has been registered.
+	 * Verifies if the email supplied has been registered.
+	 * Returns the ID of the user found, MIN_Value if not.
 	 */
-	public boolean verifyEmail(String email) {
+	public int verifyEmail(String email) {
 
 		//DatabaseManager db = DatabaseManager.getDatabaseManager();
-		ResultSet set;
-		boolean found = false;
-
+		//ResultSet set;
+		
 		try(ResultSet rs = query(select_VerifyEmail, email)){
-			return rs.first();
+			if(rs.first())
+				return rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return found;
+		return Integer.MIN_VALUE;
+	}
+	
+	/*
+	 * Verifies if the username supplied has been registered.
+	 * Returns the ID of the user found, MIN_Value if not.
+	 */
+	public int verifyUsername(String username) {
+
+		//DatabaseManager db = DatabaseManager.getDatabaseManager();
+		//ResultSet set;
+		
+		try(ResultSet rs = query(select_VerifyUsername, username)){
+			if(rs.first())
+				return rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return Integer.MIN_VALUE;
 	}
 
-	public boolean verifyPassword(String email, String password) {
-		try(ResultSet set = query(select_VerifyPassword, email)){
+	public boolean verifyPassword(String id, String password) {
+		try(ResultSet set = query(select_VerifyPassword, id)){
 			if(set.first()) {
 				String dbPW = set.getString(1);
 				String salt = set.getString(2);
@@ -69,16 +90,24 @@ public class UserDao extends DatabaseManager {
 	/*
 	 * Returns null if user isn't found or password isn't correct
 	 */
-	public User getUser(String email) {
-		StringBuilder sb = new StringBuilder();
+	public User getUser(String id) {
+		//StringBuilder sb = new StringBuilder();
 		User user = null;
 
-		try(ResultSet userSet = query(select_getUser)){
+		try(ResultSet userSet = query(select_getUser, id)){
 			if(userSet.first()) {
 				user = new User();
-				user.setId(userSet.getInt(1));
+				user.setId(Integer.parseInt(id));
+				user.setNameFirst(userSet.getString(1));
+				user.setNameLast(userSet.getString(2));
+				user.setUsername(userSet.getString(3));
+				user.setEmail(userSet.getString(4));
+				user.setPhoneHome(userSet.getString(5));
+				user.setPhoneWork(userSet.getString(6));
+				user.setPhoneMobile(userSet.getString(7));
+				user.setDateJoined(userSet.getTimestamp(8));
 			}
-		} catch (SQLException e) { //exception caused by prepared statment and connection
+		} catch (SQLException e) { //exception caused by prepared statement and connection
 			e.printStackTrace();
 		}
 		return user;

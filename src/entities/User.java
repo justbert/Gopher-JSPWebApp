@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -21,12 +22,13 @@ public class User implements Serializable {
 	private int id;					
 	private String nameFirst;		
 	private String nameLast;
+	private String username;
 	private String email;
 	private String phoneHome;
 	private String phoneMobile;
 	private String phoneWork;
 	private String password;
-	private Date dateJoined;
+	private Timestamp dateJoined;
 	private UserType userTypeId;
 	
 	public enum UserType{
@@ -58,12 +60,13 @@ public class User implements Serializable {
 	}
 	public User(){}
 
-	public User(int id, String nameFirst, String nameLast, String email, String phoneHome, String phoneMobile,
-			String phoneWork, String password, Date dateJoined, UserType userTypeId) {
+	public User(int id, String nameFirst, String nameLast,String username, String email, String phoneHome, String phoneMobile,
+			String phoneWork, String password, Timestamp dateJoined, UserType userTypeId) {
 		super();
 		this.id = id;
 		this.nameFirst = nameFirst;
 		this.nameLast = nameLast;
+		this.username = username;
 		this.email = email;
 		this.phoneHome = phoneHome;
 		this.phoneMobile = phoneMobile;
@@ -97,6 +100,14 @@ public class User implements Serializable {
 		this.nameLast = nameLast;
 	}
 
+	public String getUsername() {
+		return this.username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -137,11 +148,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Date getDateJoined() {
+	public Timestamp getDateJoined() {
 		return dateJoined;
 	}
 
-	public void setDateJoined(Date dateJoined) {
+	public void setDateJoined(Timestamp dateJoined) {
 		this.dateJoined = dateJoined;
 	}
 
