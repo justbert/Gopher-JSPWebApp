@@ -25,6 +25,8 @@ public class Errand implements Serializable {
 	private int reward_id;						// Reward for completing this errand
 	private Timestamp deadline;					// Due date/time for errand
 	private String status;						// Ongoing progress status
+	private String name;
+	private String description;
 	
 	public enum ImportanceType{
 		VERY_HIGH("Very High",5),
@@ -59,8 +61,10 @@ public class Errand implements Serializable {
 	
 	public Errand(){};
 	
-	public Errand(int id, User user_id_cusomter, User user_id_gopher, Date dateCreated, Date dateCompleted, int reward_id, Timestamp deadline, String status, ImportanceType importance){
+	public Errand(int id, String name, String description, User user_id_cusomter, User user_id_gopher, Date dateCreated, Date dateCompleted, int reward_id, Timestamp deadline, String status, ImportanceType importance){
 		this.id = id;
+		this.name = name;
+		this.description = description;
 		this.user_id_customer = user_id_cusomter;
 		this.user_id_gopher = user_id_gopher;
 		this.dateCreated = dateCreated;
@@ -132,5 +136,20 @@ public class Errand implements Serializable {
 	}
 	public void setImportance(ImportanceType importanceTypeId) {
 		this.importanceTypeID = importanceTypeId;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
