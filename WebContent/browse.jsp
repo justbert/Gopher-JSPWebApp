@@ -5,7 +5,7 @@
 <%@page import="java.util.List" %>
 <jsp:include page="/header.jsp"/>
 
-<% List<Errand> errandList = (List<Errand>)session.getAttribute("errandList");%>
+<% List<Errand> errandList = (List<Errand>)request.getAttribute("errandList");%>
 
 <style>
 	.pad-me-please{
@@ -56,9 +56,7 @@
 		                         <h4>
 								 <a href="item.jsp" style="color: black;"><%=errand.getDeadline() %></a>
 		                         </h4>
-		                         <% for(Task task : errand.getTasks()){%>
-		                         	<p><% task.getDescription(); %></p>
-		                         <% }%>
+								<% errand.getImportanceTypeID().toString(); %>
 		                     </div>
 		                     <div class="ratings">
 		                         <p class="pull-right">15 reviews</p>
