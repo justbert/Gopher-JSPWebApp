@@ -1,5 +1,6 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
-<%@tag description="Main Template Wrapper" pageEncoding="UTF-8"%>
 <html>
 	<link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" >
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -8,7 +9,7 @@
 
 	<body>
 		<% if(session.getAttribute("userObject") != null) {%>
-		<jsp:include page="/widget.jsp"/>
+			<jsp:include page="/widget.jsp"/>
 		<%} %>
 		<nav class="navbar navbar-default navbar-fixed-top nav-margin">
 			<div class="container">
@@ -32,7 +33,3 @@
   			</div>
 		</nav>
 		<div class="container">
-			<jsp:doBody/>
-		</div>
-	</body>
-</html>

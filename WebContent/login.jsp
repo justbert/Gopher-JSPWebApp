@@ -21,9 +21,7 @@
 		width:350px;
 	}	
 </style>
-
-<t:main>
-	<jsp:body>
+<jsp:include page="/header.jsp"/>
 		<div class="bg-teal pad-nav-bar">
 			<img class="img-responsive" style="margin:auto;padding:20px 0px;" src="assets/img/cute_gopher.png"></img>
 		</div>
@@ -35,5 +33,4 @@
 			 	<button class="btn btn-default bg-grey" type="submit">Sign in</button>
 			</form>
 		</div>
-    </jsp:body>
-</t:main>
+<jsp:include page="/footer.jsp"/>

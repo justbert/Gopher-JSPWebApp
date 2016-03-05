@@ -20,8 +20,7 @@
 	}
 	
 </style>
-<t:main>	
-	<jsp:body>
+<jsp:include page="/header.jsp"/>
 	<div class="bg-teal pad-nav-bar">
 		<form class="block-display" id="login-form" method="post">
 			 <h2>Join <span class="monty-font">Gopher</span> today.</h2>
@@ -40,5 +39,4 @@
 			<img width="200px" src="/Gopher/assets/img/logo.gif" />
 		</div>
 	</div>
-	</jsp:body>
-</t:main>
+<jsp:include page="/footer.jsp"/>

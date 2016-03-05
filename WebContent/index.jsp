@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
+<jsp:include page="/header.jsp"/>
+
 <style>
 	.what-is-gopher{
 		border-top:1px solid gray;
@@ -15,8 +17,6 @@
 		color:black;
 	}"WebContent/assets/css/main-style.css"
 </style>	
-<t:main>
-	<jsp:body>
 		<div class="jumbotron text-center bg-teal">
 			<div class="gopher homespacer">	
 				<img src="assets/img/cute_gopher.png">		
@@ -41,5 +41,4 @@
  		register as a customer and make life simple.
  		</p>
 	</div>
-	</jsp:body>
-</t:main>
+<jsp:include page="/footer.jsp"/>
