@@ -1,9 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-
-<t:main>
-	<jsp:body>
-	
+<jsp:include page="/header.jsp"/>	
 	<style>
 		.profile-header {
 			padding-top: 50px;
@@ -229,6 +226,4 @@
 					
 		</div>
 	</div>
-	
-    </jsp:body>
-</t:main>
+<jsp:include page="/footer.jsp"/>

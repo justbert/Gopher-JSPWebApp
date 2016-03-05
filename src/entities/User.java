@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import entities.Address.AddressType;
+import entities.User.UserType;
 
 /**
  * This class represents a model of User data
@@ -28,7 +29,7 @@ public class User implements Serializable {
 	private String phoneMobile;
 	private String phoneWork;
 	private String password;
-	private Timestamp dateJoined;
+	private Date dateJoined;
 	private UserType userTypeId;
 	
 	public enum UserType{
@@ -67,6 +68,21 @@ public class User implements Serializable {
 		this.nameFirst = nameFirst;
 		this.nameLast = nameLast;
 		this.username = username;
+		this.email = email;
+		this.phoneHome = phoneHome;
+		this.phoneMobile = phoneMobile;
+		this.phoneWork = phoneWork;
+		this.password = password;
+		this.dateJoined = dateJoined;
+		this.userTypeId = userTypeId;
+	}
+
+		public User(int id, String nameFirst, String nameLast, String email, String phoneHome, String phoneMobile,
+			String phoneWork, Date dateJoined, UserType userTypeId) {
+		super();
+		this.id = id;
+		this.nameFirst = nameFirst;
+		this.nameLast = nameLast;
 		this.email = email;
 		this.phoneHome = phoneHome;
 		this.phoneMobile = phoneMobile;
@@ -148,7 +164,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Timestamp getDateJoined() {
+	public Date getDateJoined() {
 		return dateJoined;
 	}
 

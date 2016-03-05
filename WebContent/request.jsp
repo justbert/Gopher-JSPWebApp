@@ -19,8 +19,7 @@
 		
 	}
 </style>
-<t:main>
-	<jsp:body>
+<jsp:include page="/header.jsp"/>
 	<div class="row pad-nav-bar bg-teal">
 	 	<div class="col-md-6">
 	 		<h1>Request an Errand</h1>
@@ -104,6 +103,4 @@
 	        </div>
         </div>
 	</div>
-    </jsp:body>
-</t:main>
-
+<jsp:include page="/footer.jsp"/>

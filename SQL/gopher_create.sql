@@ -111,6 +111,8 @@ CREATE TABLE IF NOT EXISTS `importance_types` (
 
 CREATE TABLE IF NOT EXISTS `errands` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100),
+  `description` VARCHAR(250),
   `creationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `completionDate` TIMESTAMP NULL,
   `deadline` TIMESTAMP NULL,

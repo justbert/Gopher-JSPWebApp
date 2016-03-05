@@ -1,8 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<t:main>
-<jsp:body>
+<jsp:include page="/header.jsp"/>
+
 <jsp:useBean id="taskBean" class="entities.Task"/>
 <jsp:useBean id="userBean" class="entities.User"/>
 <jsp:setProperty name="userBean" property="username" value="Josh" />
@@ -85,5 +85,4 @@
 <!-- jQuery -->
 <script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
-</jsp:body>
-</t:main>
+<jsp:include page="/footer.jsp"/>
