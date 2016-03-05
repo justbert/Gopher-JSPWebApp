@@ -51,11 +51,11 @@
 		                     <img src="assets/img/gopher_small.png" alt="">
 		                     <div class="caption">
 		                     
-		                         <h4 class="pull-right"><%=errand.getRewardId().getRewardValue()%></h4>
+		                         <h4 class="pull-right">$<%=errand.getRewardId().getRewardValue()%></h4>
 		                         <h4>
-								 <a href="item.jsp" style="color: black;"><%=errand.getDeadline() %></a>
+								 <a href="item.jsp" style="color: black;"><%=errand.getName()%></a>
 		                         </h4>
-								<% errand.getImportanceTypeID().toString(); %>
+								<p><% errand.getDescription(); %></p>
 		                     </div>
 		                     <div class="ratings">
 		                         <p class="pull-right">15 reviews</p>

@@ -43,6 +43,8 @@ public class ErrandDao extends DatabaseManager {
 			while (rs.next()){
 				errands.add(new Errand(
 						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getString("description"),
 						userDB.getUserForID(rs.getInt("userIdCustomer")),
 						userDB.getUserForID(rs.getInt("userIdGopher")),
 						rs.getDate("creationDate"),
@@ -65,6 +67,8 @@ public class ErrandDao extends DatabaseManager {
 			if(rs.next())
 				errand = new Errand(
 						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getString("description"),
 						userDB.getUserForID(rs.getInt("userIdCustomer")),
 						userDB.getUserForID(rs.getInt("userIdGopher")),
 						rs.getDate("creationDate"),
