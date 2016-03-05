@@ -19,13 +19,13 @@
 			        	<span class="icon-bar"></span>
 			       	 	<span class="icon-bar"></span> 
       				</button>
-      				<a class="navbar-brand" href="/Gopher/index.jsp"><img class="img-align" src="assets/img/blocklogo.png"></a>
+      				<a class="navbar-brand" href="/Gopher/"><img class="img-align" src="assets/img/blocklogo.png"></a>
     			</div>
     		
     			<div class="collapse navbar-collapse" id="myNavbar">	
 					<ul class="nav navbar-nav navbar-right">
 			            <li><a href="/Gopher/login.jsp">Log In</a></li>
-			            <li><a href="/Gopher/browse.jsp">Browse</a></li>
+			            <li><a href="/Gopher/browse">Browse</a></li>
 			            <li><a href="/Gopher/request.jsp">Request</a></li>
 			            <li><a href="/Gopher/dashboard.jsp">Profile</a></li>
 	        		</ul>

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import entities.User;
+import entities.User.UserType;
 import utils.DatabaseManager;
 import utils.Password;
 
@@ -13,8 +14,10 @@ public class UserDao extends DatabaseManager {
 	private static final String select_VerifyUsername = "SELECT id from gopher.users WHERE username = ?";
 	private static final String select_VerifyPassword = "SELECT password, salt from gopher.users WHERE id = ?";
 	private static final String insert_RegisterUser = "INSERT INTO users (email, password, salt) VALUES (?, ?, ?)";
-	private static final String select_getUser = "SELECT nameFirst, nameLast, username, email, phoneHome, phoneWork, phoneMobile, joinDate FROM gopher.users WHERE id = ?";
+	private static final String select_getUser = "SELECT id, nameFirst, nameLast, email, addressIDHome, addressIDWork, phoneHome, phoneMobile, phoneWork, dateJoined FROM Gopher.users WHERE email = ?";
 	
+	private static final String select_getUserForID = "Select * from users where id = ?";
+
 	/*
 	 * Verifies if the email supplied has been registered.
 	 * Returns the ID of the user found, MIN_Value if not.
@@ -109,6 +112,26 @@ public class UserDao extends DatabaseManager {
 			}
 		} catch (SQLException e) { //exception caused by prepared statement and connection
 			e.printStackTrace();
+		}
+		return user;
+	}
+	public User getUserForID(int id){
+		User user = new User();
+
+		try(ResultSet rs = query(select_getUserForID, id)){
+			while(rs.next())
+				new User(rs.getInt("id"), 
+						rs.getString("nameFirst"), 
+						rs.getString("nameLast"), 
+						rs.getString("email"), 
+						rs.getString("phoneHome"), 
+						rs.getString("phoneMobile"),
+						rs.getString("phoneWork"),  
+						rs.getDate("joinDate"), 
+						UserType.getUserType(rs.getInt("userTypeId")));
+		}catch(SQLException e){
+			e.printStackTrace();
+			return null;
 		}
 		return user;
 	}

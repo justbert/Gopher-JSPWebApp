@@ -22,7 +22,7 @@ public class Errand implements Serializable {
 	private Date dateCompleted;					// Date the errand was completed
 	private ImportanceType importanceTypeID;
 	private List<Task> tasks;					// List of tasks involved in the errand
-	private int reward_id;						// Reward for completing this errand
+	private Reward rewardId;						// Reward for completing this errand
 	private Timestamp deadline;					// Due date/time for errand
 	private String status;						// Ongoing progress status
 	private String name;
@@ -43,7 +43,7 @@ public class Errand implements Serializable {
 			this.index = index;
 		}
 		
-		public ImportanceType getImportanceType(int index){
+		public static ImportanceType getImportanceType(int index){
 			for(ImportanceType type : ImportanceType.values())
 				if(type.index == index) return type;
 			return null;
@@ -58,9 +58,36 @@ public class Errand implements Serializable {
 		}
 	}
 	
+	public enum StatusType{
+		NOT_STARTED(1, "Not Started"),
+		IN_PROGRESS(2, "In Progresss"),
+		COMPLETED(3, "Completed");
+		
+		private String name;
+		private int index;
+		
+		private StatusType(int index, String name){
+			this.name = name;
+			this.index = index;
+		}
+		
+		public static StatusType getStatusType(int index){
+			for(StatusType type : StatusType.values())
+				if(type.index == index) return type;
+			return null;
+		}
+		
+		public String getTitle(){
+			return name;
+		}
+		
+		public int getIndex(){
+			return this.index;
+		}
+	}
 	
 	public Errand(){};
-	
+
 	public Errand(int id, String name, String description, User user_id_cusomter, User user_id_gopher, Date dateCreated, Date dateCompleted, int reward_id, Timestamp deadline, String status, ImportanceType importance){
 		this.id = id;
 		this.name = name;
@@ -68,7 +95,7 @@ public class Errand implements Serializable {
 		this.user_id_customer = user_id_cusomter;
 		this.user_id_gopher = user_id_gopher;
 		this.dateCreated = dateCreated;
-		this.reward_id = reward_id;
+		this.rewardId = reward;
 		this.setDeadline(deadline);
 		this.setStatus(status);
 		this.setImportance(importance);
@@ -93,10 +120,10 @@ public class Errand implements Serializable {
 	public List<Task> getTasks() {
 		return tasks;
 	}
-	public int getRewardId() {
-		return reward_id;
+	public Reward getRewardId() {
+		return rewardId;
 	}
-	public String getStatus() {
+	public StatusType getStatus() {
 		return status;
 	}
 	public Timestamp getDeadline() {
@@ -125,10 +152,10 @@ public class Errand implements Serializable {
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
-	public void setRewardId(int reward_id) {
-		this.reward_id = reward_id;
+	public void setRewardId(Reward rewardId) {
+		this.rewardId = rewardId;
 	}	
-	public void setStatus(String status) {
+	public void setStatus(StatusType status) {
 		this.status = status;
 	}
 	public void setDeadline(Timestamp deadline) {
