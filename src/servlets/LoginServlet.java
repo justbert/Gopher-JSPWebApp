@@ -22,40 +22,44 @@ public class LoginServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private UserDao user = new UserDao();
+	private UserDao userDAO = new UserDao();
 
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.getRequestDispatcher("/login.jsp").forward(request, response);
+	}
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		PrintWriter out = response.getWriter();
+		
 		HttpSession session = request.getSession();
 		String email = request.getParameter("email");
-		if(email != null) {
-			if(user.verifyEmail(email)) {
-				if(user.verifyPassword(email, request.getParameter("password"))) {
-					User current = user.getUser(email);
-					if(current != null) {
-						session.setAttribute("userObject", current);
-					}
-					response.sendRedirect("dashboard.jsp");
-				} else {
-					
-					out.print("<script type=\"text/javascript\">");
-					out.print("alert(\"Password is incorrect. Please try again.\");");
-							out.print("</script>");
-					
-				}
-			} else if(email.equals("")) {
-				
-				out.print("<script type=\"text/javascript\">");
-						out.print("alert(\"Please enter an email.\");");
-								out.print("</script>");
-				
-			} else {
-				
-				out.print("<script type=\"text/javascript\">");
-				out.print("alert(\"This email has not been registered.\");");
-				out.print("</script>");
-				
-			}
+		String password = request.getParameter("password");
+		int id;
+		
+		request.removeAttribute("email");
+		request.removeAttribute("password");
+		
+		//Make sure there is an email entered
+		if(email.equals("")) {
+			session.setAttribute("error", "Please enter a username, or an email.");
+			request.getRequestDispatcher("/login").forward(request, response);
 		}
+		
+		//Verify if the username or password are correct. Actually checking if they aren't valid.
+		if((id = userDAO.verifyEmail(email)) == Integer.MIN_VALUE && 
+				(id = userDAO.verifyUsername(email)) == Integer.MIN_VALUE) {
+			session.setAttribute("error", "The email or username supplied have not been registered.");
+			
+		}
+		
+		if(userDAO.verifyPassword(Integer.toString(id), password)) {
+			session.setAttribute("loggedIn", true);
+			session.setAttribute("userObject", userDAO.getUser(Integer.toString(id)));
+			request.getRequestDispatcher("dashboard").forward(request, response);
+		} else {
+			session.setAttribute("error", "The password supplied is not correct.");
+			request.getRequestDispatcher("/login").forward(request, response);
+		}
+		
 	}
 }

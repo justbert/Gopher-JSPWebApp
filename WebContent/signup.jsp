@@ -25,7 +25,9 @@
 	<div class="bg-teal pad-nav-bar">
 		<form class="block-display" id="login-form" method="post">
 			 <h2>Join <span class="monty-font">Gopher</span> today.</h2>
-			 <label>Email address</label>
+			 <label>Username</label>
+			 <input class="block-display" type="text" name="username" />
+			 <label>Email Address</label>
 			 <input class="block-display" type="email" name="email" />
 			 <label>Password</label>
 			 <input class="block-display" type="password" name="password"/>

@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `phoneWork` VARCHAR(20) NULL,
   `phoneMobile` VARCHAR(20) NULL,
   `password` CHAR(128) NULL,
-  `salt` VARCHAR(32) NULL,
+  `salt` CHAR(32) NULL,
   `joinDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userTypeId` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
