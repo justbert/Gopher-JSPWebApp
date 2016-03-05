@@ -1,15 +1,12 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import daos.UserDao;
-import entities.User;
 
 /**
  * Class which
@@ -40,16 +37,18 @@ public class LoginServlet extends HttpServlet {
 		request.removeAttribute("password");
 		
 		//Make sure there is an email entered
-		if(email.equals("")) {
+		if(email.isEmpty()) {
 			session.setAttribute("error", "Please enter a username, or an email.");
-			request.getRequestDispatcher("/login").forward(request, response);
+			response.sendRedirect("login");
+			return;
 		}
 		
 		//Verify if the username or password are correct. Actually checking if they aren't valid.
 		if((id = userDAO.verifyEmail(email)) == Integer.MIN_VALUE && 
 				(id = userDAO.verifyUsername(email)) == Integer.MIN_VALUE) {
 			session.setAttribute("error", "The email or username supplied have not been registered.");
-			
+			response.sendRedirect("login");
+			return;
 		}
 		
 		if(userDAO.verifyPassword(Integer.toString(id), password)) {
@@ -58,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("dashboard").forward(request, response);
 		} else {
 			session.setAttribute("error", "The password supplied is not correct.");
-			request.getRequestDispatcher("/login").forward(request, response);
+			response.sendRedirect("login");
 		}
 		
 	}

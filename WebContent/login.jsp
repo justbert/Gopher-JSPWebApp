@@ -1,6 +1,6 @@
 <%-- <%@page import="utils.Login"%>
 <%@page import="models.User"%> --%>
-<%@page import="servlets.LoginServlet" %>
+<%-- <%@page import="servlets.LoginServlet" %> --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <style>	
@@ -28,11 +28,14 @@
 			<img class="img-responsive" style="margin:auto;padding:20px 0px;" src="assets/img/cute_gopher.png"></img>
 		</div>
 		<div class="bg-white">
-	    	<form class="block-display" id="login-form" action="loginServlet" method="post">
+	    	<form class="block-display" id="login-form" action="login" method="post">
 				<h2 class="monty-font">Sign in</h2>
 			 	<input class="block-display" type="text" placeholder="Email" name="email"/>
 			 	<input class="block-display" type="password" placeholder="Password" name="password" />
 			 	<button class="btn btn-default bg-grey" type="submit">Sign in</button>
+			 	<%if(!((String)session.getAttribute("error")).isEmpty()) { 
+			 	response.getWriter().write("<p class=\"block-display\">" +(String)session.getAttribute("error") +"</p>");
+			 	}%>
 			</form>
 		</div>
     </jsp:body>
