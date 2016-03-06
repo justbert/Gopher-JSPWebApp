@@ -43,14 +43,16 @@ public class ErrandDao extends DatabaseManager {
 			while (rs.next()){
 				errands.add(new Errand(
 						rs.getInt("id"),
-						userDB.getUserForID(rs.getInt("userIdCustomer")),
-						userDB.getUserForID(rs.getInt("userIdGopher")),
+						rs.getString("name"),
+						rs.getString("description"),
 						rs.getDate("creationDate"),
 						rs.getDate("completionDate"),
-						rewardDB.getRewardForID(rs.getInt("rewardId")),
 						rs.getTimestamp("deadline"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
 						StatusType.getStatusType(rs.getInt("statusTypeId")),
-						ImportanceType.getImportanceType(rs.getInt("importanceTypeId"))
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher"))					
 					));
 			}
 			return errands;
@@ -65,14 +67,16 @@ public class ErrandDao extends DatabaseManager {
 			if(rs.next())
 				errand = new Errand(
 						rs.getInt("id"),
-						userDB.getUserForID(rs.getInt("userIdCustomer")),
-						userDB.getUserForID(rs.getInt("userIdGopher")),
+						rs.getString("name"),
+						rs.getString("description"),
 						rs.getDate("creationDate"),
 						rs.getDate("completionDate"),
-						rewardDB.getRewardForID(rs.getInt("rewardId")),
 						rs.getTimestamp("deadline"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
 						StatusType.getStatusType(rs.getInt("statusTypeId")),
-						ImportanceType.getImportanceType(rs.getInt("importanceTypeId"))
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher"))
 					);
 		}
 		catch (SQLException e){

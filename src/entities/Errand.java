@@ -5,6 +5,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import entities.Errand.ImportanceType;
+import entities.Errand.StatusType;
+
 /**
  * This class represents a model of Errand data
  * It acts as the domain-specific class that the application
@@ -24,7 +27,7 @@ public class Errand implements Serializable {
 	private List<Task> tasks;					// List of tasks involved in the errand
 	private Reward rewardId;						// Reward for completing this errand
 	private Timestamp deadline;					// Due date/time for errand
-	private String status;						// Ongoing progress status
+	private StatusType status;						// Ongoing progress status
 	private String name;
 	private String description;
 	
@@ -87,8 +90,8 @@ public class Errand implements Serializable {
 	}
 	
 	public Errand(){};
-
-	public Errand(int id, String name, String description, User user_id_cusomter, User user_id_gopher, Date dateCreated, Date dateCompleted, int reward_id, Timestamp deadline, String status, ImportanceType importance){
+	
+	public Errand(int id,String name, String description, Date dateCreated, Date dateCompleted, Timestamp deadline, Reward reward, StatusType status, ImportanceType importance, User user_id_cusomter, User user_id_gopher){
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -100,11 +103,39 @@ public class Errand implements Serializable {
 		this.setStatus(status);
 		this.setImportance(importance);
 	}
-
+	
+/*	rs.getInt("id"),
+	rs.getString("name"),
+	rs.getString("description"),
+	rs.getDate("creationDate"),
+	rs.getDate("completionDate"),
+	rs.getTimestamp("deadline"),
+	rewardDB.getRewardForID(rs.getInt("rewardId")),
+	StatusType.getStatusType(rs.getInt("statusTypeId")),
+	ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+	userDB.getUserForID(rs.getInt("userIdCustomer")),
+	userDB.getUserForID(rs.getInt("userIdGopher"))	
+*/
 	// Getters
 	public int getId() {
 		return id;
 	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public User getUserIdCustomer() {
 		return user_id_customer;
 	}
@@ -163,20 +194,5 @@ public class Errand implements Serializable {
 	}
 	public void setImportance(ImportanceType importanceTypeId) {
 		this.importanceTypeID = importanceTypeId;
-	}
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 }

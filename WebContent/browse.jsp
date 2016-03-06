@@ -1,11 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@page import="entities.Errand" %>
+<%@page import="daos.ErrandDao" %>
 <%@page import="entities.Task" %>
 <%@page import="java.util.List" %>
 <jsp:include page="/header.jsp"/>
-
-<% List<Errand> errandList = (List<Errand>)request.getAttribute("errandList");%>
+<%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
 	.pad-me-please{
@@ -46,17 +45,18 @@
 		</div>
 		<div class="bg-white">
 				<div id="product-wrapper">
-				<% for(Errand errand : errandList) { %>
+				<%-- <% for(Errand errand : errandList) { %> --%>
+				<c:forEach items="${errandList}" var="errand"> 
 		            <div class="col-sm-4 col-lg-4 col-md-4">
 		                 <div class="thumbnail">
 		                     <img src="assets/img/gopher_small.png" alt="">
 		                     <div class="caption">
 		                     
-		                         <h4 class="pull-right"><%=errand.getRewardId().getRewardValue()%></h4>
+		                         <h4 class="pull-right">$ ${errand.getRewardId()}<%-- <%=errand.getRewardId().getRewardValue() %> --%></h4>
 		                         <h4>
-								 <a href="item.jsp" style="color: black;"><%=errand.getDeadline() %></a>
+								 <a href="item.jsp" style="color: black;">${errand.getName()}</a>
 		                         </h4>
-								<% errand.getImportanceTypeID().toString(); %>
+		                         <p>${errand.getDateCreated() } </p>
 		                     </div>
 		                     <div class="ratings">
 		                         <p class="pull-right">15 reviews</p>
@@ -70,11 +70,10 @@
 		                     </div>
 		                 </div>
 		            </div>
-		            <%} %>
+		            </c:forEach>
+		          <%--   <%} %> --%>
 				</div>
 			</div>
-		</div>
-	</div>
 <script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
