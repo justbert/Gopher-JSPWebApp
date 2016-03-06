@@ -8,7 +8,7 @@
 </servlet>
 <servlet-mapping>
 	<servlet-name>IndexServlet</servlet-name>
-	<url-pattern></url-pattern>
+	<url-pattern>/index</url-pattern>
 </servlet-mapping>
 
 <servlet>
@@ -19,5 +19,13 @@
 	<servlet-name>BrowseServlet</servlet-name>
 	<url-pattern>/browse</url-pattern>
 </servlet-mapping>
-  
+
+<servlet>
+	<servlet-name>ErrandServlet</servlet-name>
+	<servlet-class>servlets.ErrandServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>ErrandServlet</servlet-name>
+	<url-pattern>/errand</url-pattern>
+</servlet-mapping>
 </web-app>

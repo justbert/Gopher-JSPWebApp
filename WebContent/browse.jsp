@@ -2,9 +2,8 @@
 <%@page import="entities.Errand" %>
 <%@page import="daos.ErrandDao" %>
 <%@page import="entities.Task" %>
-<%@page import="java.util.List" %>
-<jsp:include page="/header.jsp"/>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="header.jsp"/>
 
 <style>
 	.pad-me-please{
@@ -50,11 +49,11 @@
 		            <div class="col-sm-4 col-lg-4 col-md-4">
 		                 <div class="thumbnail">
 		                     <img src="assets/img/gopher_small.png" alt="">
-		                     <div class="caption">
+		                     <div class="caption" id="errand${errand.getId()}">
 		                     
-		                         <h4 class="pull-right">$ ${errand.getRewardId()}<%-- <%=errand.getRewardId().getRewardValue() %> --%></h4>
+		                         <h4 class="pull-right">$ ${errand.getRewardId().getRewardValue()}<%-- <%=errand.getRewardId().getRewardValue() %> --%></h4>
 		                         <h4>
-								 <a href="item.jsp" style="color: black;">${errand.getName()}</a>
+								 <a href="/Gopher/errand?id=${errand.getId() }" style="color: black;">${errand.getName()}</a>
 		                         </h4>
 		                         <p>${errand.getDateCreated() } </p>
 		                     </div>
@@ -84,4 +83,4 @@
 	});
 </script>
 
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>

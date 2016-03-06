@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 		//Make sure there is an email entered
 		if(email.equals("")) {
 			session.setAttribute("error", "Please enter a username, or an email.");
-			request.getRequestDispatcher("/login").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/login").forward(request, response);
 		}
 		
 		//Verify if the username or password are correct. Actually checking if they aren't valid.

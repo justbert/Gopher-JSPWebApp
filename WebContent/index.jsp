@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="/header.jsp"/>
+<jsp:include page="header.jsp"/>
 
 <style>
 	.what-is-gopher{
@@ -39,4 +39,4 @@
  		register as a customer and make life simple.
  		</p>
 	</div>
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>

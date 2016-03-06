@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="/header.jsp"/>	
+<jsp:include page="header.jsp"/>	
 	<style>
 		.profile-header {
 			padding-top: 50px;
@@ -225,4 +225,4 @@
 					
 		</div>
 	</div>
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>
