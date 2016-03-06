@@ -1,5 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@tag description="Main Template Wrapper" pageEncoding="UTF-8"%>
 <html>
 	<link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" >
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -8,7 +8,7 @@
 
 	<body>
 		<% if(session.getAttribute("userObject") != null) {%>
-		<jsp:include page="/widget.jsp"/>
+			<jsp:include page="/widget.jsp"/>
 		<%} %>
 		<nav class="navbar navbar-default navbar-fixed-top nav-margin">
 			<div class="container">
@@ -18,13 +18,13 @@
 			        	<span class="icon-bar"></span>
 			       	 	<span class="icon-bar"></span> 
       				</button>
-      				<a class="navbar-brand" href="/Gopher/index.jsp"><img class="img-align" src="assets/img/blocklogo.png"></a>
+      				<a class="navbar-brand" href="/Gopher/"><img class="img-align" src="assets/img/blocklogo.png"></a>
     			</div>
     		
     			<div class="collapse navbar-collapse" id="myNavbar">	
 					<ul class="nav navbar-nav navbar-right">
 			            <li><a href="/Gopher/login.jsp">Log In</a></li>
-			            <li><a href="/Gopher/browse.jsp">Browse</a></li>
+			            <li><a href="/Gopher/browse">Browse</a></li>
 			            <li><a href="/Gopher/request.jsp">Request</a></li>
 			            <li><a href="/Gopher/dashboard.jsp">Profile</a></li>
 	        		</ul>
@@ -32,7 +32,3 @@
   			</div>
 		</nav>
 		<div class="container">
-			<jsp:doBody/>
-		</div>
-	</body>
-</html>

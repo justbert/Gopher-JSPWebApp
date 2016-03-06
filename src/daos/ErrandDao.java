@@ -6,22 +6,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.Address;
 import entities.Errand;
+import entities.Errand.ImportanceType;
+import entities.Errand.StatusType;
+import entities.User.UserType;
+import entities.User;
 /**
  * 
  * @author joshr
  *
  */
 public class ErrandDao extends DatabaseManager {
-
-	
 	private static final String DELETE = "DELETE FROM Errands WHERE id=?";
-	private static final String SELECT_ALL = "SELECT * FROM Errands ORDER BY id";
-	private static final String SELECT_BY_ID = "SELECT * FROM Errands WHERE id=?";
+	private static final String SELECT_ALL = "SELECT * FROM errands";
+	private static final String SELECT_BY_ID = "SELECT * FROM errands where id = ?";
 	private static final String SELECT_BY_NAME = "SELECT * FROM Errands WHERE name=?";
 	private static final String INSERT = "INSERT INTO Errands(name, tel, passwd) VALUES(?, ?, ?)";
 	private static final String UPDATE = "UPDATE Errands SET name=?, tel=?, passwd=? WHERE id=?";
 			
+	private UserDao userDB = new UserDao();
+	private RewardDAO rewardDB = new RewardDAO();
 	public int delete(int id) {
 		try{
 		Integer result = update(DELETE, Integer.toString(id));
@@ -33,23 +38,22 @@ public class ErrandDao extends DatabaseManager {
 	}
 	
 	public List<Errand> selectAll(){
-		try{
-			List<Errand> errands = new ArrayList<Errand>();
-			ResultSet rs = query(SELECT_ALL);
+		List<Errand> errands = new ArrayList<Errand>();
+		try(ResultSet rs = query(SELECT_ALL)){
 			while (rs.next()){
-				Errand errand = new Errand(
-						rs.getInt("id"), 
-						rs.getInt("user_id_customer"), 
-						rs.getInt("user_id_gopher"), 
-						rs.getDate("date_created"), 
-						rs.getDate("date_completed"), 
-						rs.getInt("reward_id"), 
-						rs.getTimestamp("deadline"), 
-						rs.getString("status"),
-						rs.getString("importance"),
-						rs.getString("category")
-					);
-				errands.add(errand);
+				errands.add(new Errand(
+						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getString("description"),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher")),
+						rs.getDate("creationDate"),
+						rs.getDate("completionDate"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
+						rs.getTimestamp("deadline"),
+						StatusType.getStatusType(rs.getInt("statusTypeId")),
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId"))
+					));
 			}
 			return errands;
 		} catch (SQLException e){
@@ -58,27 +62,27 @@ public class ErrandDao extends DatabaseManager {
 	}
 	
 	public Errand selectById(int id){
-		try{
-			ResultSet rs = query(SELECT_BY_ID, Integer.toString(id));
-			if (rs.next())
-				return new Errand(
-						rs.getInt("id"), 
-						rs.getInt("user_id_customer"), 
-						rs.getInt("user_id_gopher"), 
-						rs.getDate("date_created"), 
-						rs.getDate("date_completed"), 
-						rs.getInt("reward_id"), 
-						rs.getTimestamp("deadline"), 
-						rs.getString("status"),
-						rs.getString("importance"),
-						rs.getString("category")
+		Errand errand = null;
+		try(ResultSet rs = query(SELECT_BY_ID, Integer.toString(id));){
+			if(rs.next())
+				errand = new Errand(
+						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getString("description"),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher")),
+						rs.getDate("creationDate"),
+						rs.getDate("completionDate"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
+						rs.getTimestamp("deadline"),
+						StatusType.getStatusType(rs.getInt("statusTypeId")),
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId"))
 					);
-					
 		}
 		catch (SQLException e){
-			throw new RuntimeException(e);
+			e.printStackTrace();
+			return null;
 		}
-		return null;
+		return errand;
 	}
 }
-

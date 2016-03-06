@@ -3,14 +3,14 @@ package entities;
 public class Notification {
 	private Integer id;
 	private String title;
-	private User user;
-	private NotificationType type;
+	private User userId;
+	private NotificationType notificationTypeID;
 	
 	public enum NotificationType{
-		SystemMessage("System Message", 0),
-		PrivateMessage("Private Message", 1),
-		ErrandCompleted("Errand Completed", 2),
-		ErrandAccepted("Errand Accepted", 3);
+		SystemMessage("System Message", 1),
+		PrivateMessage("Private Message", 2),
+		ErrandCompleted("Errand Completed",3),
+		ErrandAccepted("Errand Accepted", 4);
 		
 		private String title;
 		private int index;
@@ -35,12 +35,12 @@ public class Notification {
 		}
 	}
 
-	public Notification(Integer id, String title, User user, NotificationType type) {
+	public Notification(Integer id, String title, User userId, NotificationType notificationTypeID) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.user = user;
-		this.type = type;
+		this.userId = userId;
+		this.notificationTypeID = notificationTypeID;
 	}
 
 	public Integer getId() {
@@ -59,21 +59,19 @@ public class Notification {
 		this.title = title;
 	}
 
-	public User getUser() {
-		return user;
+	public User getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(User userId) {
+		this.userId = userId;
 	}
 
-	public NotificationType getType() {
-		return type;
+	public NotificationType getNotificationTypeID() {
+		return notificationTypeID;
 	}
 
-	public void setType(NotificationType type) {
-		this.type = type;
-	}
-
-	
+	public void setNotificationTypeID(NotificationType notificationTypeID) {
+		this.notificationTypeID = notificationTypeID;
+	}	
 }

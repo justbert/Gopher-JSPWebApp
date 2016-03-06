@@ -12,59 +12,72 @@ import java.util.Date;
  */
 public class Rating implements Serializable {
 	private static final long serialVersionUID = 4562427898201605236L;
-
-	private int id;				// Unique id for the rating
-	private User userRated;		// The user receiving the rating
-	private User rater;			// The user giving the rating
-	private int rating;			// The numeric value of the rating
-	private Errand errand;		// The errand this rating pertains to
-	private String comments;	// Comments left by the rater
-	private Date dateCreated;	// Date rating was created
+	private int id;
+	private User userIdRated;
+	private User userIdRater;
+	private int ratingValue;
+	private Errand errandId;
+	private String comments;
+	private Date creationDate;
 	
-	// Getters
+	public Rating(){
+		
+	}
+	
+	public Rating(int id, User userIdRated, User userIdRater, int ratingValue, Errand errandId, String comments,
+			Date creationDAte) {
+		super();
+		this.id = id;
+		this.userIdRated = userIdRated;
+		this.userIdRater = userIdRater;
+		this.ratingValue = ratingValue;
+		this.errandId = errandId;
+		this.comments = comments;
+		this.creationDate = creationDAte;
+	}
 	public int getId() {
 		return id;
 	}
-	public User getUserRated() {
-		return userRated;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public User getRater() {
-		return rater;
+	public User getUserIdRated() {
+		return userIdRated;
 	}
-	public int getRating() {
-		return rating;
+	public void setUserIdRated(User userIdRated) {
+		this.userIdRated = userIdRated;
 	}
-	public Errand getErrand() {
-		return errand;
+	public User getUserIdRater() {
+		return userIdRater;
+	}
+	public void setUserIdRater(User userIdRater) {
+		this.userIdRater = userIdRater;
+	}
+	public int getRatingValue() {
+		return ratingValue;
+	}
+	public void setRatingValue(int ratingValue) {
+		this.ratingValue = ratingValue;
+	}
+	public Errand getErrandId() {
+		return errandId;
+	}
+	public void setErrandId(Errand errandId) {
+		this.errandId = errandId;
 	}
 	public String getComments() {
 		return comments;
 	}
-	public Date getDateCreated() {
-		return dateCreated;
-	}
-	
-	// Setters
-	public void setId(int id) {
-		this.id = id;
-	}
-	public void setUserRated(User userRated) {
-		this.userRated = userRated;
-	}
-	public void setRater(User rater) {
-		this.rater = rater;
-	}
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-	public void setErrand(Errand errand) {
-		this.errand = errand;
-	}
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
+	public Date getCreationDate() {
+		return creationDate;
 	}
-
+	public void setCreationDate(Date creationDAte) {
+		this.creationDate = creationDAte;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }
