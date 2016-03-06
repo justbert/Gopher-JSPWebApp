@@ -27,6 +27,8 @@ public class ErrandDao extends DatabaseManager {
 			
 	private UserDao userDB = new UserDao();
 	private RewardDAO rewardDB = new RewardDAO();
+	
+	
 	public int delete(int id) {
 		try{
 		Integer result = update(DELETE, Integer.toString(id));

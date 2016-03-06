@@ -22,7 +22,7 @@
 		width:350px;
 	}	
 </style>
-<jsp:include page="/header.jsp"/>
+<jsp:include page="header.jsp"/>
 		<div class="bg-teal pad-nav-bar">
 			<img class="img-responsive" style="margin:auto;padding:20px 0px;" src="assets/img/cute_gopher.png"></img>
 		</div>
@@ -39,4 +39,4 @@
 			 	</c:if>
 			</form>
 		</div>
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>

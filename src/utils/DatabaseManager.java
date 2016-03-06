@@ -89,7 +89,8 @@ public class DatabaseManager {
 		 PreparedStatement pst = null;
          pst = conn.prepareStatement(queryString);
          for(int i = 1; i <= parameters.length; i++)
-        	 pst.setObject(i, parameters[i - 1]);
+        	 if (parameters[i-1] != null)
+        		 pst.setObject(i, parameters[i - 1]);
          
          return pst.executeQuery();
 	 }
@@ -101,7 +102,7 @@ public class DatabaseManager {
 	  * @throws SQLException
 	  */
 	 protected ResultSet query(String queryString) throws SQLException{
-		 return query(queryString, (Object)new String[0]);
+		 return query(queryString, new String[0]);
 	 }
 	 
 	 /**

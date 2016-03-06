@@ -104,18 +104,6 @@ public class Errand implements Serializable {
 		this.setImportance(importance);
 	}
 	
-/*	rs.getInt("id"),
-	rs.getString("name"),
-	rs.getString("description"),
-	rs.getDate("creationDate"),
-	rs.getDate("completionDate"),
-	rs.getTimestamp("deadline"),
-	rewardDB.getRewardForID(rs.getInt("rewardId")),
-	StatusType.getStatusType(rs.getInt("statusTypeId")),
-	ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
-	userDB.getUserForID(rs.getInt("userIdCustomer")),
-	userDB.getUserForID(rs.getInt("userIdGopher"))	
-*/
 	// Getters
 	public int getId() {
 		return id;
