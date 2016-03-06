@@ -47,7 +47,7 @@ public class DatabaseManager {
     	 
     	String url, dbName, driver, userName, password;
     	 
-		try(Scanner input = new Scanner(new FileReader("C:\\serverConfig.txt"))) {
+		try(Scanner input = new Scanner(new FileReader("serverConfig.txt"))) {
 
 			url = input.nextLine(); 
 	        dbName = input.nextLine();  
@@ -119,7 +119,7 @@ public class DatabaseManager {
 		 PreparedStatement pst = null;
          pst = conn.prepareStatement(queryString);
          for(int i = 1; i <= parameters.length; i++)
-        	 pst.setObject(i, parameters[i]);
+        	 pst.setObject(i, parameters[i-1]);
          
          return pst.executeUpdate();
 	 }
@@ -136,7 +136,7 @@ public class DatabaseManager {
 		 PreparedStatement pst = null;
          pst = conn.prepareStatement(queryString);
          for(int i = 1; i <= parameters.length; i++)
-        	 pst.setObject(i, parameters[i]);
+        	 pst.setObject(i, parameters[i-1]);
          
          return pst.executeUpdate();
 	 }

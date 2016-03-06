@@ -33,9 +33,6 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		int id;
 		
-		request.removeAttribute("email");
-		request.removeAttribute("password");
-		
 		//Make sure there is an email entered
 		if(email.isEmpty()) {
 			session.setAttribute("error", "Please enter a username, or an email.");
@@ -46,7 +43,8 @@ public class LoginServlet extends HttpServlet {
 		//Verify if the username or password are correct. Actually checking if they aren't valid.
 		if((id = userDAO.verifyEmail(email)) == Integer.MIN_VALUE && 
 				(id = userDAO.verifyUsername(email)) == Integer.MIN_VALUE) {
-			session.setAttribute("error", "The email or username supplied have not been registered.");
+			session.setAttribute("error", "The email or username supplied has not been registered.");
+			session.setAttribute("email", email);
 			response.sendRedirect("login");
 			return;
 		}
@@ -57,6 +55,7 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("dashboard").forward(request, response);
 		} else {
 			session.setAttribute("error", "The password supplied is not correct.");
+			session.setAttribute("email", email);
 			response.sendRedirect("login");
 		}
 		

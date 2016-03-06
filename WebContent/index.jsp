@@ -22,8 +22,8 @@
 	   				<div class="monty-font" ><strong>gopher</strong></div> 
 					<p>Need something done? Get someone to <i>gopher</i> it!</p> 
 					<form class="form-inline">
-	   					<a href="/Gopher/login.jsp"><button type="button" class="btn btn-outline btn-lg spacer">log in</button></a>
-	   					<a href="/Gopher/signup.jsp"><button type="button" class="btn btn-outline btn-lg">sign up</button></a>
+	   					<a href="/Gopher/login"><button type="button" class="btn btn-outline btn-lg spacer">log in</button></a>
+	   					<a href="/Gopher/register"><button type="button" class="btn btn-outline btn-lg">sign up</button></a>
 	 				</form> 
 	 			</div> 
 	 		</div>  				
