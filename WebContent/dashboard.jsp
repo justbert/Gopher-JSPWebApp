@@ -1,5 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="entities.User" %>
 <jsp:include page="/header.jsp"/>	
+
+<% // Store logged in user data %>
+<% User user = (User) request.getAttribute("user"); %>
+
 	<style>
 		.profile-header {
 			padding-top: 50px;
@@ -62,12 +67,14 @@
 	
 	<!-- ****************END STYLE BLOCK******************* -->
 	
+	
+	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
     	<div class="profile-header-img">
 			<img class="img-circle" src="assets/img/profile_img.jpg" >
 		</div>
-		<h1>Skye Turriff</h1>
+		<h1><% user.getUsername(); %></h1>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
