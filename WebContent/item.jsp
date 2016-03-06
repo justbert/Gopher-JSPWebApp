@@ -13,11 +13,11 @@
             <img src="http://lorempixel.com/1500/200/food/5" alt="Slide 1"/>
             <div class="caption-full">
                 <h4 class="pull-right">$24.99</h4>
-                <h4><a href="#"style="color: black;"><jsp:getProperty name="taskBean" property="taskName"/></a> <!--  apparently property name is case sensitive, and needs to be 1st char lowercase-->
+                <h4><a href="#"style="color: black;"><jsp:getProperty name="taskBean" property="name"/></a> <!--  apparently property name is case sensitive, and needs to be 1st char lowercase-->
                 </h4>
-                <p><jsp:getProperty name="userBean" property="username"/></p>
+                <p><jsp:getProperty name="userBean" property="nameFirst"/></p>
                 <p>Blah Blah</p>
-                <p><jsp:getProperty name="taskBean" property="taskDescription"/></p>
+                <p><jsp:getProperty name="taskBean" property="description"/></p>
             </div>
             <div class="ratings">
                 <p class="pull-right">3 reviews</p>

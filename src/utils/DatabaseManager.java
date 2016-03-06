@@ -101,7 +101,7 @@ public class DatabaseManager {
 	  * @throws SQLException
 	  */
 	 protected ResultSet query(String queryString) throws SQLException{
-		 return query(queryString, new String[0]);
+		 return query(queryString, (Object)new String[0]);
 	 }
 	 
 	 /**

@@ -45,14 +45,14 @@ public class ErrandDao extends DatabaseManager {
 						rs.getInt("id"),
 						rs.getString("name"),
 						rs.getString("description"),
-						userDB.getUserForID(rs.getInt("userIdCustomer")),
-						userDB.getUserForID(rs.getInt("userIdGopher")),
 						rs.getDate("creationDate"),
 						rs.getDate("completionDate"),
-						rewardDB.getRewardForID(rs.getInt("rewardId")),
 						rs.getTimestamp("deadline"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
 						StatusType.getStatusType(rs.getInt("statusTypeId")),
-						ImportanceType.getImportanceType(rs.getInt("importanceTypeId"))
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher"))					
 					));
 			}
 			return errands;
@@ -69,14 +69,14 @@ public class ErrandDao extends DatabaseManager {
 						rs.getInt("id"),
 						rs.getString("name"),
 						rs.getString("description"),
-						userDB.getUserForID(rs.getInt("userIdCustomer")),
-						userDB.getUserForID(rs.getInt("userIdGopher")),
 						rs.getDate("creationDate"),
 						rs.getDate("completionDate"),
-						rewardDB.getRewardForID(rs.getInt("rewardId")),
 						rs.getTimestamp("deadline"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
 						StatusType.getStatusType(rs.getInt("statusTypeId")),
-						ImportanceType.getImportanceType(rs.getInt("importanceTypeId"))
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher"))
 					);
 		}
 		catch (SQLException e){
