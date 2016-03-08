@@ -24,8 +24,8 @@ public class ErrandDao extends DatabaseManager {
 	private static final String SELECT_BY_NAME = "SELECT * FROM Errands WHERE name=?";
 	private static final String INSERT = "INSERT INTO Errands(name, tel, passwd) VALUES(?, ?, ?)";
 	private static final String UPDATE = "UPDATE Errands SET name=?, tel=?, passwd=? WHERE id=?";
-	private static final String SELECT_ERRANDS_FOR_USERID = "SELECT * From errands join on users where errands.userIdCustomer = users.id where users.id = ?";
-	private static final String SELECT_ERRANDS_FOR_GOPHERID = "SELECT * From errands join on users where errands.userIdGopher = users.id where users.id = ?";
+	private static final String SELECT_ERRANDS_FOR_USERID = "SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ?";
+	private static final String SELECT_ERRANDS_FOR_GOPHERID = "SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ?";
 	private UserDao userDB = new UserDao();
 	private RewardDAO rewardDB = new RewardDAO();
 	
