@@ -56,9 +56,11 @@ public class DashboardServlet extends HttpServlet {
 		
 		// If user is logged in, continue
 		List<Errand> errandsCustomer = errandDao.selectErrandsForUser((User)session.getAttribute("userObject"));
+		List<Errand> errandsGopher = errandDao.selectErrandsForGopherId((User)session.getAttribute("userObject"));
 		
 		try {
 			request.setAttribute("errandsCustomer", errandsCustomer);
+			request.setAttribute("errandsGopher", errandsGopher);
 			request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();

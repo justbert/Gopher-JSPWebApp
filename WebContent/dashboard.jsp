@@ -150,29 +150,26 @@
 			<!--  Current errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
-					Incomplete Errands
+					Your Errands to Gopher
 				</h3>
 				<table class="table">					
 						<tr>
 							<th>Errand</th>
 							<th>Reward</th>
-							<th>Date Accepted</th>
+							<th>Deadline</th>
 						</tr>
 						
 						<!-- List all errands for which this customer is registered as a Gopher -->
-						<tr>
-							<td>Walk my dog</td>
-							<td>$5.00</td>
-							<td>01/30/2016</td>
-						</tr>
-						<tr>
-							<td>Set up my internet</td>
-							<td>$20.00</td>
-							<td>02/01/2016</td>
-						</tr>
+						<c:forEach items="${errandsGopher}" var="errand">
+							<tr>
+								<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+								<td>$ ${errand.getRewardId().getRewardValue() }</td>
+								<td>${errand.getDeadline() }</td>
+							</tr>
+						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					Errand Requests
+					Your Errand Requests
 				</h3>
 				<table class="table">
 					<tr>
