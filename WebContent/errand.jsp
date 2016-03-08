@@ -10,13 +10,13 @@
 <div class="row bg-teal">
     <div class="col-md-8 col-md-offset-2">
         <div class="thumbnail ">
-            <img src="http://lorempixel.com/1500/200/food/5" alt="Slide 1"/>
+            <img src="assets/img/gopher_small.png" alt="Slide 1"/>
             <div class="caption-full">
                 <h4 class="pull-right">$ ${errand.getRewardId().getRewardValue()}</h4>
                 <h4><a href="#"style="color: black;">${errand.getName() }</a>
                 </h4>
-                <p>what goes here?</p>
-                <p>Blah Blah</p>
+                <p></p>
+                <p></p>
                 <p>${errand.getDescription() }</p>
             </div>
             <div class="ratings">
