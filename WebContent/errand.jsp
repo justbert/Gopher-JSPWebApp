@@ -15,8 +15,6 @@
                 <h4 class="pull-right">$ ${errand.getRewardId().getRewardValue()}</h4>
                 <h4><a href="#"style="color: black;">${errand.getName() }</a>
                 </h4>
-                <p></p>
-                <p></p>
                 <p>${errand.getDescription() }</p>
             </div>
             <div class="ratings">
