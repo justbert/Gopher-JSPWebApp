@@ -73,9 +73,17 @@
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
     	<div class="profile-header-img">
-			<img class="img-circle" src="assets/img/profile_img.jpg" >
+    	
+    		<!-- Hack for demo to show profile pic for Skye only -->
+    		<c:if test="${userObject.getId() == 102}">
+    			<img class="img-circle" src="assets/img/profile_img.jpg" >
+    		</c:if>
+    		<c:if test="${userObject.getId() != 102}">
+    			<img class="img-circle" src="assets/img/cute_gopher.png" >
+    		</c:if>		
+    		
 		</div>
-		<h1><c:out value="${userObject.getNameFirst()}" /> <c:out value="${userObject.getNameLast()}" /></h1>
+		<h1><c:out value="${userObject.getUsername()}" /> </h1>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
@@ -128,6 +136,7 @@
 					<tr>
 						<th>Customer Rating:</th>
 						<td>
+							<img class="img-circle" src="assets/img/rating.png" >
 							<img class="img-circle" src="assets/img/rating.png" >
 							<img class="img-circle" src="assets/img/rating.png" >
 						</td>
@@ -200,16 +209,16 @@
 						<th>Reward</th>
 						<th>Date Completed</th>
 					</tr>
-					<tr>
-						<td>Get me a popsicle</td>
-						<td>One hug</td>
-						<td>01/03/2016</td>
-					</tr>
-					<tr>
-						<td>Get my groceries</td>
-						<td>$10 gift card</td>
-						<td>01/17/2016</td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<td>Get me a popsicle</td> -->
+<!-- 						<td>One hug</td> -->
+<!-- 						<td>01/03/2016</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td>Get my groceries</td> -->
+<!-- 						<td>$10 gift card</td> -->
+<!-- 						<td>01/17/2016</td> -->
+<!-- 					</tr> -->
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
 					Requested Errands
@@ -220,16 +229,16 @@
 						<th>Reward</th>
 						<th>Date Completed</th>
 					</tr>
-					<tr>
-						<td>Deliver my medicine</td>
-						<td>Free pizza</td>
-						<td>01/05/2016</td>
-					</tr>
-					<tr>
-						<td>Pick up my laundry</td>
-						<td>$10.00</td>
-						<td>01/03/2016</td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<td>Deliver my medicine</td> -->
+<!-- 						<td>Free pizza</td> -->
+<!-- 						<td>01/05/2016</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td>Pick up my laundry</td> -->
+<!-- 						<td>$10.00</td> -->
+<!-- 						<td>01/03/2016</td> -->
+<!-- 					</tr> -->
 				</table>
 			</div>
 					
