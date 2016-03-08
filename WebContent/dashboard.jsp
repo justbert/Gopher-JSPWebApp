@@ -1,5 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="entities.User" %>
+<%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>	
+
+<% // Store logged in user data %>
+<% User user = (User) request.getAttribute("user"); %>
+
 	<style>
 		.profile-header {
 			padding-top: 50px;
@@ -62,12 +68,20 @@
 	
 	<!-- ****************END STYLE BLOCK******************* -->
 	
+	<!-- If user is not logged in, redirect them to login page -->
+	<c:if test="${userObject == null}">
+		<c:redirect url="/login" />
+	</c:if>
+	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
     	<div class="profile-header-img">
 			<img class="img-circle" src="assets/img/profile_img.jpg" >
 		</div>
-		<h1>Skye Turriff</h1>
+		<h1>${user.getUsername()} </h1>
+		<c:if test="${user == null}">
+			<h1>Skye Turriff</h1>
+		</c:if>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
