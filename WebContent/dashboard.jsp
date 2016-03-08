@@ -78,8 +78,8 @@
     	<div class="profile-header-img">
 			<img class="img-circle" src="assets/img/profile_img.jpg" >
 		</div>
-		<h1>${user.getUsername()} </h1>
-		<c:if test="${user == null}">
+		<h1><c:out value="${userObject.getUsername()}" /> </h1>
+		<c:if test="${userObject == null}">
 			<h1>Skye Turriff</h1>
 		</c:if>
 	</div>
