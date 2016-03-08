@@ -43,17 +43,11 @@ public class DashboardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		
-		// Until login, just grab a "logged in" user by userId (1-100)
-		User user = userDao.getUserForID(5);
-				
-		List<Errand> errands = errandDao.selectAll();	// Need to implement select user's errands
-		errands = 	errands.subList(0, 10);
+		List<Errand> errandsCustomer = errandDao.selectErrandsForUser((User)session.getAttribute("userObject"));
 		
 		try {
-			request.setAttribute("user", user);
-			request.setAttribute("errand", errands);
-			request.getRequestDispatcher("dashboard").forward(request, response);
+			request.setAttribute("errandsCustomer", errandsCustomer);
+			request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}

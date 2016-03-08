@@ -25,6 +25,7 @@ public class ErrandDao extends DatabaseManager {
 	private static final String INSERT = "INSERT INTO Errands(name, tel, passwd) VALUES(?, ?, ?)";
 	private static final String UPDATE = "UPDATE Errands SET name=?, tel=?, passwd=? WHERE id=?";
 	private static final String SELECT_ERRANDS_FOR_USERID = "SELECT * From errands join on users where errands.userIdCustomer = users.id where users.id = ?";
+	private static final String SELECT_ERRANDS_FOR_GOPHERID = "SELECT * From errands join on users where errands.userIdGopher = users.id where users.id = ?";
 	private UserDao userDB = new UserDao();
 	private RewardDAO rewardDB = new RewardDAO();
 	
@@ -64,8 +65,16 @@ public class ErrandDao extends DatabaseManager {
 	}
 	
 	public List<Errand> selectErrandsForUser(User user){
+		return selectErrandsForUser(SELECT_ERRANDS_FOR_USERID, user.getId());
+	}
+	
+	public List<Errand> selectErrandsForGopherId(User user){
+		return selectErrandsForUser(SELECT_ERRANDS_FOR_GOPHERID, user.getId());
+	}
+	
+	public List<Errand> selectErrandsForUser(String query, int userid){
 		List<Errand> errands = new ArrayList<Errand>();
-		try(ResultSet rs = query(SELECT_ERRANDS_FOR_USERID, user.getId())){
+		try(ResultSet rs = query(query, userid)){
 			while (rs.next()){
 				errands.add(new Errand(
 						rs.getInt("id"),

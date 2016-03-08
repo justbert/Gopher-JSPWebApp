@@ -68,7 +68,7 @@
 	
 	<!-- ****************END STYLE BLOCK******************* -->
 	
-	<!-- If user is not logged in, redirect them to login page -->
+	<!-- If user is not logged in, redirect them to login page MOVE TO DASHBOARD SERVLET -->
 	<c:if test="${userObject == null}">
 		<c:redirect url="/login" />
 	</c:if>
@@ -78,10 +78,7 @@
     	<div class="profile-header-img">
 			<img class="img-circle" src="assets/img/profile_img.jpg" >
 		</div>
-		<h1><c:out value="${userObject.getUsername()}" /> </h1>
-		<c:if test="${userObject == null}">
-			<h1>Skye Turriff</h1>
-		</c:if>
+		<h1><c:out value="${userObject.getNameFirst()}" /> <c:out value="${userObject.getNameLast()}" /></h1>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
@@ -118,11 +115,10 @@
 				<table class="table">
 					<tr>
 						<th>Username:</th>
-						<td>Skye Turriff</td>
-					</tr>
+						<td>${userObject.getUsername()}
 					<tr>
 						<th>Email:</th>
-						<td>turriff.skye@gmail.com</td>
+						<td>${userObject.getEmail()}</td>
 					</tr>
 					<tr>
 						<th>Gopher Rating:</th>
@@ -159,22 +155,22 @@
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
 					Incomplete Errands
 				</h3>
-				<table class="table">
-					<tr>
-						<th>Errand</th>
-						<th>Reward</th>
-						<th>Date Accepted</th>
-					</tr>
-					<tr>
-						<td>Walk my dog</td>
-						<td>$5.00</td>
-						<td>01/30/2016</td>
-					</tr>
-					<tr>
-						<td>Set up my internet</td>
-						<td>$20.00</td>
-						<td>02/01/2016</td>
-					</tr>
+				<table class="table">					
+						<tr>
+							<th>Errand</th>
+							<th>Reward</th>
+							<th>Date Accepted</th>
+						</tr>
+						<tr>
+							<td>Walk my dog</td>
+							<td>$5.00</td>
+							<td>01/30/2016</td>
+						</tr>
+						<tr>
+							<td>Set up my internet</td>
+							<td>$20.00</td>
+							<td>02/01/2016</td>
+						</tr>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
 					Errand Requests
@@ -185,11 +181,14 @@
 						<th>Reward</th>
 						<th>Date Requested</th>
 					</tr>
+					
+					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
 						<td>Pick up my kids from daycare</td>
 						<td>$10.00</td>
 						<td>02/03/2016</td>
 					</tr>
+					</c:forEach>
 				</table>
 			</div>
 			
