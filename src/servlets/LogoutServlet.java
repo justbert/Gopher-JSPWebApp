@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +23,12 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if((Boolean)session.getAttribute("loggedIn")) {
-			session.removeAttribute("userObject");
-			session.removeAttribute("loggedIn");
+			Enumeration<String> names = session.getAttributeNames();
+			
+			while(names.hasMoreElements()) {
+				session.removeAttribute(names.nextElement());
+			}
+			
 			try {
 				response.sendRedirect("index");
 			} catch (IOException e) {
