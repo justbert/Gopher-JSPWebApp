@@ -63,6 +63,30 @@ public class ErrandDao extends DatabaseManager {
 		}
 	}
 	
+	public List<Errand> selectErrandsForUser(User user){
+		List<Errand> errands = new ArrayList<Errand>();
+		try(ResultSet rs = query(SELECT_ERRANDS_FOR_USERID, user.getId())){
+			while (rs.next()){
+				errands.add(new Errand(
+						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getString("description"),
+						rs.getDate("creationDate"),
+						rs.getDate("completionDate"),
+						rs.getTimestamp("deadline"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
+						StatusType.getStatusType(rs.getInt("statusTypeId")),
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher"))					
+					));
+			}
+			return errands;
+		} catch (SQLException e){
+			throw new RuntimeException(e);
+		}	
+	}
+	
 	public Errand selectById(int id){
 		Errand errand = null;
 		try(ResultSet rs = query(SELECT_BY_ID, Integer.toString(id));){
