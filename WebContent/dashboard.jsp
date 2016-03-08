@@ -184,8 +184,8 @@
 					
 					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
-						<td>Pick up my kids from daycare</td>
-						<td>$10.00</td>
+						<td>${errand.getDescription()}</td>
+						<td>$10.00 ${errand.getRewardId().getRewardValue() }</td>
 						<td>02/03/2016</td>
 					</tr>
 					</c:forEach>
