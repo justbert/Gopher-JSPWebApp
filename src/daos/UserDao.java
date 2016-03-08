@@ -116,13 +116,14 @@ public class UserDao extends DatabaseManager {
 		return user;
 	}
 	public User getUserForID(int id){
-		User user = new User();
+		User user = null;
 
 		try(ResultSet rs = query(select_getUserForID, id)){
 			while(rs.next())
-				new User(rs.getInt("id"), 
+				user = new User(rs.getInt("id"), 
 						rs.getString("nameFirst"), 
 						rs.getString("nameLast"), 
+						rs.getString("username"),
 						rs.getString("email"), 
 						rs.getString("phoneHome"), 
 						rs.getString("phoneMobile"),
