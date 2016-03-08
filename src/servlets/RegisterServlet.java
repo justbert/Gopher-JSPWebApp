@@ -73,7 +73,7 @@ public class RegisterServlet extends HttpServlet {
 				session.removeAttribute("email");
 				session.removeAttribute("username");
 				
-				session.setAttribute("user", user);
+				session.setAttribute("userObject", user);
 				session.setAttribute("loggedIn", true);
 				request.getRequestDispatcher("dashboard").forward(request, response);
 			} else {
