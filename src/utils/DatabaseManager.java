@@ -47,7 +47,7 @@ public class DatabaseManager {
     	 
     	String url, dbName, driver, userName, password;
     	 
-		try(Scanner input = new Scanner(new FileReader("serverConfig.txt"))) {
+		try(Scanner input = new Scanner(new FileReader("C:/RemoteServerConfig.txt"))) {
 
 			url = input.nextLine(); 
 	        dbName = input.nextLine();  

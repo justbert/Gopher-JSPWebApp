@@ -10,11 +10,11 @@ import utils.DatabaseManager;
 import utils.Password;
 
 public class UserDao extends DatabaseManager {
-	private static final String select_VerifyEmail = "SELECT id from gopher.users WHERE email = ?";
-	private static final String select_VerifyUsername = "SELECT id from gopher.users WHERE username = ?";
-	private static final String select_VerifyPassword = "SELECT password, salt from gopher.users WHERE id = ?";
+	private static final String select_VerifyEmail = "SELECT id from users WHERE email = ?";
+	private static final String select_VerifyUsername = "SELECT id from users WHERE username = ?";
+	private static final String select_VerifyPassword = "SELECT password, salt from users WHERE id = ?";
 	private static final String insert_RegisterUser = "INSERT INTO users (username, email, password, salt, userTypeId) VALUES (?, ?, ?, ?, ?)";
-	private static final String select_getUser = "SELECT id, nameFirst, nameLast, email, addressIDHome, addressIDWork, phoneHome, phoneMobile, phoneWork, dateJoined FROM Gopher.users WHERE email = ?";
+	private static final String select_getUser = "SELECT id, nameFirst, nameLast, email, addressIDHome, addressIDWork, phoneHome, phoneMobile, phoneWork, dateJoined FROM users WHERE email = ?";
 	
 	private static final String select_getUserForID = "Select * from users where id = ?";
 

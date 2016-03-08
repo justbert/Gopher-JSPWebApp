@@ -51,8 +51,8 @@ public class LoginServlet extends HttpServlet {
 		
 		if(userDAO.verifyPassword(Integer.toString(id), password)) {
 			session.setAttribute("loggedIn", true);
-			session.setAttribute("userObject", userDAO.getUser(Integer.toString(id)));
-			request.getRequestDispatcher("dashboard").forward(request, response);
+			session.setAttribute("userObject", userDAO.getUserForID(id));
+			response.sendRedirect("dashboard");
 		} else {
 			session.setAttribute("error", "The password supplied is not correct.");
 			session.setAttribute("email", email);

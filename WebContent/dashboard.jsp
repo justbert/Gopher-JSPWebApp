@@ -69,9 +69,9 @@
 	<!-- ****************END STYLE BLOCK******************* -->
 	
 	<!-- If user is not logged in, redirect them to login page -->
-<%-- 	<c:if test="${userObject == null}"> --%>
-<%-- 		<c:redirect url="/login" /> --%>
-<%-- 	</c:if> --%>
+	<c:if test="${userObject == null}">
+		<c:redirect url="/login" />
+	</c:if>
 	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
