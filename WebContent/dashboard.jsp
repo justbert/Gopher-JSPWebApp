@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entities.User" %>
+<%@page import="entities.Errand" %>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>	
 
@@ -68,10 +69,6 @@
 	
 	<!-- ****************END STYLE BLOCK******************* -->
 	
-	<!-- If user is not logged in, redirect them to login page MOVE TO DASHBOARD SERVLET -->
-	<c:if test="${userObject == null}">
-		<c:redirect url="/login" />
-	</c:if>
 	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
@@ -153,27 +150,26 @@
 			<!--  Current errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
-					Incomplete Errands
+					Your Errands to Gopher
 				</h3>
 				<table class="table">					
 						<tr>
 							<th>Errand</th>
 							<th>Reward</th>
-							<th>Date Accepted</th>
+							<th>Deadline</th>
 						</tr>
-						<tr>
-							<td>Walk my dog</td>
-							<td>$5.00</td>
-							<td>01/30/2016</td>
-						</tr>
-						<tr>
-							<td>Set up my internet</td>
-							<td>$20.00</td>
-							<td>02/01/2016</td>
-						</tr>
+						
+						<!-- List all errands for which this customer is registered as a Gopher -->
+						<c:forEach items="${errandsGopher}" var="errand">
+							<tr>
+								<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+								<td>$ ${errand.getRewardId().getRewardValue() }</td>
+								<td>${errand.getDeadline() }</td>
+							</tr>
+						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					Errand Requests
+					Your Errand Requests
 				</h3>
 				<table class="table">
 					<tr>
@@ -182,11 +178,12 @@
 						<th>Date Requested</th>
 					</tr>
 					
+					<!-- List all errands for which this customer is registered as a Customer -->
 					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
-						<td>${errand.getDescription()}</td>
-						<td>$10.00 ${errand.getRewardId().getRewardValue() }</td>
-						<td>02/03/2016</td>
+						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td>$ ${errand.getRewardId().getRewardValue() }</td>
+						<td>${errand.getDateCreated() }</td>
 					</tr>
 					</c:forEach>
 				</table>

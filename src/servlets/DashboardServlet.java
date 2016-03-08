@@ -43,10 +43,24 @@ public class DashboardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
+		
+		// If user isn't logged in, redirect them to login page
+		if (session.getAttribute("loggedIn") == null) {
+			try {
+				response.sendRedirect("login");
+				return;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// If user is logged in, continue
 		List<Errand> errandsCustomer = errandDao.selectErrandsForUser((User)session.getAttribute("userObject"));
+		List<Errand> errandsGopher = errandDao.selectErrandsForGopherId((User)session.getAttribute("userObject"));
 		
 		try {
 			request.setAttribute("errandsCustomer", errandsCustomer);
+			request.setAttribute("errandsGopher", errandsGopher);
 			request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
