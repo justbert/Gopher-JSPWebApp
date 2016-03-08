@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 	<link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" >
@@ -23,10 +25,19 @@
     		
     			<div class="collapse navbar-collapse" id="myNavbar">	
 					<ul class="nav navbar-nav navbar-right">
-			            <li><a href="/Gopher/login">Log In</a></li>
+						<c:choose>
+							<c:when test="${loggedIn}">
+								<li><a href="/Gopher/dashboard">Welcome, ${userObject.getUsername()}</a></li>
+							</c:when>
+							<c:otherwise>
+							<li><a href="/Gopher/login">Log In</a></li>
+							</c:otherwise>
+						</c:choose>
 			            <li><a href="/Gopher/browse">Browse</a></li>
 			            <li><a href="/Gopher/request.jsp">Request</a></li>
-			            <li><a href="/Gopher/dashboard">Profile</a></li>
+			            <c:if test="${loggedIn}">
+			            	<li><a href="/Gopher/logout">Logout</a></li>
+			            </c:if>
 	        		</ul>
     			</div>
   			</div>
