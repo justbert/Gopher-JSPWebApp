@@ -73,12 +73,15 @@
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
     	<div class="profile-header-img">
+    	
+    		<!-- Hack for demo to show profile pic for Skye only -->
     		<c:if test="${userObject.getId() == 102}">
     			<img class="img-circle" src="assets/img/profile_img.jpg" >
     		</c:if>
     		<c:if test="${userObject.getId() != 102}">
     			<img class="img-circle" src="assets/img/cute_gopher.png" >
     		</c:if>		
+    		
 		</div>
 		<h1><c:out value="${userObject.getUsername()}" /> </h1>
 	</div>

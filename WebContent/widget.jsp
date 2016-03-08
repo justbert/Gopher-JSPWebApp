@@ -10,6 +10,8 @@
 </script>
 
 <div id="profile-widget" class="text-center draggable">
+	
+	<!-- Hack for demo to show profile pic for Skye only -->
 	<c:if test="${userObject.getId() == 102}">
     	<img class="img-circle profile-img" src="assets/img/profile_img.jpg"
 		height="100" width="100" alt="">
@@ -18,6 +20,7 @@
     	<img class="img-circle profile-img" src="assets/img/cute_gopher.png"
 		height="100" width="100" alt="">
     </c:if>	
+    
 	<div class="btn-group" id="profile-wdiget-button-container"
 		role="group">
 		<button type="button" class="btn btn-default btn-xs"
