@@ -15,17 +15,17 @@
 	
 </style>
 		<div class="bg-teal pad-nav-bar">
-			<div id="carousel" class="carousel slide pad-me-please" data-ride="carousel">
-    			<!-- Menu -->
+			<!-- <div id="carousel" class="carousel slide pad-me-please" data-ride="carousel">
+    			Menu
 			    <ol class="carousel-indicators">
 			        <li data-target="#carousel" data-slide-to="0" class="active"></li>
 			        <li data-target="#carousel" data-slide-to="1"></li>
 			        <li data-target="#carousel" data-slide-to="2"></li>
 			    </ol>  
-			    <!-- Items -->
-			    <div class="carousel-inner">			        
+			    Items
+ 			    <div class="carousel-inner">			        
 			        <div class="item active">
-			            <img src="http://lorempixel.com/1500/400/food/5" alt="Slide 1"/>
+			            <img src="assets/img/gopher_small.png" alt="Slide 1"/>
 			        </div>
 			        <div class="item">
 			            <img src="http://lorempixel.com/1500/400/cats/5" alt="Slide 2"/>
@@ -33,14 +33,14 @@
 			        <div class="item">
 			            <img src="http://lorempixel.com/1500/400/people/5" alt="Slide 3"/>
 			        </div>
-			    </div> 
+			    </div>
 			    <a href="#carousel" class="left carousel-control" data-slide="prev">
 			        <span class="glyphicon glyphicon-chevron-left"></span>
 			    </a>
 			    <a href="#carousel" class="right carousel-control" data-slide="next">
 			        <span class="glyphicon glyphicon-chevron-right"></span>
 			    </a>
-			</div>
+			</div> -->
 		</div>
 		<div class="bg-white">
 				<div id="product-wrapper">

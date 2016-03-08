@@ -23,10 +23,10 @@
     		
     			<div class="collapse navbar-collapse" id="myNavbar">	
 					<ul class="nav navbar-nav navbar-right">
-			            <li><a href="/Gopher/login.jsp">Log In</a></li>
+			            <li><a href="/Gopher/login">Log In</a></li>
 			            <li><a href="/Gopher/browse">Browse</a></li>
 			            <li><a href="/Gopher/request.jsp">Request</a></li>
-			            <li><a href="/Gopher/dashboard.jsp">Profile</a></li>
+			            <li><a href="/Gopher/dashboard">Profile</a></li>
 	        		</ul>
     			</div>
   			</div>

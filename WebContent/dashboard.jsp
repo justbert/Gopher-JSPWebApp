@@ -1,5 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="entities.User" %>
+<%@page import="entities.Errand" %>
+<%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>	
+
+<% // Store logged in user data %>
+<% User user = (User) request.getAttribute("user"); %>
+
 	<style>
 		.profile-header {
 			padding-top: 50px;
@@ -62,12 +69,13 @@
 	
 	<!-- ****************END STYLE BLOCK******************* -->
 	
+	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
     	<div class="profile-header-img">
 			<img class="img-circle" src="assets/img/profile_img.jpg" >
 		</div>
-		<h1>Skye Turriff</h1>
+		<h1><c:out value="${userObject.getNameFirst()}" /> <c:out value="${userObject.getNameLast()}" /></h1>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
@@ -104,11 +112,10 @@
 				<table class="table">
 					<tr>
 						<th>Username:</th>
-						<td>Skye Turriff</td>
-					</tr>
+						<td>${userObject.getUsername()}
 					<tr>
 						<th>Email:</th>
-						<td>turriff.skye@gmail.com</td>
+						<td>${userObject.getEmail()}</td>
 					</tr>
 					<tr>
 						<th>Gopher Rating:</th>
@@ -143,27 +150,26 @@
 			<!--  Current errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
-					Incomplete Errands
+					Your Errands to Gopher
 				</h3>
-				<table class="table">
-					<tr>
-						<th>Errand</th>
-						<th>Reward</th>
-						<th>Date Accepted</th>
-					</tr>
-					<tr>
-						<td>Walk my dog</td>
-						<td>$5.00</td>
-						<td>01/30/2016</td>
-					</tr>
-					<tr>
-						<td>Set up my internet</td>
-						<td>$20.00</td>
-						<td>02/01/2016</td>
-					</tr>
+				<table class="table">					
+						<tr>
+							<th>Errand</th>
+							<th>Reward</th>
+							<th>Deadline</th>
+						</tr>
+						
+						<!-- List all errands for which this customer is registered as a Gopher -->
+						<c:forEach items="${errandsGopher}" var="errand">
+							<tr>
+								<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+								<td>$ ${errand.getRewardId().getRewardValue() }</td>
+								<td>${errand.getDeadline() }</td>
+							</tr>
+						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					Errand Requests
+					Your Errand Requests
 				</h3>
 				<table class="table">
 					<tr>
@@ -171,11 +177,15 @@
 						<th>Reward</th>
 						<th>Date Requested</th>
 					</tr>
+					
+					<!-- List all errands for which this customer is registered as a Customer -->
+					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
-						<td>Pick up my kids from daycare</td>
-						<td>$10.00</td>
-						<td>02/03/2016</td>
+						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td>$ ${errand.getRewardId().getRewardValue() }</td>
+						<td>${errand.getDateCreated() }</td>
 					</tr>
+					</c:forEach>
 				</table>
 			</div>
 			
