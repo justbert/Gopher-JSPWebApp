@@ -24,7 +24,7 @@ public class ErrandDao extends DatabaseManager {
 	private static final String SELECT_BY_NAME = "SELECT * FROM Errands WHERE name=?";
 	private static final String INSERT = "INSERT INTO Errands(name, tel, passwd) VALUES(?, ?, ?)";
 	private static final String UPDATE = "UPDATE Errands SET name=?, tel=?, passwd=? WHERE id=?";
-			
+	private static final String SELECT_ERRANDS_FOR_USERID = "SELECT * From errands join on users where errands.userIdCustomer = users.id where users.id = ?";
 	private UserDao userDB = new UserDao();
 	private RewardDAO rewardDB = new RewardDAO();
 	
@@ -61,6 +61,30 @@ public class ErrandDao extends DatabaseManager {
 		} catch (SQLException e){
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public List<Errand> selectErrandsForUser(User user){
+		List<Errand> errands = new ArrayList<Errand>();
+		try(ResultSet rs = query(SELECT_ERRANDS_FOR_USERID, user.getId())){
+			while (rs.next()){
+				errands.add(new Errand(
+						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getString("description"),
+						rs.getDate("creationDate"),
+						rs.getDate("completionDate"),
+						rs.getTimestamp("deadline"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
+						StatusType.getStatusType(rs.getInt("statusTypeId")),
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher"))					
+					));
+			}
+			return errands;
+		} catch (SQLException e){
+			throw new RuntimeException(e);
+		}	
 	}
 	
 	public Errand selectById(int id){
