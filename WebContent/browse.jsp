@@ -1,10 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entities.Errand" %>
+<%@page import="daos.ErrandDao" %>
 <%@page import="entities.Task" %>
-<%@page import="java.util.List" %>
-<jsp:include page="/header.jsp"/>
-
-<% List<Errand> errandList = (List<Errand>)request.getAttribute("errandList");%>
+<%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="header.jsp"/>
 
 <style>
 	.pad-me-please{
@@ -45,17 +44,18 @@
 		</div>
 		<div class="bg-white">
 				<div id="product-wrapper">
-				<% for(Errand errand : errandList) { %>
+				<%-- <% for(Errand errand : errandList) { %> --%>
+				<c:forEach items="${errandList}" var="errand"> 
 		            <div class="col-sm-4 col-lg-4 col-md-4">
 		                 <div class="thumbnail">
 		                     <img src="assets/img/gopher_small.png" alt="">
-		                     <div class="caption">
+		                     <div class="caption" id="errand${errand.getId()}">
 		                     
-		                         <h4 class="pull-right">$<%=errand.getRewardId().getRewardValue()%></h4>
+		                         <h4 class="pull-right">$ ${errand.getRewardId().getRewardValue()}<%-- <%=errand.getRewardId().getRewardValue() %> --%></h4>
 		                         <h4>
-								 <a href="item.jsp" style="color: black;"><%=errand.getName()%></a>
+								 <a href="/Gopher/errand?id=${errand.getId() }" style="color: black;">${errand.getName()}</a>
 		                         </h4>
-								<p><% errand.getDescription(); %></p>
+		                         <p>${errand.getDateCreated() } </p>
 		                     </div>
 		                     <div class="ratings">
 		                         <p class="pull-right">15 reviews</p>
@@ -69,11 +69,10 @@
 		                     </div>
 		                 </div>
 		            </div>
-		            <%} %>
+		            </c:forEach>
+		          <%--   <%} %> --%>
 				</div>
 			</div>
-		</div>
-	</div>
 <script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -84,4 +83,4 @@
 	});
 </script>
 
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>

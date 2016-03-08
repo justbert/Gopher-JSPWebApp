@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entities.User" %>
-<jsp:include page="/header.jsp"/>	
+<jsp:include page="header.jsp"/>	
 
 <% // Store logged in user data %>
 <% User user = (User) request.getAttribute("user"); %>
@@ -74,7 +74,7 @@
     	<div class="profile-header-img">
 			<img class="img-circle" src="assets/img/profile_img.jpg" >
 		</div>
-		<h1><% user.getUsername(); %></h1>
+		<h1>Skye Turriff</h1>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
@@ -232,4 +232,4 @@
 					
 		</div>
 	</div>
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>

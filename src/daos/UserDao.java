@@ -13,7 +13,7 @@ public class UserDao extends DatabaseManager {
 	private static final String select_VerifyEmail = "SELECT id from gopher.users WHERE email = ?";
 	private static final String select_VerifyUsername = "SELECT id from gopher.users WHERE username = ?";
 	private static final String select_VerifyPassword = "SELECT password, salt from gopher.users WHERE id = ?";
-	private static final String insert_RegisterUser = "INSERT INTO users (email, password, salt) VALUES (?, ?, ?)";
+	private static final String insert_RegisterUser = "INSERT INTO users (username, email, password, salt, userTypeId) VALUES (?, ?, ?, ?, ?)";
 	private static final String select_getUser = "SELECT id, nameFirst, nameLast, email, addressIDHome, addressIDWork, phoneHome, phoneMobile, phoneWork, dateJoined FROM Gopher.users WHERE email = ?";
 	
 	private static final String select_getUserForID = "Select * from users where id = ?";
@@ -69,7 +69,7 @@ public class UserDao extends DatabaseManager {
 		return false;
 	}
 	
-	public boolean registerUser(String email, String password) {
+	public boolean registerUser(String username, String email, String password, String userTypeId) {
 		boolean registered = false;
 		StringBuilder sb = new StringBuilder();
 		String passwordAndSalt[] = new String[2];
@@ -81,7 +81,7 @@ public class UserDao extends DatabaseManager {
 		}
 		
 		try {
-			if(update(insert_RegisterUser, email, passwordAndSalt[0], passwordAndSalt[1]) > 0)
+			if(update(insert_RegisterUser, username,  email, passwordAndSalt[0], passwordAndSalt[1], userTypeId) > 0)
 				registered = true;
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -5,6 +5,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import entities.Errand.ImportanceType;
+import entities.Errand.StatusType;
+
 /**
  * This class represents a model of Errand data
  * It acts as the domain-specific class that the application
@@ -88,7 +91,7 @@ public class Errand implements Serializable {
 	
 	public Errand(){};
 	
-	public Errand(int id,String name, String description, User user_id_cusomter, User user_id_gopher, Date dateCreated, Date dateCompleted, Reward reward, Timestamp deadline, StatusType status, ImportanceType importance){
+	public Errand(int id,String name, String description, Date dateCreated, Date dateCompleted, Timestamp deadline, Reward reward, StatusType status, ImportanceType importance, User user_id_cusomter, User user_id_gopher){
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -100,7 +103,7 @@ public class Errand implements Serializable {
 		this.setStatus(status);
 		this.setImportance(importance);
 	}
-
+	
 	// Getters
 	public int getId() {
 		return id;

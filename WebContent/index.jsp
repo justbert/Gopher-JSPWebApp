@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="/header.jsp"/>
+<jsp:include page="header.jsp"/>
 
 <style>
 	.what-is-gopher{
@@ -22,8 +22,8 @@
 	   				<div class="monty-font" ><strong>gopher</strong></div> 
 					<p>Need something done? Get someone to <i>gopher</i> it!</p> 
 					<form class="form-inline">
-	   					<a href="/Gopher/login.jsp"><button type="button" class="btn btn-outline btn-lg spacer">log in</button></a>
-	   					<a href="/Gopher/signup.jsp"><button type="button" class="btn btn-outline btn-lg">sign up</button></a>
+	   					<a href="/Gopher/login"><button type="button" class="btn btn-outline btn-lg spacer">log in</button></a>
+	   					<a href="/Gopher/register"><button type="button" class="btn btn-outline btn-lg">sign up</button></a>
 	 				</form> 
 	 			</div> 
 	 		</div>  				
@@ -39,4 +39,4 @@
  		register as a customer and make life simple.
  		</p>
 	</div>
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>
