@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entities.User" %>
+<%@page import="entities.Errand" %>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>	
 
@@ -68,10 +69,6 @@
 	
 	<!-- ****************END STYLE BLOCK******************* -->
 	
-	<!-- If user is not logged in, redirect them to login page MOVE TO DASHBOARD SERVLET -->
-	<c:if test="${userObject == null}">
-		<c:redirect url="/login" />
-	</c:if>
 	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
@@ -161,6 +158,8 @@
 							<th>Reward</th>
 							<th>Date Accepted</th>
 						</tr>
+						
+						<!-- List all errands for which this customer is registered as a Gopher -->
 						<tr>
 							<td>Walk my dog</td>
 							<td>$5.00</td>
@@ -182,11 +181,12 @@
 						<th>Date Requested</th>
 					</tr>
 					
+					<!-- List all errands for which this customer is registered as a Customer -->
 					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
-						<td>${errand.getDescription()}</td>
-						<td>$10.00 ${errand.getRewardId().getRewardValue() }</td>
-						<td>02/03/2016</td>
+						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td>$ ${errand.getRewardId().getRewardValue() }</td>
+						<td>${errand.getDateCreated() }</td>
 					</tr>
 					</c:forEach>
 				</table>
