@@ -1,1 +1,1 @@
-This is the JJIBS Web App Runner app!
+Gopher by JJIBS

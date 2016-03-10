@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<jsp:include page="header.jsp"/>
 
 <style>
 	.what-is-gopher{
@@ -13,23 +13,21 @@
 	}
 	.blacktext{
 		color:black;
-	}
+	}"WebContent/assets/css/main-style.css"
 </style>	
-<t:main>
-	<jsp:body>
-	<div class="jumbotron text-center">
-		<div class="gopher homespacer">	
-			<img src="assets/img/cute_gopher.png">		
-			<div id="title-text" class="vert-align">			
-   				<div class="monty-font" ><strong>gopher</strong></div> 
-				<p>Need something done? Get someone to <i>gopher</i> it!</p> 
-				<form class="form-inline">
-   					<a href="/Gopher/login.jsp"><button type="button" class="btn btn-outline btn-lg spacer">log in</button></a>
-   					<a href="/Gopher/signup.jsp"><button type="button" class="btn btn-outline btn-lg">sign up</button></a>
- 				</form> 
- 			</div> 
- 		</div>  				
-   	</div> 
+		<div class="jumbotron text-center bg-teal">
+			<div class="gopher homespacer">	
+				<img src="assets/img/cute_gopher.png">		
+				<div id="title-text" class="vert-align">			
+	   				<div class="monty-font" ><strong>gopher</strong></div> 
+					<p>Need something done? Get someone to <i>gopher</i> it!</p> 
+					<form class="form-inline">
+	   					<a href="/Gopher/login"><button type="button" class="btn btn-outline btn-lg spacer">log in</button></a>
+	   					<a href="/Gopher/register"><button type="button" class="btn btn-outline btn-lg">sign up</button></a>
+	 				</form> 
+	 			</div> 
+	 		</div>  				
+	   	</div>
  	
    	<div id='what-is-gopher' class="block-text vert-align container-fluid bg-white block-size fill blacktext"> 
  		<h2 class="text-center blacktext">What is <span class="monty-font blacktext" style="font-size:60px;">gopher?</span></h2>
@@ -41,5 +39,4 @@
  		register as a customer and make life simple.
  		</p>
 	</div>
-	</jsp:body>
-</t:main>
+<jsp:include page="footer.jsp"/>
