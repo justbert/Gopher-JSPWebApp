@@ -1,9 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@page import="entities.User" %>
+<%@page import="entities.Errand" %>
+<%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="header.jsp"/>	
 
-<t:main>
-	<jsp:body>
-	
+<% // Store logged in user data %>
+<% User user = (User) request.getAttribute("user"); %>
+
 	<style>
 		.profile-header {
 			padding-top: 50px;
@@ -66,17 +69,26 @@
 	
 	<!-- ****************END STYLE BLOCK******************* -->
 	
+	
 	<!-- User dashboard header -->
     <div class="container-fluid profile-header text-center">
     	<div class="profile-header-img">
-			<img class="img-circle" src="assets/img/profile_img.jpg" >
+    	
+    		<!-- Hack for demo to show profile pic for Skye only -->
+    		<c:if test="${userObject.getId() == 102}">
+    			<img class="img-circle" src="assets/img/profile_img.jpg" >
+    		</c:if>
+    		<c:if test="${userObject.getId() != 102}">
+    			<img class="img-circle" src="assets/img/cute_gopher.png" >
+    		</c:if>		
+    		
 		</div>
-		<h1>Skye Turriff</h1>
+		<h1><c:out value="${userObject.getUsername()}" /> </h1>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
 	
-	<div><div class="w_960">
+	<div>
 		<div class="dashboard-nav">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
@@ -108,11 +120,10 @@
 				<table class="table">
 					<tr>
 						<th>Username:</th>
-						<td>Skye Turriff</td>
-					</tr>
+						<td>${userObject.getUsername()}
 					<tr>
 						<th>Email:</th>
-						<td>turriff.skye@gmail.com</td>
+						<td>${userObject.getEmail()}</td>
 					</tr>
 					<tr>
 						<th>Gopher Rating:</th>
@@ -125,6 +136,7 @@
 					<tr>
 						<th>Customer Rating:</th>
 						<td>
+							<img class="img-circle" src="assets/img/rating.png" >
 							<img class="img-circle" src="assets/img/rating.png" >
 							<img class="img-circle" src="assets/img/rating.png" >
 						</td>
@@ -147,27 +159,26 @@
 			<!--  Current errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
-					Incomplete Errands
+					Your Errands to Gopher
 				</h3>
-				<table class="table">
-					<tr>
-						<th>Errand</th>
-						<th>Reward</th>
-						<th>Date Accepted</th>
-					</tr>
-					<tr>
-						<td>Walk my dog</td>
-						<td>$5.00</td>
-						<td>01/30/2016</td>
-					</tr>
-					<tr>
-						<td>Set up my internet</td>
-						<td>$20.00</td>
-						<td>02/01/2016</td>
-					</tr>
+				<table class="table">					
+						<tr>
+							<th>Errand</th>
+							<th>Reward</th>
+							<th>Deadline</th>
+						</tr>
+						
+						<!-- List all errands for which this customer is registered as a Gopher -->
+						<c:forEach items="${errandsGopher}" var="errand">
+							<tr>
+								<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+								<td>$ ${errand.getRewardId().getRewardValue() }</td>
+								<td>${errand.getDeadline() }</td>
+							</tr>
+						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					Errand Requests
+					Your Errand Requests
 				</h3>
 				<table class="table">
 					<tr>
@@ -175,11 +186,15 @@
 						<th>Reward</th>
 						<th>Date Requested</th>
 					</tr>
+					
+					<!-- List all errands for which this customer is registered as a Customer -->
+					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
-						<td>Pick up my kids from daycare</td>
-						<td>$10.00</td>
-						<td>02/03/2016</td>
+						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td>$ ${errand.getRewardId().getRewardValue() }</td>
+						<td>${errand.getDateCreated() }</td>
 					</tr>
+					</c:forEach>
 				</table>
 			</div>
 			
@@ -194,16 +209,16 @@
 						<th>Reward</th>
 						<th>Date Completed</th>
 					</tr>
-					<tr>
-						<td>Get me a popsicle</td>
-						<td>One hug</td>
-						<td>01/03/2016</td>
-					</tr>
-					<tr>
-						<td>Get my groceries</td>
-						<td>$10 gift card</td>
-						<td>01/17/2016</td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<td>Get me a popsicle</td> -->
+<!-- 						<td>One hug</td> -->
+<!-- 						<td>01/03/2016</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td>Get my groceries</td> -->
+<!-- 						<td>$10 gift card</td> -->
+<!-- 						<td>01/17/2016</td> -->
+<!-- 					</tr> -->
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
 					Requested Errands
@@ -214,21 +229,19 @@
 						<th>Reward</th>
 						<th>Date Completed</th>
 					</tr>
-					<tr>
-						<td>Deliver my medicine</td>
-						<td>Free pizza</td>
-						<td>01/05/2016</td>
-					</tr>
-					<tr>
-						<td>Pick up my laundry</td>
-						<td>$10.00</td>
-						<td>01/03/2016</td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<td>Deliver my medicine</td> -->
+<!-- 						<td>Free pizza</td> -->
+<!-- 						<td>01/05/2016</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td>Pick up my laundry</td> -->
+<!-- 						<td>$10.00</td> -->
+<!-- 						<td>01/03/2016</td> -->
+<!-- 					</tr> -->
 				</table>
 			</div>
 					
 		</div>
-	</div></div>
-	
-    </jsp:body>
-</t:main>
+	</div>
+<jsp:include page="footer.jsp"/>

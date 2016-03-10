@@ -1,2 +1,4 @@
 build/**/*
 build/
+serverConfig.txt
+/remoteServerConfig.txt

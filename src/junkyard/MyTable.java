@@ -1,7 +1,12 @@
-package models;
+package junkyard;
 
 import java.io.Serializable;
 
+/**
+ * Basic Bean for testing the Database Manager class
+ * @author Ian
+ *
+ */
 public class MyTable implements Serializable{
 	private String username;
 	private String firstName;
