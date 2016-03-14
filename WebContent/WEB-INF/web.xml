@@ -19,7 +19,7 @@
     <servlet-name>BrowseServlet</servlet-name>
     <url-pattern>/browse</url-pattern>
 </servlet-mapping>
-  
+
 <servlet>
 	<servlet-name>LoginServlet</servlet-name>
 	<servlet-class>servlets.LoginServlet</servlet-class>
@@ -63,6 +63,15 @@
 <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>RequestServlet</servlet-name>
+    <servlet-class>servlets.RequestServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>RequestServlet</servlet-name>
+    <url-pattern>/request</url-pattern>
 </servlet-mapping>
 
 </web-app>
