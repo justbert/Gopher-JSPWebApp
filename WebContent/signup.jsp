@@ -22,7 +22,7 @@
 	
 </style>
 <jsp:include page="header.jsp"/>
-	<div class="bg-teal pad-nav-bar">
+	<div class="bg-teal pad-nav-bar jumbotron">
 		<form class="block-display" id="login-form" method="post" action="register">
 			 <h2>Join <span class="monty-font">Gopher</span> today.</h2>
 			 <label>Username</label>

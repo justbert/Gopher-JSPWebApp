@@ -26,6 +26,10 @@
 		position: relative;
 	}
 	
+	.jumbotron p {
+  		font-size: 16px;
+	}
+	
 </style>
 <!-- 		<div class="bg-teal pad-nav-bar">
 		</div> -->
