@@ -19,7 +19,7 @@ public class RatingDAO extends DatabaseManager {
 	
 	/** Defines a query that selects all ratings ordered them by newest first */
 	private static final String selectAllRatings = 
-			"SELECT * FROM ratings ORDER BY date_created desc";
+			"SELECT * FROM ratings ORDER BY creationDate desc";
 	
 	/** Defines a query that selects all ratings for a single user by user id */
 	private static final String selectUserRatingsByUserId = 
@@ -37,6 +37,12 @@ public class RatingDAO extends DatabaseManager {
 	/** Defines a query that updates the rating value and comments of an entry by id */
 	private static final String updateRatingById = 
 			"UPDATE ratings SET rating = ?, comments = ? WHERE id = ?";
+	
+	private static final String selectAllRatingsForErrand = 
+			"SELECT * FROM ratings where errandId = ? ORDER BY creationDate DESC";
+	
+	private static final String selectRatingAverageForErrandID =
+			"SELECT avg(ratingValue) FROM ratings WHERE errandId=?";
 	
 	
 	/**
@@ -149,6 +155,38 @@ public class RatingDAO extends DatabaseManager {
 		return result;
 	}
 	
+	/**
+	 * Returns a list of all ratings from the database ordered by most recent
+	 * @return List of Rating objects
+	 */
+	public List<Rating> getAllRatingsForErrandID(int id) {
+		List<Rating> ratings = new ArrayList<>();
+		
+		try (ResultSet rs = query(selectAllRatingsForErrand, id)){
+			while (rs.next()) {
+				ratings.add(mapData(rs));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	// Handle this eventually
+		}
+		
+		return ratings;
+	}
+	
+	public float getRatingAverageForErrandID(int id) {
+	
+		try (ResultSet rs = query(selectRatingAverageForErrandID, id)){
+			if (rs.first()) {
+				return rs.getFloat("avg(ratingValue)");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	// Handle this eventually
+		}
+		
+		return Float.MIN_VALUE;
+	}
 	
 	/**
 	 * Helper method that maps the data from the specified ResultSet to a Rating model object
@@ -162,9 +200,9 @@ public class RatingDAO extends DatabaseManager {
 		rating.setId(rs.getInt("id"));
 		rating.setUserIdRated(new User());		// will have to decide how to do this later
 		rating.setUserIdRater(new User());			// Can User class use its DAO to do this with an id?
-		rating.setRatingValue(rs.getInt("rating"));
+		rating.setRatingValue(rs.getInt("ratingValue"));
 		rating.setComments(rs.getString("comments"));
-		rating.setCreationDate(rs.getDate("date_created"));
+		rating.setCreationDate(rs.getDate("creationDate"));
 		
 		return rating;
 	}
