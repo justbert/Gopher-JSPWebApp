@@ -16,7 +16,7 @@
                 <h4 class="pull-right">$ ${errand.getRewardId().getRewardValue()}</h4>
                 <h4><a href="#"style="color: black;">${errand.getName() }</a>
                 </h4>
-                <p>${errand.getDescription() }</p>
+                <p>${errand.getDescription()}</p>
             </div>
             <div class="ratings">
                 <p class="pull-right">${ratingsList.size()} reviews</p>
@@ -27,7 +27,7 @@
                     <c:forEach begin="1" end="${5-errandAverage}">
                 	<span class="glyphicon glyphicon-star-empty"></span>
                 	</c:forEach>
-                    ${errandAverage } stars
+                    ${errandAverage} stars
                 </p>
             </div>
         </div>

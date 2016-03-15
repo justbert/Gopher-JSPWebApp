@@ -39,21 +39,18 @@
 	<div class="row bg-white">
 		<div id="tasks-container">
 	        <div class="row" id="subtasks">
-	        	<div class="col-md-3"><h4>Remove the last Subtask</h4></div>
-	        	<div class="col-md-3 col-md-offset-2"><h4>Add another Subtask</h4></div>
+	        	<div class="col-md-3"><button id="remove-task" onclick="removeTaskTab()">Remove the last Subtask</button></div>
+	        	<div class="col-md-3 col-md-offset-2"><button id="add-task" onclick="addTaskTab()">Add Another Task</button></div>
 	        </div>
 	        <div class="row">
 		        <div class="col-md-3">
-		        	<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a data-toggle="tab" href="#task1">Task 1</a></li>
-						<li><a data-toggle="tab" href="#task2">Task 2</a></li>
-						<li><a data-toggle="tab" href="#task3">Task 3</a></li>
-						<li><a data-toggle="tab" href="#task4">Task 4</a></li>
+		        	<ul class="nav nav-pills nav-stacked" id="tasks-list">
+						<li class="active"><a data-toggle="tab" href="#task1div" id="task1li">Task 1</a></li>
 					</ul>
 				</div>
 	        	<div class="col-md-9">
-	        		<div class="tab-content dashboard-content">
-		        		<div id="task1" class="tab-pane fade in active table-responsive">
+	        		<div id="tasks-div" class="tab-content dashboard-content">
+		        		<div id="task1div" class="tab-pane fade in active table-responsive">
 							<h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
 								Gophered Errands
 								</h3>
@@ -95,12 +92,30 @@
 								</tr>
 							</table>
 						</div>
-						<div id="task2" class="tab-pane fade table-responsive">Here be Dragons</div>
-						<div id="task3" class="tab-pane fade table-responsive">Don't click the next one.</div>
-						<div id="task4" class="tab-pane fade table-responsive">God damnit.</div>
+						
 		        	</div>
 		        </div>
 	        </div>
         </div>
 	</div>
+	
+	
+	<script type="text/javascript">
+	var numTasks = 1;
+	
+	function addTaskTab() {
+		numTasks++;
+	    $("#tasks-list").append("<li><a data-toggle=\"tab\" href=\"#task" + numTasks + "div\" id=\"task"+ numTasks +"li\">Task "+ numTasks+"</a></li>");     // Append new elements
+		$("#tasks-div").append("<div id=\"task"+numTasks+"div\" class=\"tab-pane fade table-responsive\">"+"Task Div Number" + numTasks +"</div>");
+	}
+	
+	function removeTaskTab() {
+		if(numTasks > 0) {
+			$("#task" + numTasks + "li").remove();
+			$("#task" + numTasks + "div").remove();
+			numTasks--;
+		}
+	}
+	</script>
+	
 <jsp:include page="footer.jsp"/>
