@@ -27,7 +27,7 @@
 			color: #555;
 		}
 		.dashboard-nav{
-				background-color:ghostwhite;
+			background-color:ghostwhite;
 		}
 		
 		.dashboard-content {

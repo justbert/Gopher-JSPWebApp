@@ -99,6 +99,7 @@
 				<li><a data-toggle="tab" href="#alerts">Notifications</a></li>
 				<li><a data-toggle="tab" href="#active-errands">Active Errands</a></li>
 				<li><a data-toggle="tab" href="#past-errands">Past Errands</a></li>
+				<li><a data-toggle="tab" href="#ratings">Ratings</a></li>
 			</ul>
 		</div>
 		
@@ -243,6 +244,31 @@
 <!-- 						<td>$10.00</td> -->
 <!-- 						<td>01/03/2016</td> -->
 <!-- 					</tr> -->
+				</table>
+			</div>
+			
+			<!--  Ratings tab -->
+			<div id="ratings" class="tab-pane fade table-responsive">
+				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
+					My Ratings As A Customer
+				</h3>
+				<table class="table">
+					<tr>
+						<td>Rating</td>
+						<td>Comments</td>
+						<td>Date</td>
+						<td>By</td>
+						<td>Errand<td>
+					</tr>
+					
+					<!-- List all ratings for which this user was registered as a customer -->
+						<c:forEach items="${ratingsCustomer}" var="rating">
+							<tr>
+								<td>${rating.getRatingValue()}</td>
+								<td>${rating.getComments()}</td>
+								<td>${rating.getCreationDate()}</td>
+							</tr>
+						</c:forEach>
 				</table>
 			</div>
 					
