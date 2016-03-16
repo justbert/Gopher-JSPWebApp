@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" >
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="assets/js/jquery-2.2.0.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.js"></script>
 	<link href="assets/css/main-style.css" rel="stylesheet" type="text/css">
 

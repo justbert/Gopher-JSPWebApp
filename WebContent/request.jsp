@@ -110,7 +110,7 @@
 	}
 	
 	function removeTaskTab() {
-		if(numTasks > 0) {
+		if(numTasks > 1) {
 			$("#task" + numTasks + "li").remove();
 			$("#task" + numTasks + "div").remove();
 			numTasks--;
