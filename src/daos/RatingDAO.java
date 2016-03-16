@@ -48,12 +48,7 @@ public class RatingDAO extends DatabaseManager {
 	/** Defines a query that updates the rating value and comments of an entry by id */
 	private static final String updateRatingById = 
 			"UPDATE ratings SET rating = ?, comments = ? WHERE id = ?";
-	
-	private static final String selectAllRatingsForErrand = 
-			"SELECT * FROM ratings where errandId = ? ORDER BY creationDate DESC";
-	
-	private static final String selectRatingAverageForErrandID =
-			"SELECT avg(ratingValue) FROM ratings WHERE errandId=?";
+
 	
 	/**
 	 * Returns a list of all ratings from the database ordered by most recent
@@ -184,39 +179,6 @@ public class RatingDAO extends DatabaseManager {
 		}
 		
 		return result;
-	}
-	
-	/**
-	 * Returns a list of all ratings from the database ordered by most recent
-	 * @return List of Rating objects
-	 */
-	public List<Rating> getAllRatingsForErrandID(int id) {
-		List<Rating> ratings = new ArrayList<>();
-		
-		try (ResultSet rs = query(selectAllRatingsForErrand, id)){
-			while (rs.next()) {
-				ratings.add(mapData(rs));
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();	// Handle this eventually
-		}
-		
-		return ratings;
-	}
-	
-	public float getRatingAverageForErrandID(int id) {
-	
-		try (ResultSet rs = query(selectRatingAverageForErrandID, id)){
-			if (rs.first()) {
-				return rs.getFloat("avg(ratingValue)");
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();	// Handle this eventually
-		}
-		
-		return Float.MIN_VALUE;
 	}
 	
 	/**
