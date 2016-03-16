@@ -6,9 +6,15 @@
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>
 
+<style>
+	.jumbotron p {
+  		font-size: 14px;
+	}
+</style>
+
 <!-- Page Content -->
-<div class="pad-nav-bar"></div>
-<div class="row bg-teal">
+<!-- <div class="pad-nav-bar pad-me-please"></div> -->
+<div class="row bg-teal jumbotron">
     <div class="col-md-8 col-md-offset-2">
         <div class="thumbnail ">
             <img src="assets/img/gopher_small.png" alt="Slide 1"/>

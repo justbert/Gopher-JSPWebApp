@@ -2,6 +2,12 @@
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
+	.jumbotron h1 {
+  		font-size: 36px !important;
+	}
+	.jumbotron  {
+  		font-size: 14px !important;
+	}
 	.input-container{
 		padding:20px;
 		margin:20px;
@@ -18,9 +24,10 @@
 		padding:20px;
 		
 	}
+
 </style>
 <jsp:include page="header.jsp"/>
-	<div class="row pad-nav-bar bg-teal">
+	<div class="row pad-nav-bar bg-teal jumbotron">
 	 	<div class="col-md-6">
 	 		<h1>Request an Errand</h1>
 		 	<div class="input-container">

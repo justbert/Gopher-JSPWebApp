@@ -13,7 +13,6 @@ import utils.DatabaseManager;
  * Defines all actions that may be performed on the Rating model class.
  * Maps the Rating model to the ratings db table.
  * @author skyet
- *
  */
 public class RatingDAO extends DatabaseManager {
 	
@@ -29,6 +28,18 @@ public class RatingDAO extends DatabaseManager {
 	private static final String selectContributedRatingsByUserId = 
 			"SELECT * FROM ratings WHERE user_rater_id = ? ORDER BY date_created desc";
 	
+	/** Defines a query that selects all customer ratings for a user by user id */
+	private static final String selectAllRatingsForCustomer = 
+			"SELECT * FROM ratings join errands on ratings.userIdRated = errands.userIdCustomer where errands.userIdCustomer = ?";
+	
+	/** Defines a query that selects all ratings associated with an errand by errand id @author justin */
+	private static final String selectAllRatingsForErrand = 
+			"SELECT * FROM ratings where errandId = ? ORDER BY creationDate DESC";
+	
+	/** Define a query that retrieves the average rating value for an errand by errand id @author justin */
+	private static final String selectRatingAverageForErrandID =
+			"SELECT avg(ratingValue) FROM ratings WHERE errandId=?";
+	
 	/** Defines a query that adds a rating entry into the database */
 	private static final String insertRating = 
 			"INSERT INTO ratings ( user_rated_id, user_rater_id, errand_id, rating, comments )"
@@ -43,7 +54,6 @@ public class RatingDAO extends DatabaseManager {
 	
 	private static final String selectRatingAverageForErrandID =
 			"SELECT avg(ratingValue) FROM ratings WHERE errandId=?";
-	
 	
 	/**
 	 * Returns a list of all ratings from the database ordered by most recent
@@ -98,6 +108,27 @@ public class RatingDAO extends DatabaseManager {
 				ratings.add(mapData(rs));
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();	// Handle this eventually
+		}
+		
+		return ratings;
+	}
+	
+	
+	/**
+	 * Returns a list of all ratings given to a user who acted as a customer
+	 * @param id the id of the user
+	 * @return a List of Rating objects
+	 */
+	public List<Rating> getAllCustomerRatingsById(int id) {
+		List<Rating> ratings = new ArrayList<>();
+		
+		try (ResultSet rs = query(selectAllRatingsForCustomer, id)) {
+			while (rs.next()) {
+				ratings.add(mapData(rs));
+			}
+		}
+		catch (SQLException e) {
 			e.printStackTrace();	// Handle this eventually
 		}
 		
@@ -187,6 +218,49 @@ public class RatingDAO extends DatabaseManager {
 		
 		return Float.MIN_VALUE;
 	}
+	
+	/**
+	 * Returns a list of all ratings from the database ordered by most recent
+	 * @return List of Rating objects
+	 * @author justin
+	 */
+	public List<Rating> getAllRatingsForErrandID(int id) {
+		List<Rating> ratings = new ArrayList<>();
+		
+		try (ResultSet rs = query(selectAllRatingsForErrand, id)){
+			while (rs.next()) {
+				ratings.add(mapData(rs));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	// Handle this eventually
+		}
+		
+		return ratings;
+	}
+	
+	
+	/**
+	 * Returns a list of all ratings associated with an errand
+	 * @param id the id of the errand to retrieve the ratings for
+	 * @return List of Rating objects if they exists, Float.MIN_VALUE
+	 * if there are no ratings for that errand
+	 * @author justin
+	 */
+	public float getRatingAverageForErrandID(int id) {
+	
+		try (ResultSet rs = query(selectRatingAverageForErrandID, id)){
+			if (rs.first()) {
+				return rs.getFloat("avg(ratingValue)");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	// Handle this eventually
+		}
+		
+		return Float.MIN_VALUE;
+	}
+	
 	
 	/**
 	 * Helper method that maps the data from the specified ResultSet to a Rating model object

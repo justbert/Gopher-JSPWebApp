@@ -6,12 +6,6 @@
 
 
 	<style>
-		.jumbotron {
-			margin-bottom: 0px !important;
-		}
-		.jumbotron h1 {
-  			font-size: 36px !important;
-		}
 		.profile-header {
 			padding-top: 50px;
 			padding-bottom: 50px;
@@ -33,7 +27,7 @@
 			color: #555;
 		}
 		.dashboard-nav{
-				background-color:ghostwhite;
+			background-color:ghostwhite;
 		}
 		
 		.dashboard-content {
@@ -75,17 +69,9 @@
 	
 	
 	<!-- User dashboard header -->
-    <div class="container-fluid profile-header text-center jumbotron">
+    <div class="container-fluid profile-header text-center">
     	<div class="profile-header-img">
-    	
-    		<!-- Hack for demo to show profile pic for Skye only -->
-    		<c:if test="${userObject.getId() == 102}">
-    			<img class="img-circle" src="assets/img/profile_img.jpg" >
-    		</c:if>
-    		<c:if test="${userObject.getId() != 102}">
-    			<img class="img-circle" src="assets/img/cute_gopher.png" >
-    		</c:if>		
-    		
+    			<img class="img-circle" src="assets/img/cute_gopher.png" >	  		
 		</div>
 		<h1><c:out value="${userObject.getUsername()}" /> </h1>
 	</div>
@@ -96,10 +82,8 @@
 		<div class="dashboard-nav">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-				<li><a data-toggle="tab" href="#alerts">Notifications</a></li>
 				<li><a data-toggle="tab" href="#active-errands">Active Errands</a></li>
 				<li><a data-toggle="tab" href="#past-errands">Past Errands</a></li>
-				<li><a data-toggle="tab" href="#ratings">Ratings</a></li>
 			</ul>
 		</div>
 		
@@ -109,27 +93,12 @@
 			<!-- Profile info, displayed by default -->
 			<div id="profile" class="tab-pane fade in active table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-user tab-icon"></span>
-					My Account
+					Basic Info
 				</h3>
-				<div class="btn-group edit-btns" role="group">
-					<button type="button" class="btn btn-default btn-sm" aria-label="Edit Profile">
-						<span class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit Profile"></span>
-					</button>
-					<button type="button" class="btn btn-default btn-sm" aria-label="Change Photo">
-						<span class="glyphicon glyphicon-camera" data-toggle="tooltip" title="Change Photo"></span>
-					</button>
-					<button type="button" class="btn btn-default btn-sm" aria-label="Setting">
-						<span class="glyphicon glyphicon-cog" data-toggle="tooltip" title="Settings"></span>
-					</button>
-				</div>
 				<table class="table">
 					<tr>
 						<th>Username:</th>
 						<td>${userObject.getUsername()}
-					<tr>
-						<th>Email:</th>
-						<td>${userObject.getEmail()}</td>
-					</tr>
 					<tr>
 						<th>Gopher Rating:</th>
 						<td>
@@ -149,22 +118,10 @@
 				</table>
 			</div>
 			
-			<!--  Notifications tab -->
-			<div id="alerts" class="tab-pane fade table-responsive">
-				<h3 class="table-title"><span class="glyphicon glyphicon-bell tab-icon"></span>
-					My Notifications
-				</h3>
-				<table class="table">
-					<tr>
-						<td>No notifications to show</td>
-					</tr>
-				</table>
-			</div>
-			
 			<!--  Current errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
-					Your Errands to Gopher
+					Errands Being Gophered
 				</h3>
 				<table class="table">					
 						<tr>
@@ -173,7 +130,7 @@
 							<th>Deadline</th>
 						</tr>
 						
-						<!-- List all errands for which this customer is registered as a Gopher -->
+						<!-- List all errands for which this user is registered as a Gopher -->
 						<c:forEach items="${errandsGopher}" var="errand">
 							<tr>
 								<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
@@ -183,7 +140,7 @@
 						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					Your Errand Requests
+					Errands Requested
 				</h3>
 				<table class="table">
 					<tr>
@@ -192,7 +149,7 @@
 						<th>Date Requested</th>
 					</tr>
 					
-					<!-- List all errands for which this customer is registered as a Customer -->
+					<!-- List all errands for which this user is registered as a Customer -->
 					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
 						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
@@ -206,8 +163,8 @@
 			<!-- Past errands completed or requested by user -->
 			<div id="past-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
-					Gophered Errands
-					</h3>
+					Past Errands Gophered
+				</h3>
 				<table class="table">
 					<tr>
 						<th>Errand</th>
@@ -226,7 +183,7 @@
 <!-- 					</tr> -->
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-					Requested Errands
+					Past Errand Requests
 				</h3>
 				<table class="table">
 					<tr>
@@ -244,31 +201,6 @@
 <!-- 						<td>$10.00</td> -->
 <!-- 						<td>01/03/2016</td> -->
 <!-- 					</tr> -->
-				</table>
-			</div>
-			
-			<!--  Ratings tab -->
-			<div id="ratings" class="tab-pane fade table-responsive">
-				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
-					My Ratings As A Customer
-				</h3>
-				<table class="table">
-					<tr>
-						<td>Rating</td>
-						<td>Comments</td>
-						<td>Date</td>
-						<td>By</td>
-						<td>Errand<td>
-					</tr>
-					
-					<!-- List all ratings for which this user was registered as a customer -->
-						<c:forEach items="${ratingsCustomer}" var="rating">
-							<tr>
-								<td>${rating.getRatingValue()}</td>
-								<td>${rating.getComments()}</td>
-								<td>${rating.getCreationDate()}</td>
-							</tr>
-						</c:forEach>
 				</table>
 			</div>
 					
