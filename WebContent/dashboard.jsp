@@ -6,6 +6,12 @@
 
 
 	<style>
+		.jumbotron {
+			margin-bottom: 0px !important;
+		}
+		.jumbotron h1 {
+  			font-size: 36px !important;
+		}
 		.profile-header {
 			padding-top: 50px;
 			padding-bottom: 50px;
@@ -69,7 +75,7 @@
 	
 	
 	<!-- User dashboard header -->
-    <div class="container-fluid profile-header text-center">
+    <div class="container-fluid profile-header text-center jumbotron">
     	<div class="profile-header-img">
     	
     		<!-- Hack for demo to show profile pic for Skye only -->
