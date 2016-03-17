@@ -267,6 +267,8 @@
 								<td>${rating.getRatingValue()}</td>
 								<td>${rating.getComments()}</td>
 								<td>${rating.getCreationDate()}</td>
+								<td>${rating.getUserIdRater().getUsername()}
+								<td>${rating.getErrandId().getName()}
 							</tr>
 						</c:forEach>
 				</table>

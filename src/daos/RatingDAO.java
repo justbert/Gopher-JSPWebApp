@@ -16,6 +16,9 @@ import utils.DatabaseManager;
  */
 public class RatingDAO extends DatabaseManager {
 	
+	private UserDao userDao = new UserDao();
+	private ErrandDao errandDao = new ErrandDao();
+	
 	/** Defines a query that selects all ratings ordered them by newest first */
 	private static final String selectAllRatings = 
 			"SELECT * FROM ratings ORDER BY creationDate desc";
@@ -30,7 +33,8 @@ public class RatingDAO extends DatabaseManager {
 	
 	/** Defines a query that selects all customer ratings for a user by user id */
 	private static final String selectAllRatingsForCustomer = 
-			"SELECT * FROM ratings join errands on ratings.userIdRated = errands.userIdCustomer where errands.userIdCustomer = ?";
+			"SELECT * FROM ratings, errands WHERE ratings.userIdRated = errands.userIdCustomer "
+			+ "AND errandId = errands.id AND userIdCustomer = ? ORDER BY ratings.creationDate DESC;";
 	
 	/** Defines a query that selects all ratings associated with an errand by errand id @author justin */
 	private static final String selectAllRatingsForErrand = 
@@ -230,13 +234,14 @@ public class RatingDAO extends DatabaseManager {
 	 * @return The Rating with data mapped from the ResultSet
 	 * @throws SQLException if an error occurs when accessing db
 	 */
-	private static Rating mapData(ResultSet rs) throws SQLException {
+	private Rating mapData(ResultSet rs) throws SQLException {
 		Rating rating = new Rating();
 		
 		rating.setId(rs.getInt("id"));
-		rating.setUserIdRated(new User());		// will have to decide how to do this later
-		rating.setUserIdRater(new User());			// Can User class use its DAO to do this with an id?
+		rating.setUserIdRated(userDao.getUserForID(rs.getInt("userIdRated")));
+		rating.setUserIdRater(userDao.getUserForID(rs.getInt("userIdRater")));
 		rating.setRatingValue(rs.getInt("ratingValue"));
+		rating.setErrandId(errandDao.selectById(rs.getInt("errandId")));
 		rating.setComments(rs.getString("comments"));
 		rating.setCreationDate(rs.getDate("creationDate"));
 		
