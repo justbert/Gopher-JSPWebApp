@@ -28,7 +28,7 @@ public class LogoutServlet extends HttpServlet {
 			while(names.hasMoreElements()) {
 				session.removeAttribute(names.nextElement());
 			}
-			
+			session.invalidate();
 			try {
 				response.sendRedirect("index");
 			} catch (IOException e) {
