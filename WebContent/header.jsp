@@ -9,9 +9,11 @@
 	<link href="assets/css/main-style.css" rel="stylesheet" type="text/css">
 
 	<body>
-		<% if(session.getAttribute("userObject") != null) {%>
+		
+		<c:if test="loggedIn">
 			<jsp:include page="widget.jsp"/>
-		<%} %>
+		</c:if>
+		
 		<nav class="navbar navbar-default navbar-fixed-top nav-margin">
 			<div class="container">
 				<div class="navbar-header">
