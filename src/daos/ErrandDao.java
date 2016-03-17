@@ -26,6 +26,7 @@ public class ErrandDao extends DatabaseManager {
 	private static final String UPDATE = "UPDATE Errands SET name=?, tel=?, passwd=? WHERE id=?";
 	private static final String SELECT_ERRANDS_FOR_USERID = "SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ?";
 	private static final String SELECT_ERRANDS_FOR_GOPHERID = "SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ?";
+	private static final String SELECT_12_LATEST = "SELECT * FROM errands ORDER BY creationDate DESC LIMIT 12";
 	private UserDao userDB = new UserDao();
 	private RewardDAO rewardDB = new RewardDAO();
 	
@@ -119,5 +120,29 @@ public class ErrandDao extends DatabaseManager {
 			return null;
 		}
 		return errand;
+	}
+	
+	public List<Errand> select12Latest(){
+		List<Errand> errands = new ArrayList<Errand>();
+		try(ResultSet rs = query(SELECT_12_LATEST)){
+			while (rs.next()){
+				errands.add(new Errand(
+						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getString("description"),
+						rs.getDate("creationDate"),
+						rs.getDate("completionDate"),
+						rs.getTimestamp("deadline"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
+						StatusType.getStatusType(rs.getInt("statusTypeId")),
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher"))					
+					));
+			}
+			return errands;
+		} catch (SQLException e){
+			throw new RuntimeException(e);
+		}
 	}
 }
