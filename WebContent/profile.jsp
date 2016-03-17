@@ -73,7 +73,7 @@
     	<div class="profile-header-img">
     			<img class="img-circle" src="assets/img/cute_gopher.png" >	  		
 		</div>
-		<h1><c:out value="${userObject.getUsername()}" /> </h1>
+		<h1><c:out value="${viewUser.getUsername()}" /> </h1>
 	</div>
 	
 	<!-- Tab navigation for dashboard content -->
@@ -98,7 +98,7 @@
 				<table class="table">
 					<tr>
 						<th>Username:</th>
-						<td>${userObject.getUsername()}
+						<td>${viewUser.getUsername()}
 					<tr>
 						<th>Gopher Rating:</th>
 						<td>

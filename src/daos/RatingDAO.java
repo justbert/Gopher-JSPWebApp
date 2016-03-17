@@ -44,6 +44,11 @@ public class RatingDAO extends DatabaseManager {
 	private static final String selectRatingAverageForErrandID =
 			"SELECT avg(ratingValue) FROM ratings WHERE errandId=?";
 	
+	/** Define a query that retrieves the average rating value for a customer by id */
+	private static final String selectRatingAverageForCustomerID =
+			"SELECT avg(ratingValue)FROM ratings, errands WHERE ratings.userIdRated = errands.userIdCustomer "
+			+ "AND errandId = errands.id AND userIdCustomer = ?";
+	
 	/** Defines a query that adds a rating entry into the database */
 	private static final String insertRating = 
 			"INSERT INTO ratings ( user_rated_id, user_rater_id, errand_id, rating, comments )"
@@ -216,6 +221,26 @@ public class RatingDAO extends DatabaseManager {
 	public float getRatingAverageForErrandID(int id) {
 	
 		try (ResultSet rs = query(selectRatingAverageForErrandID, id)){
+			if (rs.first()) {
+				return rs.getFloat("avg(ratingValue)");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	// Handle this eventually
+		}
+		
+		return Float.MIN_VALUE;
+	}
+	
+	/**
+	 * Returns a list of all ratings associated with a customer
+	 * @param id the id of the customer to retrieve the ratings for
+	 * @return List of Rating objects if they exists, Float.MIN_VALUE
+	 * if there are no ratings for that customer
+	 */
+	public float getRatingAverageForCustomerID(int id) {
+	
+		try (ResultSet rs = query(selectRatingAverageForCustomerID, id)){
 			if (rs.first()) {
 				return rs.getFloat("avg(ratingValue)");
 			}
