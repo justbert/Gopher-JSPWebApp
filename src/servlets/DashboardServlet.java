@@ -33,18 +33,14 @@ public class DashboardServlet extends HttpServlet {
 	private ErrandDao errandDao = new ErrandDao();
 	private RatingDAO ratingDao = new RatingDAO();
 	
-	/**
-     * @see HttpServlet#HttpServlet()
-     */
+	/** @see HttpServlet#HttpServlet() */
     public DashboardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
     
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	/** @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response) */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		
@@ -76,9 +72,7 @@ public class DashboardServlet extends HttpServlet {
 	}
 
 	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	/** @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response) */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		doGet(request, response);

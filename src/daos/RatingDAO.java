@@ -16,6 +16,9 @@ import utils.DatabaseManager;
  */
 public class RatingDAO extends DatabaseManager {
 	
+	private UserDao userDao = new UserDao();
+	private ErrandDao errandDao = new ErrandDao();
+	
 	/** Defines a query that selects all ratings ordered them by newest first */
 	private static final String selectAllRatings = 
 			"SELECT * FROM ratings ORDER BY creationDate desc";
@@ -30,7 +33,8 @@ public class RatingDAO extends DatabaseManager {
 	
 	/** Defines a query that selects all customer ratings for a user by user id */
 	private static final String selectAllRatingsForCustomer = 
-			"SELECT * FROM ratings join errands on ratings.userIdRated = errands.userIdCustomer where errands.userIdCustomer = ?";
+			"SELECT * FROM ratings, errands WHERE ratings.userIdRated = errands.userIdCustomer "
+			+ "AND errandId = errands.id AND userIdCustomer = ? ORDER BY ratings.creationDate DESC;";
 	
 	/** Defines a query that selects all ratings associated with an errand by errand id @author justin */
 	private static final String selectAllRatingsForErrand = 
@@ -39,6 +43,11 @@ public class RatingDAO extends DatabaseManager {
 	/** Define a query that retrieves the average rating value for an errand by errand id @author justin */
 	private static final String selectRatingAverageForErrandID =
 			"SELECT avg(ratingValue) FROM ratings WHERE errandId=?";
+	
+	/** Define a query that retrieves the average rating value for a customer by id */
+	private static final String selectRatingAverageForCustomerID =
+			"SELECT avg(ratingValue)FROM ratings, errands WHERE ratings.userIdRated = errands.userIdCustomer "
+			+ "AND errandId = errands.id AND userIdCustomer = ?";
 	
 	/** Defines a query that adds a rating entry into the database */
 	private static final String insertRating = 
@@ -223,6 +232,26 @@ public class RatingDAO extends DatabaseManager {
 		return Float.MIN_VALUE;
 	}
 	
+	/**
+	 * Returns a list of all ratings associated with a customer
+	 * @param id the id of the customer to retrieve the ratings for
+	 * @return List of Rating objects if they exists, Float.MIN_VALUE
+	 * if there are no ratings for that customer
+	 */
+	public float getRatingAverageForCustomerID(int id) {
+	
+		try (ResultSet rs = query(selectRatingAverageForCustomerID, id)){
+			if (rs.first()) {
+				return rs.getFloat("avg(ratingValue)");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	// Handle this eventually
+		}
+		
+		return Float.MIN_VALUE;
+	}
+	
 	
 	/**
 	 * Helper method that maps the data from the specified ResultSet to a Rating model object
@@ -230,13 +259,14 @@ public class RatingDAO extends DatabaseManager {
 	 * @return The Rating with data mapped from the ResultSet
 	 * @throws SQLException if an error occurs when accessing db
 	 */
-	private static Rating mapData(ResultSet rs) throws SQLException {
+	private Rating mapData(ResultSet rs) throws SQLException {
 		Rating rating = new Rating();
 		
 		rating.setId(rs.getInt("id"));
-		rating.setUserIdRated(new User());		// will have to decide how to do this later
-		rating.setUserIdRater(new User());			// Can User class use its DAO to do this with an id?
+		rating.setUserIdRated(userDao.getUserForID(rs.getInt("userIdRated")));
+		rating.setUserIdRater(userDao.getUserForID(rs.getInt("userIdRater")));
 		rating.setRatingValue(rs.getInt("ratingValue"));
+		rating.setErrandId(errandDao.selectById(rs.getInt("errandId")));
 		rating.setComments(rs.getString("comments"));
 		rating.setCreationDate(rs.getDate("creationDate"));
 		

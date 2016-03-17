@@ -27,13 +27,14 @@
             <div class="ratings">
                 <p class="pull-right">${ratingsList.size()} reviews</p>
                 <p>
-                    <c:forEach begin="1" end="${errandAverage}">
+                	<a href="/Gopher/profile?id=${errand.getUserIdCustomer().getId()}">${errand.getUserIdCustomer().getUsername()}</a>'s Rating:
+                    <c:forEach begin="1" end="${customerAverage}">
                 	<span class="glyphicon glyphicon-star"></span>
                 	</c:forEach>
-                    <c:forEach begin="1" end="${5-errandAverage}">
+                    <c:forEach begin="1" end="${5-customerAverage}">
                 	<span class="glyphicon glyphicon-star-empty"></span>
                 	</c:forEach>
-                    ${errandAverage} stars
+                    ${customerAverage} stars
                 </p>
             </div>
         </div>
