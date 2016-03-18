@@ -65,7 +65,7 @@
     <servlet-name>RequestServlet</servlet-name>
     <url-pattern>/request</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>ProfileServlet</servlet-name>
     <servlet-class>servlets.ProfileServlet</servlet-class>
   </servlet>

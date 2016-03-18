@@ -1,6 +1,27 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ page import="java.io.*, java.net.*,java.util.*"%>
+
+<%-- Language Declaration and Resource Bundle --%>
+<% 
+String lang = request.getParameter( "lang" );
+  if ( lang == null){ lang = "en";}
+  ResourceBundle RB = ResourceBundle.getBundle("com.lang.i18n.text", new Locale(lang));
+%> 
+
+<%-- Variable Declarations --%>
+<%! String requestErrand, description, title, reqErrand, gopheredErrands; %>
+
+<%-- Variable Initializations --%>
+<% 
+  requestErrand = RB.getString("requestErrand"); 
+  description = RB.getString("description"); 
+  title = RB.getString("title"); 
+  reqErrand = RB.getString("reqErrand"); 
+  gopheredErrands = RB.getString("gopheredErrands");
+%>
+
 <style>
 	.jumbotron h1 {
   		font-size: 36px !important;
@@ -37,13 +58,13 @@
 <jsp:include page="header.jsp"/>
 	<div class="row pad-nav-bar bg-teal jumbotron">
 	 	<div class="col-md-6">
-	 		<h1>Request an Errand</h1>
+	 		<h1><%=requestErrand %></h1>
 		 	<div class="input-container">
-			  	<label>Title</label>
+			  	<label><%=title %></label>
 			  	<input style="width:50%;" type="text"></input>
 			</div>
 			<div class="input-container">
-				<label>Description</label>
+				<label><%=description %></label>
 				<textarea style='box-sizing: border-box;width:100%;' name='description'></textarea>
 			</div>
 		</div>
@@ -67,7 +88,7 @@
 	        		<div id="tasks-div" class="tab-content dashboard-content">
 		        		<div id="task1div" class="tab-pane fade in active table-responsive">
 							<!-- <h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
-								Gophered Errands
+								<%=gopheredErrands %>
 								</h3>
 							<table class="table">
 								<tr>
@@ -87,7 +108,7 @@
 								</tr>
 							</table>
 							<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-								Requested Errands
+								<%=reqErrand %>
 							</h3>
 							<table class="table">
 								<tr>

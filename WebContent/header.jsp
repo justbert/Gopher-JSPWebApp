@@ -1,5 +1,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.io.*, java.net.*,java.util.*"%>
+<%-- Language Declaration and Resource Bundle --%>
+<% 
+  String lang = request.getParameter( "lang" );
+  if ( lang == null){ lang = "en";}
+  ResourceBundle RB = ResourceBundle.getBundle("com.lang.i18n.text", new Locale(lang));
+%> 
+
+<%-- Variable Declarations --%>
+<%! String welcome, login, browse, req, logout; %>
+
+<%-- Variable Initializations --%>
+<% 
+  welcome = RB.getString("welcome"); 
+  login = RB.getString("login"); 
+  browse = RB.getString("browse"); 
+  req = RB.getString("req"); 
+  logout = RB.getString("logout"); 
+%>
 
 <!DOCTYPE html>
 <html>
@@ -22,24 +41,33 @@
 			        	<span class="icon-bar"></span>
 			       	 	<span class="icon-bar"></span> 
       				</button>
-      				<a class="navbar-brand" href="/Gopher/"><img class="img-align" src="assets/img/blocklogo.png"></a>
+      				<a class="navbar-brand" href="/Gopher/index.jsp?lang=<%=lang%>"><img class="img-align" src="assets/img/blocklogo.png"></a>
     			</div>
     		
     			<div class="collapse navbar-collapse" id="myNavbar">	
 					<ul class="nav navbar-nav navbar-right">
 						<c:choose>
 							<c:when test="${loggedIn}">
-								<li><a href="/Gopher/dashboard">Welcome, ${userObject.getUsername()}</a></li>
+								<li><a href="/Gopher/dashboard?lang=<%=lang%>"><%=welcome%>, ${userObject.getUsername()}</a></li>
 							</c:when>
 							<c:otherwise>
-							<li><a href="/Gopher/login">Log In</a></li>
+							<li><a href="/Gopher/login?lang=<%=lang%>"><%=login%></a></li>
 							</c:otherwise>
 						</c:choose>
-			            <li><a href="/Gopher/browse">Browse</a></li>
-			            <li><a href="/Gopher/request.jsp">Request</a></li>
+			            <li><a href="/Gopher/browse?lang=<%=lang%>"><%=browse%></a></li>
+			            <li><a href="/Gopher/request.jsp?lang=<%=lang%>"><%=req%></a></li>
 			            <c:if test="${loggedIn}">
-			            	<li><a href="/Gopher/logout">Logout</a></li>
+			            	<li><a href="/Gopher/logout?lang=<%=lang%>"><%=logout%></a></li>
 			            </c:if>
+			            
+			            <li><form class="navbar-form">
+            				<select id="lang" name="lang" onchange="submit()">
+            					<option value="en" ${language == 'en' ? 'selected' : ''}>Language</option>
+                				<option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+                				<option value="fr" ${language == 'fr' ? 'selected' : ''}>Francais</option>
+            				</select>
+       				   </form></li>
+			            
 	        		</ul>
     			</div>
   			</div>
