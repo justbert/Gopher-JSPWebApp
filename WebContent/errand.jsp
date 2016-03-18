@@ -4,6 +4,28 @@
 <%@page import="entities.Task" %>
 <%@page import="entities.Rating" %>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page import="java.io.*, java.net.*,java.util.*"%>
+
+<%-- Language Declaration and Resource Bundle --%>
+<% 
+String lang = request.getParameter( "lang" );
+if ( lang == null){ lang = "en";}
+  ResourceBundle RB = ResourceBundle.getBundle("com.lang.i18n.text", new Locale(lang));
+%> 
+
+<%-- Variable Declarations --%>
+<%! String reviews, stars, leaveReview, anon, rating; %>
+
+<%-- Variable Initializations --%>
+<% 
+  reviews = RB.getString("reviews"); 
+  stars = RB.getString("stars"); 
+  leaveReview = RB.getString("leaveReview"); 
+  anon = RB.getString("anon"); 
+  rating = RB.getString("rating"); 
+%>
+
 <jsp:include page="header.jsp"/>
 
 <style>
@@ -25,23 +47,23 @@
                 <p>${errand.getDescription()}</p>
             </div>
             <div class="ratings">
-                <p class="pull-right">${ratingsList.size()} reviews</p>
+                <p class="pull-right">${ratingsList.size()} <%=reviews %></p>
                 <p>
-                	<a href="/Gopher/profile?id=${errand.getUserIdCustomer().getId()}">${errand.getUserIdCustomer().getUsername()}</a>'s Rating:
+                	<a href="/Gopher/profile?id=${errand.getUserIdCustomer().getId()}">${errand.getUserIdCustomer().getUsername()}</a>'s <%=rating %>:
                     <c:forEach begin="1" end="${customerAverage}">
                 	<span class="glyphicon glyphicon-star"></span>
                 	</c:forEach>
                     <c:forEach begin="1" end="${5-customerAverage}">
                 	<span class="glyphicon glyphicon-star-empty"></span>
                 	</c:forEach>
-                    ${customerAverage} stars
+                    ${customerAverage} <%=stars %>
                 </p>
             </div>
         </div>
 
         <div class="well bg-white">
             <div class="text-right">
-                <a class="btn btn-success">Leave a Review</a>
+                <a class="btn btn-success"><%=leaveReview %></a>
             </div>
             <c:forEach items="${ratingsList}" var="rating">
             <hr>
@@ -53,7 +75,7 @@
                     <c:forEach begin="1" end="${5-rating.ratingValue}">
                 	<span class="glyphicon glyphicon-star-empty"></span>
                 	</c:forEach>
-                    Anonymous
+                    <%=anon %>
                     <span class="pull-right">${rating.creationDate}</span>
 					<p><c:out value="${rating.comments}"/></p>
                 </div>

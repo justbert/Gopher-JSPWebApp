@@ -2,6 +2,52 @@
 <%@page import="entities.User" %>
 <%@page import="entities.Errand" %>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page import="java.io.*, java.net.*,java.util.*"%>
+
+<%-- Language Declaration and Resource Bundle --%>
+<% 
+String lang = request.getParameter( "lang" );
+  if ( lang == null){ lang = "en";}
+  ResourceBundle RB = ResourceBundle.getBundle("com.lang.i18n.text", new Locale(lang));
+%> 
+
+<%-- Variable Declarations --%>
+<%! String profile, notifications, activeErrands, pastErrands, ratings, myAccount, 
+     editProfile, changePhoto, settings, gophRating, custRating, username, email,
+     toGopher, errand, reward, deadline, reqDate, reqErrand, gopheredErrands, dateCompleted,
+     ratingsAsCust, rating, comments, date, by; %>
+
+<%-- Variable Initializations --%>
+<% 
+  profile = RB.getString("profile"); 
+  notifications = RB.getString("notifications"); 
+  activeErrands = RB.getString("activeErrands"); 
+  pastErrands = RB.getString("pastErrands"); 
+  ratings = RB.getString("ratings"); 
+  myAccount = RB.getString("myAccount"); 
+  editProfile = RB.getString("editProfile"); 
+  changePhoto = RB.getString("changePhoto"); 
+  settings = RB.getString("settings"); 
+  gophRating = RB.getString("gophRating"); 
+  custRating = RB.getString("custRating"); 
+  username = RB.getString("username"); 
+  email = RB.getString("email"); 
+  toGopher = RB.getString("toGopher"); 
+  errand = RB.getString("errand"); 
+  reward = RB.getString("reward"); 
+  deadline = RB.getString("deadline"); 
+  reqDate = RB.getString("reqDate"); 
+  reqErrand = RB.getString("reqErrand"); 
+  gopheredErrands = RB.getString("gopheredErrands"); 
+  dateCompleted = RB.getString("dateCompleted"); 
+  ratingsAsCust = RB.getString("ratingsAsCust"); 
+  rating = RB.getString("rating"); 
+  comments = RB.getString("comments"); 
+  date = RB.getString("date"); 
+  by = RB.getString("by");  
+%>
+
 <jsp:include page="header.jsp"/>	
 
 
@@ -95,11 +141,11 @@
 	<div>
 		<div class="dashboard-nav">
 			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-				<li><a data-toggle="tab" href="#alerts">Notifications</a></li>
-				<li><a data-toggle="tab" href="#active-errands">Active Errands</a></li>
-				<li><a data-toggle="tab" href="#past-errands">Past Errands</a></li>
-				<li><a data-toggle="tab" href="#ratings">Ratings</a></li>
+				<li class="active"><a data-toggle="tab" href="#profile"><%=profile%></a></li>
+				<li><a data-toggle="tab" href="#alerts"><%=notifications%></a></li>
+				<li><a data-toggle="tab" href="#active-errands"><%=activeErrands%></a></li>
+				<li><a data-toggle="tab" href="#past-errands"><%=pastErrands%></a></li>
+				<li><a data-toggle="tab" href="#ratings"><%=ratings%></a></li>
 			</ul>
 		</div>
 		
@@ -109,29 +155,29 @@
 			<!-- Profile info, displayed by default -->
 			<div id="profile" class="tab-pane fade in active table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-user tab-icon"></span>
-					My Account
+					<%=myAccount%>
 				</h3>
 				<div class="btn-group edit-btns" role="group">
-					<button type="button" class="btn btn-default btn-sm" aria-label="Edit Profile">
-						<span class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit Profile"></span>
+					<button type="button" class="btn btn-default btn-sm" aria-label=<%=editProfile%>>
+						<span class="glyphicon glyphicon-pencil" data-toggle="tooltip" title=<%=editProfile%>></span>
 					</button>
-					<button type="button" class="btn btn-default btn-sm" aria-label="Change Photo">
-						<span class="glyphicon glyphicon-camera" data-toggle="tooltip" title="Change Photo"></span>
+					<button type="button" class="btn btn-default btn-sm" aria-label=<%=changePhoto%>>
+						<span class="glyphicon glyphicon-camera" data-toggle="tooltip" title=<%=changePhoto%>></span>
 					</button>
-					<button type="button" class="btn btn-default btn-sm" aria-label="Setting">
-						<span class="glyphicon glyphicon-cog" data-toggle="tooltip" title="Settings"></span>
+					<button type="button" class="btn btn-default btn-sm" aria-label=<%=settings%>>
+						<span class="glyphicon glyphicon-cog" data-toggle="tooltip" title=<%=settings%>></span>
 					</button>
 				</div>
 				<table class="table">
 					<tr>
-						<th>Username:</th>
+						<th><%=username%>:</th>
 						<td>${userObject.getUsername()}
 					<tr>
-						<th>Email:</th>
+						<th><%=email%>:</th>
 						<td>${userObject.getEmail()}</td>
 					</tr>
 					<tr>
-						<th>Gopher Rating:</th>
+						<th><%=gophRating%>:</th>
 						<td>
 							<img class="img-circle" src="assets/img/rating.png" >
 							<img class="img-circle" src="assets/img/rating.png" >
@@ -139,7 +185,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>Customer Rating:</th>
+						<th><%=custRating%>:</th>
 						<td>
 							<img class="img-circle" src="assets/img/rating.png" >
 							<img class="img-circle" src="assets/img/rating.png" >
@@ -152,7 +198,7 @@
 			<!--  Notifications tab -->
 			<div id="alerts" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-bell tab-icon"></span>
-					My Notifications
+					<%=notifications%>
 				</h3>
 				<table class="table">
 					<tr>
@@ -164,13 +210,13 @@
 			<!--  Current errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
-					Your Errands to Gopher
+					<%=toGopher %>
 				</h3>
 				<table class="table">					
 						<tr>
-							<th>Errand</th>
-							<th>Reward</th>
-							<th>Deadline</th>
+							<th><%=errand%></th>
+							<th><%=reward%></th>
+							<th><%=deadline%></th>
 						</tr>
 						
 						<!-- List all errands for which this customer is registered as a Gopher -->
@@ -183,13 +229,13 @@
 						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					Your Errand Requests
+					<%=reqErrand %>
 				</h3>
 				<table class="table">
 					<tr>
-						<th>Errand</th>
-						<th>Reward</th>
-						<th>Date Requested</th>
+						<th><%=errand%></th>
+						<th><%=reward%></th>
+						<th><%=reqDate%></th>
 					</tr>
 					
 					<!-- List all errands for which this customer is registered as a Customer -->
@@ -206,13 +252,13 @@
 			<!-- Past errands completed or requested by user -->
 			<div id="past-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
-					Gophered Errands
+					<%=gopheredErrands %>
 					</h3>
 				<table class="table">
 					<tr>
-						<th>Errand</th>
-						<th>Reward</th>
-						<th>Date Completed</th>
+						<th><%=errand%></th>
+						<th><%=reward%></th>
+						<th><%=dateCompleted %></th>
 					</tr>
 <!-- 					<tr> -->
 <!-- 						<td>Get me a popsicle</td> -->
@@ -226,13 +272,13 @@
 <!-- 					</tr> -->
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-					Requested Errands
+					<%=reqErrand %>
 				</h3>
 				<table class="table">
 					<tr>
-						<th>Errand</th>
-						<th>Reward</th>
-						<th>Date Completed</th>
+						<th><%=errand%></th>
+						<th><%=reward%></th>
+						<th><%=dateCompleted %></th>
 					</tr>
 <!-- 					<tr> -->
 <!-- 						<td>Deliver my medicine</td> -->
@@ -250,15 +296,15 @@
 			<!--  Ratings tab -->
 			<div id="ratings" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
-					My Ratings As A Customer
+					<%=ratingsAsCust %>
 				</h3>
 				<table class="table">
 					<tr>
-						<td>Rating</td>
-						<td>Comments</td>
-						<td>Date</td>
-						<td>By</td>
-						<td>Errand<td>
+						<td><%=rating%></td>
+						<td><%=comments%></td>
+						<td><%=date%></td>
+						<td><%=by%></td>
+						<td><%=errand%><td>
 					</tr>
 					
 					<!-- List all ratings for which this user was registered as a customer -->
