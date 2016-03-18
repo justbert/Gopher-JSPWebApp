@@ -31,10 +31,15 @@ public class RatingDAO extends DatabaseManager {
 	private static final String selectContributedRatingsByUserId = 
 			"SELECT * FROM ratings WHERE user_rater_id = ? ORDER BY date_created desc";
 	
-	/** Defines a query that selects all customer ratings for a user by user id */
+	/** Defines a query that selects all Customer ratings for a user by user id */
 	private static final String selectAllRatingsForCustomer = 
 			"SELECT * FROM ratings, errands WHERE ratings.userIdRated = errands.userIdCustomer "
 			+ "AND errandId = errands.id AND userIdCustomer = ? ORDER BY ratings.creationDate DESC;";
+	
+	/** Defines a query that selects all Gopher ratings for a user by user id */
+	private static final String selectAllRatingsForGopher = 
+			"SELECT * FROM ratings, errands WHERE ratings.userIdRated = errands.userIdGopher "
+			+ "AND errandId = errands.id AND userIdGopher = ? ORDER BY ratings.creationDate DESC;";
 	
 	/** Defines a query that selects all ratings associated with an errand by errand id @author justin */
 	private static final String selectAllRatingsForErrand = 
@@ -44,10 +49,15 @@ public class RatingDAO extends DatabaseManager {
 	private static final String selectRatingAverageForErrandID =
 			"SELECT avg(ratingValue) FROM ratings WHERE errandId=?";
 	
-	/** Define a query that retrieves the average rating value for a customer by id */
+	/** Define a query that retrieves the average rating value for a Customer by id */
 	private static final String selectRatingAverageForCustomerID =
 			"SELECT avg(ratingValue)FROM ratings, errands WHERE ratings.userIdRated = errands.userIdCustomer "
 			+ "AND errandId = errands.id AND userIdCustomer = ?";
+	
+	/** Define a query that retrieves the average rating value for a Gopher by id */
+	private static final String selectRatingAverageForGopherID =
+			"SELECT avg(ratingValue)FROM ratings, errands WHERE ratings.userIdRated = errands.userIdGopher "
+			+ "AND errandId = errands.id AND userIdGopher = ?";
 	
 	/** Defines a query that adds a rating entry into the database */
 	private static final String insertRating = 
@@ -120,7 +130,7 @@ public class RatingDAO extends DatabaseManager {
 	
 	
 	/**
-	 * Returns a list of all ratings given to a user who acted as a customer
+	 * Returns a list of all ratings given to a user who acted as a Customer
 	 * @param id the id of the user
 	 * @return a List of Rating objects
 	 */
@@ -128,6 +138,26 @@ public class RatingDAO extends DatabaseManager {
 		List<Rating> ratings = new ArrayList<>();
 		
 		try (ResultSet rs = query(selectAllRatingsForCustomer, id)) {
+			while (rs.next()) {
+				ratings.add(mapData(rs));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	// Handle this eventually
+		}
+		
+		return ratings;
+	}
+	
+	/**
+	 * Returns a list of all ratings given to a user who acted as a Gopher
+	 * @param id the id of the user
+	 * @return a List of Rating objects
+	 */
+	public List<Rating> getAllGopherRatingsById(int id) {
+		List<Rating> ratings = new ArrayList<>();
+		
+		try (ResultSet rs = query(selectAllRatingsForGopher, id)) {
 			while (rs.next()) {
 				ratings.add(mapData(rs));
 			}
@@ -241,6 +271,26 @@ public class RatingDAO extends DatabaseManager {
 	public float getRatingAverageForCustomerID(int id) {
 	
 		try (ResultSet rs = query(selectRatingAverageForCustomerID, id)){
+			if (rs.first()) {
+				return rs.getFloat("avg(ratingValue)");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	// Handle this eventually
+		}
+		
+		return Float.MIN_VALUE;
+	}
+	
+	/**
+	 * Returns a list of all ratings associated with a Gopher
+	 * @param id the id of the Gopher to retrieve the ratings for
+	 * @return List of Rating objects if they exists, Float.MIN_VALUE
+	 * if there are no ratings for that Gopher
+	 */
+	public float getRatingAverageForGopherID(int id) {
+	
+		try (ResultSet rs = query(selectRatingAverageForGopherID, id)){
 			if (rs.first()) {
 				return rs.getFloat("avg(ratingValue)");
 			}

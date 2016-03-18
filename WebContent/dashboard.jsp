@@ -90,8 +90,7 @@
 		<h1><c:out value="${userObject.getUsername()}" /> </h1>
 	</div>
 	
-	<!-- Tab navigation for dashboard content -->
-	
+	<!-- Tab navigation for dashboard content -->	
 	<div>
 		<div class="dashboard-nav">
 			<ul class="nav nav-tabs">
@@ -132,19 +131,15 @@
 					</tr>
 					<tr>
 						<th>Gopher Rating:</th>
-						<td>
+						<td><c:forEach begin="1" end="${gopherRatingAvg}">
 							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-						</td>
+						</c:forEach></td>
 					</tr>
 					<tr>
 						<th>Customer Rating:</th>
-						<td>
+						<td><c:forEach begin="1" end="${customerRatingAvg}">
 							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-						</td>
+						</c:forEach></td>
 					</tr>
 				</table>
 			</div>
@@ -264,7 +259,34 @@
 					<!-- List all ratings for which this user was registered as a customer -->
 						<c:forEach items="${ratingsCustomer}" var="rating">
 							<tr>
-								<td>${rating.getRatingValue()}</td>
+								<td><c:forEach begin="1" end="${rating.getRatingValue()}">
+									<img class="img-circle" src="assets/img/rating.png" >
+								</c:forEach></td>
+								<td>${rating.getComments()}</td>
+								<td>${rating.getCreationDate()}</td>
+								<td>${rating.getUserIdRater().getUsername()}
+								<td>${rating.getErrandId().getName()}
+							</tr>
+						</c:forEach>
+				</table>
+				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
+					My Ratings As A Gopher
+				</h3>
+				<table class="table">
+					<tr>
+						<td>Rating</td>
+						<td>Comments</td>
+						<td>Date</td>
+						<td>By</td>
+						<td>Errand<td>
+					</tr>
+					
+					<!-- List all ratings for which this user was registered as a gopher -->
+						<c:forEach items="${ratingsGopher}" var="rating">
+							<tr>
+								<td><c:forEach begin="1" end="${rating.getRatingValue()}">
+									<img class="img-circle" src="assets/img/rating.png" >
+								</c:forEach></td>
 								<td>${rating.getComments()}</td>
 								<td>${rating.getCreationDate()}</td>
 								<td>${rating.getUserIdRater().getUsername()}

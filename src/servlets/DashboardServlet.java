@@ -29,14 +29,12 @@ public class DashboardServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -2915114669209009394L;
 	private User user;
-	private UserDao userDao = new UserDao();
 	private ErrandDao errandDao = new ErrandDao();
 	private RatingDAO ratingDao = new RatingDAO();
 	
 	/** @see HttpServlet#HttpServlet() */
     public DashboardServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     
@@ -54,17 +52,34 @@ public class DashboardServlet extends HttpServlet {
 			}
 		}
 		
+		// If user is logged in, continue
 		user = (User) session.getAttribute("userObject");
 		
-		// If user is logged in, continue
-		List<Errand> errandsCustomer = errandDao.selectErrandsForUser((User)session.getAttribute("userObject"));
-		List<Errand> errandsGopher = errandDao.selectErrandsForGopherId((User)session.getAttribute("userObject"));
+		// Retrieve errand for which the user is a Customer
+		List<Errand> errandsCustomer = errandDao.selectErrandsForUser(user);
+		
+		// Errands for which the user is a Gopher
+		List<Errand> errandsGopher = errandDao.selectErrandsForGopherId(user);
+		
+		// All ratings for the user as a Customer
 		List<Rating> ratingsCustomer = ratingDao.getAllCustomerRatingsById(user.getId());
+		
+		// Average rating for the user as a Customer
+		Float customerRatingAvg = ratingDao.getRatingAverageForCustomerID(user.getId());
+		
+		// All ratings for the user as a Customer
+		List<Rating> ratingsGopher = ratingDao.getAllGopherRatingsById(user.getId());
+						
+		// Average rating for the user as a Customer
+		Float gopherRatingAvg = ratingDao.getRatingAverageForGopherID(user.getId());
 		
 		try {
 			request.setAttribute("errandsCustomer", errandsCustomer);
 			request.setAttribute("errandsGopher", errandsGopher);
 			request.setAttribute("ratingsCustomer",  ratingsCustomer);
+			request.setAttribute("customerRatingAvg", customerRatingAvg);
+			request.setAttribute("ratingsGopher", ratingsGopher);
+			request.setAttribute("gopherRatingAvg", gopherRatingAvg);
 			request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
@@ -74,8 +89,7 @@ public class DashboardServlet extends HttpServlet {
 	
 	/** @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response) */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }

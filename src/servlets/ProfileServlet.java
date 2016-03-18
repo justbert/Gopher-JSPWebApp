@@ -31,7 +31,6 @@ public class ProfileServlet extends HttpServlet {
     /** @see HttpServlet#HttpServlet() */
     public ProfileServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/** @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response) */
@@ -39,15 +38,33 @@ public class ProfileServlet extends HttpServlet {
 		
 		// Get data for the user who's public profile is being viewed
 		viewUser = userDao.getUserForID(Integer.parseInt(request.getParameter("id")));
+		
+		// Errands for which the user id a Customer
 		List<Errand> errandsCustomer = errandDao.selectErrandsForUser(viewUser);
+		
+		// Errands for which the user is a Gopher
 		List<Errand> errandsGopher = errandDao.selectErrandsForGopherId(viewUser);
+		
+		// All ratings for the user as a Customer
 		List<Rating> ratingsCustomer = ratingDao.getAllCustomerRatingsById(viewUser.getId());
+		
+		// Average rating for the user as a Customer
+		Float customerRatingAvg = ratingDao.getRatingAverageForCustomerID(viewUser.getId());
+		
+		// All ratings for the user as a Customer
+		List<Rating> ratingsGopher = ratingDao.getAllGopherRatingsById(viewUser.getId());
+				
+		// Average rating for the user as a Customer
+		Float gopherRatingAvg = ratingDao.getRatingAverageForGopherID(viewUser.getId());
 		
 		try {
 			request.setAttribute("viewUser", viewUser);
 			request.setAttribute("errandsCustomer", errandsCustomer);
 			request.setAttribute("errandsGopher", errandsGopher);
 			request.setAttribute("ratingsCustomer", ratingsCustomer);
+			request.setAttribute("customerRatingAvg", customerRatingAvg);
+			request.setAttribute("ratingsGopher", ratingsGopher);
+			request.setAttribute("gopherRatingAvg", gopherRatingAvg);
 			request.getRequestDispatcher("/profile.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
@@ -56,7 +73,7 @@ public class ProfileServlet extends HttpServlet {
 
 	/** @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response) */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }
