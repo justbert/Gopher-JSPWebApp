@@ -60,13 +60,13 @@
 	        <div class="row">
 		        <div class="col-md-3">
 		        	<ul class="nav nav-pills nav-stacked" id="tasks-list">
-						<li class="active"><a data-toggle="tab" href="#task1div" id="task1li">Task 1</a></li>
+						<li class="active" id="task1li"><a data-toggle="tab" href="#task1div">Task 1</a></li>
 					</ul>
 				</div>
 	        	<div class="col-md-9">
 	        		<div id="tasks-div" class="tab-content dashboard-content">
 		        		<div id="task1div" class="tab-pane fade in active table-responsive">
-							<h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
+							<!-- <h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
 								Gophered Errands
 								</h3>
 							<table class="table">
@@ -105,7 +105,8 @@
 									<td>$10.00</td>
 									<td>01/03/2016</td>
 								</tr>
-							</table>
+							</table> -->
+							<div class="map" id="map1"></div>
 						</div>
 						
 		        	</div>
@@ -113,22 +114,13 @@
 	        </div>
         </div>
 	</div>
-	<div id="map"></div>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
-    </script>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpiQxT9pbyX3_zs4M1CTRCZFprNwOw7Gg&callback=initMap"async defer></script> -->
 	<script src="https://maps.googleapis.com/maps/api/js?&callback=addMap&key=AIzaSyCpiQxT9pbyX3_zs4M1CTRCZFprNwOw7Gg" async defer></script>
 	<script type="text/javascript">
 	//Global Variables
 	var numTasks = 1;
 	var startPos;
+	var mapArray = new Array(100);
 	
 	window.onload = function() {
 		  startPos;
@@ -140,6 +132,9 @@
 			startPos = {coords: {latitude: 45.4165703, longitude:-75.7047006}};
 		  }
 		  navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
+		  
+		  mapArray[0] = addMap("map1");
+		  
 	};
 	
 	function addTaskTab() {
@@ -151,15 +146,18 @@
 		anchor.setAttribute("data-toggle", "tab");
 		andhor.setAttribute("") */
 		
-	    $("#tasks-list").append("<li><a data-toggle=\"tab\" href=\"#task" + numTasks + "div\" id=\"task"+ numTasks +"li\">Task "+ numTasks+"</a></li>");     // Append new elements
+	    $("#tasks-list").append("<li id=\"task"+ numTasks +"li\"><a data-toggle=\"tab\" href=\"#task" + numTasks + "div\">Task "+ numTasks+"</a></li>");     // Append new elements
 		$("#tasks-div").append("<div id=\"task"+numTasks+"div\" class=\"tab-pane fade table-responsive\"><div class=\"map\" id=\"map" + numTasks +"\"></div></div>");
-	    addMap('map'+numTasks);
+	    mapArray[numTasks] = addMap('map'+numTasks);
 	}
 	
 	function removeTaskTab() {
 		if(numTasks > 1) {
 			$("#task" + numTasks + "li").remove();
 			$("#task" + numTasks + "div").remove();
+			
+			mapArray[numTasks] = null;
+			
 			numTasks--;
 		}
 	}
@@ -172,7 +170,7 @@
 			zoom: 15,
 		});
 		
-		//mapsArray = map;
+		return map;
 		/* geocoder.geocode({ 'address': address }, function (results, status) {
 		    if (status == google.maps.GeocoderStatus.OK) {
 		        var mapOptions = {
