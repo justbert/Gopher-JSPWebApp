@@ -2,6 +2,30 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ page import="java.io.*, java.net.*,java.util.*"%>
+
+<%-- Language Declaration and Resource Bundle --%>
+<% 
+String lang = request.getParameter( "lang" );
+if ( lang == null){ lang = "en";}
+  ResourceBundle RB = ResourceBundle.getBundle("com.lang.i18n.text", new Locale(lang));
+%> 
+
+<%-- Variable Declarations --%>
+<%! String join, gopher, today, username, email, password, confirmpass, signmeup; %>
+
+<%-- Variable Initializations --%>
+<% 
+  join = RB.getString("join"); 
+  gopher = RB.getString("gopher"); 
+  today = RB.getString("today"); 
+  username = RB.getString("username"); 
+  email = RB.getString("email"); 
+  password = RB.getString("password");
+  confirmpass = RB.getString("confirmpass"); 
+  signmeup = RB.getString("signmeup");
+%>
+
 <style>
 	#login-form{
 		padding: 20px 0px;
@@ -24,18 +48,18 @@
 <jsp:include page="header.jsp"/>
 	<div class="bg-teal pad-nav-bar jumbotron">
 		<form class="block-display" id="login-form" method="post" action="register">
-			 <h2>Join <span class="monty-font">Gopher</span> today.</h2>
-			 <label>Username</label>
+			 <h2><%=join%> <span class="monty-font"><%=gopher%></span> <%=today%>.</h2>
+			 <label><%=username%></label>
 			 <input class="block-display" type="text" name="username" value="${username}">
 			 <c:remove var="username"/>
-			 <label>Email Address</label>
+			 <label><%=email%></label>
 			 <input class="block-display" type="email" name="email" value="${email}"/>
 			 <c:remove var="email"/>
-			 <label>Password</label>
+			 <label><%=password%></label>
 			 <input class="block-display" type="password" name="password"/>
-			 <label>Confirm Password</label>
+			 <label><%=confirmpass%></label>
 			 <input class="block-display" type="password" name="passwordConfirm"/>
-			 <button class="btn btn-default">Sign me up!</button>
+			 <button class="btn btn-default"><%=signmeup%></button>
 		</form>
 	</div>
 	

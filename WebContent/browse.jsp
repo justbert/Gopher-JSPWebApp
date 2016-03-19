@@ -3,6 +3,24 @@
 <%@page import="daos.ErrandDao" %>
 <%@page import="entities.Task" %>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page import="java.io.*, java.net.*,java.util.*"%>
+
+<%-- Language Declaration and Resource Bundle --%>
+<% 
+  String lang = request.getParameter( "lang" );
+  if ( lang == null){ lang = "en";}
+  ResourceBundle RB = ResourceBundle.getBundle("com.lang.i18n.text", new Locale(lang));
+%> 
+
+<%-- Variable Declarations --%>
+<%! String reviews; %>
+
+<%-- Variable Initializations --%>
+<% 
+  reviews = RB.getString("reviews"); 
+%>
+
 <jsp:include page="header.jsp"/>
 
 <style>
@@ -47,7 +65,7 @@
 		                         <p>${errand.getDateCreated() } </p>
 		                     </div>
 		                     <div class="ratings pull-bottom">
-		                         <p class="pull-right">15 reviews</p>
+		                         <p class="pull-right">15 <%=reviews%></p>
 		                         <p>
 		                             <span class="glyphicon glyphicon-star"></span>
 		                             <span class="glyphicon glyphicon-star"></span>

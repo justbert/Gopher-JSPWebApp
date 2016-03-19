@@ -3,6 +3,26 @@
 <%@page import="entities.User" %>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ page import="java.io.*, java.net.*,java.util.*"%>
+
+<%-- Language Declaration and Resource Bundle --%>
+<% 
+String lang = request.getParameter( "lang" );
+if ( lang == null){ lang = "en";}
+  ResourceBundle RB = ResourceBundle.getBundle("com.lang.i18n.text", new Locale(lang));
+%> 
+
+<%-- Variable Declarations --%>
+<%! String settings, alerts, endorsements, messages; %>
+
+<%-- Variable Initializations --%>
+<% 
+settings = RB.getString("settings"); 
+alerts = RB.getString("alerts"); 
+endorsements = RB.getString("endorsements"); 
+messages = RB.getString("messages"); 
+%>
+
 <script type="text/javascript">
 	$(function() {
 		$(".draggable").draggable();
@@ -26,22 +46,22 @@
 		<button type="button" class="btn btn-default btn-xs"
 			aria-label="Settings">
 			<span class="glyphicon glyphicon-cog" data-toggle="tooltip"
-				title="Settings"></span>
+				title=<%=settings %>></span>
 		</button>
 		<button type="button" class="btn btn-default btn-xs"
 			aria-label="Notifications">
 			<span class="glyphicon glyphicon-bell" data-toggle="tooltip"
-				title="Alerts"></span>
+				title=<%=alerts %>></span>
 		</button>
 		<button type="button" class="btn btn-default btn-xs"
 			aria-label="Notifications">
 			<span class="glyphicon glyphicon-heart" data-toggle="tooltip"
-				title="Endorsements"></span>
+				title=<%=endorsements %>></span>
 		</button>
 		<button type="button" class="btn btn-default btn-xs"
 			aria-label="Notifications">
 			<span class="glyphicon glyphicon-inbox" data-toggle="tooltip"
-				title="Messages"></span>
+				title=<%=messages %>></span>
 		</button>
 	</div>
 </div>
