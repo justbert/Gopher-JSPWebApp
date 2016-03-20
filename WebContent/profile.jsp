@@ -14,8 +14,8 @@ if ( lang == null){ lang = "en";};
 
 <%-- Variable Declarations --%>
 <%! String profile, activeErrands, pastErrands, ratings, basicInfo, username, gophRating, custRating,
-    toGopher, errand, reward, deadline, reqDate, dateCompleted, reqErrand, gopheredErrands, pastReq,
-    ratingsAsCust, rating, comments, date, by;; %>
+    toGopher, needGopher, errand, reward, deadline, reqDate, dateCompleted, reqErrand, gopheredErrands,
+    ratingsAsCust, ratingsAsGopher, rating, comments, date, by;; %>
 
 <%-- Variable Initializations --%>
 <% 
@@ -28,6 +28,7 @@ username = RB.getString("username");
 gophRating = RB.getString("gophRating"); 
 custRating = RB.getString("custRating"); 
 toGopher = RB.getString("toGopher");
+needGopher = RB.getString("needGopher");
 errand = RB.getString("errand"); 
 reward = RB.getString("reward"); 
 deadline = RB.getString("deadline"); 
@@ -35,8 +36,8 @@ reqDate = RB.getString("reqDate");
 dateCompleted = RB.getString("dateCompleted"); 
 reqErrand = RB.getString("reqErrand"); 
 gopheredErrands = RB.getString("gopheredErrands"); 
-pastReq = RB.getString("pastReq"); 
-ratingsAsCust = RB.getString("ratingsAsCust"); 
+ratingsAsCust = RB.getString("ratingsAsCust");
+ratingsAsGopher = RB.getString("ratingsAsGopher");
 rating = RB.getString("rating"); 
 comments = RB.getString("comments"); 
 date = RB.getString("date"); 
@@ -156,10 +157,10 @@ by = RB.getString("by");
 				</table>
 			</div>
 			 
-			<!--  Current errands - requesting or to-do -->
+			<!-- User's current errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
-					<%=toGopher %>
+					${viewUser.getUsername()}'s <%=toGopher %>
 				</h3>
 				<table class="table">					
 						<tr>
@@ -178,7 +179,7 @@ by = RB.getString("by");
 						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					<%=reqErrand %>
+					${viewUser.getUsername()}'s <%=needGopher %>
 				</h3>
 				<table class="table">
 					<tr>
@@ -201,7 +202,7 @@ by = RB.getString("by");
 			<!-- Past errands completed or requested by user -->
 			<div id="past-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
-					<%=gopheredErrands %>
+					${viewUser.getUsername()}'s <%=gopheredErrands %>
 				</h3>
 				<table class="table">
 					<tr>
@@ -221,7 +222,7 @@ by = RB.getString("by");
 <!-- 					</tr> -->
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-					<%=pastReq %>
+					${viewUser.getUsername()}'s <%=gopheredErrands %>
 				</h3>
 				<table class="table">
 					<tr>
@@ -245,7 +246,7 @@ by = RB.getString("by");
 			<!--  Ratings tab -->
 			<div id="ratings" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
-					${viewUser.getUsername()} - <%=ratingsAsCust %>:
+					${viewUser.getUsername()}'s <%=ratingsAsCust %>:
 				</h3>
 				<table class="table">
 					<tr>
@@ -270,7 +271,7 @@ by = RB.getString("by");
 						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
-					${viewUser.getUsername()}'s Ratings as a Gopher:
+					${viewUser.getUsername()}'s <%=ratingsAsGopher %>:
 				</h3>
 				<table class="table">
 					<tr>

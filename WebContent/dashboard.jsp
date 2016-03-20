@@ -15,8 +15,8 @@ String lang = request.getParameter( "lang" );
 <%-- Variable Declarations --%>
 <%! String profile, notifications, activeErrands, pastErrands, ratings, myAccount, 
      editProfile, changePhoto, settings, gophRating, custRating, username, email,
-     toGopher, errand, reward, deadline, reqDate, reqErrand, gopheredErrands, dateCompleted,
-     ratingsAsCust, rating, comments, date, by; %>
+     toGopher, needGopher, errand, reward, deadline, reqDate, reqErrand, gopheredErrands, 
+     dateCompleted, ratingsAsCust, ratingsAsGopher, rating, comments, date, by; %>
 
 <%-- Variable Initializations --%>
 <% 
@@ -34,6 +34,7 @@ String lang = request.getParameter( "lang" );
   username = RB.getString("username"); 
   email = RB.getString("email"); 
   toGopher = RB.getString("toGopher"); 
+  needGopher = RB.getString("needGopher");
   errand = RB.getString("errand"); 
   reward = RB.getString("reward"); 
   deadline = RB.getString("deadline"); 
@@ -41,7 +42,8 @@ String lang = request.getParameter( "lang" );
   reqErrand = RB.getString("reqErrand"); 
   gopheredErrands = RB.getString("gopheredErrands"); 
   dateCompleted = RB.getString("dateCompleted"); 
-  ratingsAsCust = RB.getString("ratingsAsCust"); 
+  ratingsAsCust = RB.getString("ratingsAsCust");
+  ratingsAsGopher = RB.getString("ratingsAsGopher");
   rating = RB.getString("rating"); 
   comments = RB.getString("comments"); 
   date = RB.getString("date"); 
@@ -202,7 +204,7 @@ String lang = request.getParameter( "lang" );
 				</table>
 			</div>
 			
-			<!--  Current errands - requesting or to-do -->
+			<!--  User's active errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
 					<%=toGopher %>
@@ -214,7 +216,7 @@ String lang = request.getParameter( "lang" );
 							<th><%=deadline%></th>
 						</tr>
 						
-						<!-- List all errands for which this customer is registered as a Gopher -->
+						<!-- List all errands for which this user is registered as a Gopher -->
 						<c:forEach items="${errandsGopher}" var="errand">
 							<tr>
 								<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
@@ -224,7 +226,7 @@ String lang = request.getParameter( "lang" );
 						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					<%=reqErrand %>
+					<%=needGopher %>
 				</h3>
 				<table class="table">
 					<tr>
@@ -233,7 +235,7 @@ String lang = request.getParameter( "lang" );
 						<th><%=reqDate%></th>
 					</tr>
 					
-					<!-- List all errands for which this customer is registered as a Customer -->
+					<!-- List all errands for which this user is registered as a Customer -->
 					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
 						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
@@ -316,7 +318,7 @@ String lang = request.getParameter( "lang" );
 						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
-					My Ratings As A Gopher
+					<%=ratingsAsGopher %>
 				</h3>
 				<table class="table">
 					<tr>
