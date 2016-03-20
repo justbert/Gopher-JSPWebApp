@@ -210,19 +210,18 @@ by = RB.getString("by");
 						<th><%=reward %></th>
 						<th><%=dateCompleted %></th>
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<td>Get me a popsicle</td> -->
-<!-- 						<td>One hug</td> -->
-<!-- 						<td>01/03/2016</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td>Get my groceries</td> -->
-<!-- 						<td>$10 gift card</td> -->
-<!-- 						<td>01/17/2016</td> -->
-<!-- 					</tr> -->
+					
+					<!-- List all completed errands for which this user is registered as a Gopher -->
+					<c:forEach items="${completedErrandsGopher}" var="errand">
+						<tr>
+							<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+							<td>$ ${errand.getRewardId().getRewardValue() }</td>
+							<td>${errand.getDeadline() }</td>
+						</tr>
+					</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-					${viewUser.getUsername()}'s <%=gopheredErrands %>
+					${viewUser.getUsername()}'s <%=reqErrand %>
 				</h3>
 				<table class="table">
 					<tr>
@@ -230,16 +229,15 @@ by = RB.getString("by");
 						<th><%=reward %></th>
 						<th><%=dateCompleted %></th>
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<td>Deliver my medicine</td> -->
-<!-- 						<td>Free pizza</td> -->
-<!-- 						<td>01/05/2016</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td>Pick up my laundry</td> -->
-<!-- 						<td>$10.00</td> -->
-<!-- 						<td>01/03/2016</td> -->
-<!-- 					</tr> -->
+					
+					<!-- List all completed errands for which this user is registered as a Customer -->
+					<c:forEach items="${completedErrandsCustomer}" var="errand">
+					<tr>
+						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td>$ ${errand.getRewardId().getRewardValue() }</td>
+						<td>${errand.getDateCreated() }</td>
+					</tr>
+					</c:forEach>
 				</table>
 			</div>
 			

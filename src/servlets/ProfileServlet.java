@@ -39,28 +39,36 @@ public class ProfileServlet extends HttpServlet {
 		// Get data for the user who's public profile is being viewed
 		viewUser = userDao.getUserForID(Integer.parseInt(request.getParameter("id")));
 		
-		// Errands for which the user id a Customer
+		// Active errands for which the user id a Customer
 		List<Errand> errandsCustomer = errandDao.selectErrandsForUser(viewUser);
 		
-		// Errands for which the user is a Gopher
+		// Active errands for which the user is a Gopher
 		List<Errand> errandsGopher = errandDao.selectErrandsForGopherId(viewUser);
+		
+		// Completed errands for which the user is a Customer (requests)
+		List<Errand> completedErrandsCustomer = errandDao.selectCompletedErrandsForUser(viewUser);
+						
+		// Completed errands for which the user is a Gopher
+		List<Errand> completedErrandsGopher = errandDao.selectCompletedErrandsForGopher(viewUser);
 		
 		// All ratings for the user as a Customer
 		List<Rating> ratingsCustomer = ratingDao.getAllCustomerRatingsById(viewUser.getId());
 		
 		// Average rating for the user as a Customer
-		Float customerRatingAvg = ratingDao.getRatingAverageForCustomerID(viewUser.getId());
+		Integer customerRatingAvg = ratingDao.getRatingAverageForCustomerID(viewUser.getId());
 		
 		// All ratings for the user as a Customer
 		List<Rating> ratingsGopher = ratingDao.getAllGopherRatingsById(viewUser.getId());
 				
 		// Average rating for the user as a Customer
-		Float gopherRatingAvg = ratingDao.getRatingAverageForGopherID(viewUser.getId());
+		Integer gopherRatingAvg = ratingDao.getRatingAverageForGopherID(viewUser.getId());
 		
 		try {
 			request.setAttribute("viewUser", viewUser);
 			request.setAttribute("errandsCustomer", errandsCustomer);
 			request.setAttribute("errandsGopher", errandsGopher);
+			request.setAttribute("completedErrandsCustomer", completedErrandsCustomer);
+			request.setAttribute("completedErrandsGopher", completedErrandsGopher);
 			request.setAttribute("ratingsCustomer", ratingsCustomer);
 			request.setAttribute("customerRatingAvg", customerRatingAvg);
 			request.setAttribute("ratingsGopher", ratingsGopher);

@@ -24,8 +24,23 @@ public class ErrandDao extends DatabaseManager {
 	private static final String SELECT_BY_NAME = "SELECT * FROM Errands WHERE name=?";
 	private static final String INSERT = "INSERT INTO Errands(name, tel, passwd) VALUES(?, ?, ?)";
 	private static final String UPDATE = "UPDATE Errands SET name=?, tel=?, passwd=? WHERE id=?";
-	private static final String SELECT_ERRANDS_FOR_USERID = "SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ?";
-	private static final String SELECT_ERRANDS_FOR_GOPHERID = "SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ?";
+	
+	/** Query to retreive active errand requests that the user has made */
+	private static final String SELECT_ERRANDS_FOR_USERID = 
+			"SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ? and completionDate is null";
+	
+	/** Query to retrieve active errands the user is gophering */
+	private static final String SELECT_ERRANDS_FOR_GOPHERID = 
+			"SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ? and completionDate is null";
+	
+	/** Query to retrieve errands the user has requested and that have since been completed */
+	private static final String SELECT_COMPLETED_ERRANDS_FOR_USERID = 
+			"SELECT * FROM errands, users WHERE errands.userIdCustomer = users.id AND userIdCustomer = ? AND completionDate is not null";
+	
+	/** Query to retrieve errand the user has completed as a gopher */
+	private static final String SELECT_COMPLETED_ERRANDS_FOR_GOPHERID = 
+			"SELECT * FROM errands, users WHERE errands.userIdGopher = users.id AND userIdGopher = ? AND completionDate is not null";
+	
 	private static final String SELECT_12_LATEST = "SELECT * FROM errands ORDER BY creationDate DESC LIMIT 12";
 	private UserDao userDB = new UserDao();
 	private RewardDAO rewardDB = new RewardDAO();
@@ -65,12 +80,24 @@ public class ErrandDao extends DatabaseManager {
 		}
 	}
 	
+	/** Returns a list of active (incomplete) errands the user has requested */
 	public List<Errand> selectErrandsForUser(User user){
 		return selectErrandsForUser(SELECT_ERRANDS_FOR_USERID, user.getId());
 	}
 	
+	/** Returns a list of active (incomplete errands the user is gophering */
 	public List<Errand> selectErrandsForGopherId(User user){
 		return selectErrandsForUser(SELECT_ERRANDS_FOR_GOPHERID, user.getId());
+	}
+	
+	/** Returns a list of errands the user has requested and have been completed */
+	public List<Errand> selectCompletedErrandsForUser(User user){
+		return selectErrandsForUser(SELECT_COMPLETED_ERRANDS_FOR_USERID, user.getId());
+	}
+	
+	/** Returns a list of errands the user was a gopher for and have been completed*/
+	public List<Errand> selectCompletedErrandsForGopher(User user){
+		return selectErrandsForUser(SELECT_COMPLETED_ERRANDS_FOR_GOPHERID, user.getId());
 	}
 	
 	public List<Errand> selectErrandsForUser(String query, int userid){

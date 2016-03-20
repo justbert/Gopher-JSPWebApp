@@ -49,14 +49,14 @@ public class RatingDAO extends DatabaseManager {
 	private static final String selectRatingAverageForErrandID =
 			"SELECT avg(ratingValue) FROM ratings WHERE errandId=?";
 	
-	/** Define a query that retrieves the average rating value for a Customer by id */
+	/** Define a query that retrieves the average rating value for a Customer by id (rounded to nearest integer)*/
 	private static final String selectRatingAverageForCustomerID =
-			"SELECT avg(ratingValue)FROM ratings, errands WHERE ratings.userIdRated = errands.userIdCustomer "
+			"SELECT ROUND(avg(ratingValue)) FROM ratings, errands WHERE ratings.userIdRated = errands.userIdCustomer "
 			+ "AND errandId = errands.id AND userIdCustomer = ?";
 	
-	/** Define a query that retrieves the average rating value for a Gopher by id */
+	/** Define a query that retrieves the average rating value for a Gopher by id (rounded to nearest integer)*/
 	private static final String selectRatingAverageForGopherID =
-			"SELECT avg(ratingValue)FROM ratings, errands WHERE ratings.userIdRated = errands.userIdGopher "
+			"SELECT ROUND(avg(ratingValue)) FROM ratings, errands WHERE ratings.userIdRated = errands.userIdGopher "
 			+ "AND errandId = errands.id AND userIdGopher = ?";
 	
 	/** Defines a query that adds a rating entry into the database */
@@ -263,43 +263,45 @@ public class RatingDAO extends DatabaseManager {
 	}
 	
 	/**
-	 * Returns a list of all ratings associated with a customer
-	 * @param id the id of the customer to retrieve the ratings for
-	 * @return List of Rating objects if they exists, Float.MIN_VALUE
+	 * Returns the average of all ratings associated with a Customer, rounded
+	 * to the nearest integer
+	 * @param id the id of the customer to retrieve the average ratings for
+	 * @return int average of Rating objects if they exists, Integer.MIN_VALUE
 	 * if there are no ratings for that customer
 	 */
-	public float getRatingAverageForCustomerID(int id) {
+	public int getRatingAverageForCustomerID(int id) {
 	
 		try (ResultSet rs = query(selectRatingAverageForCustomerID, id)){
 			if (rs.first()) {
-				return rs.getFloat("avg(ratingValue)");
+				return rs.getInt("ROUND(avg(ratingValue))");
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();	// Handle this eventually
 		}
 		
-		return Float.MIN_VALUE;
+		return Integer.MIN_VALUE;
 	}
 	
 	/**
-	 * Returns a list of all ratings associated with a Gopher
-	 * @param id the id of the Gopher to retrieve the ratings for
-	 * @return List of Rating objects if they exists, Float.MIN_VALUE
+	 * Returns the average of all ratings associated with a Gopher, rounded
+	 * to the nearest integer
+	 * @param id the id of the Gopher to retrieve the average ratings for
+	 * @return int average of Rating objects if they exists, Integer.MIN_VALUE
 	 * if there are no ratings for that Gopher
 	 */
-	public float getRatingAverageForGopherID(int id) {
+	public int getRatingAverageForGopherID(int id) {
 	
 		try (ResultSet rs = query(selectRatingAverageForGopherID, id)){
 			if (rs.first()) {
-				return rs.getFloat("avg(ratingValue)");
+				return rs.getInt("ROUND(avg(ratingValue))");
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();	// Handle this eventually
 		}
 		
-		return Float.MIN_VALUE;
+		return Integer.MIN_VALUE;
 	}
 	
 	
