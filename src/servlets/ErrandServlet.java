@@ -44,7 +44,7 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 			//request.setAttribute("errandAverage", errandRatingAvg);
 			
 			// Get the average rating for the customer who requested the errand
-			Float customerRatingAvg = ratingDAO.getRatingAverageForCustomerID(errand.getUserIdCustomer().getId());
+			Integer customerRatingAvg = ratingDAO.getRatingAverageForCustomerID(errand.getUserIdCustomer().getId());
 			request.setAttribute("customerAverage", customerRatingAvg);
 			
 			request.getRequestDispatcher("/errand.jsp").forward(request, response);

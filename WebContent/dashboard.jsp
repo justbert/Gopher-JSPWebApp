@@ -15,8 +15,8 @@ String lang = request.getParameter( "lang" );
 <%-- Variable Declarations --%>
 <%! String profile, notifications, activeErrands, pastErrands, ratings, myAccount, 
      editProfile, changePhoto, settings, gophRating, custRating, username, email,
-     toGopher, errand, reward, deadline, reqDate, reqErrand, gopheredErrands, dateCompleted,
-     ratingsAsCust, rating, comments, date, by; %>
+     toGopher, needGopher, errand, reward, deadline, reqDate, reqErrand, gopheredErrands, 
+     dateCompleted, ratingsAsCust, ratingsAsGopher, rating, comments, date, by; %>
 
 <%-- Variable Initializations --%>
 <% 
@@ -34,6 +34,7 @@ String lang = request.getParameter( "lang" );
   username = RB.getString("username"); 
   email = RB.getString("email"); 
   toGopher = RB.getString("toGopher"); 
+  needGopher = RB.getString("needGopher");
   errand = RB.getString("errand"); 
   reward = RB.getString("reward"); 
   deadline = RB.getString("deadline"); 
@@ -41,7 +42,8 @@ String lang = request.getParameter( "lang" );
   reqErrand = RB.getString("reqErrand"); 
   gopheredErrands = RB.getString("gopheredErrands"); 
   dateCompleted = RB.getString("dateCompleted"); 
-  ratingsAsCust = RB.getString("ratingsAsCust"); 
+  ratingsAsCust = RB.getString("ratingsAsCust");
+  ratingsAsGopher = RB.getString("ratingsAsGopher");
   rating = RB.getString("rating"); 
   comments = RB.getString("comments"); 
   date = RB.getString("date"); 
@@ -136,8 +138,7 @@ String lang = request.getParameter( "lang" );
 		<h1><c:out value="${userObject.getUsername()}" /> </h1>
 	</div>
 	
-	<!-- Tab navigation for dashboard content -->
-	
+	<!-- Tab navigation for dashboard content -->	
 	<div>
 		<div class="dashboard-nav">
 			<ul class="nav nav-tabs">
@@ -178,19 +179,15 @@ String lang = request.getParameter( "lang" );
 					</tr>
 					<tr>
 						<th><%=gophRating%>:</th>
-						<td>
+						<td><c:forEach begin="1" end="${gopherRatingAvg}">
 							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-						</td>
+						</c:forEach></td>
 					</tr>
 					<tr>
 						<th><%=custRating%>:</th>
-						<td>
+						<td><c:forEach begin="1" end="${customerRatingAvg}">
 							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-						</td>
+						</c:forEach></td>
 					</tr>
 				</table>
 			</div>
@@ -207,7 +204,7 @@ String lang = request.getParameter( "lang" );
 				</table>
 			</div>
 			
-			<!--  Current errands - requesting or to-do -->
+			<!--  User's active errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
 					<%=toGopher %>
@@ -219,7 +216,7 @@ String lang = request.getParameter( "lang" );
 							<th><%=deadline%></th>
 						</tr>
 						
-						<!-- List all errands for which this customer is registered as a Gopher -->
+						<!-- List all errands for which this user is registered as a Gopher -->
 						<c:forEach items="${errandsGopher}" var="errand">
 							<tr>
 								<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
@@ -229,7 +226,7 @@ String lang = request.getParameter( "lang" );
 						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					<%=reqErrand %>
+					<%=needGopher %>
 				</h3>
 				<table class="table">
 					<tr>
@@ -238,7 +235,7 @@ String lang = request.getParameter( "lang" );
 						<th><%=reqDate%></th>
 					</tr>
 					
-					<!-- List all errands for which this customer is registered as a Customer -->
+					<!-- List all errands for which this user is registered as a Customer -->
 					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
 						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
@@ -259,17 +256,17 @@ String lang = request.getParameter( "lang" );
 						<th><%=errand%></th>
 						<th><%=reward%></th>
 						<th><%=dateCompleted %></th>
+						<th>Rate the Customer</th>
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<td>Get me a popsicle</td> -->
-<!-- 						<td>One hug</td> -->
-<!-- 						<td>01/03/2016</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td>Get my groceries</td> -->
-<!-- 						<td>$10 gift card</td> -->
-<!-- 						<td>01/17/2016</td> -->
-<!-- 					</tr> -->
+					
+					<!-- List all completed errands for which this user is registered as a Gopher -->
+					<c:forEach items="${completedErrandsGopher}" var="errand">
+						<tr>
+							<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+							<td>$ ${errand.getRewardId().getRewardValue() }</td>
+							<td>${errand.getDeadline() }</td>
+						</tr>
+					</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
 					<%=reqErrand %>
@@ -279,17 +276,17 @@ String lang = request.getParameter( "lang" );
 						<th><%=errand%></th>
 						<th><%=reward%></th>
 						<th><%=dateCompleted %></th>
+						<th>Rate the Gopher</th>
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<td>Deliver my medicine</td> -->
-<!-- 						<td>Free pizza</td> -->
-<!-- 						<td>01/05/2016</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td>Pick up my laundry</td> -->
-<!-- 						<td>$10.00</td> -->
-<!-- 						<td>01/03/2016</td> -->
-<!-- 					</tr> -->
+					
+					<!-- List all completed errands for which this user is registered as a Customer -->
+					<c:forEach items="${completedErrandsCustomer}" var="errand">
+					<tr>
+						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td>$ ${errand.getRewardId().getRewardValue() }</td>
+						<td>${errand.getDateCreated() }</td>
+					</tr>
+					</c:forEach>
 				</table>
 			</div>
 			
@@ -310,7 +307,34 @@ String lang = request.getParameter( "lang" );
 					<!-- List all ratings for which this user was registered as a customer -->
 						<c:forEach items="${ratingsCustomer}" var="rating">
 							<tr>
-								<td>${rating.getRatingValue()}</td>
+								<td><c:forEach begin="1" end="${rating.getRatingValue()}">
+									<img class="img-circle" src="assets/img/rating.png" >
+								</c:forEach></td>
+								<td>${rating.getComments()}</td>
+								<td>${rating.getCreationDate()}</td>
+								<td>${rating.getUserIdRater().getUsername()}
+								<td>${rating.getErrandId().getName()}
+							</tr>
+						</c:forEach>
+				</table>
+				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
+					<%=ratingsAsGopher %>
+				</h3>
+				<table class="table">
+					<tr>
+						<td>Rating</td>
+						<td>Comments</td>
+						<td>Date</td>
+						<td>By</td>
+						<td>Errand<td>
+					</tr>
+					
+					<!-- List all ratings for which this user was registered as a gopher -->
+						<c:forEach items="${ratingsGopher}" var="rating">
+							<tr>
+								<td><c:forEach begin="1" end="${rating.getRatingValue()}">
+									<img class="img-circle" src="assets/img/rating.png" >
+								</c:forEach></td>
 								<td>${rating.getComments()}</td>
 								<td>${rating.getCreationDate()}</td>
 								<td>${rating.getUserIdRater().getUsername()}

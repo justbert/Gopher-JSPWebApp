@@ -14,8 +14,8 @@ if ( lang == null){ lang = "en";};
 
 <%-- Variable Declarations --%>
 <%! String profile, activeErrands, pastErrands, ratings, basicInfo, username, gophRating, custRating,
-    toGopher, errand, reward, deadline, reqDate, dateCompleted, reqErrand, gopheredErrands, pastReq,
-    ratingsAsCust, rating, comments, date, by;; %>
+    toGopher, needGopher, errand, reward, deadline, reqDate, dateCompleted, reqErrand, gopheredErrands,
+    ratingsAsCust, ratingsAsGopher, rating, comments, date, by;; %>
 
 <%-- Variable Initializations --%>
 <% 
@@ -28,6 +28,7 @@ username = RB.getString("username");
 gophRating = RB.getString("gophRating"); 
 custRating = RB.getString("custRating"); 
 toGopher = RB.getString("toGopher");
+needGopher = RB.getString("needGopher");
 errand = RB.getString("errand"); 
 reward = RB.getString("reward"); 
 deadline = RB.getString("deadline"); 
@@ -35,8 +36,8 @@ reqDate = RB.getString("reqDate");
 dateCompleted = RB.getString("dateCompleted"); 
 reqErrand = RB.getString("reqErrand"); 
 gopheredErrands = RB.getString("gopheredErrands"); 
-pastReq = RB.getString("pastReq"); 
-ratingsAsCust = RB.getString("ratingsAsCust"); 
+ratingsAsCust = RB.getString("ratingsAsCust");
+ratingsAsGopher = RB.getString("ratingsAsGopher");
 rating = RB.getString("rating"); 
 comments = RB.getString("comments"); 
 date = RB.getString("date"); 
@@ -143,27 +144,23 @@ by = RB.getString("by");
 						<td>${viewUser.getUsername()}
 					<tr>
 						<th><%=gophRating %>:</th>
-						<td>
+						<td><c:forEach begin="1" end="${gopherRatingAvg}">
 							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-						</td>
+						</c:forEach></td>
 					</tr>
 					<tr>
 						<th><%=custRating %>:</th>
-						<td>
+						<td><c:forEach begin="1" end="${customerRatingAvg}">
 							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-							<img class="img-circle" src="assets/img/rating.png" >
-						</td>
+						</c:forEach></td>
 					</tr>
 				</table>
 			</div>
-			
-			<!--  Current errands - requesting or to-do -->
+			 
+			<!-- User's current errands - requesting or to-do -->
 			<div id="active-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-exclamation-sign tab-icon"></span>
-					<%=toGopher %>
+					${viewUser.getUsername()}'s <%=toGopher %>
 				</h3>
 				<table class="table">					
 						<tr>
@@ -182,7 +179,7 @@ by = RB.getString("by");
 						</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-hourglass tab-icon"></span>
-					<%=reqErrand %>
+					${viewUser.getUsername()}'s <%=needGopher %>
 				</h3>
 				<table class="table">
 					<tr>
@@ -205,7 +202,7 @@ by = RB.getString("by");
 			<!-- Past errands completed or requested by user -->
 			<div id="past-errands" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
-					<%=gopheredErrands %>
+					${viewUser.getUsername()}'s <%=gopheredErrands %>
 				</h3>
 				<table class="table">
 					<tr>
@@ -213,19 +210,18 @@ by = RB.getString("by");
 						<th><%=reward %></th>
 						<th><%=dateCompleted %></th>
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<td>Get me a popsicle</td> -->
-<!-- 						<td>One hug</td> -->
-<!-- 						<td>01/03/2016</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td>Get my groceries</td> -->
-<!-- 						<td>$10 gift card</td> -->
-<!-- 						<td>01/17/2016</td> -->
-<!-- 					</tr> -->
+					
+					<!-- List all completed errands for which this user is registered as a Gopher -->
+					<c:forEach items="${completedErrandsGopher}" var="errand">
+						<tr>
+							<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+							<td>$ ${errand.getRewardId().getRewardValue() }</td>
+							<td>${errand.getDeadline() }</td>
+						</tr>
+					</c:forEach>
 				</table>
 				<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-					<%=pastReq %>
+					${viewUser.getUsername()}'s <%=reqErrand %>
 				</h3>
 				<table class="table">
 					<tr>
@@ -233,23 +229,22 @@ by = RB.getString("by");
 						<th><%=reward %></th>
 						<th><%=dateCompleted %></th>
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<td>Deliver my medicine</td> -->
-<!-- 						<td>Free pizza</td> -->
-<!-- 						<td>01/05/2016</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td>Pick up my laundry</td> -->
-<!-- 						<td>$10.00</td> -->
-<!-- 						<td>01/03/2016</td> -->
-<!-- 					</tr> -->
+					
+					<!-- List all completed errands for which this user is registered as a Customer -->
+					<c:forEach items="${completedErrandsCustomer}" var="errand">
+					<tr>
+						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td>$ ${errand.getRewardId().getRewardValue() }</td>
+						<td>${errand.getDateCreated() }</td>
+					</tr>
+					</c:forEach>
 				</table>
 			</div>
 			
 			<!--  Ratings tab -->
 			<div id="ratings" class="tab-pane fade table-responsive">
 				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
-					${viewUser.getUsername()} - <%=ratingsAsCust %>:
+					${viewUser.getUsername()}'s <%=ratingsAsCust %>:
 				</h3>
 				<table class="table">
 					<tr>
@@ -263,7 +258,34 @@ by = RB.getString("by");
 					<!-- List all ratings for which this user was registered as a customer -->
 						<c:forEach items="${ratingsCustomer}" var="rating">
 							<tr>
-								<td>${rating.getRatingValue()}</td>
+								<td><c:forEach begin="1" end="${rating.getRatingValue()}">
+									<img class="img-circle" src="assets/img/rating.png" >
+								</c:forEach></td>
+								<td>${rating.getComments()}</td>
+								<td>${rating.getCreationDate()}</td>
+								<td>${rating.getUserIdRater().getUsername()}
+								<td>${rating.getErrandId().getName()}
+							</tr>
+						</c:forEach>
+				</table>
+				<h3 class="table-title"><span class="glyphicon glyphicon-heart tab-icon"></span>
+					${viewUser.getUsername()}'s <%=ratingsAsGopher %>:
+				</h3>
+				<table class="table">
+					<tr>
+						<td>Rating</td>
+						<td>Comments</td>
+						<td>Date</td>
+						<td>By</td>
+						<td>Errand<td>
+					</tr>
+					
+					<!-- List all ratings for which this user was registered as a gopher -->
+						<c:forEach items="${ratingsGopher}" var="rating">
+							<tr>
+								<td><c:forEach begin="1" end="${rating.getRatingValue()}">
+									<img class="img-circle" src="assets/img/rating.png" >
+								</c:forEach></td>
 								<td>${rating.getComments()}</td>
 								<td>${rating.getCreationDate()}</td>
 								<td>${rating.getUserIdRater().getUsername()}
