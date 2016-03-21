@@ -81,7 +81,7 @@ String lang = request.getParameter( "lang" );
 			color: #555;
 		}
 		.dashboard-nav{
-				background-color:ghostwhite;
+			background-color:ghostwhite;
 		}
 		
 		.dashboard-content {

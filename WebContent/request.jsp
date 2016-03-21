@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ page import="java.io.*, java.net.*,java.util.*"%>
+<%@ page import="java.io.*, java.net.*, java.util.*" %>
 
 <%-- Language Declaration and Resource Bundle --%>
 <% 
@@ -26,29 +26,120 @@ String lang = request.getParameter( "lang" );
 	.jumbotron h1 {
   		font-size: 36px !important;
 	}
+	
 	.jumbotron  {
   		font-size: 14px !important;
+  		margin-bottom: 0px !important;
 	}
-	.input-container{
-		padding:20px;
-		margin:20px;
+	
+	.profile-header {
+		padding-top: 50px;
+		padding-bottom: 50px;
+		background-color: #c7eaee;
 	}
-	.input-container input{
-		margin-left:15px;
+	
+	.profile-header-img {
+		margin-top: 20px;
 	}
-	.input-container textarea{
-		height:120px;
+	
+	.img-circle {
+		border-radius: 50%;
+		border: 3px solid white;
 	}
-	#tasks-container{
-		background-color:white;
-		border-radius:20px;
-		padding:20px;
+	
+	.request-nav a, a:hover {
+		padding: 10px 15px;
+		font-size: 16px;
+		color: #555;
+	}
 		
+	.request-nav {
+		background-color:ghostwhite;
 	}
+	
+	.request-content {
+		border-style: solid;
+		border-color: #ddd;
+		border-width: 1px 1px 1px 1px;
+		border-radius: 10px 10px 10px 10px;
+		background-color: white;
+		margin: 0px;
+		padding: 20px;
+		min-height: 400px;
+	}
+	
+	.clearfix:after {
+		visibility: hidden;
+		display: block;
+		font-size: 0;
+		content: " ";
+		clear: both;
+		height: 0;
+	}
+	
+	#tasks-container {
+		padding: 10px;
+	}
+	
+	#tasks-div {
+		padding: 10px;
+	}
+	
+	form h4 {
+		margin-bottom: 20px;
+		margin-top: 20px;
+	}
+	
+	#tasks-div h5 {
+		padding: 15px;
+	}
+	
+	input, textarea {
+		display: block;
+		width: 50%;
+		border: 2px solid #c7eaee;
+		border-radius: 5px;
+		margin: 8px 0 !important;
+	}
+	
+	select {
+		display: block;
+		border: 2px solid #c7eaee;
+		border-radius: 5px;
+		margin: 8px 0 !important;
+	}
+	
+	#subtasks button {
+		background-color: white;
+    	color: black;
+    	border: 2px solid #c7eaee;
+    	border-radius: 5px;
+    	margin: 2px;
+    	padding: 5px;
+	}
+	
+	#subtasks button:hover {
+    	background-color: #c7eaee;
+    	color: white;
+	}
+	
 	.map {
 		height:300px;
-		width:300px;
+		width:100%;
+		margin: auto;
+		padding: 20px;
 	}
+	
+	.submitBtn {
+		background-color: #c7eaee;
+		width: 20%;
+		padding: 10px;
+		border: none;
+		border-radius: 5px;
+		margin-left: 35%;
+    	margin-top: 20px;
+	}
+	
 
 </style>
 <head>
@@ -56,86 +147,83 @@ String lang = request.getParameter( "lang" );
 	<meta name="viewport" content="initial-scale=1.0">
 </head>
 <jsp:include page="header.jsp"/>
-	<div class="row pad-nav-bar bg-teal jumbotron">
-	 	<div class="col-md-6">
-	 		<h1><%=requestErrand %></h1>
-		 	<div class="input-container">
-			  	<label><%=title %></label>
-			  	<input style="width:50%;" type="text"></input>
-			</div>
-			<div class="input-container">
-				<label><%=description %></label>
-				<textarea style='box-sizing: border-box;width:100%;' name='description'></textarea>
-			</div>
+	
+	<!-- Header -->
+	<div class="container-fluid profile-header text-center jumbotron bg-teal">
+	 	<div class="profile-header-img">
+	 		<img class="img-circle" src="assets/img/cute_gopher.png" >		
 		</div>
-		<div class="col-md-6" id="mapTest">
-<!-- 			<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:400px;width:520px;'><div id='gmap_canvas' style='height:400px;width:520px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='https://embedmap.org/'>google map wordpress widget</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=e417dc20894e022e40790fc64a1a2ec49ff41b31'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng(45.29364945583902,-75.74120339660647),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(45.29364945583902,-75.74120339660647)});infowindow = new google.maps.InfoWindow({content:'<strong></strong><br><br>K2G Ottawa<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>	         -->
-		 </div>
+		<h1>Request an Errand </h1>
 	</div>
-	<div class="row bg-white">
-		<div id="tasks-container">
-	        <div class="row" id="subtasks">
-	        	<div class="col-md-3"><button id="remove-task" onclick="removeTaskTab()">Remove the last Subtask</button></div>
-	        	<div class="col-md-3 col-md-offset-2"><button id="add-task" onclick="addTaskTab()">Add Another Task</button></div>
-	        </div>
-	        <div class="row">
-		        <div class="col-md-3">
-		        	<ul class="nav nav-pills nav-stacked" id="tasks-list">
+	
+	<!-- Begin form to add errand request -->
+	<div class="request-content">
+		<form id="addErrandForm">
+			<h4>Enter Errand Information:</h4>
+			<label class="col-md-3">Title:</label>
+			<input type="text" name="errandName" placeholder="Title of your errand">
+			<label class="col-md-3">Description:</label>
+			<textarea rows="4" cols="50" name="errandDescription" placeholder="Enter a description of your errand."></textarea>
+			<label class="col-md-3">Deadline:</label>
+			<input type="datetime-local" name="deadline">
+			<label class="col-md-3">Importance:</label>
+			<select form="addErrandForm">
+  				<option value="1">Very Low</option>
+  				<option value="2">Low</option>
+  				<option value="3" selected>Normal</option>
+  				<option value="4">High</option>
+  				<option value="5">Very High</option>
+			</select>
+			<h4>Enter Reward Information:</h4>
+			<label class="col-md-3">Reward</label>
+			<input type="text" name="rewardName" placeholder="Name of the reward">
+			<label class="col-md-3">Description</label>
+			<textarea rows="4" cols="50" name="rewardDescription" placeholder="Enter a decription of the reward"></textarea>			
+		
+			<!-- Section to add task(s) -->
+			<h4>Enter Task(s) Information:</h4>
+			<div id="tasks-container" class="clearfix">
+				<div class="col-md-3">
+					<ul class="nav nav-pills nav-stacked" id="tasks-list">
 						<li class="active" id="task1li"><a data-toggle="tab" href="#task1div">Task 1</a></li>
 					</ul>
+					<div id="subtasks">
+				        <div><button type="button" id="add-task" onclick="addTaskTab()">Add Task</button></div>
+				        <div><button type="button" id="remove-task" onclick="removeTaskTab()">Remove Last Task</button></div>	        	
+				       </div>
 				</div>
-	        	<div class="col-md-9">
-	        		<div id="tasks-div" class="tab-content dashboard-content">
-		        		<div id="task1div" class="tab-pane fade in active table-responsive">
-							<!-- <h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
-								<c:out value="gopheredErrands"></c:out>
-								<c:
-								</h3>
-							<table class="table">
-								<tr>
-									<th>Errand</th>
-									<th>Reward</th>
-									<th>Date Completed</th>
-								</tr>
-								<tr>
-									<td>Get me a popsicle</td>
-									<td>One hug</td>
-									<td>01/03/2016</td>
-								</tr>
-								<tr>
-									<td>Get my groceries</td>
-									<td>$10 gift card</td>
-									<td>01/17/2016</td>
-								</tr>
-							</table>
-							<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-								<c:out value="reqErrands"></c:out>
-							</h3>
-							<table class="table">
-								<tr>
-									<th>Errand</th>
-									<th>Reward</th>
-									<th>Date Completed</th>
-								</tr>
-								<tr>
-									<td>Deliver my medicine</td>
-									<td>Free pizza</td>
-									<td>01/05/2016</td>
-								</tr>
-								<tr>
-									<td>Pick up my laundry</td>
-									<td>$10.00</td>
-									<td>01/03/2016</td>
-								</tr>
-							</table> -->
+				<div class="col-md-9">
+				    <div id="tasks-div" class="tab-content">
+				    	<label class="col-md-3">Title:</label>
+						<input type="text" name="taskName" placeholder="Title of your task">
+						<label class="col-md-3">Description:</label>
+						<textarea rows="4" cols="50" name="taskDescription" placeholder="Enter a description of your task."></textarea>
+						<h5>Enter a location for this task:</h5>
+						<label class="col-md-3">Address Line 1:</label>
+						<input type="text" name="addressLine1">
+						<label class="col-md-3">Address Line 2:</label>
+						<input type="text" name="addressLine2">
+						<label class="col-md-3">City:</label>
+						<input type="text" name="city">
+						<label class="col-md-3">Province:</label>
+						<input type="text" name="province">
+						<label class="col-md-3">Country:</label>
+						<input type="text" name="country">
+						<label class="col-md-3">Postal Code:</label>
+						<input type="text" name="zip">
+					    <div id="task1div" class="tab-pane fade in active table-responsive">
 							<div class="map" id="map1"></div>
-						</div>
-						
-		        	</div>
-		        </div>
-	        </div>
-        </div>
+						</div>	
+					</div>
+				</div>
+			</div>
+			
+			<button class="submitBtn" type="submit">Request Errand!</button>
+			
+		</form>	
 	</div>
+	
+	
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpiQxT9pbyX3_zs4M1CTRCZFprNwOw7Gg&callback=initMap"async defer></script> -->
 	<script src="https://maps.googleapis.com/maps/api/js?&callback=addMap&key=AIzaSyCpiQxT9pbyX3_zs4M1CTRCZFprNwOw7Gg" async defer></script>
 	<script type="text/javascript">
