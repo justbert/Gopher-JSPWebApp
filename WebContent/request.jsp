@@ -87,75 +87,39 @@ String lang = request.getParameter( "lang" );
 	        	<div class="col-md-9">
 	        		<div id="tasks-div" class="tab-content dashboard-content">
 		        		<div id="task1div" class="tab-pane fade in active table-responsive">
-							<!-- <h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
-								<c:out value="gopheredErrands"></c:out>
-								<c:
-								</h3>
-							<table class="table">
-								<tr>
-									<th>Errand</th>
-									<th>Reward</th>
-									<th>Date Completed</th>
-								</tr>
-								<tr>
-									<td>Get me a popsicle</td>
-									<td>One hug</td>
-									<td>01/03/2016</td>
-								</tr>
-								<tr>
-									<td>Get my groceries</td>
-									<td>$10 gift card</td>
-									<td>01/17/2016</td>
-								</tr>
-							</table>
-							<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-								<c:out value="reqErrands"></c:out>
-							</h3>
-							<table class="table">
-								<tr>
-									<th>Errand</th>
-									<th>Reward</th>
-									<th>Date Completed</th>
-								</tr>
-								<tr>
-									<td>Deliver my medicine</td>
-									<td>Free pizza</td>
-									<td>01/05/2016</td>
-								</tr>
-								<tr>
-									<td>Pick up my laundry</td>
-									<td>$10.00</td>
-									<td>01/03/2016</td>
-								</tr>
-							</table> -->
 							<div class="map" id="map1"></div>
 						</div>
-						
 		        	</div>
 		        </div>
 	        </div>
         </div>
 	</div>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpiQxT9pbyX3_zs4M1CTRCZFprNwOw7Gg&callback=initMap"async defer></script> -->
+    
 	<script src="https://maps.googleapis.com/maps/api/js?&callback=addMap&key=AIzaSyCpiQxT9pbyX3_zs4M1CTRCZFprNwOw7Gg" async defer></script>
 	<script type="text/javascript">
 	//Global Variables
 	var numTasks = 1;
-	var startPos;
+	var startPos = {coords: {latitude: 45.4165703, longitude: -75.7047006}};
 	var mapArray = new Array(100);
 	
 	window.onload = function() {
-		  startPos;
+		  
 		  var geoSuccess = function(position) {
 		    startPos = position;
+		    mapArray["map1"] = addMap("map1");
 		  };
 		  
-		  var geoFailure = function(position) {
-			startPos = {coords: {latitude: 45.4165703, longitude:-75.7047006}};
+		  var geoFailure = function() {
+			startPos = {coords: {latitude: 45.4165703, longitude: -75.7047006}};
+			/* startPos.coords.latitude = 45.4165703; 
+			startPos.coords.longitude = -75.7047006; */
+			mapArray["map1"] = addMap("map1");
+			
 		  }
+		  
 		  navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
 		  
-		  mapArray[0] = addMap("map1");
+		 
 		  
 	};
 	
@@ -168,9 +132,17 @@ String lang = request.getParameter( "lang" );
 		anchor.setAttribute("data-toggle", "tab");
 		andhor.setAttribute("") */
 		
-	    $("#tasks-list").append("<li id=\"task"+ numTasks +"li\"><a data-toggle=\"tab\" href=\"#task" + numTasks + "div\">Task "+ numTasks+"</a></li>");     // Append new elements
-		$("#tasks-div").append("<div id=\"task"+numTasks+"div\" class=\"tab-pane fade table-responsive\"><div class=\"map\" id=\"map" + numTasks +"\"></div></div>");
-	    mapArray[numTasks] = addMap('map'+numTasks);
+	    $("#tasks-list").append('<li id="task'+ numTasks +'li"><a data-toggle="tab" href="#task' + numTasks + 'div">Task '+ numTasks+'</a></li>');     // Append new elements
+		$("#tasks-div").append('<div id="task' + numTasks + 'div" class="tab-pane fade table-responsive"><div class="map" id="map' + numTasks +'"></div></div>');
+	    
+	    mapArray['map'+numTasks] = addMap('map'+numTasks);
+	    google.maps.event.trigger(mapArray['map'+numTasks], 'resize');
+	    
+	    $('a[href="#task'+numTasks+'div"]').on('shown.bs.tab', function(e) {
+	        google.maps.event.trigger(mapArray['map'+numTasks], 'resize');
+	    });
+	    
+	    $('a[href="#task'+numTasks+'div"]').tab('show');
 	}
 	
 	function removeTaskTab() {
@@ -188,7 +160,7 @@ String lang = request.getParameter( "lang" );
 		//var geocoder = new google.maps.Geocoder();
 		
 		var map = new google.maps.Map(document.getElementById(mapElement), {
-			center: {lat: 45.4165703, lng: -75.7047006},
+			center: {lat: startPos.coords.latitude, lng: startPos.coords.longitude},
 			zoom: 15,
 		});
 		
@@ -211,10 +183,6 @@ String lang = request.getParameter( "lang" );
 		}); */
 	}
 	
-	$('a[href="#edit_tab_map"]').on('shown.bs.tab', function(e)
-		    {
-		        google.maps.event.trigger(map, 'resize');
-    	});
 	
 	
 	</script>

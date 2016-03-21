@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,6 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import com.mysql.jdbc.CommunicationsException;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLTransientException;
 
 
 /**
@@ -83,18 +88,32 @@ public class DatabaseManager {
       * @throws SQLException
       */
      protected ResultSet query(String queryString, Object... parameters) throws SQLException{
-		 /*
-		  * should a pst be passed as a parameter so that it can be reused multiple times if the
-		  * class performing the search can use it multiple times, or is it stashed on the DB
-		  * somehow?
-		  */
+    	 ResultSet set = null;
 		 PreparedStatement pst = null;
-         pst = conn.prepareStatement(queryString);
-         for(int i = 1; i <= parameters.length; i++)
-        	 if (parameters[i-1] != null)
-        		 pst.setObject(i, parameters[i - 1]);
-         
-         return pst.executeQuery();
+		          
+		 if(conn.isClosed()) {
+			 createConnection();
+			 System.out.println("Connection remade because it was closed.");
+		 }
+         try {
+        	 pst = conn.prepareStatement(queryString);
+        	 for(int i = 1; i <= parameters.length; i++)
+            	 if (parameters[i-1] != null)
+            		 pst.setObject(i, parameters[i - 1]);
+        	 set = pst.executeQuery();
+         } catch (SQLException e) {
+        	 e.printStackTrace();
+        	 this.createConnection();
+        	 System.out.println("Connection is reestablished after SQLException.");
+         } finally {
+        	 pst = conn.prepareStatement(queryString);
+        	 for(int i = 1; i <= parameters.length; i++)
+            	 if (parameters[i-1] != null)
+            		 pst.setObject(i, parameters[i - 1]);
+        	 set = pst.executeQuery();
+         }
+
+         return set;
 	 }
 	 
 	 /**
@@ -152,4 +171,29 @@ public class DatabaseManager {
 		 if(conn != null)
 			 conn.close();
 	}
+	 
+	 private void createConnection() {
+		 String url, dbName, driver, userName, password;
+    	 
+			try(Scanner input = new Scanner(new FileReader("C:/remoteServerConfig.txt"))) {
+
+
+
+				url = input.nextLine(); 
+		        dbName = input.nextLine();  
+		        driver = input.nextLine();  
+		        userName = input.nextLine();
+		        password = input.nextLine();
+		         
+		        Class.forName(driver).newInstance();  /* Reflect database driver */
+	            conn = DriverManager.getConnection(url + dbName, userName, password); 
+	            
+			} catch(FileNotFoundException ex) {
+				System.out.println("File not found: " + ex.getMessage());
+			} catch(IOException ex) {
+				System.out.println("IOException: " + ex.getMessage());
+			} catch(Exception e) {
+				
+			} 
+	 }
 }
