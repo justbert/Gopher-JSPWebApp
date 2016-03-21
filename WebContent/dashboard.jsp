@@ -256,7 +256,6 @@ String lang = request.getParameter( "lang" );
 						<th><%=errand%></th>
 						<th><%=reward%></th>
 						<th><%=dateCompleted %></th>
-						<th>Rate the Customer</th>
 					</tr>
 					
 					<!-- List all completed errands for which this user is registered as a Gopher -->
@@ -276,7 +275,6 @@ String lang = request.getParameter( "lang" );
 						<th><%=errand%></th>
 						<th><%=reward%></th>
 						<th><%=dateCompleted %></th>
-						<th>Rate the Gopher</th>
 					</tr>
 					
 					<!-- List all completed errands for which this user is registered as a Customer -->
