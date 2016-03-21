@@ -45,8 +45,16 @@ String lang = request.getParameter( "lang" );
 		padding:20px;
 		
 	}
+	.map {
+		height:300px;
+		width:300px;
+	}
 
 </style>
+<head>
+	<title>Request an Errand</title>
+	<meta name="viewport" content="initial-scale=1.0">
+</head>
 <jsp:include page="header.jsp"/>
 	<div class="row pad-nav-bar bg-teal jumbotron">
 	 	<div class="col-md-6">
@@ -60,8 +68,8 @@ String lang = request.getParameter( "lang" );
 				<textarea style='box-sizing: border-box;width:100%;' name='description'></textarea>
 			</div>
 		</div>
-		<div class="col-md-6">
-			<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:400px;width:520px;'><div id='gmap_canvas' style='height:400px;width:520px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='https://embedmap.org/'>google map wordpress widget</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=e417dc20894e022e40790fc64a1a2ec49ff41b31'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng(45.29364945583902,-75.74120339660647),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(45.29364945583902,-75.74120339660647)});infowindow = new google.maps.InfoWindow({content:'<strong></strong><br><br>K2G Ottawa<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>	        
+		<div class="col-md-6" id="mapTest">
+<!-- 			<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:400px;width:520px;'><div id='gmap_canvas' style='height:400px;width:520px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='https://embedmap.org/'>google map wordpress widget</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=e417dc20894e022e40790fc64a1a2ec49ff41b31'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng(45.29364945583902,-75.74120339660647),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(45.29364945583902,-75.74120339660647)});infowindow = new google.maps.InfoWindow({content:'<strong></strong><br><br>K2G Ottawa<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>	         -->
 		 </div>
 	</div>
 	<div class="row bg-white">
@@ -73,14 +81,15 @@ String lang = request.getParameter( "lang" );
 	        <div class="row">
 		        <div class="col-md-3">
 		        	<ul class="nav nav-pills nav-stacked" id="tasks-list">
-						<li class="active"><a data-toggle="tab" href="#task1div" id="task1li">Task 1</a></li>
+						<li class="active" id="task1li"><a data-toggle="tab" href="#task1div">Task 1</a></li>
 					</ul>
 				</div>
 	        	<div class="col-md-9">
 	        		<div id="tasks-div" class="tab-content dashboard-content">
 		        		<div id="task1div" class="tab-pane fade in active table-responsive">
-							<h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
-								<%=gopheredErrands %>
+							<!-- <h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
+								<c:out value="gopheredErrands"></c:out>
+								<c:
 								</h3>
 							<table class="table">
 								<tr>
@@ -100,7 +109,7 @@ String lang = request.getParameter( "lang" );
 								</tr>
 							</table>
 							<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-								<%=reqErrand %>
+								<c:out value="reqErrands"></c:out>
 							</h3>
 							<table class="table">
 								<tr>
@@ -118,7 +127,8 @@ String lang = request.getParameter( "lang" );
 									<td>$10.00</td>
 									<td>01/03/2016</td>
 								</tr>
-							</table>
+							</table> -->
+							<div class="map" id="map1"></div>
 						</div>
 						
 		        	</div>
@@ -126,24 +136,87 @@ String lang = request.getParameter( "lang" );
 	        </div>
         </div>
 	</div>
-	
-	
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpiQxT9pbyX3_zs4M1CTRCZFprNwOw7Gg&callback=initMap"async defer></script> -->
+	<script src="https://maps.googleapis.com/maps/api/js?&callback=addMap&key=AIzaSyCpiQxT9pbyX3_zs4M1CTRCZFprNwOw7Gg" async defer></script>
 	<script type="text/javascript">
+	//Global Variables
 	var numTasks = 1;
+	var startPos;
+	var mapArray = new Array(100);
+	
+	window.onload = function() {
+		  startPos;
+		  var geoSuccess = function(position) {
+		    startPos = position;
+		  };
+		  
+		  var geoFailure = function(position) {
+			startPos = {coords: {latitude: 45.4165703, longitude:-75.7047006}};
+		  }
+		  navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
+		  
+		  mapArray[0] = addMap("map1");
+		  
+	};
 	
 	function addTaskTab() {
 		numTasks++;
-	    $("#tasks-list").append("<li><a data-toggle=\"tab\" href=\"#task" + numTasks + "div\" id=\"task"+ numTasks +"li\">Task "+ numTasks+"</a></li>");     // Append new elements
-		$("#tasks-div").append("<div id=\"task"+numTasks+"div\" class=\"tab-pane fade table-responsive\">"+"Task Div Number" + numTasks +"</div>");
+		
+		/* var tasksList = document.getElementById("tasks-list");
+		var newLI = document.createElement("li");
+		var anchor = document.createElement("a");
+		anchor.setAttribute("data-toggle", "tab");
+		andhor.setAttribute("") */
+		
+	    $("#tasks-list").append("<li id=\"task"+ numTasks +"li\"><a data-toggle=\"tab\" href=\"#task" + numTasks + "div\">Task "+ numTasks+"</a></li>");     // Append new elements
+		$("#tasks-div").append("<div id=\"task"+numTasks+"div\" class=\"tab-pane fade table-responsive\"><div class=\"map\" id=\"map" + numTasks +"\"></div></div>");
+	    mapArray[numTasks] = addMap('map'+numTasks);
 	}
 	
 	function removeTaskTab() {
 		if(numTasks > 1) {
 			$("#task" + numTasks + "li").remove();
 			$("#task" + numTasks + "div").remove();
+			
+			mapArray[numTasks] = null;
+			
 			numTasks--;
 		}
 	}
+	
+	function addMap(mapElement) {
+		//var geocoder = new google.maps.Geocoder();
+		
+		var map = new google.maps.Map(document.getElementById(mapElement), {
+			center: {lat: 45.4165703, lng: -75.7047006},
+			zoom: 15,
+		});
+		
+		return map;
+		/* geocoder.geocode({ 'address': address }, function (results, status) {
+		    if (status == google.maps.GeocoderStatus.OK) {
+		        var mapOptions = {
+		            zoom: 14,
+		            center: results[0].geometry.location,
+		            disableDefaultUI: true
+		        };
+		        var map = new google.maps.Map(document.getElementById("mapTest"), mapOptions);
+		        var marker = new google.maps.Marker({
+		            map: map,
+		            position: results[0].geometry.location
+		        });
+		    } else {
+		        alert("Geocode was not successful for the following reason: " + status);
+		    }
+		}); */
+	}
+	
+	$('a[href="#edit_tab_map"]').on('shown.bs.tab', function(e)
+		    {
+		        google.maps.event.trigger(map, 'resize');
+    	});
+	
+	
 	</script>
 	
 <jsp:include page="footer.jsp"/>
