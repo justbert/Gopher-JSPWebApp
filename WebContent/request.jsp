@@ -88,7 +88,8 @@ String lang = request.getParameter( "lang" );
 	        		<div id="tasks-div" class="tab-content dashboard-content">
 		        		<div id="task1div" class="tab-pane fade in active table-responsive">
 							<!-- <h3 class="table-title"><span class="glyphicon glyphicon-star tab-icon"></span>
-								<%=gopheredErrands %>
+								<c:out value="gopheredErrands"></c:out>
+								<c:
 								</h3>
 							<table class="table">
 								<tr>
@@ -108,7 +109,7 @@ String lang = request.getParameter( "lang" );
 								</tr>
 							</table>
 							<h3 class="table-title"><span class="glyphicon glyphicon-list-alt tab-icon"></span>
-								<%=reqErrand %>
+								<c:out value="reqErrands"></c:out>
 							</h3>
 							<table class="table">
 								<tr>
@@ -210,6 +211,10 @@ String lang = request.getParameter( "lang" );
 		}); */
 	}
 	
+	$('a[href="#edit_tab_map"]').on('shown.bs.tab', function(e)
+		    {
+		        google.maps.event.trigger(map, 'resize');
+    	});
 	
 	
 	</script>
