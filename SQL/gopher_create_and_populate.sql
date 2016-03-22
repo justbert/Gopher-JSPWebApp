@@ -60,6 +60,8 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   `province` VARCHAR(75) NULL,
   `country` VARCHAR(75) NULL,
   `zip` VARCHAR(10) NULL,
+  `lat` FLOAT(10,6),
+  `long` FLOAT(10, 6),kkk
   `userId` INT UNSIGNED NOT NULL,
   `addressTypeId` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
