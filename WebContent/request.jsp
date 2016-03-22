@@ -356,8 +356,22 @@ String lang = request.getParameter( "lang" );
 		
 		map.addListener('click', function(e) {
 			mapArray[this.name].setMarkerLocation(e.latLng);
+			
+			var geocoder = new google.maps.Geocoder;
+			
+			var that = this;
+			
+			geocoder.geocode({'location':e.latLng}, function(results, status) {
+				if(status === google.maps.GeocoderStatus.OK) {
+					if(results[1]) {
+						console.log(results);
+						$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val(results[1].formatted_address);
+					}
+				}
+			});
 		});
-				
+		
+		
 		//return map;
 		/* geocoder.geocode({ 'address': address }, function (results, status) {
 		    if (status == google.maps.GeocoderStatus.OK) {
@@ -376,6 +390,8 @@ String lang = request.getParameter( "lang" );
 		    }
 		}); */
 	}
+	
+
 	</script>
 	
 <jsp:include page="footer.jsp"/>
