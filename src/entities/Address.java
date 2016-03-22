@@ -21,6 +21,8 @@ public class Address implements Serializable {
 	private String province;
 	private String country;
 	private String zip;
+	private double lat;
+	private double lon;
 	private User userId;
 	private AddressType addressType;
 	
@@ -41,7 +43,7 @@ public class Address implements Serializable {
 			this.index = index;
 		}
 		
-		public AddressType getAddressType(int index){
+		public static AddressType getAddressType(int index){
 			for(AddressType type : AddressType.values())
 				if(type.index == index) return type;
 			return null;
@@ -56,7 +58,7 @@ public class Address implements Serializable {
 		}
 	}
 
-	public Address(int id, String addressLine1, String addressLine2, String city, String province, String country, String zip, User userId, AddressType addressType) {
+	public Address(int id, String addressLine1, String addressLine2, String city, String province, String country, String zip, double lat, double lon, User userId, AddressType addressType) {
 		super();
 		this.id = id;
 		this.addressLine1 = addressLine1;
@@ -65,6 +67,8 @@ public class Address implements Serializable {
 		this.province = province;
 		this.country = country;
 		this.zip = zip;
+		this.lat = lat;
+		this.lon = lon;
 		this.userId = userId;
 		this.addressType = addressType;
 	}
@@ -159,6 +163,22 @@ public class Address implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+	public double getLon() {
+		return lon;
+	}
+
+	public void setLon(double lon) {
+		this.lon = lon;
 	}
 
 }
