@@ -44,8 +44,8 @@ public class ErrandDao extends DatabaseManager {
 	
 	/** Defines a query that adds an errand entry into the database */
 	private static final String insertErrand = 
-			"INSERT INTO errands ( name, description, deadline, statusTypeId, importanceTypeId, userIdCustomer, userIdGopher )"
-			+ "VALUES ( ?, ?, ?, ?, ?, ?, ? )";
+			"INSERT INTO errands ( name, description, deadline, rewardId, statusTypeId, importanceTypeId, userIdCustomer, userIdGopher)"
+			+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	private static final String SELECT_12_LATEST = "SELECT * FROM errands ORDER BY creationDate DESC LIMIT 12";
 	private UserDao userDB = new UserDao();
@@ -63,10 +63,11 @@ public class ErrandDao extends DatabaseManager {
 			errand.getName(),
 			errand.getDescription(),
 			errand.getDeadline(),
-			errand.getStatus().getIndex(),
+			1,
+			1,
 			errand.getImportanceTypeID().getIndex(),
 			errand.getUserIdCustomer().getId(),
-			errand.getUserIdGopher().getId()
+			null
 		};
 		
 		try {
