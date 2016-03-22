@@ -55,8 +55,8 @@
 							</c:otherwise>
 						</c:choose>
 			            <li><a href="/Gopher/browse?lang=<%=lang%>"><%=browse%></a></li>
-			            <li><a href="/Gopher/request.jsp?lang=<%=lang%>"><%=req%></a></li>
 			            <c:if test="${loggedIn}">
+			            	<li><a href="/Gopher/request?lang=<%=lang%>"><%=req%></a></li>
 			            	<li><a href="/Gopher/logout?lang=<%=lang%>"><%=logout%></a></li>
 			            </c:if>
 			            
@@ -64,7 +64,7 @@
             				<select id="lang" name="lang" onchange="submit()">
             					<option value="en" ${language == 'en' ? 'selected' : ''}>Language</option>
                 				<option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
-                				<option value="fr" ${language == 'fr' ? 'selected' : ''}>Francais</option>
+                				<option value="fr" ${language == 'fr' ? 'selected' : ''}>Français</option>
             				</select>
        				   </form></li>
 			            

@@ -158,7 +158,7 @@ String lang = request.getParameter( "lang" );
 	
 	<!-- Begin form to add errand request -->
 	<div class="request-content">
-		<form id="addErrandForm">
+		<form id="addErrandForm" method="post">
 			<h4>Enter Errand Information:</h4>
 			<label class="col-md-3">Title:</label>
 			<input type="text" name="errandName" placeholder="Title of your errand">
@@ -194,24 +194,24 @@ String lang = request.getParameter( "lang" );
 				</div>
 	        	<div class="col-md-9">
 	        		<div id="tasks-div" class="tab-content">
-	        			<label class="col-md-3">Title:</label>
-						<input type="text" name="taskName" placeholder="Title of your task">
-						<label class="col-md-3">Description:</label>
-						<textarea rows="4" cols="50" name="taskDescription" placeholder="Enter a description of your task."></textarea>
-						<h5>Enter a location for this task:</h5>
-						<label class="col-md-3">Address Line 1:</label>
-						<input type="text" name="addressLine1">
-						<label class="col-md-3">Address Line 2:</label>
-						<input type="text" name="addressLine2">
-						<label class="col-md-3">City:</label>
-						<input type="text" name="city">
-						<label class="col-md-3">Province:</label>
-						<input type="text" name="province">
-						<label class="col-md-3">Country:</label>
-						<input type="text" name="country">
-						<label class="col-md-3">Postal Code:</label>
-						<input type="text" name="zip">
 		        		<div id="task1div" class="tab-pane fade in active table-responsive">
+			        		<label class="col-md-3">Title:</label>
+							<input type="text" name="taskName1" placeholder="Title of your task">
+							<label class="col-md-3">Description:</label>
+							<textarea rows="4" cols="50" name="taskDescription1" placeholder="Enter a description of your task."></textarea>
+							<h5>Enter a location for this task:</h5>
+							<label class="col-md-3">Address Line 1:</label>
+							<input type="text" name="addressLine1Task1">
+							<label class="col-md-3">Address Line 2:</label>
+							<input type="text" name="addressLine2Task2">
+							<label class="col-md-3">City:</label>
+							<input type="text" name="cityTask1">
+							<label class="col-md-3">Province:</label>
+							<input type="text" name="provinceTask1">
+							<label class="col-md-3">Country:</label>
+							<input type="text" name="countryTask1">
+							<label class="col-md-3">Postal Code:</label>
+							<input type="text" name="zipTask1">
 							<div class="map" id="map1"></div>
 						</div>
 		        	</div>
@@ -295,7 +295,26 @@ String lang = request.getParameter( "lang" );
 		andhor.setAttribute("") */
 		
 	    $("#tasks-list").append('<li id="task'+ numTasks +'li"><a data-toggle="tab" href="#task' + numTasks + 'div">Task '+ numTasks+'</a></li>');     // Append new elements
-		$("#tasks-div").append('<div id="task' + numTasks + 'div" class="tab-pane fade table-responsive"><div class="map" id="map' + numTasks +'"></div></div>');
+		$("#tasks-div").append(
+				'<div id="task' + numTasks + 'div" class="tab-pane fade table-responsive">' +
+				'<label class="col-md-3">Title:</label>' +
+				'<input type="text" name="taskName'+numTasks+'+" placeholder="Title of your task">'+
+				'<label class="col-md-3">Description:</label>'+
+				'<textarea rows="4" cols="50" name="taskDescription'+numTasks+'" placeholder="Enter a description of your task."></textarea>'+
+				'<h5>Enter a location for this task:</h5>'+
+				'<label class="col-md-3">Address Line 1:</label>'+
+				'<input type="text" name="addressLine1Task'+numTasks+'">'+
+				'<label class="col-md-3">Address Line 2:</label>'+
+				'<input type="text" name="addressLine2Task'+numTasks+'">'+
+				'<label class="col-md-3">City:</label>'+
+				'<input type="text" name="cityTask'+numTasks+'">'+
+				'<label class="col-md-3">Province:</label>'+
+				'<input type="text" name="provinceTask'+numTasks+'">'+
+				'<label class="col-md-3">Country:</label>'+
+				'<input type="text" name="countryTask'+numTasks+'">'+
+				'<label class="col-md-3">Postal Code:</label>'+
+				'<input type="text" name="zipTask'+numTasks+'">'+
+			'<div class="map" id="map' + numTasks +'"></div></div>');
 	    
 	    addMap("map"+numTasks);
 	    
