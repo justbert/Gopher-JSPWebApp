@@ -158,7 +158,7 @@ String lang = request.getParameter( "lang" );
 	
 	<!-- Begin form to add errand request -->
 	<div class="request-content">
-		<form id="addErrandForm">
+		<form id="addErrandForm" action="errand" method="post">
 			<h4>Enter Errand Information:</h4>
 			<label class="col-md-3">Title:</label>
 			<input type="text" name="errandName" placeholder="Title of your errand">

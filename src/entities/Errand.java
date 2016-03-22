@@ -104,6 +104,10 @@ public class Errand implements Serializable {
 		this.setImportance(importance);
 	}
 	
+	public Errand(String name, String description, Date deadline, User customer) {
+		
+	}
+
 	// Getters
 	public int getId() {
 		return id;
