@@ -158,7 +158,8 @@ String lang = request.getParameter( "lang" );
 	
 	<!-- Begin form to add errand request -->
 	<div class="request-content">
-		<form id="addErrandForm" method="post">
+	
+		<form id="addErrandForm" action="request" method="post">
 			<h4>Enter Errand Information:</h4>
 			<label class="col-md-3">Title:</label>
 			<input type="text" name="errandName" placeholder="Title of your errand">
@@ -167,7 +168,7 @@ String lang = request.getParameter( "lang" );
 			<label class="col-md-3">Deadline:</label>
 			<input type="datetime-local" name="deadline">
 			<label class="col-md-3">Importance:</label>
-			<select form="addErrandForm">
+			<select form="addErrandForm" name="importance">
   				<option value="1">Very Low</option>
   				<option value="2">Low</option>
   				<option value="3" selected>Normal</option>
