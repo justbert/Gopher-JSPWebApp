@@ -262,7 +262,7 @@ String lang = request.getParameter( "lang" );
 				this.marker = new google.maps.Marker({
 					position: position,
 				    map: this.map,
-				    draggable: true,
+				    draggable: false,
 				});
 			} else {
 				this.marker.setPosition(position);
@@ -366,7 +366,7 @@ String lang = request.getParameter( "lang" );
 				if(status === google.maps.GeocoderStatus.OK) {
 					if(results[1]) {
 						console.log(results);
-						$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val(results[1].formatted_address);
+						$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val(results[0].formatted_address);
 					}
 				}
 			});
