@@ -4,8 +4,9 @@
 <%-- Language Declaration and Resource Bundle --%>
 <% 
   String lang = request.getParameter( "lang" );
-  if ( lang == null){ lang = "en";}
+  if(lang == null){ lang = "en";}
   ResourceBundle RB = ResourceBundle.getBundle("com.lang.i18n.text", new Locale(lang));
+  String currentLang = lang.toUpperCase();
 %> 
 
 <%-- Variable Declarations --%>
@@ -62,9 +63,10 @@
 			            
 			            <li><form class="navbar-form">
             				<select id="lang" name="lang" onchange="submit()">
-            					<option value="en" ${language == 'en' ? 'selected' : ''}>Language</option>
+            					<option><%=currentLang%></option>             				
                 				<option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
                 				<option value="fr" ${language == 'fr' ? 'selected' : ''}>Français</option>
+                				<option value="es" ${language == 'es' ? 'selected' : ''}>Español</option>
             				</select>
        				   </form></li>
 			            
