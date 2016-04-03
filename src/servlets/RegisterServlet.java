@@ -26,7 +26,6 @@ public class RegisterServlet extends HttpServlet {
 	private UserDao userDAO = new UserDao();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.getRequestDispatcher("/signup.jsp").forward(request, response);
 	}
 	
@@ -75,7 +74,7 @@ public class RegisterServlet extends HttpServlet {
 				
 				session.setAttribute("userObject", user);
 				session.setAttribute("loggedIn", true);
-				request.getRequestDispatcher("dashboard").forward(request, response);
+				response.sendRedirect("/dashboard");
 			} else {
 				response.sendRedirect("/");
 			}

@@ -219,7 +219,7 @@ String lang = request.getParameter( "lang" );
 						<!-- List all errands for which this user is registered as a Gopher -->
 						<c:forEach items="${errandsGopher}" var="errand">
 							<tr>
-								<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+								<td><a href="/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
 								<td>$ ${errand.getRewardId().getRewardValue() }</td>
 								<td>${errand.getDeadline() }</td>
 							</tr>
@@ -238,7 +238,7 @@ String lang = request.getParameter( "lang" );
 					<!-- List all errands for which this user is registered as a Customer -->
 					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
-						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td><a href="/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
 						<td>$ ${errand.getRewardId().getRewardValue() }</td>
 						<td>${errand.getDateCreated() }</td>
 					</tr>
@@ -261,7 +261,7 @@ String lang = request.getParameter( "lang" );
 					<!-- List all completed errands for which this user is registered as a Gopher -->
 					<c:forEach items="${completedErrandsGopher}" var="errand">
 						<tr>
-							<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+							<td><a href="/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
 							<td>$ ${errand.getRewardId().getRewardValue() }</td>
 							<td>${errand.getDeadline() }</td>
 						</tr>
@@ -280,7 +280,7 @@ String lang = request.getParameter( "lang" );
 					<!-- List all completed errands for which this user is registered as a Customer -->
 					<c:forEach items="${completedErrandsCustomer}" var="errand">
 					<tr>
-						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td><a href="/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
 						<td>$ ${errand.getRewardId().getRewardValue() }</td>
 						<td>${errand.getDateCreated() }</td>
 					</tr>

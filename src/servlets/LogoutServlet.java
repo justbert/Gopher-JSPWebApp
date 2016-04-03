@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.Enumeration;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +23,7 @@ public class LogoutServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
 		HttpSession session = request.getSession();
 		
-		if((Boolean)session.getAttribute("loggedIn")) {
+		if(session.getAttribute("loggedIn") != null && (Boolean)session.getAttribute("loggedIn")) {
 			Enumeration<String> names = session.getAttributeNames();
 			
 			while(names.hasMoreElements()) {
@@ -30,9 +31,15 @@ public class LogoutServlet extends HttpServlet {
 			}
 			session.invalidate();
 			try {
-				response.sendRedirect("index");
+				response.sendRedirect("/");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				response.sendRedirect("/");
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}

@@ -64,8 +64,6 @@ by = RB.getString("by");
 		}
 		
 		.dashboard-nav a, a:hover {
-			padding: 10px 15px;
-			font-size: 16px;
 			color: #555;
 		}
 		.dashboard-nav{
@@ -172,7 +170,7 @@ by = RB.getString("by");
 						<!-- List all errands for which this user is registered as a Gopher -->
 						<c:forEach items="${errandsGopher}" var="errand">
 							<tr>
-								<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+								<td><a href="/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
 								<td>$ ${errand.getRewardId().getRewardValue() }</td>
 								<td>${errand.getDeadline() }</td>
 							</tr>
@@ -191,7 +189,7 @@ by = RB.getString("by");
 					<!-- List all errands for which this user is registered as a Customer -->
 					<c:forEach items="${errandsCustomer}" var="errand">
 					<tr>
-						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td><a href="/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
 						<td>$ ${errand.getRewardId().getRewardValue() }</td>
 						<td>${errand.getDateCreated() }</td>
 					</tr>
@@ -214,7 +212,7 @@ by = RB.getString("by");
 					<!-- List all completed errands for which this user is registered as a Gopher -->
 					<c:forEach items="${completedErrandsGopher}" var="errand">
 						<tr>
-							<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+							<td><a href="/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
 							<td>$ ${errand.getRewardId().getRewardValue() }</td>
 							<td>${errand.getDeadline() }</td>
 						</tr>
@@ -233,7 +231,7 @@ by = RB.getString("by");
 					<!-- List all completed errands for which this user is registered as a Customer -->
 					<c:forEach items="${completedErrandsCustomer}" var="errand">
 					<tr>
-						<td><a href="/Gopher/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
+						<td><a href="/errand?id=${errand.getId() }" >${errand.getName()}</a></td>
 						<td>$ ${errand.getRewardId().getRewardValue() }</td>
 						<td>${errand.getDateCreated() }</td>
 					</tr>

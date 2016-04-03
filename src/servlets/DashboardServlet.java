@@ -45,7 +45,7 @@ public class DashboardServlet extends HttpServlet {
 		// If user isn't logged in, redirect them to login page
 		if (session.getAttribute("loggedIn") == null) {
 			try {
-				response.sendRedirect("login");
+				response.sendRedirect("/login");
 				return;
 			} catch (IOException e) {
 				e.printStackTrace();

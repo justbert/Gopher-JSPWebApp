@@ -41,23 +41,23 @@
 			        	<span class="icon-bar"></span>
 			       	 	<span class="icon-bar"></span> 
       				</button>
-      				<a class="navbar-brand" href="/Gopher/index.jsp?lang=<%=lang%>"><img class="img-align" src="assets/img/blocklogo.png"></a>
+      				<a class="navbar-brand" href="/index?lang=<%=lang%>"><img class="img-align" src="/assets/img/blocklogo.png"></a>
     			</div>
     		
     			<div class="collapse navbar-collapse" id="myNavbar">	
 					<ul class="nav navbar-nav navbar-right">
 						<c:choose>
 							<c:when test="${loggedIn}">
-								<li><a href="/Gopher/dashboard?lang=<%=lang%>"><%=welcome%>, ${userObject.getUsername()}</a></li>
+								<li><a href="/dashboard?lang=<%=lang%>"><%=welcome%>, ${userObject.getUsername()}</a></li>
 							</c:when>
 							<c:otherwise>
-							<li><a href="/Gopher/login?lang=<%=lang%>"><%=login%></a></li>
+							<li><a href="/login?lang=<%=lang%>"><%=login%></a></li>
 							</c:otherwise>
 						</c:choose>
-			            <li><a href="/Gopher/browse?lang=<%=lang%>"><%=browse%></a></li>
+			            <li><a href="/browse?lang=<%=lang%>"><%=browse%></a></li>
 			            <c:if test="${loggedIn}">
-			            	<li><a href="/Gopher/request?lang=<%=lang%>"><%=req%></a></li>
-			            	<li><a href="/Gopher/logout?lang=<%=lang%>"><%=logout%></a></li>
+			            	<li><a href="/request?lang=<%=lang%>"><%=req%></a></li>
+			            	<li><a href="/logout?lang=<%=lang%>"><%=logout%></a></li>
 			            </c:if>
 			            
 			            <li><form class="navbar-form">

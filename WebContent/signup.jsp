@@ -76,7 +76,7 @@ if ( lang == null){ lang = "en";}
 	
 	<div class="bg-white fill">
 		<div style="width:200px;text-align:center;margin:0 auto;padding-top:20px">
-			<img width="200px" src="/Gopher/assets/img/logo.gif" />
+			<img width="200px" src="/assets/img/logo.gif" />
 		</div>
 	</div>
 <jsp:include page="footer.jsp"/>

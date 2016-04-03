@@ -46,8 +46,8 @@ blurb3 = RB.getString("blurb3");
 	   				<div class="monty-font" ><strong><%=gopher %></strong></div> 
 					<p><%=blurb1 %></p> 
 					<form class="form-inline">
-	   					<a href="/Gopher/login"><button type="button" class="btn btn-outline btn-lg spacer"><%=signin %></button></a>
-	   					<a href="/Gopher/register"><button type="button" class="btn btn-outline btn-lg"><%=signmeup %></button></a>
+	   					<a href="/login"><button type="button" class="btn btn-outline btn-lg spacer"><%=signin %></button></a>
+	   					<a href="/register"><button type="button" class="btn btn-outline btn-lg"><%=signmeup %></button></a>
 	 				</form> 
 	 			</div> 
 	 		</div>  				
