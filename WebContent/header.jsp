@@ -41,7 +41,7 @@
 			        	<span class="icon-bar"></span>
 			       	 	<span class="icon-bar"></span> 
       				</button>
-      				<a class="navbar-brand" href="/index?lang=<%=lang%>"><img class="img-align" src="/assets/img/blocklogo.png"></a>
+      				<a class="navbar-brand" href="/?lang=<%=lang%>"><img class="img-align" src="/assets/img/blocklogo.png"></a>
     			</div>
     		
     			<div class="collapse navbar-collapse" id="myNavbar">	
