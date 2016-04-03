@@ -234,7 +234,7 @@ String lang = request.getParameter( "lang" );
 	var mapArray = new Array(100);
 	var markerArray = new Array(100);
 	
-	//
+	//Object creation function
 	if(typeof Object.create !== 'function') {
 		Object.create = function(o) {
 			var F = function(o) {};
@@ -288,13 +288,7 @@ String lang = request.getParameter( "lang" );
 	
 	function addTaskTab() {
 		numTasks++;
-		
-		/* var tasksList = document.getElementById("tasks-list");
-		var newLI = document.createElement("li");
-		var anchor = document.createElement("a");
-		anchor.setAttribute("data-toggle", "tab");
-		andhor.setAttribute("") */
-		
+
 	    $("#tasks-list").append('<li id="task'+ numTasks +'li"><a data-toggle="tab" href="#task' + numTasks + 'div">Task '+ numTasks+'</a></li>');     // Append new elements
 		$("#tasks-div").append(
 				'<div id="task' + numTasks + 'div" class="tab-pane fade table-responsive">' +
@@ -333,14 +327,13 @@ String lang = request.getParameter( "lang" );
 			$("#task" + numTasks + "li").remove();
 			$("#task" + numTasks + "div").remove();
 			
-			mapArray[numTasks] = null;
+			mapArray['map'+numTasks] = null;
 			
 			numTasks--;
 		}
 	}
 	
 	function addMap(mapElement) {
-		//var geocoder = new google.maps.Geocoder();
 		
 		var map = new google.maps.Map(document.getElementById(mapElement), {
 			center: {lat: startPos.coords.latitude, lng: startPos.coords.longitude},
@@ -364,7 +357,7 @@ String lang = request.getParameter( "lang" );
 			
 			geocoder.geocode({'location':e.latLng}, function(results, status) {
 				if(status === google.maps.GeocoderStatus.OK) {
-					if(results[1]) {
+					if(results[0]) {
 						console.log(results);
 						$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val(results[0].formatted_address);
 					}
@@ -372,27 +365,8 @@ String lang = request.getParameter( "lang" );
 			});
 		});
 		
-		
-		//return map;
-		/* geocoder.geocode({ 'address': address }, function (results, status) {
-		    if (status == google.maps.GeocoderStatus.OK) {
-		        var mapOptions = {
-		            zoom: 14,
-		            center: results[0].geometry.location,
-		            disableDefaultUI: true
-		        };
-		        var map = new google.maps.Map(document.getElementById("mapTest"), mapOptions);
-		        var marker = new google.maps.Marker({
-		            map: map,
-		            position: results[0].geometry.location
-		        });
-		    } else {
-		        alert("Geocode was not successful for the following reason: " + status);
-		    }
-		}); */
 	}
 	
-
 	</script>
 	
 <jsp:include page="footer.jsp"/>
