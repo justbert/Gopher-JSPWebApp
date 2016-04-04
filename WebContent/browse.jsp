@@ -60,7 +60,7 @@
 		                     
 		                         <h4 class="pull-right">$ ${errand.getRewardId().getRewardValue()}</h4>
 		                         <h4>
-								 <a href="/Gopher/errand?id=${errand.getId() }" style="color: black;">${errand.getName()}</a>
+								 <a href="/errand?id=${errand.getId() }" style="color: black;">${errand.getName()}</a>
 		                         </h4>
 		                         <p>${errand.getDateCreated() } </p>
 		                     </div>

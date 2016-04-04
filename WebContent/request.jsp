@@ -158,7 +158,8 @@ String lang = request.getParameter( "lang" );
 	
 	<!-- Begin form to add errand request -->
 	<div class="request-content">
-		<form id="addErrandForm">
+	
+		<form id="addErrandForm" action="request" method="post">
 			<h4>Enter Errand Information:</h4>
 			<label class="col-md-3">Title:</label>
 			<input type="text" name="errandName" placeholder="Title of your errand">
@@ -167,7 +168,7 @@ String lang = request.getParameter( "lang" );
 			<label class="col-md-3">Deadline:</label>
 			<input type="datetime-local" name="deadline">
 			<label class="col-md-3">Importance:</label>
-			<select form="addErrandForm">
+			<select form="addErrandForm" name="importance">
   				<option value="1">Very Low</option>
   				<option value="2">Low</option>
   				<option value="3" selected>Normal</option>
@@ -194,24 +195,24 @@ String lang = request.getParameter( "lang" );
 				</div>
 	        	<div class="col-md-9">
 	        		<div id="tasks-div" class="tab-content">
-	        			<label class="col-md-3">Title:</label>
-						<input type="text" name="taskName" placeholder="Title of your task">
-						<label class="col-md-3">Description:</label>
-						<textarea rows="4" cols="50" name="taskDescription" placeholder="Enter a description of your task."></textarea>
-						<h5>Enter a location for this task:</h5>
-						<label class="col-md-3">Address Line 1:</label>
-						<input type="text" name="addressLine1">
-						<label class="col-md-3">Address Line 2:</label>
-						<input type="text" name="addressLine2">
-						<label class="col-md-3">City:</label>
-						<input type="text" name="city">
-						<label class="col-md-3">Province:</label>
-						<input type="text" name="province">
-						<label class="col-md-3">Country:</label>
-						<input type="text" name="country">
-						<label class="col-md-3">Postal Code:</label>
-						<input type="text" name="zip">
 		        		<div id="task1div" class="tab-pane fade in active table-responsive">
+			        		<label class="col-md-3">Title:</label>
+							<input type="text" name="taskName1" placeholder="Title of your task">
+							<label class="col-md-3">Description:</label>
+							<textarea rows="4" cols="50" name="taskDescription1" placeholder="Enter a description of your task."></textarea>
+							<h5>Enter a location for this task:</h5>
+							<label class="col-md-3">Address Line 1:</label>
+							<input type="text" name="addressLine1Task1">
+							<label class="col-md-3">Address Line 2:</label>
+							<input type="text" name="addressLine2Task2">
+							<label class="col-md-3">City:</label>
+							<input type="text" name="cityTask1">
+							<label class="col-md-3">Province:</label>
+							<input type="text" name="provinceTask1">
+							<label class="col-md-3">Country:</label>
+							<input type="text" name="countryTask1">
+							<label class="col-md-3">Postal Code:</label>
+							<input type="text" name="zipTask1">
 							<div class="map" id="map1"></div>
 						</div>
 		        	</div>
@@ -231,45 +232,91 @@ String lang = request.getParameter( "lang" );
 	var numTasks = 1;
 	var startPos = {coords: {latitude: 45.4165703, longitude: -75.7047006}};
 	var mapArray = new Array(100);
+	var markerArray = new Array(100);
+	
+	//Object creation function
+	if(typeof Object.create !== 'function') {
+		Object.create = function(o) {
+			var F = function(o) {};
+			F.prototype = o;
+			return new F();
+		};
+	}
+	
+	var MapCanvas = {
+		map: null,
+		marker: null,
+		name: null,
+		
+		setName: function(n) {
+			this.name = n;
+		},
+		
+		setMap: function(m) {
+			this.map = m;
+		}, 
+		
+		setMarkerLocation: function(position) {
+			
+			if(this.marker === null) {
+				this.marker = new google.maps.Marker({
+					position: position,
+				    map: this.map,
+				    draggable: false,
+				});
+			} else {
+				this.marker.setPosition(position);
+			}
+			this.map.panTo(position);
+		},
+	};
 	
 	window.onload = function() {
 		  
 		  var geoSuccess = function(position) {
 		    startPos = position;
-		    mapArray["map1"] = addMap("map1");
+		    addMap("map1");
 		  };
 		  
 		  var geoFailure = function() {
 			startPos = {coords: {latitude: 45.4165703, longitude: -75.7047006}};
-			/* startPos.coords.latitude = 45.4165703; 
-			startPos.coords.longitude = -75.7047006; */
-			mapArray["map1"] = addMap("map1");
-			
+			addMap("map1");
 		  }
 		  
 		  navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
-		  
-		 
-		  
 	};
 	
 	function addTaskTab() {
 		numTasks++;
-		
-		/* var tasksList = document.getElementById("tasks-list");
-		var newLI = document.createElement("li");
-		var anchor = document.createElement("a");
-		anchor.setAttribute("data-toggle", "tab");
-		andhor.setAttribute("") */
-		
+
 	    $("#tasks-list").append('<li id="task'+ numTasks +'li"><a data-toggle="tab" href="#task' + numTasks + 'div">Task '+ numTasks+'</a></li>');     // Append new elements
-		$("#tasks-div").append('<div id="task' + numTasks + 'div" class="tab-pane fade table-responsive"><div class="map" id="map' + numTasks +'"></div></div>');
+		$("#tasks-div").append(
+				'<div id="task' + numTasks + 'div" class="tab-pane fade table-responsive">' +
+				'<label class="col-md-3">Title:</label>' +
+				'<input type="text" name="taskName'+numTasks+'+" placeholder="Title of your task">'+
+				'<label class="col-md-3">Description:</label>'+
+				'<textarea rows="4" cols="50" name="taskDescription'+numTasks+'" placeholder="Enter a description of your task."></textarea>'+
+				'<h5>Enter a location for this task:</h5>'+
+				'<label class="col-md-3">Address Line 1:</label>'+
+				'<input type="text" name="addressLine1Task'+numTasks+'">'+
+				'<label class="col-md-3">Address Line 2:</label>'+
+				'<input type="text" name="addressLine2Task'+numTasks+'">'+
+				'<label class="col-md-3">City:</label>'+
+				'<input type="text" name="cityTask'+numTasks+'">'+
+				'<label class="col-md-3">Province:</label>'+
+				'<input type="text" name="provinceTask'+numTasks+'">'+
+				'<label class="col-md-3">Country:</label>'+
+				'<input type="text" name="countryTask'+numTasks+'">'+
+				'<label class="col-md-3">Postal Code:</label>'+
+				'<input type="text" name="zipTask'+numTasks+'">'+
+			'<div class="map" id="map' + numTasks +'"></div></div>');
 	    
-	    mapArray['map'+numTasks] = addMap('map'+numTasks);
-	    google.maps.event.trigger(mapArray['map'+numTasks], 'resize');
+	    addMap("map"+numTasks);
+	    
+	    google.maps.event.trigger(mapArray['map'+numTasks].map, 'resize');
 	    
 	    $('a[href="#task'+numTasks+'div"]').on('shown.bs.tab', function(e) {
-	        google.maps.event.trigger(mapArray['map'+numTasks], 'resize');
+	        google.maps.event.trigger(mapArray['map'+numTasks].map, 'resize');
 	    });
 	    
 	    $('a[href="#task'+numTasks+'div"]').tab('show');
@@ -280,40 +327,45 @@ String lang = request.getParameter( "lang" );
 			$("#task" + numTasks + "li").remove();
 			$("#task" + numTasks + "div").remove();
 			
-			mapArray[numTasks] = null;
+			mapArray['map'+numTasks] = null;
 			
 			numTasks--;
 		}
 	}
 	
 	function addMap(mapElement) {
-		//var geocoder = new google.maps.Geocoder();
 		
 		var map = new google.maps.Map(document.getElementById(mapElement), {
 			center: {lat: startPos.coords.latitude, lng: startPos.coords.longitude},
 			zoom: 15,
 		});
 		
-		return map;
-		/* geocoder.geocode({ 'address': address }, function (results, status) {
-		    if (status == google.maps.GeocoderStatus.OK) {
-		        var mapOptions = {
-		            zoom: 14,
-		            center: results[0].geometry.location,
-		            disableDefaultUI: true
-		        };
-		        var map = new google.maps.Map(document.getElementById("mapTest"), mapOptions);
-		        var marker = new google.maps.Marker({
-		            map: map,
-		            position: results[0].geometry.location
-		        });
-		    } else {
-		        alert("Geocode was not successful for the following reason: " + status);
-		    }
-		}); */
+		map.name = mapElement;
+					
+		m = Object.create(MapCanvas);
+		m.setName(mapElement);
+		m.setMap(map);
+		
+		mapArray[mapElement] = m;
+		
+		map.addListener('click', function(e) {
+			mapArray[this.name].setMarkerLocation(e.latLng);
+			
+			var geocoder = new google.maps.Geocoder;
+			
+			var that = this;
+			
+			geocoder.geocode({'location':e.latLng}, function(results, status) {
+				if(status === google.maps.GeocoderStatus.OK) {
+					if(results[0]) {
+						console.log(results);
+						$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val(results[0].formatted_address);
+					}
+				}
+			});
+		});
+		
 	}
-	
-	
 	
 	</script>
 	

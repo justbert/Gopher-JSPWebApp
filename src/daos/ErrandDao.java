@@ -8,6 +8,7 @@ import java.util.List;
 
 import entities.Address;
 import entities.Errand;
+import entities.Rating;
 import entities.Errand.ImportanceType;
 import entities.Errand.StatusType;
 import entities.User.UserType;
@@ -41,9 +42,43 @@ public class ErrandDao extends DatabaseManager {
 	private static final String SELECT_COMPLETED_ERRANDS_FOR_GOPHERID = 
 			"SELECT * FROM errands, users WHERE errands.userIdGopher = users.id AND userIdGopher = ? AND completionDate is not null";
 	
+	/** Defines a query that adds an errand entry into the database */
+	private static final String insertErrand = 
+			"INSERT INTO errands ( name, description, deadline, rewardId, statusTypeId, importanceTypeId, userIdCustomer, userIdGopher)"
+			+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
+	
 	private static final String SELECT_12_LATEST = "SELECT * FROM errands ORDER BY creationDate DESC LIMIT 12";
 	private UserDao userDB = new UserDao();
 	private RewardDAO rewardDB = new RewardDAO();
+	
+	/**
+	 * Inserts a new entry into the database
+	 * @param errand The model data to map to the database entry
+	 * @return The number of rows updated
+	 */
+	public int addErrand(Errand errand) {	
+		int result = -1;
+		
+		Object[] errandData = {
+			errand.getName(),
+			errand.getDescription(),
+			errand.getDeadline(),
+			1,
+			1,
+			errand.getImportanceTypeID().getIndex(),
+			errand.getUserIdCustomer().getId(),
+			null
+		};
+		
+		try {
+			result = update(insertErrand, errandData);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	
 	public int delete(int id) {

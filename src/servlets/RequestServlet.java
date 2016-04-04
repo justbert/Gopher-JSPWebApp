@@ -1,8 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
 import daos.ErrandDao;
+import entities.Errand;
+import entities.Errand.ImportanceType;
 import entities.User;
 
 public class RequestServlet extends HttpServlet {
@@ -24,12 +27,35 @@ public class RequestServlet extends HttpServlet {
 	
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		request.getRequestDispatcher("/request.jsp").forward(request, response);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		HttpSession session = request.getSession();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		
+		Errand errandToCreate = null;
+		
+		try {
+			errandToCreate = new Errand(
+					request.getParameter("errandName"),
+					request.getParameter("errandDescription"),
+					fmt.parse(request.getParameter("deadline")),
+					ImportanceType.getImportanceType(Integer.parseInt(request.getParameter("importance"))),
+					(User)session.getAttribute("userObject")
+				);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (java.text.ParseException e) {
+			e.printStackTrace();
+		}
+		
+		if (errandToCreate != null)
+			errand.addErrand(errandToCreate);
+		
+		request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 	}
 	
 }

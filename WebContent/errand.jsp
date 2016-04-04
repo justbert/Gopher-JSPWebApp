@@ -49,7 +49,7 @@ if ( lang == null){ lang = "en";}
             <div class="ratings">
                 <p class="pull-right">${ratingsList.size()} <%=reviews %></p>
                 <p>
-                	<a href="/Gopher/profile?id=${errand.getUserIdCustomer().getId()}">${errand.getUserIdCustomer().getUsername()}</a>'s <%=rating %>:
+                	<a href="/profile?id=${errand.getUserIdCustomer().getId()}">${errand.getUserIdCustomer().getUsername()}</a>'s <%=rating %>:
                     <c:forEach begin="1" end="${customerAverage}">
                 	<span class="glyphicon glyphicon-star"></span>
                 	</c:forEach>
