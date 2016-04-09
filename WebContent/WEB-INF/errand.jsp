@@ -20,7 +20,7 @@ if ( lang == null){ lang = "en";}
 <%-- Variable Initializations --%>
 <% 
   reviews = RB.getString("reviews"); 
-  stars = RB1.getString("stars"); 
+  stars = RB.getString("stars"); 
   leaveReview = RB.getString("leaveReview"); 
   anon = RB.getString("anon"); 
   rating = RB.getString("rating"); 
