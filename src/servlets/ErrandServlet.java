@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import daos.ErrandDao;
 import daos.RatingDAO;
+import daos.UserDao;
 import entities.Errand;
+import entities.Errand.StatusType;
 import entities.Rating;
 import entities.User;
 
@@ -26,7 +28,11 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 	
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response){
-
+		User currentUser = (User)request.getSession().getAttribute("userObject");
+		Errand errand = errandDB.selectById(Integer.parseInt(request.getParameter("id")));
+		errand.setStatus(StatusType.IN_PROGRESS);
+		errand.setUserIdGopher(currentUser);
+		errandDB.updateErrand(errand);
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
@@ -46,7 +52,7 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 			
 			//Check if current session user is the gopher for the errand
 			User currentUser = (User)request.getSession().getAttribute("userObject");
-			if (currentUser.getId() == errand.getUserIdGopher().getId())
+			if (errand.getUserIdGopher() == null && currentUser.getId() == errand.getUserIdGopher().getId())
 				request.setAttribute("currentUserIsGopher", "true");
 			else 
 				request.setAttribute("currentUserIsGopher", "false");
