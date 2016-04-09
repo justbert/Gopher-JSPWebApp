@@ -8,10 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.ant.SessionsTask;
+
 import daos.ErrandDao;
 import daos.RatingDAO;
+import daos.UserDao;
 import entities.Errand;
 import entities.Rating;
+import entities.User;
 
 public class ErrandServlet extends javax.servlet.http.HttpServlet {
 
@@ -47,6 +51,16 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 			// Get the average rating for the customer who requested the errand
 			Integer customerRatingAvg = ratingDAO.getRatingAverageForCustomerID(errand.getUserIdCustomer().getId());
 			request.setAttribute("customerAverage", customerRatingAvg);
+			
+			request.setAttribute("customerId", errand.getUserIdCustomer().getId());
+			request.setAttribute("gopherId", errand.getUserIdGopher().getId());
+			
+			//Check if current session user is the gopher for the errand
+			User currentUser = (User)request.getSession().getAttribute("userObject");
+			if (currentUser.getId() == errand.getUserIdGopher().getId())
+				request.setAttribute("currentUserIsGopher", "true");
+			else 
+				request.setAttribute("currentUserIsGopher", "false");
 			
 			request.getRequestDispatcher("/errand.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {

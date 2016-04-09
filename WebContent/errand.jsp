@@ -3,6 +3,7 @@
 <%@page import="daos.ErrandDao" %>
 <%@page import="entities.Task" %>
 <%@page import="entities.Rating" %>
+
 <%@ taglib  prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page import="java.io.*, java.net.*,java.util.*"%>
@@ -10,7 +11,7 @@
 <%-- Language Declaration and Resource Bundle --%>
 <% 
 String lang = request.getParameter( "lang" );
-if ( lang == null){ lang = "en";}
+if (lang == null){ lang = "en";}
   ResourceBundle RB = ResourceBundle.getBundle("com.lang.i18n.text", new Locale(lang));
 %> 
 
@@ -42,8 +43,7 @@ if ( lang == null){ lang = "en";}
             <img src="assets/img/gopher_small.png" alt="Slide 1"/>
             <div class="caption-full">
                 <h4 class="pull-right">$ ${errand.getRewardId().getRewardValue()}</h4>
-                <h4><a href="#"style="color: black;">${errand.getName() }</a>
-                </h4>
+                <h4><a href="#"style="color: black;">${errand.getName() }</a></h4>
                 <p>${errand.getDescription()}</p>
             </div>
             <div class="ratings">
