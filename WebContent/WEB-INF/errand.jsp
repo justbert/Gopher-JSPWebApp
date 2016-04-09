@@ -79,17 +79,17 @@ if ( lang == null){ lang = "en";}
 					<%-- Not started --%>                
                 	<c:when test="${errand.status.index == 1}">
                 		<c:choose>
-	                		<c:when test="${currentUserIsGopher}">
-	               			    <form id="accept-form" action="errand?id=${errand.id}" method="post">
-				                	<div class="row">
-				                		<button type="submit" class="col-md-4 col-md-offset-4 btn btn-lg btn-success">Accept Task</button>
-				                	</div>
-				                </form>
+	                		<c:when test="${currentUserIsCustomer}">
+								<div class="row">
+			                		<div class="col-md-4 col-md-offset-4">No Gopher has accepted your task yet</div>
+			                	</div>
 	                		</c:when>
 	                		<c:when test="${!currentUserIsGopher}">
-	                			<div class="row">
-			                		<div class="col-md-4 col-md-offset-4">No Gopher has accepted this task yet</div>
-			                	</div>
+                			    <form id="complete-form" action="errand?id=${errand.id}" method="post">
+				                	<div class="row">
+				                		<button type="submit" class="col-md-4 col-md-offset-4 btn btn-lg btn-success">Accept Errand</button>
+				                	</div>
+				                </form>
 	                		</c:when>
                 		</c:choose>
                 	</c:when>
@@ -98,7 +98,7 @@ if ( lang == null){ lang = "en";}
 	                		<c:when test="${currentUserIsGopher}">
 	                			<form id="accept-form" action="errand?id=${errand.id}" method="post">
 				                	<div class="row">
-				                		<button type="submit" class="col-md-4 col-md-offset-4 btn btn-lg btn-warning">Complete Task</button>
+				                		<button type="submit" class="col-md-4 col-md-offset-4 btn btn-lg btn-warning">Complete Errand</button>
 				                	</div>
 				                </form>
 	                		</c:when>
@@ -112,7 +112,7 @@ if ( lang == null){ lang = "en";}
                 	<c:when test="${errand.status.index == 3}">
                 		<div class="row">
                 			<div class="col-md-4 col-md-offset-4">Task Completed</div>
-                			</div>
+               			</div>
                 	</c:when>
                 </c:choose>            	
             </div>

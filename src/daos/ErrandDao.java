@@ -27,7 +27,7 @@ public class ErrandDao extends DatabaseManager {
 	private static final String UPDATE = "UPDATE Errands SET name=?, tel=?, passwd=? WHERE id=?";
 	
 	private static final String UPDATE_ERRAND = 
-			"UPDATE errands SET name=?, description=?, creationDate=?, completionDate=?, deadline=?, rewardId=?, statusTypeId=?, importanceTypeId=?, userIdCustomer=?, userIdGopher=?;";
+			"UPDATE errands SET name=?, description=?, creationDate=?, completionDate=?, deadline=?, rewardId=?, statusTypeId=?, importanceTypeId=?, userIdCustomer=?, userIdGopher=? where id = ?;";
 	/** Query to retreive active errand requests that the user has made */
 	private static final String SELECT_ERRANDS_FOR_USERID = 
 			"SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ? and completionDate is null";
@@ -216,20 +216,20 @@ public class ErrandDao extends DatabaseManager {
 //"UPDATE errands SET name=?, description=?, creationDate=?, completionDate=?, deadline=?, rewardId=?, statusTypeId=?, importanceTypeId=?, userIdCustomer=?, userIdGopher=?;";
 	
 	public void updateErrand(Errand errand){
-		try(ResultSet rs = query(UPDATE_ERRAND, errand.getName(),
+		try{
+			update(UPDATE_ERRAND, errand.getName(),
 				errand.getDescription(),
 				errand.getDateCreated(),
 				errand.getDateCompleted(),
 				errand.getDeadline(),
-				errand.getRewardId(), 
+				errand.getRewardId().getId(), 
 				errand.getStatus().getIndex(),
 				errand.getImportanceTypeID().getIndex(),
 				errand.getUserIdCustomer().getId(),
-				errand.getUserIdGopher().getId())){
-			if(rs.next())
-				return;
+				errand.getUserIdGopher().getId(),
+				errand.getId());
 		}catch(SQLException e){
-			
+			e.printStackTrace();
 		}
 	}
 }

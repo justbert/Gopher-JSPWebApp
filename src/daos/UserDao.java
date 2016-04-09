@@ -89,6 +89,7 @@ public class UserDao extends DatabaseManager {
 	}
 
 	public User getUserForID(int id){
+		if(id ==0) return null;
 		User user = null;
 
 		try(ResultSet rs = query(select_getUserForID, id)){

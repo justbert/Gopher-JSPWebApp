@@ -30,9 +30,21 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response){
 		User currentUser = (User)request.getSession().getAttribute("userObject");
 		Errand errand = errandDB.selectById(Integer.parseInt(request.getParameter("id")));
-		errand.setStatus(StatusType.IN_PROGRESS);
-		errand.setUserIdGopher(currentUser);
-		errandDB.updateErrand(errand);
+		
+		if(errand.getStatus() == StatusType.IN_PROGRESS && currentUser.getId() == errand.getUserIdGopher().getId()){
+			errand.setStatus(StatusType.COMPLETED);
+			errandDB.updateErrand(errand);
+		}else if(errand.getStatus() == StatusType.NOT_STARTED && errand.getUserIdGopher() == null){
+			errand.setStatus(StatusType.IN_PROGRESS);
+			errand.setUserIdGopher(currentUser);
+			System.out.println("what");
+			errandDB.updateErrand(errand);
+		}
+		try {
+			response.sendRedirect("errand?id="+errand.getId());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
@@ -52,11 +64,17 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 			
 			//Check if current session user is the gopher for the errand
 			User currentUser = (User)request.getSession().getAttribute("userObject");
-			if (errand.getUserIdGopher() == null && currentUser.getId() == errand.getUserIdGopher().getId())
-				request.setAttribute("currentUserIsGopher", "true");
+
+			if (errand.getUserIdGopher() != null && currentUser.getId() == errand.getUserIdGopher().getId())
+				request.setAttribute("currentUserIsGopher", true);
 			else 
-				request.setAttribute("currentUserIsGopher", "false");
+				request.setAttribute("currentUserIsGopher", false);
 			
+			if(currentUser.getId() == errand.getUserIdCustomer().getId()){
+				request.setAttribute("currentUserIsCustomer", true);
+			}else{
+				request.setAttribute("currentUserIsCustomer", false);
+			}
 			request.getRequestDispatcher("WEB-INF/errand.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
