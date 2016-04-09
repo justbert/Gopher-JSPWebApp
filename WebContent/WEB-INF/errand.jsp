@@ -15,7 +15,7 @@ if ( lang == null){ lang = "en";}
 %> 
 
 <%-- Variable Declarations --%>
-<%! String reviews, stars, leaveReview, anon, rating, tasksText; %>
+<%! String reviews, stars, leaveReview, anon, rating, tasksText, prevRating, taskName, taskDescription, startDate, completionDate, address; %>
 
 <%-- Variable Initializations --%>
 <% 
@@ -25,6 +25,12 @@ if ( lang == null){ lang = "en";}
   anon = RB.getString("anon"); 
   rating = RB.getString("rating"); 
   tasksText = RB.getString("tasks");
+  prevRating = RB.getString("prevRating");
+  taskName = RB.getString("taskName");
+  taskDescription = RB.getString("taskDescription");
+  startDate = RB.getString("startDate");
+  completionDate = RB.getString("completionDate");
+  address = RB.getString("addressText");
 %>
 
 <jsp:include page="header.jsp"/>
@@ -73,9 +79,10 @@ if ( lang == null){ lang = "en";}
         </div>
 
         <div class="well bg-white">
-            <div class="text-right">
-                <a class="btn btn-success"><%=leaveReview %></a>
+            <div>
+            	<h4><%=prevRating %></h4>
             </div>
+            <hr />
             <c:forEach items="${ratingsList}" var="rating">
             <hr>
             <div class="row">
@@ -95,7 +102,7 @@ if ( lang == null){ lang = "en";}
         </div>
         
         <div class="well well-lg bg-white">
-            <div class="text-right">
+            <div class="">
                 <h4><%=tasksText%></h4>
             </div>
             <c:forEach items="${errand.tasks}" var="task">
@@ -103,23 +110,23 @@ if ( lang == null){ lang = "en";}
             <div class="row task">
                 <div class="col-md-12">
                		<div class="col-md-6">
-               			<h5>Task Name</h5>
+               			<h5><%=taskName%>Task Name</h5>
 						<p><c:out value="${task.name}"/></p>
 					</div>
 					<div class="col-md-6">
-						<h5>Task Description</h5>
+						<h5><%=taskDescription%>Task Description</h5>
 						<p><c:out value="${task.description}" /></p>
 					</div>
 					<div class="col-md-6">
-						<h5>Start Date</h5>
+						<h5><%=startDate%>Start Date</h5>
 						<c:out value="${task.startDate}" />
 					</div>
 					<div class="col-md-6">
-						<h5>Completion Date</h5>
+						<h5><%=completionDate%>Completion Date</h5>
 						<c:out value="${task.completionDate}" />
 					</div>
 					<div class="col-md-6">
-						<h5>Address: </h5>
+						<h5><%=address%>Address: </h5>
 						<c:out value="${task.address_id}" />
 					</div>
                 </div>
