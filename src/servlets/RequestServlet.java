@@ -27,7 +27,7 @@ public class RequestServlet extends HttpServlet {
 	
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/request.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/request.jsp").forward(request, response);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
@@ -55,7 +55,7 @@ public class RequestServlet extends HttpServlet {
 		if (errandToCreate != null)
 			errand.addErrand(errandToCreate);
 		
-		request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
 	}
 	
 }

@@ -43,7 +43,7 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 			Integer customerRatingAvg = ratingDAO.getRatingAverageForCustomerID(errand.getUserIdCustomer().getId());
 			request.setAttribute("customerAverage", customerRatingAvg);
 			
-			request.getRequestDispatcher("/errand.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/errand.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}

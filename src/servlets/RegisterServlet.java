@@ -26,7 +26,7 @@ public class RegisterServlet extends HttpServlet {
 	private UserDao userDAO = new UserDao();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/signup.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/signup.jsp").forward(request, response);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{

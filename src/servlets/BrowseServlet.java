@@ -26,7 +26,7 @@ public class BrowseServlet extends javax.servlet.http.HttpServlet {
 		//errands = 	errands.subList(0, 10);
 		try {
 			request.setAttribute("errandList", errands);
-			request.getRequestDispatcher("/browse.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/browse.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}

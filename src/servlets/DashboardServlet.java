@@ -88,7 +88,7 @@ public class DashboardServlet extends HttpServlet {
 			request.setAttribute("customerRatingAvg", customerRatingAvg);
 			request.setAttribute("ratingsGopher", ratingsGopher);
 			request.setAttribute("gopherRatingAvg", gopherRatingAvg);
-			request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}
