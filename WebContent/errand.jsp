@@ -15,7 +15,7 @@ if ( lang == null){ lang = "en";}
 %> 
 
 <%-- Variable Declarations --%>
-<%! String reviews, stars, leaveReview, anon, rating; %>
+<%! String reviews, stars, leaveReview, anon, rating, tasksText; %>
 
 <%-- Variable Initializations --%>
 <% 
@@ -24,6 +24,7 @@ if ( lang == null){ lang = "en";}
   leaveReview = RB.getString("leaveReview"); 
   anon = RB.getString("anon"); 
   rating = RB.getString("rating"); 
+  tasksText = RB.getString("tasks");
 %>
 
 <jsp:include page="header.jsp"/>
@@ -31,6 +32,16 @@ if ( lang == null){ lang = "en";}
 <style>
 	.jumbotron p {
   		font-size: 14px;
+	}
+	.task h5{
+		font-weight:bolder;
+	}
+	
+	.task-group{
+		margin:20px;
+		display:inline;
+	}
+	.task-item{
 	}
 </style>
 
@@ -78,6 +89,39 @@ if ( lang == null){ lang = "en";}
                     <%=anon %>
                     <span class="pull-right">${rating.creationDate}</span>
 					<p><c:out value="${rating.comments}"/></p>
+                </div>
+            </div>
+            </c:forEach>
+        </div>
+        
+        <div class="well well-lg bg-white">
+            <div class="text-right">
+                <h4><%=tasksText%></h4>
+            </div>
+            <c:forEach items="${errand.tasks}" var="task">
+            <hr>
+            <div class="row task">
+                <div class="col-md-12">
+               		<div class="col-md-6">
+               			<h5>Task Name</h5>
+						<p><c:out value="${task.name}"/></p>
+					</div>
+					<div class="col-md-6">
+						<h5>Task Description</h5>
+						<p><c:out value="${task.description}" /></p>
+					</div>
+					<div class="col-md-6">
+						<h5>Start Date</h5>
+						<c:out value="${task.startDate}" />
+					</div>
+					<div class="col-md-6">
+						<h5>Completion Date</h5>
+						<c:out value="${task.completionDate}" />
+					</div>
+					<div class="col-md-6">
+						<h5>Address: </h5>
+						<c:out value="${task.address_id}" />
+					</div>
                 </div>
             </div>
             </c:forEach>

@@ -23,7 +23,7 @@ public class Address implements Serializable {
 	private String zip;
 	private double lat;
 	private double lon;
-	private User userId;
+	private int userId;
 	private AddressType addressType;
 	
 	
@@ -58,7 +58,7 @@ public class Address implements Serializable {
 		}
 	}
 
-	public Address(int id, String addressLine1, String addressLine2, String city, String province, String country, String zip, double lat, double lon, User userId, AddressType addressType) {
+	public Address(int id, String addressLine1, String addressLine2, String city, String province, String country, String zip, double lat, double lon, int userId, AddressType addressType) {
 		super();
 		this.id = id;
 		this.addressLine1 = addressLine1;
@@ -143,11 +143,11 @@ public class Address implements Serializable {
 	}
 
 
-	public User getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(User userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -180,5 +180,14 @@ public class Address implements Serializable {
 	public void setLon(double lon) {
 		this.lon = lon;
 	}
-
+	
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.addressLine1 + "\n");
+		sb.append(this.addressLine2 + "\n");
+		sb.append(this.city + "\n");
+		sb.append(this.province + "\n");
+		return this.addressLine1 +"\n" + addressLine2;
+	}
 }

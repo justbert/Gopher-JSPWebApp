@@ -20,12 +20,12 @@ public class Task implements Serializable{
 	private String description;
 	private Date startDate;
 	private Date completionDate;
-	private Errand errandId;
+	private int errandId;
 	private Address address_id;
 	
 	public Task(){}
 	
-	public Task(int id, String name, String description, Date startDate, Date completionDate, Errand errandId,
+	public Task(int id, String name, String description, Date startDate, Date completionDate, int errandId,
 			Address address_id) {
 		super();
 		this.id = id;
@@ -77,11 +77,11 @@ public class Task implements Serializable{
 		this.completionDate = completionDate;
 	}
 
-	public Errand getErrandId() {
+	public int getErrandId() {
 		return errandId;
 	}
 
-	public void setErrandId(Errand errandId) {
+	public void setErrandId(int errandId) {
 		this.errandId = errandId;
 	}
 

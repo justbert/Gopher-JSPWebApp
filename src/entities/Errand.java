@@ -91,9 +91,44 @@ public class Errand implements Serializable {
 	
 	public Errand(){};
 	
+	
+	
+	public Errand(int id, User user_id_customer, User user_id_gopher, Date dateCreated, Date dateCompleted,
+			ImportanceType importanceTypeID, List<Task> tasks, Reward rewardId, Date deadline, StatusType status,
+			String name, String description) {
+		this.id = id;
+		this.user_id_customer = user_id_customer;
+		this.user_id_gopher = user_id_gopher;
+		this.dateCreated = dateCreated;
+		this.dateCompleted = dateCompleted;
+		this.importanceTypeID = importanceTypeID;
+		this.tasks = tasks;
+		this.rewardId = rewardId;
+		this.deadline = deadline;
+		this.status = status;
+		this.name = name;
+		this.description = description;
+	}
+
+
+
 	public Errand(int id,String name, String description, Date dateCreated, Date dateCompleted, Timestamp deadline, Reward reward, StatusType status, ImportanceType importance, User user_id_cusomter, User user_id_gopher){
 		this.id = id;
 		this.name = name;
+		this.description = description;
+		this.user_id_customer = user_id_cusomter;
+		this.user_id_gopher = user_id_gopher;
+		this.dateCreated = dateCreated;
+		this.rewardId = reward;
+		this.setDeadline(deadline);
+		this.setStatus(status);
+		this.setImportance(importance);
+	}
+	
+	public Errand(int id,String name, String description, List<Task> tasks, Date dateCreated, Date dateCompleted, Timestamp deadline, Reward reward, StatusType status, ImportanceType importance, User user_id_cusomter, User user_id_gopher){
+		this.id = id;
+		this.name = name;
+		this.tasks = tasks;
 		this.description = description;
 		this.user_id_customer = user_id_cusomter;
 		this.user_id_gopher = user_id_gopher;
