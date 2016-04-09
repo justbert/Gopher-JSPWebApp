@@ -25,6 +25,13 @@ public class Reward implements Serializable {
 		this.rewardValue = rewardValue;
 		this.description = description;
 	}
+	
+	public Reward(String name, String description, int rewardValue) {
+		this.name = name;
+		this.description = description;
+		this.rewardValue = rewardValue;	
+	}
+	
 	public int getId() {
 		return id;
 	}

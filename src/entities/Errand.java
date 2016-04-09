@@ -104,12 +104,13 @@ public class Errand implements Serializable {
 		this.setImportance(importance);
 	}
 
-	public Errand(String name, String description, Date deadline, ImportanceType importanceType, User customer) {
+	public Errand(String name, String description, Date deadline, ImportanceType importanceType, User customer, Reward reward) {
 		this.name = name;
 		this.description = description;
 		this.deadline = deadline;
 		this.importanceTypeID = importanceType;
 		this.user_id_customer = customer;
+		this.rewardId = reward;
 	}
 
 	// Getters

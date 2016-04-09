@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.mysql.jdbc.CommunicationsException;
+import com.mysql.jdbc.Statement;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLTransientException;
 
@@ -161,6 +162,36 @@ public class DatabaseManager {
         	 pst.setObject(i, parameters[i-1]);
          
          return pst.executeUpdate();
+	 }
+	 
+	 /**
+	  * Inserts a new entry into the database. Accepts an Object[] composed of the 
+	  * data to map to the new database entry, and the insert query
+	  * @param queryString Defines the query with placeholder for Object data
+	  * @param parameters The Object containing the values to insert into the database
+	  * @return the auto-generated id of the inserted object
+	  * @throws SQLException
+	  */
+	 protected int insert(String queryString, Object... parameters) throws SQLException{
+		 PreparedStatement pst = null;
+		 int primaryKey = -1;
+		 
+		 try {
+			 pst = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);
+			 
+	         for(int i = 1; i <= parameters.length; i++)
+	        	 pst.setObject(i, parameters[i-1]);
+	                  
+	         pst.executeUpdate();
+	         ResultSet generatedKeys = pst.getGeneratedKeys();
+	         
+	         generatedKeys.next();
+	         primaryKey = generatedKeys.getInt(1);
+		 } 
+		 catch (SQLException e) {
+			 e.printStackTrace();
+		 }
+		 return primaryKey;
 	 }
 	 
 	 /**

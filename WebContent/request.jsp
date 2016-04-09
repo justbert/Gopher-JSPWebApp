@@ -179,7 +179,9 @@ String lang = request.getParameter( "lang" );
 			<label class="col-md-3">Reward</label>
 			<input type="text" name="rewardName" placeholder="Name of the reward">
 			<label class="col-md-3">Description</label>
-			<textarea rows="4" cols="50" name="rewardDescription" placeholder="Enter a decription of the reward"></textarea>			
+			<textarea rows="4" cols="50" name="rewardDescription" placeholder="Enter a decription of the reward"></textarea>
+			<label class="col-md-3">Reward Value ($)</label>
+			<input type="text" name="rewardValue" placeholder="Estimate the value of the reward">			
 		
 			<!-- Section to add task(s) -->
 			<h4>Enter Task(s) Information:</h4>

@@ -63,11 +63,11 @@ public class ErrandDao extends DatabaseManager {
 			errand.getName(),
 			errand.getDescription(),
 			errand.getDeadline(),
-			1,
-			1,
+			errand.getRewardId().getId(),
+			1,		// Defaulting to a status id of 1, for now
 			errand.getImportanceTypeID().getIndex(),
 			errand.getUserIdCustomer().getId(),
-			null
+			null	// No gopher assigned yet, at errand request creation
 		};
 		
 		try {
