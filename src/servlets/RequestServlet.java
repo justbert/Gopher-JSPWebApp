@@ -29,7 +29,7 @@ public class RequestServlet extends HttpServlet {
 	private RewardDAO reward = new RewardDAO();
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/request.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/request.jsp").forward(request, response);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
@@ -74,7 +74,7 @@ public class RequestServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
 	}
 	
 }

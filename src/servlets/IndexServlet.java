@@ -21,7 +21,7 @@ public class IndexServlet extends HttpServlet{
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
 		try {
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}

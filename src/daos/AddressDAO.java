@@ -19,6 +19,7 @@ public class AddressDAO  extends DatabaseManager{
 	 * Query for all rows with matching userId
 	 */
 	private static final String SELECT_ALL_ADDRESSES_BY_USERID = "SELECT * FROM addresses WHERE userId = ?";
+	private static final String SELECT_ADDRESS_BY_ADDRESSID = "SELECT * FROM addresses WHERE id = ?";
 	private static final String INSERT_ADDRESS = "INSERT INTO addresses ( id, addressLine1, addressLine2, city, province, country, zip, lat, long, userId, addressType )"
 											   + "VALUES ( ?, ?, ?, ?, ?, ?,?,? ?, ?, ?)";
 	private static final String UPDATE_ADDRESS = "UPDATE addresses SET addressLine1=?, addressLine2=?, city=?, province=?, country=?, zip=?, lat=?, long=?, addressType=? WHERE id=?";
@@ -41,6 +42,32 @@ public class AddressDAO  extends DatabaseManager{
 		return addresses;
 	}
 	
+	/**
+	 * Returns All addresses belonging to the user with the matching userId
+	 * @param userId
+	 * @return All addresses with the matching userId
+	 */
+	public Address getAddress(int addressID){
+		Address address = null;
+		try (ResultSet rs = query(SELECT_ADDRESS_BY_ADDRESSID, Integer.toString(addressID))) {
+			if(rs.next()){
+				address = new Address(rs.getInt("id"),
+						rs.getString("addressLine1"),
+						rs.getString("addressLine2"),
+						rs.getString("city"),
+						rs.getString("province"),
+						rs.getString("country"),
+						rs.getString("zip"),
+						rs.getFloat("lat"),
+						rs.getFloat("long"),
+						rs.getInt("userId"),
+						AddressType.getAddressType(rs.getInt("addressTypeId")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return address;
+	}
 	/**
 	 * Updates an Address
 	 * @param addressLine1
@@ -118,7 +145,7 @@ public class AddressDAO  extends DatabaseManager{
 			rs.getString("zip"),
 			rs.getDouble("lat"),
 			rs.getDouble("long"),
-			userDB.getUserForID(rs.getInt("userId")),
+			rs.getInt("userId"),
 			AddressType.getAddressType(rs.getInt("addressTypeId"))					
 		);				
 	}

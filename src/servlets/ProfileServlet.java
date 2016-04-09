@@ -73,7 +73,7 @@ public class ProfileServlet extends HttpServlet {
 			request.setAttribute("customerRatingAvg", customerRatingAvg);
 			request.setAttribute("ratingsGopher", ratingsGopher);
 			request.setAttribute("gopherRatingAvg", gopherRatingAvg);
-			request.getRequestDispatcher("/profile.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}

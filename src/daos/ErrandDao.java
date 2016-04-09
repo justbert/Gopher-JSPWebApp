@@ -26,6 +26,8 @@ public class ErrandDao extends DatabaseManager {
 	private static final String INSERT = "INSERT INTO Errands(name, tel, passwd) VALUES(?, ?, ?)";
 	private static final String UPDATE = "UPDATE Errands SET name=?, tel=?, passwd=? WHERE id=?";
 	
+	private static final String UPDATE_ERRAND = 
+			"UPDATE errands SET name=?, description=?, creationDate=?, completionDate=?, deadline=?, rewardId=?, statusTypeId=?, importanceTypeId=?, userIdCustomer=?, userIdGopher=? where id = ?;";
 	/** Query to retreive active errand requests that the user has made */
 	private static final String SELECT_ERRANDS_FOR_USERID = 
 			"SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ? and completionDate is null";
@@ -50,6 +52,7 @@ public class ErrandDao extends DatabaseManager {
 	private static final String SELECT_12_LATEST = "SELECT * FROM errands ORDER BY creationDate DESC LIMIT 12";
 	private UserDao userDB = new UserDao();
 	private RewardDAO rewardDB = new RewardDAO();
+	private TasksDao tasksDB = new TasksDao();
 	
 	/**
 	 * Inserts a new entry into the database
@@ -141,16 +144,17 @@ public class ErrandDao extends DatabaseManager {
 			while (rs.next()){
 				errands.add(new Errand(
 						rs.getInt("id"),
-						rs.getString("name"),
-						rs.getString("description"),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher")),
 						rs.getDate("creationDate"),
 						rs.getDate("completionDate"),
-						rs.getTimestamp("deadline"),
-						rewardDB.getRewardForID(rs.getInt("rewardId")),
-						StatusType.getStatusType(rs.getInt("statusTypeId")),
 						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
-						userDB.getUserForID(rs.getInt("userIdCustomer")),
-						userDB.getUserForID(rs.getInt("userIdGopher"))					
+						tasksDB.getTasksForErrand(rs.getInt("id")),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
+						rs.getDate("deadline"),
+						StatusType.getStatusType(rs.getInt("statusTypeId")),
+						rs.getString("name"),
+						rs.getString("description")
 					));
 			}
 			return errands;
@@ -167,6 +171,7 @@ public class ErrandDao extends DatabaseManager {
 						rs.getInt("id"),
 						rs.getString("name"),
 						rs.getString("description"),
+						tasksDB.getTasksForErrand(Integer.parseInt(rs.getString("id"))),
 						rs.getDate("creationDate"),
 						rs.getDate("completionDate"),
 						rs.getTimestamp("deadline"),
@@ -205,6 +210,26 @@ public class ErrandDao extends DatabaseManager {
 			return errands;
 		} catch (SQLException e){
 			throw new RuntimeException(e);
+		}
+	}
+	
+//"UPDATE errands SET name=?, description=?, creationDate=?, completionDate=?, deadline=?, rewardId=?, statusTypeId=?, importanceTypeId=?, userIdCustomer=?, userIdGopher=?;";
+	
+	public void updateErrand(Errand errand){
+		try{
+			update(UPDATE_ERRAND, errand.getName(),
+				errand.getDescription(),
+				errand.getDateCreated(),
+				errand.getDateCompleted(),
+				errand.getDeadline(),
+				errand.getRewardId().getId(), 
+				errand.getStatus().getIndex(),
+				errand.getImportanceTypeID().getIndex(),
+				errand.getUserIdCustomer().getId(),
+				errand.getUserIdGopher().getId(),
+				errand.getId());
+		}catch(SQLException e){
+			e.printStackTrace();
 		}
 	}
 }
