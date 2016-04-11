@@ -181,7 +181,8 @@ String lang = request.getParameter( "lang" );
 			<label class="col-md-3">Description</label>
 			<textarea rows="4" cols="50" name="rewardDescription" placeholder="Enter a decription of the reward"></textarea>
 			<label class="col-md-3">Reward Value ($)</label>
-			<input type="text" name="rewardValue" placeholder="Estimate the value of the reward">			
+			<input type="text" name="rewardValue" placeholder="Estimate the value of the reward">
+			<input type="hidden" name="numTasks" value="1">			
 		
 			<!-- Section to add task(s) -->
 			<h4>Enter Task(s) Information:</h4>
@@ -215,6 +216,8 @@ String lang = request.getParameter( "lang" );
 							<input type="text" name="countryTask1">
 							<label class="col-md-3">Postal Code:</label>
 							<input type="text" name="zipTask1">
+							<input type="hidden" name="longitudeTask1">
+							<input type="hidden" name="latitudeTask1">
 							<div class="map" id="map1"></div>
 						</div>
 		        	</div>
@@ -311,6 +314,8 @@ String lang = request.getParameter( "lang" );
 				'<input type="text" name="countryTask'+numTasks+'">'+
 				'<label class="col-md-3">Postal Code:</label>'+
 				'<input type="text" name="zipTask'+numTasks+'">'+
+				'<input type="hidden" name="longitudeTask'+numTasks+'">'+
+				'<input type="hidden" name="latitudeTask'+numTasks+'">'+
 			'<div class="map" id="map' + numTasks +'"></div></div>');
 	    
 	    addMap("map"+numTasks);
@@ -322,6 +327,7 @@ String lang = request.getParameter( "lang" );
 	    });
 	    
 	    $('a[href="#task'+numTasks+'div"]').tab('show');
+	    $('input[name="numTasks"]').val(numTasks);
 	}
 	
 	function removeTaskTab() {
@@ -365,6 +371,9 @@ String lang = request.getParameter( "lang" );
 					}
 				}
 			});
+			
+			$('input[name="latitudeTask' + that.name.substring(3, that.name.length) + '"]').val(e.latLng.lat);
+			$('input[name="longitudeTask' + that.name.substring(3, that.name.length) + '"]').val(e.latLng.lng);
 		});
 		
 	}

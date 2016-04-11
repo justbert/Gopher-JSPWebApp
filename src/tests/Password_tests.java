@@ -16,7 +16,7 @@ public class Password_tests {
 	@Test
 	public void testEncryption() {
 		
-		String password = "gopher";
+		String password = "password";
 		String[] returns = new String[2];
 		
 		try{
