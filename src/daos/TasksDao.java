@@ -31,11 +31,11 @@ public class TasksDao extends DatabaseManager{
 		int taskId = -1;
 		
 		Object[] taskData = {
-			task.getName(),
-			task.getDescription(),
-			task.getErrandId(),
-			task.getAddress_id().getId()
-		};
+				task.getName(),
+				task.getDescription(),
+				task.getErrandId(),
+				(task.getAddress_id().getId() == 0 ? null : task.getAddress_id().getId())
+			};
 		
 		try {
 			taskId = insert(insertTask, taskData);
