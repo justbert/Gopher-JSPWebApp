@@ -62,9 +62,9 @@ public class Errand implements Serializable {
 	}
 	
 	public enum StatusType{
-		NOT_STARTED(1, "Not Started"),
-		IN_PROGRESS(2, "In Progresss"),
-		COMPLETED(3, "Completed");
+		COMPLETED(1, "Completed"),
+		NOT_STARTED(2, "Not Started"),
+		IN_PROGRESS(3, "In Progress");
 		
 		private String name;
 		private int index;
