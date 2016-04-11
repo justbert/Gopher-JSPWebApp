@@ -199,8 +199,22 @@ String lang = request.getParameter( "lang" );
 				</h3>
 				<table class="table">
 					<tr>
-						<td>No notifications to show</td>
+						<th>Message Type</th>
+						<th>Title</th>
+						<th>Message</th>
 					</tr>
+<!-- 					<tr> -->
+<!-- 						<td>No notifications to show</td> -->
+<!-- 					</tr> -->
+					
+					<!-- List all notifications for this user -->
+					<c:forEach items="${notifs}" var="notif">
+						<tr>
+							<td>${notif.getNotificationTypeID().getTitle() }
+							<td>${notif.getTitle() }</td>
+							<td>${notif.getMessage() }</td>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 			

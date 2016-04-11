@@ -105,11 +105,11 @@ public class AddressDAO  extends DatabaseManager{
 	/**
 	 * Inserts a new address into the database
 	 * @param Address Object
-	 * @return The number of rows updated
+	 * @return The ID of the inserted address
 	 */
 	public int addAddress(Address address) {	
 		try {
-			return update(INSERT_ADDRESS, address.getId(),
+			return insert(INSERT_ADDRESS, address.getId(),
 					address.getAddressLine1(),
 					address.getAddressLine2(),
 					address.getCity(),

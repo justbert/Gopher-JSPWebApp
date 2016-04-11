@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import daos.ErrandDao;
+import daos.NotificationDAO;
 import daos.RatingDAO;
 import daos.UserDao;
 import entities.User;
 import entities.User.UserType;
 import entities.Errand;
+import entities.Notification;
 import entities.Rating;
 
 /**
@@ -31,12 +33,12 @@ public class DashboardServlet extends HttpServlet {
 	private User user;
 	private ErrandDao errandDao = new ErrandDao();
 	private RatingDAO ratingDao = new RatingDAO();
+	private NotificationDAO notifDao = new NotificationDAO();
 	
 	/** @see HttpServlet#HttpServlet() */
     public DashboardServlet() {
         super();
     }
-
     
 	/** @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response) */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -79,6 +81,9 @@ public class DashboardServlet extends HttpServlet {
 		// Average rating for the user as a Gopher
 		Integer gopherRatingAvg = ratingDao.getRatingAverageForGopherID(user.getId());
 		
+		// Retreive all notifications for user
+		List<Notification> notifs = notifDao.getNotificationsByUserId(user.getId());
+		
 		try {
 			request.setAttribute("errandsCustomer", errandsCustomer);
 			request.setAttribute("errandsGopher", errandsGopher);
@@ -88,13 +93,13 @@ public class DashboardServlet extends HttpServlet {
 			request.setAttribute("customerRatingAvg", customerRatingAvg);
 			request.setAttribute("ratingsGopher", ratingsGopher);
 			request.setAttribute("gopherRatingAvg", gopherRatingAvg);
+			request.setAttribute("notifs", notifs);
 			request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	
 	/** @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response) */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		//doGet(request, response);
