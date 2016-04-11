@@ -53,7 +53,7 @@ public class DatabaseManager {
     	 
     	String url, dbName, driver, userName, password;
     	 
-		try(Scanner input = new Scanner(new FileReader("serverConfig.txt"))) {
+		try(Scanner input = new Scanner(new FileReader("C:/serverConfig.txt"))) {
 
 
 
