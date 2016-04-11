@@ -57,7 +57,7 @@ public class ErrandDao extends DatabaseManager {
 	/**
 	 * Inserts a new entry into the database
 	 * @param errand The model data to map to the database entry
-	 * @return The number of rows updated
+	 * @return The ID of the errand added to the DB
 	 */
 	public int addErrand(Errand errand) {	
 		int result = -1;
@@ -74,7 +74,7 @@ public class ErrandDao extends DatabaseManager {
 		};
 		
 		try {
-			result = update(insertErrand, errandData);
+			result = insert(insertErrand, errandData);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
