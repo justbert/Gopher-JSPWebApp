@@ -327,6 +327,7 @@ String lang = request.getParameter( "lang" );
 	    });
 	    
 	    $('a[href="#task'+numTasks+'div"]').tab('show');
+	    
 	    $('input[name="numTasks"]').val(numTasks);
 	}
 	
@@ -338,6 +339,8 @@ String lang = request.getParameter( "lang" );
 			mapArray['map'+numTasks] = null;
 			
 			numTasks--;
+			
+			$('input[name="numTasks"]').val(numTasks);
 		}
 	}
 	
