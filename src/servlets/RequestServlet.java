@@ -12,10 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import daos.AddressDAO;
-import daos.ErrandDAO;
 import daos.ErrandDao;
 import daos.RewardDAO;
-import daos.TaskDAO;
 import daos.TasksDao;
 import entities.Address;
 import entities.Errand;
