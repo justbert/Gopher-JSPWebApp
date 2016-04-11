@@ -338,6 +338,7 @@ String lang = request.getParameter( "lang" );
 			mapArray['map'+numTasks] = null;
 			
 			numTasks--;
+			$('input[name="numTasks"]').val(numTasks);
 		}
 	}
 	

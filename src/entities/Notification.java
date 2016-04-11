@@ -43,6 +43,10 @@ public class Notification {
 		this.notificationTypeID = notificationTypeID;
 	}
 
+	public Notification() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}
