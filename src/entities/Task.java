@@ -36,28 +36,7 @@ public class Task implements Serializable{
 		this.errandId = errandId;
 		this.address_id = address_id;
 	}
-	
-	
-	/**
-	 * Constructor for use when creating objects to pass to the DAO for insertion into the DB.
-	 * @param name
-	 * @param description
-	 * @param startDate
-	 * @param completionDate
-	 * @param errandId
-	 * @param address_id
-	 */
-	public Task(String name, String description, Date startDate, Date completionDate, int errandId,
-			Address address_id) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.startDate = startDate;
-		this.completionDate = completionDate;
-		this.errandId = errandId;
-		this.address_id = address_id;
-	}
-	
+
 	public int getId() {
 		return id;
 	}

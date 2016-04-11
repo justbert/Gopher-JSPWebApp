@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daos.ErrandDAO;
+import daos.ErrandDao;
 import entities.Errand;
 
 public class BrowseServlet extends javax.servlet.http.HttpServlet {
@@ -15,7 +15,7 @@ public class BrowseServlet extends javax.servlet.http.HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = -3792047100550048731L;
-	private ErrandDAO errandDB = new ErrandDAO();
+	private ErrandDao errandDB = new ErrandDao();
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response){
 		//NO POST ACTION

@@ -14,14 +14,14 @@ import utils.DatabaseManager;
 
 public class AddressDAO  extends DatabaseManager{
 
-	private static UserDAO userDB = new UserDAO();
+	private static UserDao userDB = new UserDao();
 	/**
 	 * Query for all rows with matching userId
 	 */
 	private static final String SELECT_ALL_ADDRESSES_BY_USERID = "SELECT * FROM addresses WHERE userId = ?";
 	private static final String SELECT_ADDRESS_BY_ADDRESSID = "SELECT * FROM addresses WHERE id = ?";
-	private static final String INSERT_ADDRESS = "INSERT INTO addresses ( addressLine1, addressLine2, city, province, country, zip, lat, long, userId, addressType )"
-											   + "VALUES (?, ?, ?, ?, ?,?,? ?, ?, ?)";
+	private static final String INSERT_ADDRESS = "INSERT INTO addresses ( id, addressLine1, addressLine2, city, province, country, zip, lat, long, userId, addressType )"
+											   + "VALUES ( ?, ?, ?, ?, ?, ?,?,? ?, ?, ?)";
 	private static final String UPDATE_ADDRESS = "UPDATE addresses SET addressLine1=?, addressLine2=?, city=?, province=?, country=?, zip=?, lat=?, long=?, addressType=? WHERE id=?";
 	
 	
@@ -105,11 +105,11 @@ public class AddressDAO  extends DatabaseManager{
 	/**
 	 * Inserts a new address into the database
 	 * @param Address Object
-	 * @return The ID of the address created, -1 on failure.
+	 * @return The number of rows updated
 	 */
 	public int addAddress(Address address) {	
 		try {
-			return insert(INSERT_ADDRESS, address.getId(),
+			return update(INSERT_ADDRESS, address.getId(),
 					address.getAddressLine1(),
 					address.getAddressLine2(),
 					address.getCity(),

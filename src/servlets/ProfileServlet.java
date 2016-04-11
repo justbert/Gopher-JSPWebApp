@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daos.UserDAO;
-import daos.ErrandDAO;
+import daos.UserDao;
+import daos.ErrandDao;
 import daos.RatingDAO;
 import entities.Errand;
 import entities.Rating;
@@ -24,8 +24,8 @@ import entities.User;
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private User viewUser;
-	private UserDAO userDao = new UserDAO();
-	private ErrandDAO errandDao = new ErrandDAO();
+	private UserDao userDao = new UserDao();
+	private ErrandDao errandDao = new ErrandDao();
 	private RatingDAO ratingDao = new RatingDAO();
        
     /** @see HttpServlet#HttpServlet() */

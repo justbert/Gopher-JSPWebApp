@@ -11,19 +11,10 @@ import entities.Errand;
 import entities.Task;
 import utils.DatabaseManager;
 
-/**
- * @author Justin
- *
- */
-/**
- * @author Justin
- *
- */
-public class TaskDAO extends DatabaseManager{
+public class TasksDao extends DatabaseManager{
 	
 	private static final String select_latestTask = "SELECT * from tasks order by date_completed desc join on addresses using(address_id)"; 
 	private static final String select_tasksForErrand = "SELECT * FROM tasks where errandID = ?";
-	private static final String INSERT_TASK = "INSERT INTO tasks (name, description, errandID, addressesID) VALUES ( ?, ?, ?, ?)";
 	private static AddressDAO addressDB = new AddressDAO();
 	
 	
@@ -57,26 +48,6 @@ public class TaskDAO extends DatabaseManager{
 			e.printStackTrace();
 		}
 		return tasks;
-	}
-	
-	
-	/**
-	 * @param task
-	 * @return The ID of the created task.
-	 */
-	public int addTask(Task task) {	
-		try {
-			return insert(INSERT_TASK, 
-					task.getName(),
-					task.getDescription(),
-					task.getErrandId(),
-					task.getAddress_id()
-					);			
-		} 
-		catch (SQLException e) {
-			e.printStackTrace();
-		}	
-		return -1;
 	}
 }
 

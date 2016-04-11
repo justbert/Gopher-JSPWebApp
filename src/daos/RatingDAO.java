@@ -16,8 +16,8 @@ import utils.DatabaseManager;
  */
 public class RatingDAO extends DatabaseManager {
 	
-	private UserDAO userDao = new UserDAO();
-	private ErrandDAO errandDao = new ErrandDAO();
+	private UserDao userDao = new UserDao();
+	private ErrandDao errandDao = new ErrandDao();
 	
 	/** Defines a query that selects all ratings ordered them by newest first */
 	private static final String selectAllRatings = 
