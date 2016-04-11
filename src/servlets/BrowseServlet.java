@@ -23,9 +23,11 @@ public class BrowseServlet extends javax.servlet.http.HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
 		List<Errand> errands = errandDB.select12Latest();
+		List<Errand> allErrands = errandDB.selectAll(); //this needs to be only all active errands
 		//errands = 	errands.subList(0, 10);
 		try {
 			request.setAttribute("errandList", errands);
+			request.setAttribute("allErrands", allErrands);
 			request.getRequestDispatcher("WEB-INF/browse.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
