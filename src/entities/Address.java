@@ -72,6 +72,19 @@ public class Address implements Serializable {
 		this.userId = userId;
 		this.addressType = addressType;
 	}
+	
+	public Address(String addressLine1, String addressLine2, String city, String province, String country, String zip, double lat, double lon, int userId) {
+		super();
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.province = province;
+		this.country = country;
+		this.zip = zip;
+		this.lat = lat;
+		this.lon = lon;
+		this.userId = userId;
+	}
 
 	public int getId() {
 		return id;
