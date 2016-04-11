@@ -4,6 +4,7 @@ public class Notification {
 	private Integer id;
 	private String title;
 	private User userId;
+	private String message;
 	private NotificationType notificationTypeID;
 	
 	public enum NotificationType{
@@ -20,7 +21,7 @@ public class Notification {
 			this.index = index;
 		}
 		
-		public NotificationType getNotificationType(int index){
+		public static NotificationType getNotificationType(int index){
 			for(NotificationType type : NotificationType.values())
 				if(type.index == index) return type;
 			return null;
@@ -35,12 +36,22 @@ public class Notification {
 		}
 	}
 
-	public Notification(Integer id, String title, User userId, NotificationType notificationTypeID) {
+	public Notification(Integer id, String title, User userId, String message, NotificationType notificationTypeID) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.userId = userId;
+		this.message = message;
 		this.notificationTypeID = notificationTypeID;
+	}
+
+	public Notification() {}
+
+	public Notification(String title, User user, String message, NotificationType notificationType) {
+		this.title = title;
+		this.userId = user;
+		this.message = message;
+		this.notificationTypeID = notificationType;
 	}
 
 	public Integer getId() {
@@ -73,5 +84,13 @@ public class Notification {
 
 	public void setNotificationTypeID(NotificationType notificationTypeID) {
 		this.notificationTypeID = notificationTypeID;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}	
 }
