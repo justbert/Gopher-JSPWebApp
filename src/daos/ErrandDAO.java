@@ -18,7 +18,7 @@ import entities.User;
  * @author joshr
  *
  */
-public class ErrandDao extends DatabaseManager {
+public class ErrandDAO extends DatabaseManager {
 	private static final String DELETE = "DELETE FROM Errands WHERE id=?";
 	private static final String SELECT_ALL = "SELECT * FROM errands";
 	private static final String SELECT_BY_ID = "SELECT * FROM errands where id = ?";
@@ -50,14 +50,14 @@ public class ErrandDao extends DatabaseManager {
 			+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	private static final String SELECT_12_LATEST = "SELECT * FROM errands ORDER BY creationDate DESC LIMIT 12";
-	private UserDao userDB = new UserDao();
+	private UserDAO userDB = new UserDAO();
 	private RewardDAO rewardDB = new RewardDAO();
-	private TasksDao tasksDB = new TasksDao();
+	private TaskDAO tasksDB = new TaskDAO();
 	
 	/**
 	 * Inserts a new entry into the database
 	 * @param errand The model data to map to the database entry
-	 * @return The number of rows updated
+	 * @return The ID of the created errand.
 	 */
 	public int addErrand(Errand errand) {	
 		int result = -1;
@@ -74,7 +74,7 @@ public class ErrandDao extends DatabaseManager {
 		};
 		
 		try {
-			result = update(insertErrand, errandData);
+			result = insert(insertErrand, errandData);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

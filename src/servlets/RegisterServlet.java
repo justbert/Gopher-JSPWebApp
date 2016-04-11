@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import daos.UserDao;
+import daos.UserDAO;
 import entities.User;
 
 /**
@@ -23,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private UserDao userDAO = new UserDao();
+	private UserDAO userDAO = new UserDAO();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("WEB-INF/signup.jsp").forward(request, response);

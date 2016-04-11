@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import daos.ErrandDao;
+import daos.ErrandDAO;
 import daos.RatingDAO;
-import daos.UserDao;
+import daos.UserDAO;
 import entities.Errand;
 import entities.Errand.StatusType;
 import entities.Rating;
@@ -23,7 +23,7 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private ErrandDao errandDB = new ErrandDao();
+	private ErrandDAO errandDB = new ErrandDAO();
 	private RatingDAO ratingDAO = new RatingDAO();
 	
 	@Override

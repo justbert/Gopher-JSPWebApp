@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import daos.ErrandDao;
+import daos.ErrandDAO;
 import daos.RatingDAO;
-import daos.UserDao;
+import daos.UserDAO;
 import entities.User;
 import entities.User.UserType;
 import entities.Errand;
@@ -29,7 +29,7 @@ public class DashboardServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -2915114669209009394L;
 	private User user;
-	private ErrandDao errandDao = new ErrandDao();
+	private ErrandDAO errandDao = new ErrandDAO();
 	private RatingDAO ratingDao = new RatingDAO();
 	
 	/** @see HttpServlet#HttpServlet() */

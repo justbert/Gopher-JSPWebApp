@@ -9,7 +9,7 @@ import entities.User.UserType;
 import utils.DatabaseManager;
 import utils.Password;
 
-public class UserDao extends DatabaseManager {
+public class UserDAO extends DatabaseManager {
 	private static final String select_VerifyEmail = "SELECT id from users WHERE email = ?";
 	private static final String select_VerifyUsername = "SELECT id from users WHERE username = ?";
 	private static final String select_VerifyPassword = "SELECT password, salt from users WHERE id = ?";
