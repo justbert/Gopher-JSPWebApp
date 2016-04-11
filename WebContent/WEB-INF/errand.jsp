@@ -77,7 +77,7 @@ if ( lang == null){ lang = "en";}
                 </p>
                 <c:choose>
 					<%-- Not started --%>                
-                	<c:when test="${errand.status.index == 1}">
+                	<c:when test="${errand.status.index == 2}">
                 		<c:choose>
 	                		<c:when test="${currentUserIsCustomer}">
 								<div class="row">
@@ -93,7 +93,7 @@ if ( lang == null){ lang = "en";}
 	                		</c:when>
                 		</c:choose>
                 	</c:when>
-                	<c:when test="${errand.status.index == 2}">
+                	<c:when test="${errand.status.index == 3}">
                 		<c:choose>
 	                		<c:when test="${currentUserIsGopher}">
 	                			<form id="accept-form" action="errand?id=${errand.id}" method="post">
@@ -109,7 +109,7 @@ if ( lang == null){ lang = "en";}
 	                		</c:when>
                 		</c:choose>
                 	</c:when>
-                	<c:when test="${errand.status.index == 3}">
+                	<c:when test="${errand.status.index == 1}">
                 		<div class="row">
                 			<div class="col-md-4 col-md-offset-4">Task Completed</div>
                			</div>

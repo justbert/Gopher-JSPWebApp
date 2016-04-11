@@ -23,11 +23,13 @@ public class BrowseServlet extends javax.servlet.http.HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
 		List<Errand> errands = errandDB.select12Latest();
-		List<Errand> allErrands = errandDB.selectAll(); //this needs to be only all active errands
+		List<Errand> allErrands = errandDB.selectAllActive(); //filter for items that aren't complete yet
+		List<Errand> importantErrands = errandDB.selectAllHighVeryHigh(); //filter for items rating High or Very High
 		//errands = 	errands.subList(0, 10);
 		try {
 			request.setAttribute("errandList", errands);
 			request.setAttribute("allErrands", allErrands);
+			request.setAttribute("importandErrands", importantErrands);
 			request.getRequestDispatcher("WEB-INF/browse.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
