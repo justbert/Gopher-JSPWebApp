@@ -252,11 +252,11 @@ INSERT INTO `rewards` (`id`,`name`,`description`,`rewardValue`) VALUES
 (5,"Money","I will pay you $25.00 in cash",25);
 
 INSERT INTO `errands` (`name`,`description`,`creationDate`,`completionDate`,`deadline`,`rewardId`,`statusTypeId`,`importanceTypeId`,`userIdCustomer`,`userIdGopher`) VALUES 
-("Pick up Groceries","Buy groceries for me according to my grocery list, and drop them off at my house","2016-04-01 09:46:38","2016-04-01 12:46:38","2016-04-02 09:46:38",1,1,3,1,5),
-("Pick up dry cleaning","Pick up my dry cleaning from the cleaners, and drop it off at my office","2016-04-03 08:00:38","2016-04-03 11:00:38","2016-04-04 11:00:38",2,1,3,2,1),
-("Help me Move","If you have a pick up truck, I need someone to help me move a large dresser to my new place.","2016-04-03 09:46:38","2016-04-09 12:46:38","2016-04-08 12:30:38",3,1,3,3,4),
-("Pharmacy Run","Please get the following items for me, and drop them off at my house.","2016-04-04 09:46:38","2016-04-04 10:46:38","2016-04-04 12:00:38",5,1,4,4,3),
-("Cut My Lawn","I broke me leg, and need someone to cut my lawn once a week for one month","2015-04-05 09:46:38","2015-05-01 12:46:38","2015-05-01 17:00:38",4,1,3,5,2);
+("Pick up Groceries","Buy groceries for me according to my grocery list, and drop them off at my house","2016-04-01 09:46:38","2016-04-01 12:46:38","2016-04-02 09:46:38",1,2,3,1,5),
+("Pick up dry cleaning","Pick up my dry cleaning from the cleaners, and drop it off at my office","2016-04-03 08:00:38","2016-04-03 11:00:38","2016-04-04 11:00:38",2,2,3,2,1),
+("Help me Move","If you have a pick up truck, I need someone to help me move a large dresser to my new place.","2016-04-03 09:46:38","2016-04-09 12:46:38","2016-04-08 12:30:38",3,2,3,3,4),
+("Pharmacy Run","Please get the following items for me, and drop them off at my house.","2016-04-04 09:46:38","2016-04-04 10:46:38","2016-04-04 12:00:38",5,2,4,4,3),
+("Cut My Lawn","I broke me leg, and need someone to cut my lawn once a week for one month","2015-04-05 09:46:38","2015-05-01 12:46:38","2015-05-01 17:00:38",4,2,3,5,2);
 
 INSERT INTO `address_types` (name) VALUES ("Home"),("Work"),("Pickup Location"),("Dropoff Location"),("Custom Type");
 

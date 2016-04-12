@@ -50,15 +50,15 @@ if ( lang == null){ lang = "en";}
 		<form class="block-display" id="login-form" method="post" action="register">
 			 <h2><%=join%> <span class="monty-font"><%=gopher%></span> <%=today%>.</h2>
 			 <label><%=username%></label>
-			 <input class="block-display" type="text" name="username" value="${username}">
+			 <input class="block-display form-control" type="text" name="username" value="${username}">
 			 <c:remove var="username"/>
 			 <label><%=email%></label>
-			 <input class="block-display" type="email" name="email" value="${email}"/>
+			 <input class="block-display form-control" type="email" name="email" value="${email}"/>
 			 <c:remove var="email"/>
 			 <label><%=password%></label>
-			 <input class="block-display" type="password" name="password"/>
+			 <input class="block-display form-control" type="password" name="password"/>
 			 <label><%=confirmpass%></label>
-			 <input class="block-display" type="password" name="passwordConfirm"/>
+			 <input class="block-display form-control" type="password" name="passwordConfirm"/>
 			 <button class="btn btn-default"><%=signmeup%></button>
 		</form>
 	</div>
