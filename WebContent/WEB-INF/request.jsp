@@ -298,7 +298,7 @@ String lang = request.getParameter( "lang" );
 		$("#tasks-div").append(
 				'<div id="task' + numTasks + 'div" class="tab-pane fade table-responsive">' +
 				'<label class="col-md-3">Title:</label>' +
-				'<input type="text" name="taskName'+numTasks+'+" placeholder="Title of your task">'+
+				'<input type="text" name="taskName'+numTasks+'" placeholder="Title of your task">'+
 				'<label class="col-md-3">Description:</label>'+
 				'<textarea rows="4" cols="50" name="taskDescription'+numTasks+'" placeholder="Enter a description of your task."></textarea>'+
 				'<h5>Enter a location for this task:</h5>'+

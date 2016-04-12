@@ -72,7 +72,7 @@ public class ErrandDao extends DatabaseManager {
 			errand.getDescription(),
 			errand.getDeadline(),
 			errand.getRewardId().getId(),
-			1,		// Defaulting to a status id of 1, for now
+			2,		// Defaulting to a "Not Started" status upon creation
 			errand.getImportanceTypeID().getIndex(),
 			errand.getUserIdCustomer().getId(),
 			null	// No gopher assigned yet, at errand request creation

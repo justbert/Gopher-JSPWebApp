@@ -69,6 +69,7 @@ public class RequestServlet extends HttpServlet {
 			if (errandToCreate != null)
 				errandID = errandDAO.addErrand(errandToCreate);
 			
+			System.out.println("NUMBER OF TASKS: " + request.getParameter("numTasks"));
 			//Loop for the creation of tasks
 			if(errandID != 0)
 				for(int taskNum = 1; taskNum <= Integer.parseInt(request.getParameter("numTasks")); ++taskNum) {
