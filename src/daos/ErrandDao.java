@@ -32,19 +32,22 @@ public class ErrandDao extends DatabaseManager {
 			"UPDATE errands SET name=?, description=?, creationDate=?, completionDate=?, deadline=?, rewardId=?, statusTypeId=?, importanceTypeId=?, userIdCustomer=?, userIdGopher=? where id = ?;";
 	/** Query to retreive active errand requests that the user has made */
 	private static final String SELECT_ERRANDS_FOR_USERID = 
-			"SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ? and completionDate is null";
+			"SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ? and statusTypeId = 3"; //3 == In Progress
 	
 	/** Query to retrieve active errands the user is gophering */
 	private static final String SELECT_ERRANDS_FOR_GOPHERID = 
-			"SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ? and completionDate is null";
+			"SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ? and statusTypeId = 3"; //3 == In Progess
+			//"SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ? and completionDate is null";
 	
 	/** Query to retrieve errands the user has requested and that have since been completed */
 	private static final String SELECT_COMPLETED_ERRANDS_FOR_USERID = 
-			"SELECT * FROM errands, users WHERE errands.userIdCustomer = users.id AND userIdCustomer = ? AND completionDate is not null";
+			"SELECT * FROM errands, users WHERE errands.userIdCustomer = users.id AND userIdCustomer = ? AND statusTypeId = 1"; //1 == completed;
+			//"SELECT * FROM errands, users WHERE errands.userIdCustomer = users.id AND userIdCustomer = ? AND completionDate is not null";
 	
 	/** Query to retrieve errand the user has completed as a gopher */
 	private static final String SELECT_COMPLETED_ERRANDS_FOR_GOPHERID = 
-			"SELECT * FROM errands, users WHERE errands.userIdGopher = users.id AND userIdGopher = ? AND completionDate is not null";
+			"SELECT * FROM errands, users WHERE errands.userIdGopher = users.id AND userIdGopher = ? AND statusTypeId = 1"; //1 == completed
+			//"SELECT * FROM errands, users WHERE errands.userIdGopher = users.id AND userIdGopher = ? AND completionDate is not null";
 	
 	/** Defines a query that adds an errand entry into the database */
 	private static final String insertErrand = 
