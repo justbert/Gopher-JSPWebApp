@@ -31,15 +31,25 @@ public class RequestServlet extends HttpServlet {
 	private TasksDao taskDAO = new TasksDao();
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/request.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("userObject") == null)
+			response.sendRedirect("/login");
+		else
+			request.getRequestDispatcher("WEB-INF/request.jsp").forward(request, response);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		HttpSession session = request.getSession();
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		
+		
+		User currentUser = (User)session.getAttribute("userObject");
 		Errand errandToCreate = null;
 		Reward rewardToCreate = null;
+		
+		if(session.getAttribute("userObject") == null)
+			response.sendRedirect("/login");
 		
 		try {
 			
@@ -60,7 +70,7 @@ public class RequestServlet extends HttpServlet {
 					request.getParameter("errandDescription"),
 					fmt.parse(request.getParameter("deadline")),
 					ImportanceType.getImportanceType(Integer.parseInt(request.getParameter("importance"))),
-					(User)session.getAttribute("userObject"),
+					currentUser,
 					rewardToCreate
 				);
 						
@@ -82,7 +92,7 @@ public class RequestServlet extends HttpServlet {
 								request.getParameter("zipTask" + taskNum),
 								Double.parseDouble(request.getParameter("latitudeTask" + taskNum)),
 								Double.parseDouble(request.getParameter("longitudeTask" + taskNum)),
-								((User)session.getAttribute("userObject")).getId()
+								currentUser.getId()
 							);
 					
 					//Insert address into database and set the address ID
