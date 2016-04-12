@@ -32,7 +32,7 @@ public class ErrandDao extends DatabaseManager {
 			"UPDATE errands SET name=?, description=?, creationDate=?, completionDate=?, deadline=?, rewardId=?, statusTypeId=?, importanceTypeId=?, userIdCustomer=?, userIdGopher=? where id = ?;";
 	/** Query to retreive active errand requests that the user has made */
 	private static final String SELECT_ERRANDS_FOR_USERID = 
-			"SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ? and statusTypeId = 3"; //3 == In Progress
+			"SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ? and (statusTypeId = 3 or statusTypeId = 2)"; //3 == In Progress 2 == Not Started
 	
 	/** Query to retrieve active errands the user is gophering */
 	private static final String SELECT_ERRANDS_FOR_GOPHERID = 
