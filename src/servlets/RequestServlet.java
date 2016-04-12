@@ -23,10 +23,6 @@ import entities.Task;
 import entities.User;
 
 public class RequestServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4982651932025574846L;
 
 	private ErrandDao errandDAO = new ErrandDao();
@@ -87,7 +83,7 @@ public class RequestServlet extends HttpServlet {
 								Double.parseDouble(request.getParameter("longitudeTask" + taskNum)),
 								((User)session.getAttribute("userObject")).getId()
 							);
-										
+					
 					//Insert address into database and set the address ID
 					address.setId(addressDAO.addAddress(address));
 					

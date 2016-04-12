@@ -21,6 +21,8 @@ import entities.User;
 public class ErrandDao extends DatabaseManager {
 	private static final String DELETE = "DELETE FROM Errands WHERE id=?";
 	private static final String SELECT_ALL = "SELECT * FROM errands";
+	private static final String SELECT_ALL_ACTIVE = "SELECT * FROM errands where statusTypeId = 2"; //2 == not started
+	private static final String SELECT_ALL_HIGH_VERY_HIGH = "SELECT * FROM errands where statusTypeId = 2 and (importanceTypeId = 4 or importanceTypeId = 5)";
 	private static final String SELECT_BY_ID = "SELECT * FROM errands where id = ?";
 	private static final String SELECT_BY_NAME = "SELECT * FROM Errands WHERE name=?";
 	private static final String INSERT = "INSERT INTO Errands(name, tel, passwd) VALUES(?, ?, ?)";
@@ -30,26 +32,29 @@ public class ErrandDao extends DatabaseManager {
 			"UPDATE errands SET name=?, description=?, creationDate=?, completionDate=?, deadline=?, rewardId=?, statusTypeId=?, importanceTypeId=?, userIdCustomer=?, userIdGopher=? where id = ?;";
 	/** Query to retreive active errand requests that the user has made */
 	private static final String SELECT_ERRANDS_FOR_USERID = 
-			"SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ? and completionDate is null";
+			"SELECT * From errands join users on errands.userIdCustomer = users.id where users.id = ? and statusTypeId = 3"; //3 == In Progress
 	
 	/** Query to retrieve active errands the user is gophering */
 	private static final String SELECT_ERRANDS_FOR_GOPHERID = 
-			"SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ? and completionDate is null";
+			"SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ? and statusTypeId = 3"; //3 == In Progess
+			//"SELECT * From errands join users on errands.userIdGopher = users.id where users.id = ? and completionDate is null";
 	
 	/** Query to retrieve errands the user has requested and that have since been completed */
 	private static final String SELECT_COMPLETED_ERRANDS_FOR_USERID = 
-			"SELECT * FROM errands, users WHERE errands.userIdCustomer = users.id AND userIdCustomer = ? AND completionDate is not null";
+			"SELECT * FROM errands, users WHERE errands.userIdCustomer = users.id AND userIdCustomer = ? AND statusTypeId = 1"; //1 == completed;
+			//"SELECT * FROM errands, users WHERE errands.userIdCustomer = users.id AND userIdCustomer = ? AND completionDate is not null";
 	
 	/** Query to retrieve errand the user has completed as a gopher */
 	private static final String SELECT_COMPLETED_ERRANDS_FOR_GOPHERID = 
-			"SELECT * FROM errands, users WHERE errands.userIdGopher = users.id AND userIdGopher = ? AND completionDate is not null";
+			"SELECT * FROM errands, users WHERE errands.userIdGopher = users.id AND userIdGopher = ? AND statusTypeId = 1"; //1 == completed
+			//"SELECT * FROM errands, users WHERE errands.userIdGopher = users.id AND userIdGopher = ? AND completionDate is not null";
 	
 	/** Defines a query that adds an errand entry into the database */
 	private static final String insertErrand = 
 			"INSERT INTO errands ( name, description, deadline, rewardId, statusTypeId, importanceTypeId, userIdCustomer, userIdGopher)"
 			+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 	
-	private static final String SELECT_12_LATEST = "SELECT * FROM errands ORDER BY creationDate DESC LIMIT 12";
+	private static final String SELECT_12_LATEST = "SELECT * FROM errands WHERE statusTypeId = 2 ORDER BY creationDate DESC LIMIT 12";
 	private UserDao userDB = new UserDao();
 	private RewardDAO rewardDB = new RewardDAO();
 	private TasksDao tasksDB = new TasksDao();
@@ -96,7 +101,7 @@ public class ErrandDao extends DatabaseManager {
 	
 	public List<Errand> selectAll(){
 		List<Errand> errands = new ArrayList<Errand>();
-		try(ResultSet rs = query(SELECT_ALL)){
+		try(ResultSet rs = query(SELECT_ALL_ACTIVE)){
 			while (rs.next()){
 				errands.add(new Errand(
 						rs.getInt("id"),
@@ -192,6 +197,54 @@ public class ErrandDao extends DatabaseManager {
 	public List<Errand> select12Latest(){
 		List<Errand> errands = new ArrayList<Errand>();
 		try(ResultSet rs = query(SELECT_12_LATEST)){
+			while (rs.next()){
+				errands.add(new Errand(
+						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getString("description"),
+						rs.getDate("creationDate"),
+						rs.getDate("completionDate"),
+						rs.getTimestamp("deadline"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
+						StatusType.getStatusType(rs.getInt("statusTypeId")),
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher"))					
+					));
+			}
+			return errands;
+		} catch (SQLException e){
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public List<Errand> selectAllActive(){
+		List<Errand> errands = new ArrayList<Errand>();
+		try(ResultSet rs = query(SELECT_ALL_ACTIVE)){
+			while (rs.next()){
+				errands.add(new Errand(
+						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getString("description"),
+						rs.getDate("creationDate"),
+						rs.getDate("completionDate"),
+						rs.getTimestamp("deadline"),
+						rewardDB.getRewardForID(rs.getInt("rewardId")),
+						StatusType.getStatusType(rs.getInt("statusTypeId")),
+						ImportanceType.getImportanceType(rs.getInt("importanceTypeId")),
+						userDB.getUserForID(rs.getInt("userIdCustomer")),
+						userDB.getUserForID(rs.getInt("userIdGopher"))					
+					));
+			}
+			return errands;
+		} catch (SQLException e){
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public List<Errand> selectAllHighVeryHigh(){
+		List<Errand> errands = new ArrayList<Errand>();
+		try(ResultSet rs = query(SELECT_ALL_HIGH_VERY_HIGH)){
 			while (rs.next()){
 				errands.add(new Errand(
 						rs.getInt("id"),

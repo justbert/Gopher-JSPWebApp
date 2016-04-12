@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.Address;
-import entities.Rating;
-import entities.Reward;
-import entities.User;
 import entities.Address.AddressType;
 import utils.DatabaseManager;
 

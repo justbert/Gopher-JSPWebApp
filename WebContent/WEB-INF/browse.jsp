@@ -84,9 +84,9 @@ table {
 	<div id="product-wrapper " class="row bg-teal jumbotron pad-me-please">
 		<div class="dashboard-nav">
 			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#top-errands">Top
-						Errands</a></li>
+				<li class="active"><a data-toggle="tab" href="#top-errands">Latest Errands</a></li>
 				<li><a data-toggle="tab" href="#all-errands">All Errands</a></li>
+				<li><a data-toggle="tab" href="#important-errands">High Priority Errands</a>
 			</ul>
 		</div>
 		<div class="tab-content dashboard-content">
@@ -106,6 +106,35 @@ table {
 							<div class="ratings pull-bottom">
 								<p class="pull-right">
 									15 <!--TODO FIX THIS  -->
+									<%=reviews%></p>
+								<p>
+									<span class="glyphicon glyphicon-star"></span> <span
+										class="glyphicon glyphicon-star"></span> <span
+										class="glyphicon glyphicon-star"></span> <span
+										class="glyphicon glyphicon-star"></span> <span
+										class="glyphicon glyphicon-star"></span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<div id="important-errands" class="tab-pane fade table-responsive">
+				<c:forEach items="${importandErrands}" var="errand">
+					<div class="col-sm-4 col-lg-4 col-md-4 product-tombstone">
+						<div class="thumbnail product-thumbnail">
+							<img src="assets/img/gopher_small.png" alt="">
+							<div class="caption" id="errand${errand.getId()}">
+								<h4 class="pull-right">$
+									${errand.getRewardId().getRewardValue()}</h4>
+								<h4>
+									<a href="/errand?id=${errand.getId() }" style="color: black;">${errand.getName()}</a>
+								</h4>
+								<p>${errand.getDateCreated() }</p>
+							</div>
+							<div class="ratings pull-bottom">
+								<p class="pull-right">
+									15
 									<%=reviews%></p>
 								<p>
 									<span class="glyphicon glyphicon-star"></span> <span
