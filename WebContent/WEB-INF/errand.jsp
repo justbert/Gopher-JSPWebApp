@@ -157,14 +157,14 @@ if ( lang == null){ lang = "en";}
 						<h5><%=taskDescription%></h5>
 						<p><c:out value="${task.description}" /></p>
 					</div>
-					<div class="col-md-6">
+<%-- 					<div class="col-md-6">
 						<h5><%=startDate%></h5>
 						<c:out value="${task.startDate}" />
 					</div>
 					<div class="col-md-6">
 						<h5><%=completionDate%></h5>
 						<c:out value="${task.completionDate}" />
-					</div>
+					</div> --%>
 					<div class="col-md-6">
 						<h5><%=address%></h5>
 						<c:out value="${task.address_id}" />

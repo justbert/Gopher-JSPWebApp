@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,6 +35,7 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 		
 		if(errand.getStatus() == StatusType.IN_PROGRESS && currentUser.getId() == errand.getUserIdGopher().getId()){
 			errand.setStatus(StatusType.COMPLETED);
+			errand.setDateCompleted(Date.valueOf(LocalDate.now()));
 			errandDB.updateErrand(errand);
 		}else if(errand.getStatus() == StatusType.NOT_STARTED && errand.getUserIdGopher() == null){
 			errand.setStatus(StatusType.IN_PROGRESS);
