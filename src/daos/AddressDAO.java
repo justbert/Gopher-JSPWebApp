@@ -20,8 +20,8 @@ public class AddressDAO  extends DatabaseManager{
 	 */
 	private static final String SELECT_ALL_ADDRESSES_BY_USERID = "SELECT * FROM addresses WHERE userId = ?";
 	private static final String SELECT_ADDRESS_BY_ADDRESSID = "SELECT * FROM addresses WHERE id = ?";
-	private static final String INSERT_ADDRESS = "INSERT INTO addresses ( id, addressLine1, addressLine2, city, province, country, zip, lat, long, userId, addressType )"
-											   + "VALUES ( ?, ?, ?, ?, ?, ?,?,? ?, ?, ?)";
+	private static final String INSERT_ADDRESS = 
+			"INSERT INTO addresses (addressLine1, addressLine2, city, province, country, zip, lat, long, userId, addressTypeId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_ADDRESS = "UPDATE addresses SET addressLine1=?, addressLine2=?, city=?, province=?, country=?, zip=?, lat=?, long=?, addressType=? WHERE id=?";
 	
 	
@@ -107,24 +107,28 @@ public class AddressDAO  extends DatabaseManager{
 	 * @param Address Object
 	 * @return The ID of the inserted address
 	 */
-	public int addAddress(Address address) {	
+	public int addAddress(Address address) {
+		int addressId = -1;
+		Object[] addressData = {
+				address.getAddressLine1(),
+				address.getAddressLine2(),
+				address.getCity(),
+				address.getProvince(),
+				address.getCountry(),
+				address.getZip(),
+				address.getLat(),
+				address.getLon(),
+				address.getUserId(),
+				1	// default to addressTypeId of 1 for now
+			};
+		
 		try {
-			return insert(INSERT_ADDRESS, address.getId(),
-					address.getAddressLine1(),
-					address.getAddressLine2(),
-					address.getCity(),
-					address.getProvince(),
-					address.getCountry(),
-					address.getZip(),
-					address.getLat(),
-					address.getLon(),
-					address.getUserId(),
-					address.getAddressType());			
+			addressId = insert(INSERT_ADDRESS, addressData);		
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
 		}	
-		return -1;
+		return addressId;
 	}
 	
 	

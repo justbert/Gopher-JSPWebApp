@@ -87,7 +87,7 @@ public class RequestServlet extends HttpServlet {
 								Double.parseDouble(request.getParameter("longitudeTask" + taskNum)),
 								((User)session.getAttribute("userObject")).getId()
 							);
-					
+										
 					//Insert address into database and set the address ID
 					address.setId(addressDAO.addAddress(address));
 					

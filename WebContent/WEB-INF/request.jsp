@@ -207,7 +207,7 @@ String lang = request.getParameter( "lang" );
 							<label class="col-md-3">Address Line 1:</label>
 							<input type="text" name="addressLine1Task1">
 							<label class="col-md-3">Address Line 2:</label>
-							<input type="text" name="addressLine2Task2">
+							<input type="text" name="addressLine2Task1">
 							<label class="col-md-3">City:</label>
 							<input type="text" name="cityTask1">
 							<label class="col-md-3">Province:</label>
