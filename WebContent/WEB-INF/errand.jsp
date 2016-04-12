@@ -49,6 +49,10 @@ if ( lang == null){ lang = "en";}
 	}
 	.task-item{
 	}
+	.errandStatus{
+		font-weight: bolder;
+		font-size: 14px;
+	}
 </style>
 
 <!-- Page Content -->
@@ -81,7 +85,7 @@ if ( lang == null){ lang = "en";}
                 		<c:choose>
 	                		<c:when test="${currentUserIsCustomer}">
 								<div class="row">
-			                		<div class="col-md-4 col-md-offset-4">No Gopher has accepted your task yet</div>
+			                		<div class="col-md-8 errandStatus">Errand Status: No Gopher has accepted your errand yet</div>
 			                	</div>
 	                		</c:when>
 	                		<c:when test="${!currentUserIsGopher}">
@@ -104,14 +108,20 @@ if ( lang == null){ lang = "en";}
 	                		</c:when>
 	                		<c:when test="${!currentUserIsGopher}">
 	                			<div class="row">
-	                				<div class="col-md-4 col-md-offset-4">Task in progress</div>
+	                				<div class="col-md-8 errandStatus">
+	                					Errand Status: Errand is in progress by 
+	                					<a href="/profile?id=${errand.getUserIdGopher().getId()}">${errand.getUserIdGopher().getUsername()}</a>
+	                				</div>
                 				</div>
 	                		</c:when>
                 		</c:choose>
                 	</c:when>
                 	<c:when test="${errand.status.index == 1}">
                 		<div class="row">
-                			<div class="col-md-4 col-md-offset-4">Task Completed</div>
+                			<div class="col-md-8 errandStatus">
+                				Errand Status: This errand has been completed by 
+                				<a href="/profile?id=${errand.getUserIdGopher().getId()}">${errand.getUserIdGopher().getUsername()}</a>
+                			</div>
                			</div>
                 	</c:when>
                 </c:choose>            	
