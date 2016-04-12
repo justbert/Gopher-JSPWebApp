@@ -18,7 +18,7 @@ public class AddressDAO  extends DatabaseManager{
 	private static final String SELECT_ALL_ADDRESSES_BY_USERID = "SELECT * FROM addresses WHERE userId = ?";
 	private static final String SELECT_ADDRESS_BY_ADDRESSID = "SELECT * FROM addresses WHERE id = ?";
 	private static final String INSERT_ADDRESS = 
-			"INSERT INTO addresses (addressLine1, addressLine2, city, province, country, zip, lat, long, userId, addressTypeId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO addresses (addressLine1, addressLine2, city, province, country, zip, latitude, longitude, userId, addressTypeId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_ADDRESS = "UPDATE addresses SET addressLine1=?, addressLine2=?, city=?, province=?, country=?, zip=?, lat=?, long=?, addressType=? WHERE id=?";
 	
 	
@@ -55,8 +55,8 @@ public class AddressDAO  extends DatabaseManager{
 						rs.getString("province"),
 						rs.getString("country"),
 						rs.getString("zip"),
-						rs.getFloat("lat"),
-						rs.getFloat("long"),
+						rs.getDouble("latitude"),
+						rs.getDouble("longitude"),
 						rs.getInt("userId"),
 						AddressType.getAddressType(rs.getInt("addressTypeId")));
 			}
@@ -116,7 +116,7 @@ public class AddressDAO  extends DatabaseManager{
 				address.getLat(),
 				address.getLon(),
 				address.getUserId(),
-				1	// default to addressTypeId of 1 for now
+				1	// default to addressTypeId of 1 for now (not used in application)
 			};
 		
 		try {
@@ -144,8 +144,8 @@ public class AddressDAO  extends DatabaseManager{
 			rs.getString("province"),
 			rs.getString("country"),
 			rs.getString("zip"),
-			rs.getDouble("lat"),
-			rs.getDouble("long"),
+			rs.getDouble("latitude"),
+			rs.getDouble("longitude"),
 			rs.getInt("userId"),
 			AddressType.getAddressType(rs.getInt("addressTypeId"))					
 		);				

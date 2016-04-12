@@ -21,8 +21,8 @@ public class Address implements Serializable {
 	private String province;
 	private String country;
 	private String zip;
-	private double lat;
-	private double lon;
+	private double latitude;
+	private double logitude;
 	private int userId;
 	private AddressType addressType;
 	
@@ -67,8 +67,8 @@ public class Address implements Serializable {
 		this.province = province;
 		this.country = country;
 		this.zip = zip;
-		this.lat = lat;
-		this.lon = lon;
+		this.latitude = lat;
+		this.logitude = lon;
 		this.userId = userId;
 		this.addressType = addressType;
 	}
@@ -81,8 +81,8 @@ public class Address implements Serializable {
 		this.province = province;
 		this.country = country;
 		this.zip = zip;
-		this.lat = lat;
-		this.lon = lon;
+		this.latitude = lat;
+		this.logitude = lon;
 		this.userId = userId;
 	}
 
@@ -179,19 +179,19 @@ public class Address implements Serializable {
 	}
 
 	public double getLat() {
-		return lat;
+		return latitude;
 	}
 
 	public void setLat(double lat) {
-		this.lat = lat;
+		this.latitude = lat;
 	}
 
 	public double getLon() {
-		return lon;
+		return logitude;
 	}
 
 	public void setLon(double lon) {
-		this.lon = lon;
+		this.logitude = lon;
 	}
 	
 	@Override

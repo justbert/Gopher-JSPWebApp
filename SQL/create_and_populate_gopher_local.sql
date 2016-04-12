@@ -58,10 +58,10 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   `province` VARCHAR(75) NULL,
   `country` VARCHAR(75) NULL,
   `zip` VARCHAR(10) NULL,
-  `lat` FLOAT(10,6),
-  `long` FLOAT(10, 6),
+  `latitude` DOUBLE NULL,
+  `longitude` DOUBLE NULL,
   `userId` INT UNSIGNED NOT NULL,
-  `addressTypeId` INT UNSIGNED,
+  `addressTypeId` INT UNSIGNED NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userId`)
     REFERENCES `users` (`id`),
@@ -175,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `startDate` TIMESTAMP NULL DEFAULT NULL,
   `completionDate` TIMESTAMP NULL DEFAULT NULL,
   `errandId` INT UNSIGNED NOT NULL,
-  `addressesId` INT UNSIGNED,
+  `addressesId` INT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`errandId`)
     REFERENCES `errands` (`id`),
