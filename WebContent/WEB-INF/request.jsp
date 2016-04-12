@@ -11,15 +11,45 @@ String lang = request.getParameter( "lang" );
 %> 
 
 <%-- Variable Declarations --%>
-<%! String requestErrand, description, title, reqErrand, gopheredErrands; %>
+<%! String task, titleOfYourErrand, titleOfYourTask, enterADescriptionOfYourTask, enterADescriptionOfYourErrand, nameOfTheReward, enterADescriptionOfTheReward, estimateTheValueOfTheReward, requestAnErrand, enterErrandInformation, description, title, deadline, importance, veryLow, low, normal, high, veryHigh, enterRewardInformation, reward, rewardValue, enterTasksInformation, task1, addTask, removeLastTask, enterALocationForThisTask, addressLine1, addressLine2, city, province, country, postalCode, requestErrand;%>
 
 <%-- Variable Initializations --%>
-<% 
-  requestErrand = RB.getString("requestErrand"); 
-  description = RB.getString("description"); 
-  title = RB.getString("title"); 
-  reqErrand = RB.getString("reqErrand"); 
-  gopheredErrands = RB.getString("gopheredErrands");
+<%
+	task=RB.getString("task");
+	requestAnErrand=RB.getString("requestAnErrand");
+	enterErrandInformation=RB.getString("enterErrandInformation");
+	description=RB.getString("description");
+	title=RB.getString("title");
+	deadline=RB.getString("deadline");
+	importance=RB.getString("importance");
+	veryLow=RB.getString("veryLow");
+	low=RB.getString("low");
+	normal=RB.getString("normal");
+	high=RB.getString("high");
+	veryHigh=RB.getString("veryHigh");
+	enterRewardInformation=RB.getString("enterRewardInformation");
+	reward=RB.getString("reward");
+	rewardValue=RB.getString("rewardValue");
+	enterTasksInformation= RB.getString("enterTasksInformation");
+	task1=RB.getString("task1");
+	addTask=RB.getString("addTask");
+	removeLastTask=RB.getString("removeLastTask");
+	enterALocationForThisTask=RB.getString("enterALocationForThisTask");
+	addressLine1=RB.getString("addressLine1");
+	addressLine2=RB.getString("addressLine2");
+	city=RB.getString("city");
+	province=RB.getString("province");
+	country=RB.getString("country");
+	postalCode=RB.getString("postalCode");
+	requestErrand=RB.getString("requestErrand");
+	titleOfYourErrand=RB.getString("titleOfYourErrand");
+	titleOfYourTask=RB.getString("titleOfYourTask");
+	enterADescriptionOfYourTask=RB.getString("enterADescriptionOfYourTask");
+	enterADescriptionOfYourErrand=RB.getString("enterADescriptionOfYourErrand");
+	nameOfTheReward=RB.getString("nameOfTheReward");
+	enterADescriptionOfTheReward=RB.getString("enterADescriptionOfTheReward");
+	estimateTheValueOfTheReward=RB.getString("estimateTheValueOfTheReward");
+
 %>
 
 <style>
@@ -153,68 +183,68 @@ String lang = request.getParameter( "lang" );
 	 	<div class="profile-header-img">
 	 		<img class="img-circle" src="assets/img/cute_gopher.png" >		
 		</div>
-		<h1>Request an Errand </h1>
+		<h1><%=requestAnErrand %></h1>
 	</div>
 	
 	<!-- Begin form to add errand request -->
 	<div class="request-content">
 	
 		<form id="addErrandForm" action="request" method="post">
-			<h4>Enter Errand Information:</h4>
-			<label class="col-md-3">Title:</label>
-			<input type="text" name="errandName" placeholder="Title of your errand">
-			<label class="col-md-3">Description:</label>
-			<textarea rows="4" cols="50" name="errandDescription" placeholder="Enter a description of your errand."></textarea>
-			<label class="col-md-3">Deadline:</label>
+			<h4><%=enterErrandInformation%>:</h4>
+			<label class="col-md-3"><%=title%> %></label>
+			<input type="text" name="errandName" placeholder="<%=titleOfYourErrand %>">
+			<label class="col-md-3"><%=description %>:</label>
+			<textarea rows="4" cols="50" name="errandDescription" placeholder="<%=enterADescriptionOfYourErrand %>"></textarea>
+			<label class="col-md-3"><%=deadline %></label>
 			<input type="datetime-local" name="deadline">
-			<label class="col-md-3">Importance:</label>
+			<label class="col-md-3"><%=importance %>:</label>
 			<select form="addErrandForm" name="importance">
-  				<option value="1">Very Low</option>
-  				<option value="2">Low</option>
-  				<option value="3" selected>Normal</option>
-  				<option value="4">High</option>
-  				<option value="5">Very High</option>
+  				<option value="1"><%=veryLow %></option>
+  				<option value="2"><%=low %></option>
+  				<option value="3" selected><%=normal %></option>
+  				<option value="4"><%=high %></option>
+  				<option value="5"><%=veryHigh %></option>
 			</select>
-			<h4>Enter Reward Information:</h4>
-			<label class="col-md-3">Reward</label>
-			<input type="text" name="rewardName" placeholder="Name of the reward">
-			<label class="col-md-3">Description</label>
-			<textarea rows="4" cols="50" name="rewardDescription" placeholder="Enter a decription of the reward"></textarea>
-			<label class="col-md-3">Reward Value ($)</label>
-			<input type="text" name="rewardValue" placeholder="Estimate the value of the reward">
+			<h4><%=enterRewardInformation %></h4>
+			<label class="col-md-3"><%=reward %></label>
+			<input type="text" name="rewardName" placeholder="<%=nameOfTheReward%>">
+			<label class="col-md-3"><%=description %></label>
+			<textarea rows="4" cols="50" name="rewardDescription" placeholder="<%=enterADescriptionOfTheReward %>"></textarea>
+			<label class="col-md-3"><%=rewardValue %></label>
+			<input type="text" name="rewardValue" placeholder="<%=estimateTheValueOfTheReward%>">
 			<input type="hidden" name="numTasks" value="1">			
 		
 			<!-- Section to add task(s) -->
-			<h4>Enter Task(s) Information:</h4>
+			<h4><%=enterTasksInformation %></h4>
 			<div id="tasks-container" class="clearfix">
 				<div class="col-md-3">
 					<ul class="nav nav-pills nav-stacked" id="tasks-list">
-						<li class="active" id="task1li"><a data-toggle="tab" href="#task1div">Task 1</a></li>
+						<li class="active" id="task1li"><a data-toggle="tab" href="#task1div"><%=task1 %></a></li>
 					</ul>
 					<div id="subtasks">
-				        <div><button type="button" id="add-task" onclick="addTaskTab()">Add Task</button></div>
-				        <div><button type="button" id="remove-task" onclick="removeTaskTab()">Remove Last Task</button></div>	        	
+				        <div><button type="button" id="add-task" onclick="addTaskTab()"><%=addTask %></button></div>
+				        <div><button type="button" id="remove-task" onclick="removeTaskTab()"><%=removeLastTask %></button></div>	        	
 				       </div>
 				</div>
 	        	<div class="col-md-9">
 	        		<div id="tasks-div" class="tab-content">
 		        		<div id="task1div" class="tab-pane fade in active table-responsive">
-			        		<label class="col-md-3">Title:</label>
-							<input type="text" name="taskName1" placeholder="Title of your task">
-							<label class="col-md-3">Description:</label>
-							<textarea rows="4" cols="50" name="taskDescription1" placeholder="Enter a description of your task."></textarea>
-							<h5>Enter a location for this task:</h5>
-							<label class="col-md-3">Address Line 1:</label>
+			        		<label class="col-md-3"><%=title %>:</label>
+							<input type="text" name="taskName1" placeholder="<%=titleOfYourTask%>">
+							<label class="col-md-3"><%=description %>:</label>
+							<textarea rows="4" cols="50" name="taskDescription1" placeholder="<%=enterADescriptionOfYourTask%>"></textarea>
+							<h5><%=enterALocationForThisTask %></h5>
+							<label class="col-md-3"><%=addressLine1 %>:</label>
 							<input type="text" name="addressLine1Task1">
-							<label class="col-md-3">Address Line 2:</label>
+							<label class="col-md-3"><%=addressLine2 %>:</label>
 							<input type="text" name="addressLine2Task1">
-							<label class="col-md-3">City:</label>
+							<label class="col-md-3"><%=city %>:</label>
 							<input type="text" name="cityTask1">
-							<label class="col-md-3">Province:</label>
+							<label class="col-md-3"><%=province %>:</label>
 							<input type="text" name="provinceTask1">
-							<label class="col-md-3">Country:</label>
+							<label class="col-md-3"><%=country %>:</label>
 							<input type="text" name="countryTask1">
-							<label class="col-md-3">Postal Code:</label>
+							<label class="col-md-3"><%=postalCode %>:</label>
 							<input type="text" name="zipTask1">
 							<input type="hidden" name="longitudeTask1">
 							<input type="hidden" name="latitudeTask1">
@@ -294,25 +324,25 @@ String lang = request.getParameter( "lang" );
 	function addTaskTab() {
 		numTasks++;
 
-	    $("#tasks-list").append('<li id="task'+ numTasks +'li"><a data-toggle="tab" href="#task' + numTasks + 'div">Task '+ numTasks+'</a></li>');     // Append new elements
+	    $("#tasks-list").append('<li id="task'+ numTasks +'li"><a data-toggle="tab" href="#task' + numTasks + 'div"><%=task %> '+ numTasks+'</a></li>');     // Append new elements
 		$("#tasks-div").append(
 				'<div id="task' + numTasks + 'div" class="tab-pane fade table-responsive">' +
-				'<label class="col-md-3">Title:</label>' +
-				'<input type="text" name="taskName'+numTasks+'" placeholder="Title of your task">'+
-				'<label class="col-md-3">Description:</label>'+
-				'<textarea rows="4" cols="50" name="taskDescription'+numTasks+'" placeholder="Enter a description of your task."></textarea>'+
-				'<h5>Enter a location for this task:</h5>'+
-				'<label class="col-md-3">Address Line 1:</label>'+
+				'<label class="col-md-3"><%=title %>:</label>' +
+				'<input type="text" name="taskName'+numTasks+'" placeholder="<%=titleOfYourTask">'+
+				'<label class="col-md-3"><%=description %>:</label>'+
+				'<textarea rows="4" cols="50" name="taskDescription'+numTasks+'" placeholder="<%=enterADescriptionOfYourTask."></textarea>'+
+				'<h5><%=enterALocationForThisTask%>:</h5>'+
+				'<label class="col-md-3"><%=addressLine1 %>:</label>'+
 				'<input type="text" name="addressLine1Task'+numTasks+'">'+
-				'<label class="col-md-3">Address Line 2:</label>'+
+				'<label class="col-md-3"><%=addressLine2 %>:</label>'+
 				'<input type="text" name="addressLine2Task'+numTasks+'">'+
-				'<label class="col-md-3">City:</label>'+
+				'<label class="col-md-3"><%=city%>:</label>'+
 				'<input type="text" name="cityTask'+numTasks+'">'+
-				'<label class="col-md-3">Province:</label>'+
+				'<label class="col-md-3"><%=province%>:</label>'+
 				'<input type="text" name="provinceTask'+numTasks+'">'+
-				'<label class="col-md-3">Country:</label>'+
+				'<label class="col-md-3"><%=country %>:</label>'+
 				'<input type="text" name="countryTask'+numTasks+'">'+
-				'<label class="col-md-3">Postal Code:</label>'+
+				'<label class="col-md-3"><%=postalCode%>:</label>'+
 				'<input type="text" name="zipTask'+numTasks+'">'+
 				'<input type="hidden" name="longitudeTask'+numTasks+'">'+
 				'<input type="hidden" name="latitudeTask'+numTasks+'">'+
