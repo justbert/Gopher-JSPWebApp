@@ -369,8 +369,42 @@ String lang = request.getParameter( "lang" );
 			geocoder.geocode({'location':e.latLng}, function(results, status) {
 				if(status === google.maps.GeocoderStatus.OK) {
 					if(results[0]) {
-						console.log(results);
-						$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val(results[0].formatted_address);
+						
+						//reset all form info to empty
+						$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val("");
+						$('input[name="addressLine2Task' + that.name.substring(3, that.name.length) + '"]').val("");
+						$('input[name="cityTask' + that.name.substring(3, that.name.length) + '"]').val("");
+						$('input[name="provinceTask' + that.name.substring(3, that.name.length) + '"]').val("");
+						$('input[name="countryTask' + that.name.substring(3, that.name.length) + '"]').val("");
+						$('input[name="zipTask' + that.name.substring(3, that.name.length) + '"]').val("");
+						
+						for(i = 0; i < results[0]["address_components"].length; ++i) {
+							
+							switch(results[0]["address_components"][i]["types"][0]) {
+								case "street_number":
+									$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val(results[0]["address_components"][i]["long_name"]);
+									break;
+								case "route":
+									$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val(
+											$('input[name="addressLine1Task' + that.name.substring(3, that.name.length) + '"]').val() + " " +
+											results[0]["address_components"][i]["long_name"]
+											
+									);
+									break;
+								case "locality":
+									$('input[name="cityTask' + that.name.substring(3, that.name.length) + '"]').val(results[0]["address_components"][i]["long_name"]);
+									break;
+								case "administrative_area_level_1":
+									$('input[name="provinceTask' + that.name.substring(3, that.name.length) + '"]').val(results[0]["address_components"][i]["long_name"]);
+									break;
+								case "country":
+									$('input[name="countryTask' + that.name.substring(3, that.name.length) + '"]').val(results[0]["address_components"][i]["long_name"]);
+									break;
+								case "postal_code":
+									$('input[name="zipTask' + that.name.substring(3, that.name.length) + '"]').val(results[0]["address_components"][i]["long_name"]);
+									break;
+							}
+						}
 					}
 				}
 			});
