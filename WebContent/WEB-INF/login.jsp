@@ -49,9 +49,9 @@
 		<div class="bg-white">
 	    	<form class="block-display" id="login-form" action="login" method="post">
 				<h2 class="monty-font"><%=signin%></h2>
-			 	<input class="block-display" type="text" placeholder=<%=email%> name="email"  value="${email}"/>
+			 	<input class="block-display form-control" type="text" placeholder=<%=email%> name="email"  value="${email}"/>
 			 	<c:remove var="email"/>
-			 	<input class="block-display" type="password" placeholder=<%=password_ph%> name="password" />
+			 	<input class="block-display form-control" type="password" placeholder=<%=password_ph%> name="password" />
 			 	<button class="btn btn-default bg-grey" type="submit"><%=signin%></button>
 			 	<c:if test="${error != null}">
 			 		<div class="block-display bg-teal" style="margin-top: 20px;"><p class="block-display">${error}</p></div>

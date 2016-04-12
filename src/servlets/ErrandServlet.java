@@ -50,7 +50,12 @@ public class ErrandServlet extends javax.servlet.http.HttpServlet {
 		}
 	}
 	
-	public void doGet(HttpServletRequest request, HttpServletResponse response){
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userObject") == null){
+			response.sendRedirect("/login");
+			return;
+		}
 		try {
 			//request.setAttribute("errand", errand);
 			Errand errand = errandDB.selectById((Integer.parseInt(request.getParameter("id"))));
