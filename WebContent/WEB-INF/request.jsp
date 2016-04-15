@@ -191,7 +191,7 @@ String lang = request.getParameter( "lang" );
 	
 		<form id="addErrandForm" action="request" method="post">
 			<h4><%=enterErrandInformation%>:</h4>
-			<label class="col-md-3"><%=title%> %></label>
+			<label class="col-md-3"><%=title%></label>
 			<input type="text" name="errandName" placeholder="<%=titleOfYourErrand %>">
 			<label class="col-md-3"><%=description %>:</label>
 			<textarea rows="4" cols="50" name="errandDescription" placeholder="<%=enterADescriptionOfYourErrand %>"></textarea>

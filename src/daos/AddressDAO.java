@@ -9,7 +9,11 @@ import entities.Address;
 import entities.Address.AddressType;
 import utils.DatabaseManager;
 
-public class AddressDAO  extends DatabaseManager{
+/**
+ * Class which interacts with the database to create address objects.
+ * 
+ */
+public class AddressDAO extends DatabaseManager{
 
 	private static UserDao userDB = new UserDao();
 	/**

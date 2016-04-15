@@ -22,6 +22,10 @@ import entities.Reward;
 import entities.Task;
 import entities.User;
 
+/**
+ * @author Justin
+ * Servlet for the Errand request page.
+ */
 public class RequestServlet extends HttpServlet {
 	private static final long serialVersionUID = -4982651932025574846L;
 
@@ -30,6 +34,10 @@ public class RequestServlet extends HttpServlet {
 	private AddressDAO addressDAO = new AddressDAO();
 	private TasksDao taskDAO = new TasksDao();
 	
+	
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
@@ -39,6 +47,9 @@ public class RequestServlet extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/request.jsp").forward(request, response);
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		HttpSession session = request.getSession();
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
@@ -90,8 +101,8 @@ public class RequestServlet extends HttpServlet {
 								request.getParameter("provinceTask" + taskNum),
 								request.getParameter("countryTask" + taskNum),
 								request.getParameter("zipTask" + taskNum),
-								Double.parseDouble(request.getParameter("latitudeTask" + taskNum)),
-								Double.parseDouble(request.getParameter("longitudeTask" + taskNum)),
+								(request.getParameter("latitudeTask" + taskNum) == null ? null : Double.parseDouble(request.getParameter("latitudeTask" + taskNum))),
+								(request.getParameter("longitudeTask" + taskNum) == null ? null : Double.parseDouble(request.getParameter("longitudeTask" + taskNum))),
 								currentUser.getId()
 							);
 					
